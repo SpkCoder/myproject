@@ -1,0 +1,33 @@
+﻿﻿﻿﻿{
+    "code": 0, 
+    "msg": "", 
+    "count": 100, 
+    "name_ch" :"数据列表",
+    "name_en" :"dataList",
+    "field_ch" :"模块ID;数据表名称;中文字段集合;英文字段集合;字段数据类型集合;字段列宽集合;字段排序集合",
+    "field_en" :"id;name;field_ch;field_en;data_type;field_width;field_sort",
+    "data_type" :"int(6);text;text;text;text;text;int",
+    "field_width" :"100;150;200;200;200;200;100",
+    "rows": [
+        {
+            "id": "100001", 
+            "name": "modelList", 
+            "field_ch": "模块级别;模块ID;父模块ID;模块名称;模块位置;排序;链接;字体图标;是否显示",
+            "field_en": "level;id;parentId;name;position;sort;href;iconfont;show",
+            "data_type": "int;int(6);int(6);text;text;int;text;text;text",
+            "field_width": "100;100;100;100;100;100;100;100;100",
+            "field_sort": "1;2;3;4;5;6;7;8;9" 
+        }, 
+        {
+            "id": "100001", 
+            "name": "page1", 
+            "field_ch": "ID;用户名;性别;城市;签名;积分;评分;职业;财富",
+            "field_en": "id;username;sex;city;sign;experience;score;classify;wealth",
+            "data_type": "p_int(6);text;text;text;text;text;text;text;text",
+            "field_width": "100;100;100;100;100;100;100;100;100",
+            "field_sort": "1;2;3;4;5;6;7;8;9" 
+
+        }
+        
+    ]
+}

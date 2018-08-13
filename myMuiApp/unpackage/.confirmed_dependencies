@@ -1,0 +1,18 @@
+{
+	"index.html": {
+		"refer": [
+			"page/pullrefresh_main.html",
+			"page/guide.html",
+			"index-menu.html",
+			"page/ajax.html"
+		]
+	},
+	"page/pullrefresh_main.html": {
+		"resources": [
+			"page/pullrefresh_sub.html"
+		],
+		"refer": [
+			"page/pullrefresh_sub.html"
+		]
+	}
+}

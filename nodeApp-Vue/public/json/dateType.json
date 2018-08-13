@@ -1,0 +1,15 @@
+﻿﻿﻿﻿{
+    "text": "文本",
+    "textarea": "文本域",
+    "int": "正整数", 
+    "int(6)": "6位正整数", 
+    "decimal(2)" :"保留2位小数",
+    "decimal(4)" :"保留4位小数",
+    "date(YYYY-MM-DD HH:mm:ss)" :"年月日 时分秒",
+    "date(YYYY)" :"年",
+    "date(YYYY-MM)" :"年月",
+    "date(YYYY-MM-DD)" :"年月日",
+    "date(HH:mm:ss)" :"时分秒",
+    
+    
+}

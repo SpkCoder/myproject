@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>node</title>
+    <meta charset="UTF-8"/>
+    <script type="text/javascript" src="/js/jquery/jquery.js"></script>
+    <style>
+    	*{margin: 0; padding: 0;}
+    </style>
+  </head>
+  <body style="padding:20px;">
+		 <h2>login.html</h2>
+     	<p><code>action=loginIn&searchJson={"username":"tom","password":"tom123456"} //登录   post请求</code></p>
+			<p><code>action=loginOut  //退出   post请求</code></p>
+		  <p><code>action=updateData&searchJson={"username":"tom"}&updateJson={"password":"123456"} //修改密码 post请求</code></p>
+			
+			<h4 style="margin-top:20px;">登录</h4>
+			<form name="form4">
+			<p>href:</p>
+			<p><input style="width: 300px" name="href" type="text" value="http://localhost:3001/nodejs/login"></p>
+			<p>data:</p>
+			<p><textarea style="width: 300px;height: 50px;" name="data"></textarea></p>
+			<p><input type="button" value="提交" onclick="_loginIn()"></p>
+			</form>
+			<br>
+		
+			<h4 style="margin-top:20px;">退出</h4>
+			<form name="form5">
+			<p>href:</p>
+			<p><input style="width: 300px" name="href" type="text" value="http://localhost:3001/nodejs/login"></p>
+			<p>data:</p>
+			<p><textarea style="width: 300px;height: 50px;" name="data"></textarea></p>
+			<p><input type="button" value="提交" onclick="_loginOut()"></p>
+			</form>
+			<br>
+
+      <h4 style="margin-top:20px;">修改密码</h4>
+			<form name="form6">
+			<p>href:</p>
+			<p><input style="width: 300px" name="href" type="text" value="http://localhost:3001/nodejs/userList"></p>
+			<p>data:</p>
+			<p><textarea style="width: 300px;height: 50px;" name="data"></textarea></p>
+			<p><input type="button" value="提交" onclick="_updatePW()"></p>
+			</form>
+			<br>
+			
+			
+			<script type="text/javascript">
+				  function _loginIn() {
+				      var href = $("form[name=form4] input[name=href").val();
+				    	var data = $("form[name=form4] textarea[name=data").val();
+				    	$.ajax({
+				              url: href,
+				              type: "POST",
+				              dataType:"text",
+				              data:data,
+				              success: function (data,status,xhr) {
+				              	console.log("请求成功");
+				              	console.log(data);
+				              	if(data=="登录成功"){
+				              		window.location.href = "/";
+				              	}
+				              },
+				              error: function (xhr,status,error) {
+				              	console.log("请求失败"); 
+				                //console.log(xhr); 
+				                //console.log(status); 
+				                //console.log(error); 
+				              }
+				    	});
+				    }
+				    
+				    function _loginOut() {
+				      var href = $("form[name=form5] input[name=href").val();
+				    	var data = $("form[name=form5] textarea[name=data").val();
+				    	$.ajax({
+				              url: href,
+				              type: "POST",
+				              dataType:"text",
+				              data:data,
+				              success: function (data,status,xhr) {
+				              	console.log("请求成功");
+				              	console.log(data);
+				              },
+				              error: function (xhr,status,error) {
+				              	console.log("请求失败"); 
+				                //console.log(xhr); 
+				                //console.log(status); 
+				                //console.log(error); 
+				              }
+				    	});
+				    }
+				    
+				    function _updatePW() {
+				      var href = $("form[name=form6] input[name=href").val();
+				    	var data = $("form[name=form6] textarea[name=data").val();
+				    	$.ajax({
+				              url: href,
+				              type: "POST",
+				              dataType:"html",
+				              data:data,
+				              success: function (data,status,xhr) {
+				              	console.log("请求成功");
+				              	console.log(data);
+				              },
+				              error: function (xhr,status,error) {
+				              	console.log("请求失败"); 
+				                //console.log(xhr); 
+				                //console.log(status); 
+				                //console.log(error); 
+				              }
+				    	});
+				    }
+			</script>
+	</body>
+</html>

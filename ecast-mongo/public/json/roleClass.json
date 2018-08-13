@@ -1,0 +1,44 @@
+﻿/* 0 */
+{
+  "_id" : ObjectId("5ac194ebc664fc27747555c5"),
+  "id" : 1,
+  "class_name" : "System Administrator"
+}
+
+/* 1 */
+{
+  "_id" : ObjectId("5ac194ebc664fc27747555c8"),
+  "id" : 4,
+  "class_name" : "Customer"
+}
+
+/* 2 */
+{
+  "_id" : ObjectId("5ac194ebc664fc27747555c6"),
+  "id" : 2,
+  "class_name" : " Order Administrator",
+  "update_name" : "yuxian",
+  "update_time" : "2018-04-02 13:38:00"
+}
+
+/* 3 */
+{
+  "_id" : ObjectId("5ac194ebc664fc27747555c7"),
+  "id" : 3,
+  "class_name" : "Order Processor",
+  "update_name" : "yuxian",
+  "update_time" : "2018-04-02 13:38:21"
+}
+
+/* 4 */
+{
+  "_id" : ObjectId("5ac1c1eae8b1091dcc0de82d"),
+  "id" : 5,
+  "class_name" : "Associate",
+  "create_name" : "yuxian",
+  "create_time" : "2018-04-02 13:38:50",
+  "update_name" : "yuxian",
+  "update_time" : "2018-04-02 13:53:51"
+}
+
+

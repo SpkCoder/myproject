@@ -1,0 +1,69 @@
+﻿﻿﻿﻿﻿{
+    "code": 0, 
+    "msg": "", 
+    "count": 100, 
+    "name_ch" :"模块列表",
+    "name_en" :"modelList",
+    "field_ch" :"模块级别;模块ID;父模块ID;模块名称;模块位置;排序;链接;字体图标;是否显示",
+    "field_en" :"level;id;parentId;name;position;sort;href;iconfont;show",
+    "data_type" :"int;int(6);int(6);text;text;int;text;text;text",
+    "field_width" :"100;100;100;100;100;100;100;100;100",
+    "rows": [
+        {
+            "level": "1", 
+            "parentId": "", 
+            "id": "100000", 
+            "name": "系统设置", 
+            "position": "left",
+            "sort": "1",
+            "href": "",
+            "iconfont":"",
+            "show": "true" 
+        },
+        {
+            "level": "2", 
+            "parentId": "100000", 
+            "id": "100001", 
+            "name": "模块列表", 
+            "position": "",
+            "sort": "1",
+            "href": "#/page/modelList", 
+            "iconfont":"",
+            "show": "true"
+        }, 
+        {
+            "level": "2", 
+            "parentId": "100000", 
+            "id": "100002", 
+            "name": "数据列表", 
+            "position": "",
+            "sort": "2",
+            "href": "#/page/dataList", 
+            "iconfont":"",
+            "show": "true"
+        }, 
+        {
+            "level": "2", 
+            "parentId": "100000", 
+            "id": "100003", 
+            "name": "模块功能", 
+            "position": "",
+            "sort": "3",
+            "href": "#/page/modelListFn", 
+            "iconfont":"",
+            "show": "true"
+        }, 
+        {
+            "level": "2", 
+            "parentId": "100000", 
+            "id": "100004", 
+            "name": "用户列表", 
+            "position": "",
+            "sort": "4",
+            "href": "#/page/userList", 
+            "iconfont":"",
+            "show": "true"
+        }
+        
+    ]
+}

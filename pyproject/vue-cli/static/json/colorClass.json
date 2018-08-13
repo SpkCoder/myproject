@@ -1,0 +1,106 @@
+﻿/* 0 */
+{
+  "_id" : ObjectId("5ac19baec664fc27747555cd"),
+  "id" : 1,
+  "class_name" : "Active Blue",
+  "class_color_code" : "#707c8d"
+}
+
+/* 1 */
+{
+  "_id" : ObjectId("5ac19baec664fc27747555ce"),
+  "id" : 2,
+  "class_name" : "Champagne",
+  "class_color_code" : "#b3aa95"
+}
+
+/* 2 */
+{
+  "_id" : ObjectId("5ac19baec664fc27747555cf"),
+  "id" : 3,
+  "class_name" : "Charcoal",
+  "class_color_code" : "#737370"
+}
+
+/* 3 */
+{
+  "_id" : ObjectId("5ac19baec664fc27747555d0"),
+  "id" : 4,
+  "class_name" : "Energy Green",
+  "class_color_code" : "#b0b368"
+}
+
+/* 4 */
+{
+  "_id" : ObjectId("5ac19baec664fc27747555d1"),
+  "id" : 5,
+  "class_name" : "Fuscia",
+  "class_color_code" : "#f34186"
+}
+
+/* 5 */
+{
+  "_id" : ObjectId("5ac19baec664fc27747555d3"),
+  "id" : 7,
+  "class_name" : "Glossy Black",
+  "class_color_code" : "#111211"
+}
+
+/* 6 */
+{
+  "_id" : ObjectId("5ac19bafc664fc27747555d4"),
+  "id" : 8,
+  "class_name" : "Lilac",
+  "class_color_code" : "#796c83"
+}
+
+/* 7 */
+{
+  "_id" : ObjectId("5ac19bafc664fc27747555d5"),
+  "id" : 9,
+  "class_name" : "Matte Black",
+  "class_color_code" : "#3c3533"
+}
+
+/* 8 */
+{
+  "_id" : ObjectId("5ac19bafc664fc27747555d6"),
+  "id" : 10,
+  "class_name" : "Midnight Blue",
+  "class_color_code" : "#252f4b"
+}
+
+/* 9 */
+{
+  "_id" : ObjectId("5ac19bafc664fc27747555d8"),
+  "id" : 12,
+  "class_name" : "Mint",
+  "class_color_code" : "#9dc6b9"
+}
+
+/* 10 */
+{
+  "_id" : ObjectId("5ac19bafc664fc27747555d9"),
+  "id" : 13,
+  "class_name" : "Pewter",
+  "class_color_code" : "#d1d0c6"
+}
+
+/* 11 */
+{
+  "_id" : ObjectId("5ac19bafc664fc27747555da"),
+  "id" : 14,
+  "class_name" : "Red",
+  "class_color_code" : "#bb3133"
+}
+
+/* 12 */
+{
+  "_id" : ObjectId("5ac19bafc664fc27747555db"),
+  "id" : 15,
+  "class_name" : "Solar White",
+  "class_color_code" : "#593047",
+  "update_name" : "yuxian",
+  "update_time" : "2018-04-02 14:22:37"
+}
+

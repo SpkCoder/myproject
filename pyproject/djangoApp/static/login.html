@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>MONGO大数据平台</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black"> 
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="format-detection" content="telephone=no">
+  <link rel="stylesheet" href="/static/js/layui/css/layui.css"  media="all">
+  <link rel="stylesheet" href="/static/css/login.css">
+
+</head>
+  
+  <body class="login-bg">
+    <div class="login-box">
+        <header>
+            <h1>MONGO大数据平台</h1>
+        </header>
+        <div class="login-main">
+					<form class="layui-form">
+						           
+						<div class="layui-form-item">
+							<label class="login-icon">
+								<i class="layui-icon"></i>
+							</label>
+							<input type="text" name="username" lay-verify="username" autocomplete="off" placeholder="这里输入登录名" class="layui-input">
+						</div>
+						<div class="layui-form-item">
+							<label class="login-icon">
+								<i class="layui-icon"></i>
+							</label>
+							<input type="password" name="password" lay-verify="password" autocomplete="off" placeholder="这里输入密码" class="layui-input">
+						</div>
+						<div class="layui-form-item">
+							<div class="pull-left login-remember">
+								<label>记住帐号？</label>
+								<input type="checkbox" name="rememberMe" value="true" lay-skin="switch" title="记住帐号"><div class="layui-unselect layui-form-switch"><i></i></div>
+							</div>
+							<div class="pull-right">
+								<button class="layui-btn layui-btn-primary" lay-submit="" lay-filter="login">
+									<i class="layui-icon"></i> 登录
+								</button>
+							</div>
+							<div class="clear"></div>
+						</div>
+					</form>        
+		</div>
+      
+  </div>
+
+<script type="text/javascript" src="/static/js/layui/layui.js" charset="utf-8"></script>
+<script type="text/javascript">
+        layui.use(['layer', 'form'], function () {
+        var layer = layui.layer,
+				$ = layui.jquery,
+				form = layui.form;
+
+        //当前设备信息
+			  var device = layui.device();
+			  console.log(device);
+
+        //获取登录状态
+        if(localStorage.getItem("loginStatus")){
+        	 var loginStatus = JSON.parse(localStorage.getItem("loginStatus"));
+        	 $("form input[name=username]").val(loginStatus.username);
+        	 $("form input[name=password]").val(loginStatus.password);
+        	 $("form .login-remember div").addClass("layui-form-onswitch");
+        }
+       
+
+            form.verify({
+                username: function (value) {
+                    if (value === '')
+                        return '请输入用户名';
+                },
+                password: function (value) {
+                    if (value === '')
+                        return '请输入密码';
+                }
+            });
+
+            form.on('submit(login)', function (data) {  
+				        console.log(data.field);
+				        device.px = screen.width +"x" + screen.height;
+				        var reqData = 'action=SignIn&searchJson={"username":"'+data.field.username+'","password":"'+data.field.password+'"}' +'&osJson={"os":"'+device.os+'","px":"'+device.px+'"}';
+                $.ajax({
+				              url: "/nodejs/login",
+				              type: "POST",
+				              dataType:"text",
+				              data:reqData,
+				              success: function (data2,status,xhr) {
+				              	console.log("请求成功");
+				              	if(data2 == "登录成功"){
+				              		window.location.href = "/";
+				              	}else{
+				              		layer.msg(data2,{time: 1000});
+				              	}
+				              	
+				              },
+				              error: function (xhr,status,error) {
+				              	console.log("请求失败"); 
+				              }
+				    	  });
+                
+                if(data.field.rememberMe == "true"){
+                	localStorage.setItem("loginStatus",JSON.stringify(data.field));
+                }else{
+                	localStorage.removeItem("loginStatus");
+                }
+
+                return false;
+            });
+
+        });
+		
+        
+    </script>
+  </body>
+</html>

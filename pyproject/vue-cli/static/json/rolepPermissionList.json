@@ -1,0 +1,80 @@
+﻿/* 0 */
+{
+  "_id" : ObjectId("5ac2e447c664fc2b205a111a"),
+  "role_id" : 1,
+  "dbName" : "roleClass",
+  "function" : "findData"
+}
+
+/* 1 */
+{
+  "_id" : ObjectId("5ac2e447c664fc2b205a111b"),
+  "role_id" : 1,
+  "dbName" : "roleClass",
+  "function" : "insertData"
+}
+
+/* 2 */
+{
+  "_id" : ObjectId("5ac2e447c664fc2b205a111c"),
+  "role_id" : 1,
+  "dbName" : "roleClass",
+  "function" : "updateData"
+}
+
+/* 3 */
+{
+  "_id" : ObjectId("5ac2e447c664fc2b205a111d"),
+  "role_id" : 1,
+  "dbName" : "roleClass",
+  "function" : "delData"
+}
+
+/* 4 */
+{
+  "_id" : ObjectId("5ac2e447c664fc2b205a111e"),
+  "role_id" : 2,
+  "dbName" : "colorClass",
+  "function" : "findData"
+}
+
+/* 5 */
+{
+  "_id" : ObjectId("5ac3071710a3012b0c700459"),
+  "role_id" : 1,
+  "dbName" : "rolepPermissionList",
+  "function" : "findData",
+  "create_name" : "yuxian",
+  "create_time" : "2018-04-03 12:46:15"
+}
+
+/* 6 */
+{
+  "_id" : ObjectId("5ac3072610a3012b0c70045b"),
+  "role_id" : 1,
+  "dbName" : "rolepPermissionList",
+  "function" : "insertData",
+  "create_name" : "yuxian",
+  "create_time" : "2018-04-03 12:46:30"
+}
+
+/* 7 */
+{
+  "_id" : ObjectId("5ac30a5a6be5892994170ca5"),
+  "role_id" : 1,
+  "dbName" : "rolepPermissionList",
+  "function" : "delData",
+  "create_name" : "yuxian",
+  "create_time" : "2018-04-03 13:00:10"
+}
+
+/* 8 */
+{
+  "_id" : ObjectId("5ac34353d053bb1e14e9c58d"),
+  "role_id" : 1,
+  "dbName" : "recordList",
+  "function" : "findData",
+  "create_name" : "yuxian",
+  "create_time" : "2018-04-03 17:03:15"
+}
+

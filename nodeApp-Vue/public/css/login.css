@@ -1,0 +1,46 @@
+/** 初始化 **/
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,input,button,textarea,p,blockquote,th,td,form,pre{margin: 0; padding: 0; -webkit-tap-highlight-color:rgba(0,0,0,0)}
+body{-webkit-font-feature-settings: 'kern' 1; -moz-font-feature-settings: 'kern' 1; -o-font-feature-settings: 'kern' 1; text-rendering: geometricPrecision;}
+a:active,a:hover{outline:0}
+img{display: inline-block; border: none; vertical-align: middle;}
+li{list-style:none;}
+table{border-collapse: collapse; border-spacing: 0;}
+h1,h2,h3{font-size: 14px; font-weight: 400;}
+h4, h5, h6{font-size: 100%; font-weight: 400;}
+button,input,select,textarea{font-size: 100%; }
+input,button,textarea,select,optgroup,option{font-family: inherit; font-size: inherit; font-style: inherit; font-weight: inherit; outline: 0;}
+pre{white-space: pre-wrap; white-space: -moz-pre-wrap; white-space: -pre-wrap; white-space: -o-pre-wrap; word-wrap: break-word;}
+
+/** 滚动条 **/
+::-webkit-scrollbar{width: 5px; height: 10px;}
+::-webkit-scrollbar-button:vertical{display: none;}
+::-webkit-scrollbar-track, ::-webkit-scrollbar-corner{background-color: #e2e2e2;}
+::-webkit-scrollbar-thumb{border-radius: 0; background-color: rgba(0,0,0,.3);}
+::-webkit-scrollbar-thumb:vertical:hover{background-color: rgba(0,0,0,.35);}
+::-webkit-scrollbar-thumb:vertical:active{background-color: rgba(0,0,0,.38);}
+
+
+/** 初始化全局标签 **/
+body{line-height: 24px;font: 14px Helvetica Neue,Helvetica,PingFang SC,\5FAE\8F6F\96C5\9ED1,Tahoma,Arial,sans-serif;}
+a{color: #333; text-decoration:none; }
+a:hover{color: #fff;}
+a cite{font-style: normal; *cursor:pointer;}
+
+
+
+/* login */
+.login-bg{background: url(../image/login-bg-8.jpg) no-repeat center center fixed;background-size:100% 100%;}
+.login-box {width: 80%;max-width: 450px;height: 330px;margin: 10% auto;background-color: rgba(255, 255, 255, 0.407843);border-radius: 10px;color: aliceblue;}
+.login-box header {height: 39px;padding: 10px;border-bottom: 1px solid aliceblue;}
+.login-box header h1 {text-align: center;font-size: 25px;line-height: 40px;}
+.login-box .login-main {height: 185px;padding: 30px 90px 0;}
+.el-form-item{margin-bottom: 10px;}
+.el-form-item__label{color:#fff}
+.el-input__inner{color:#333}
+
+
+@media screen and (max-width:768px) {
+	.login-box .login-main {
+	    padding: 30px 20px 0;
+	}
+}

@@ -1,0 +1,477 @@
+﻿<div class="list-page-point">
+   <div class="container">
+     <p><i class="layui-icon" style="font-size: 14px;">&#xe715;</i><span></span></p>
+   </div>
+</div>
+
+
+<div class="list-page-box">
+  <div class="container2">
+    <div class="list-page">
+    
+		<div id="btnApp">
+			<el-button-group>
+			  <el-button id="btn_add" size="small"><i class="layui-icon">&#xe654;</i>Add</el-button>
+			  <el-button id="btn_delete" size="small"><i class="layui-icon">&#xe640;</i>Delete</el-button>
+			  <!--<el-button id="btn_search" size="medium"><i class="layui-icon">&#xe615;</i>Search</el-button>-->
+			</el-button-group>
+		</div>
+	    
+		<div id="searchApp"></div>
+	    <div id="tableApp"></div>
+	    <div id="pageApp"></div>
+	    <div id="formApp" class="formBox"> </div>
+	    
+
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+	require(['jquery','Vue','dataDB','ELEMENT','drag','formVerify'], function ($,Vue,dataDB,ELEMENT,drag,formVerify) {
+	    //请求数据的url
+	    var url = $("#Vue_routerView").attr("data-href").replace(/\/page\//,"/nodejs/").replace(/\.html/,"");
+		//console.log(url);
+		//当前定位
+		$(".list-page-point span").html("Products"+">>"+"Options Value");
+	
+	    var dataDBInt = dataDB.int;
+	    Vue.use(ELEMENT); 
+        
+        var dragInt = drag.int;
+        
+        var searchStatus = { 
+        	searchJson : {},
+        	prePageNum : 10,
+        	currPage : 1,
+        	sortJson : {}
+        };
+       
+        
+       
+        //按钮组
+	    var btnApp = new Vue({
+	    	el: '#btnApp'
+	    });
+       
+       
+        //加载data
+		var dataInt = function (data) {
+	        //console.log(data);
+	        
+	        if(typeof data != "object"){
+	          alert(data);
+	          return;
+	        }
+	        
+	        data.colArr = [
+	           {"title":"ID","field":"id","width":"100","data_type":"int"},
+	           {"title":"Name","field":"name","width":"200","data_type":"text"},
+	           {"title":"Value","field":"value","width":"200","data_type":"text"}
+	        ];
+	        
+	        var tableWidth = 40 + 130 + 5;
+	        data.colArr.forEach(function (item,index) {
+	        	tableWidth += Number(item.width);
+	        });
+	        tableWidth += "px";
+	        
+	        var tableHtml ='<el-table :data="tableData" border ref="multipleTable" tooltip-effect="dark" size="small" style="width:'+tableWidth+'" max-height="400" @selection-change="selectionChange" @sort-change="sortChange">';
+	        tableHtml +='<el-table-column fixed="left" type="selection" width="40"> </el-table-column>';
+	        data.colArr.forEach(function (item,index) {
+	        	tableHtml+='<el-table-column show-overflow-tooltip sortable="custom" prop="'+item.field+'" label="'+item.title+'" width="'+item.width+'"> </el-table-column>';
+	        });
+//	        tableHtml+='<el-table-column fixed="right" label="Operation" width="130"> <template slot-scope="scope"> <el-button @click="details(scope.row)" type="text" size="small">Details</el-button> <el-button @click="edit(scope.row)" type="text" size="small">Edit</el-button> <el-button @click="del(scope.row)" type="text" size="small">Delete</el-button> </template> </el-table-column>';
+	        tableHtml+='<el-table-column fixed="right" label="Operation" width="130"> <template slot-scope="scope"> <el-button @click="edit(scope.row)" type="text" size="small">Edit</el-button> <el-button @click="del(scope.row)" type="text" size="small">Delete</el-button> </template> </el-table-column>';
+	        tableHtml+=' </el-table>';
+	        $("#tableApp").html(tableHtml);
+	       
+	        
+	        var tableApp = new Vue({
+		        el: '#tableApp',
+		        data: {
+		        	tableData: data.rows,
+				    multipleSelection: []
+		        },
+		        methods: {
+				      toggleSelection(rows) {
+				        if(rows) {
+				          rows.forEach(function (row) {
+							this.$refs.multipleTable.toggleRowSelection(row);
+						  });
+				        }else {
+				          this.$refs.multipleTable.clearSelection();
+				        }
+			      },
+			      selectionChange(dataArr) {
+				        this.multipleSelection = dataArr;
+				        //选中的dataArr
+				        //console.log(dataArr);
+			      },
+			      sortChange(obj) {
+				        //排序
+				        //console.log(obj.prop +":"+obj.order);
+				        var sortJson = {};
+				        sortJson[obj.prop] = (obj.order == "descending") ? -1 : 1;
+			      	    searchStatus.sortJson = sortJson;
+			            var reqData2 = 'action=findData&searchJson='+JSON.stringify(searchStatus.searchJson)+'&prePageNum='+searchStatus.prePageNum+'&currPage='+searchStatus.currPage+'&sortJson='+JSON.stringify(searchStatus.sortJson);
+				        dataDBInt.findData(url,reqData2,dataInt);
+			      },
+			      details(row){
+			      	    //查看
+				      	//console.log(row);
+				      	//window.location.hash = "/page/detail/" +row.id;
+				      	//layer.msg("查看",{time: 1000});
+			      },
+			      add(){
+			      	    //增加
+			      	    var _this = this;
+				      	var row = {}; 
+				      	var formHtml = '<h4 id="dragbur"><span>Add</span><i class="el-icon-close closeBtn"></i><i class="el-icon-plus plusBtn"></i><i class="el-icon-minus minusBtn"></i></h4>'
+				      	formHtml += '<el-form :model="formData" :rules="rules" ref="formData" label-width="150px" size="small" name="add" class="demo-ruleForm">';
+			            for(var i = 0; i < data.colArr.length; i++){
+			               var data_type = data.colArr[i].data_type;
+			               var field = data.colArr[i].field;
+			               var title = data.colArr[i].title;
+			               row[field]="";
+			               formHtml+='<el-form-item label="'+title+'" prop="'+field+'"> <el-input v-model="formData.'+field+'" auto-complete="off" data-type="'+data_type+'" name="'+field+'"></el-input> </el-form-item>';
+			
+			            }
+			            formHtml+='<el-form-item> <el-button size="small" type="primary" @click="submitForm()">SUBMIT</el-button> <el-button size="small" class="closeBtn">CANCEL</el-button> </el-form-item>';
+			            formHtml+='</el-form>';
+				      	$("#formApp").html(formHtml);
+				      	
+				      	setTimeout(function () {
+				      		dragInt.resizeFn("formApp",formApp);
+				      		dragInt.dragFn("formApp","window");
+				      	},0);
+				      	
+				      	
+                        var rules = formVerify.rules(row,data.colArr);
+				      	var formApp = new Vue({
+						        el: '#formApp',
+						        data: {
+						         	formData: row,
+								    rules: rules
+						        },
+							    methods: {
+							      submitForm() {
+							        this.$refs["formData"].validate (function (valid) {
+										if(valid) {
+											//console.log(formApp.formData);
+											if(!formApp.formData.name){
+												_this.$message({duration: 1000, message: "Please input Name" });
+												return;
+											}
+											var dataJson = {};
+											data.colArr.forEach(function(item,index){
+												var field = item.field;
+						                         var data_type = item.data_type;
+						                      	 if(data_type == "int" || data_type == "int(6)" || data_type == "decimal(2)" || data_type == "decimal(4)"){
+						                      	 	dataJson[field] = Number(formApp.formData[field]);
+						                      	 }else{
+						                      	 	dataJson[field] = formApp.formData[field];
+						                      	 }
+						                    });
+						                    //console.log(dataJson);
+						                    
+						                    var dataArr=[];
+                                            dataArr.push(dataJson);
+                                            var reqData2 = 'action=insertData&dataArr=' + JSON.stringify(dataArr);
+						                    dataDBInt.insertData(url,reqData2,function (data2) {
+						                        _this.$message({duration: 1000, message: data2 });
+		                                        if(data2 != "Success"){return;}
+		                
+			                                    var reqData3 = 'action=findData&searchJson='+JSON.stringify(searchStatus.searchJson)+'&prePageNum='+searchStatus.prePageNum+'&currPage='+searchStatus.currPage+'&sortJson='+JSON.stringify(searchStatus.sortJson);
+		                                        dataDBInt.findData(url,reqData3,dataInt);
+		                                        $("#formApp").hide(); 
+						                    });
+										}else {
+											//console.log('error submit');
+											return false;
+										}
+									});
+							      },
+							      resetForm() {
+							        this.$refs["formData"].resetFields();
+							      }
+							    }
+					         
+				        });
+			      	
+			      },
+			      edit(row){
+			      	    //修改
+			      	    var _this = this;
+				      	//console.log(row); 
+				      	var formHtml = '<h4 id="dragbur"><span>Edit</span><i class="el-icon-close closeBtn"></i><i class="el-icon-plus plusBtn"></i><i class="el-icon-minus minusBtn"></i></h4>'
+				      	formHtml += '<el-form :model="formData" :rules="rules" ref="formData" label-width="150px" size="small" name="edit" class="demo-ruleForm">';
+			            for(var i = 0; i < data.colArr.length; i++){
+			               var data_type = data.colArr[i].data_type;
+			               var field = data.colArr[i].field;
+			               var title = data.colArr[i].title;
+			               if(field == "id"){
+			               	 formHtml+='<el-form-item label="'+title+'" prop="'+field+'"> <el-input v-model="formData.'+field+'" auto-complete="off" :disabled="true" data-type="'+data_type+'" name="'+field+'"></el-input> </el-form-item>';
+			               }else{
+			               	 formHtml+='<el-form-item label="'+title+'" prop="'+field+'"> <el-input v-model="formData.'+field+'" auto-complete="off" data-type="'+data_type+'" name="'+field+'"></el-input> </el-form-item>';
+			               }
+			
+			            }
+			            formHtml+='<el-form-item> <el-button type="primary" size="small" @click="submitForm()">SUBMIT</el-button> <el-button size="small" class="closeBtn">CANCEL</el-button> </el-form-item>';
+			            formHtml+='</el-form>';
+				      	$("#formApp").html(formHtml);
+				      	
+				      	setTimeout(function () {
+				      		dragInt.resizeFn("formApp",formApp);
+				      		dragInt.dragFn("formApp","window");
+				      	},0);
+				      	
+                        var rules = formVerify.rules(row,data.colArr);
+				      	var formApp = new Vue({
+						        el: '#formApp',
+						        data: {
+						         	formData: row,
+								    rules: rules
+						        },
+							    methods: {
+							      submitForm() {
+							        this.$refs["formData"].validate (function (valid) {
+										if(valid) {
+											//console.log(formApp.formData);
+											if(!formApp.formData.name){
+												_this.$message({duration: 1000, message: "Please input Name" });
+												return;
+											}
+											var dataJson = {};
+											data.colArr.forEach(function(item,index){
+						                         var field =item.field;
+						                         var data_type =item.data_type;
+						                      	 if(data_type == "int" || data_type == "int(6)" || data_type == "decimal(2)" || data_type == "decimal(4)"){
+						                      	 	dataJson[field] = Number(formApp.formData[field]);
+						                      	 }else{
+						                      	 	dataJson[field] = formApp.formData[field];
+						                      	 }
+						                    });
+						                    //console.log(dataJson);
+						                      
+						                    var searchJson={"id":formApp.formData.id};
+						                    delete dataJson.id;
+						                    var reqData2 = 'action=updateData&searchJson=' + JSON.stringify(searchJson) + '&updateJson=' + JSON.stringify(dataJson);
+						                    dataDBInt.updateData(url,reqData2,function (data2) {
+						                        _this.$message({duration: 1000, message: data2 });
+		                                        if(data2 != "Success"){return;}
+		                
+		                                        var reqData3 = 'action=findData&searchJson='+JSON.stringify(searchStatus.searchJson)+'&prePageNum='+searchStatus.prePageNum+'&currPage='+searchStatus.currPage+'&sortJson='+JSON.stringify(searchStatus.sortJson);
+		                                        dataDBInt.findData(url,reqData3,dataInt);
+		                                        $("#formApp").hide(); 
+						                    });
+										}else {
+											//console.log('error submit');
+											return false;
+										}
+									});
+							      },
+							      resetForm() {
+							        this.$refs["formData"].resetFields();
+							      }
+							    }
+					         
+				        });
+			      	
+			      },
+			      del(row){
+			      	//删除
+			      	//console.log(row);
+			      	var _this = this;
+			      	this.$confirm('delete?', 'Delete', {
+			          confirmButtonText: 'CONFIRM',
+			          cancelButtonText: 'CANCEL',
+			          type: 'warning'
+			        }).then(function () {
+			          var dataJson = {"id":{"$in":[row.id]}};
+		              var reqData2 = 'action=delData&dataJson=' +JSON.stringify(dataJson);
+		              dataDBInt.delData(url,reqData2,function (data2) {
+		                _this.$message({duration: 1000, message: data2 });
+		                if(data2 != "Success"){return;}
+		                
+		                var reqData3 = 'action=findData&searchJson='+JSON.stringify(searchStatus.searchJson)+'&prePageNum='+searchStatus.prePageNum+'&currPage='+searchStatus.currPage+'&sortJson='+JSON.stringify(searchStatus.sortJson);
+		                dataDBInt.findData(url,reqData3,dataInt);
+		              });
+			        }).catch(function () {
+			        	//
+			        });
+			      }
+			    }
+		    });
+	        
+	        //设置勾选状态
+	        //tableApp.toggleSelection([tableApp.tableData[1], tableApp.tableData[2]]);
+	        
+	        
+	        //新增
+            $("#btn_add").on("click",function(){
+           	   tableApp.add();
+            });
+            
+	        //查询
+            $("#btn_search").on("click",function(){
+           	   tableApp.search();
+            });
+	       
+	       
+	        //批量删除
+	        $("#btn_delete").on("click",function(){
+	        	var SelectedArr = tableApp.multipleSelection;
+	        	//console.log(SelectedArr);
+	        	if(SelectedArr.length == 0){
+	        		tableApp.$message({duration: 1000, message: "Please check the lines to be deleted" });
+	        		return;
+	        	}
+
+		       tableApp.$confirm('delete?', 'Delete', {
+		          confirmButtonText: 'CONFIRM',
+		          cancelButtonText: 'CANCEL',
+		          type: 'warning'
+		        }).then(function () {
+		            var idArr = [];
+		            for(var i=0; i<SelectedArr.length; i++){
+		            	idArr.push(SelectedArr[i].id);
+		            }
+		            //console.log(idArr);
+		            var dataJson = {"id":{"$in":idArr}};
+			        var reqData2 = 'action=delData&dataJson=' +JSON.stringify(dataJson);
+		            dataDBInt.delData(url,reqData2,function (data2) {
+		                tableApp.$message({duration: 1000, message: data2 });
+		                if(data2 != "Success"){return;}
+		                
+		                var reqData3 = 'action=findData&searchJson='+JSON.stringify(searchStatus.searchJson)+'&prePageNum='+searchStatus.prePageNum+'&currPage='+searchStatus.currPage+'&sortJson='+JSON.stringify(searchStatus.sortJson);
+		                dataDBInt.findData(url,reqData3,dataInt);
+		            });
+		        }).catch(function () {
+		        	//
+		        });
+	        });
+	        
+	       
+	       
+	        //分页
+	        if($("html,body").width()>768){
+	        	var pageHtml ='<el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currPage" :page-sizes="[10,20,50,100,200,500,1000]" :page-size="prePageNum" layout="prev, pager, next, jumper, total, sizes" :total="count"> </el-pagination>';
+	        }else{
+	        	var pageHtml ='<el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currPage" :page-sizes="[10,20,50,100,200,500,1000]" :page-size="prePageNum" layout="prev, pager, next, total" :total="count"> </el-pagination>';
+	        }
+	        $("#pageApp").html(pageHtml);
+	        
+	        var pageApp = new Vue({
+		         el: '#pageApp',
+		         data: {
+		         	currPage: data.currPage,
+			        prePageNum: data.prePageNum,
+			        count: data.count
+		         },
+                 methods: {
+			      handleSizeChange(num) {
+			      	searchStatus.prePageNum = num;
+			        var reqData2 = 'action=findData&searchJson='+JSON.stringify(searchStatus.searchJson)+'&prePageNum='+searchStatus.prePageNum+'&currPage='+searchStatus.currPage+'&sortJson='+JSON.stringify(searchStatus.sortJson);
+			        dataDBInt.findData(url,reqData2,dataInt);
+			      },
+			      handleCurrentChange(num) {
+			      	searchStatus.currPage = num;
+			        var reqData2 = 'action=findData&searchJson='+JSON.stringify(searchStatus.searchJson)+'&prePageNum='+searchStatus.prePageNum+'&currPage='+searchStatus.currPage+'&sortJson='+JSON.stringify(searchStatus.sortJson);
+			        dataDBInt.findData(url,reqData2,dataInt);
+			      }
+			    }
+	        });
+	        
+	        
+	        
+	        
+       }
+
+
+        //初始化数据
+		var reqData = 'action=findData&searchJson=&prePageNum=10&currPage=1';
+		dataDBInt.findData(url,reqData,dataInt);
+		//初始化数据 结束
+
+
+
+        //搜索
+        var seaColArr = [
+//             {"title":"ID","field":"id","width":"100","data_type":"int"},
+	           {"title":"Name","field":"name","width":"200","data_type":"text"}
+	    ];
+        function search(){
+	      	var row = {}; 
+	      	var formHtml = '<el-form :model="formData" ref="formData" :rules="rules" :inline="true" label-width="80px" size="small" name="search" class="demo-ruleForm clearfix">';
+            for(var i = 0; i < seaColArr.length; i++){
+               var data_type = seaColArr[i].data_type;
+               var field = seaColArr[i].field;
+               var title = seaColArr[i].title;
+               row[field]="";
+               if(field == "roleClass_id"){
+               	  formHtml+='<el-form-item label="roleClass" prop="'+field+'"> <el-select placeholder="" v-model="formData.'+field+'" data-type="'+data_type+'" name="'+field+'"><el-option label="System Administrator" value="1"></el-option><el-option label="System Administrator2" value="2"></el-option></el-select> </el-form-item>';
+               }else{
+                  formHtml+='<el-form-item label="'+title+'" prop="'+field+'"> <el-input v-model="formData.'+field+'" data-type="'+data_type+'" name="'+field+'"></el-input> </el-form-item>';
+               }
+
+            }
+            formHtml+='<el-form-item> <el-button size="small" type="primary" @click="submitForm()">SEARCH</el-button> <el-button size="small" @click="resetForm()">CANCEL</el-button> </el-form-item>';
+            formHtml+='</el-form>';
+	      	$("#searchApp").html(formHtml); 
+
+	      	var formApp = new Vue({
+		            el: '#searchApp',
+		            data: {
+		            	formData: row,
+					    rules:{}
+		            },
+				    methods: {
+				      submitForm() {
+				        this.$refs["formData"].validate (function (valid) {
+							if(valid) {
+								//console.log(formApp.formData);
+								var dataJson = {};
+								seaColArr.forEach(function(item,index){
+			                         var field = item.field;
+			                         var data_type = item.data_type;
+			                      	 if(data_type == "int" || data_type == "int(6)" || data_type == "decimal(2)" || data_type == "decimal(4)"){
+			                      	 	if(formApp.formData[field]){
+			                      	 		dataJson[field] = Number(formApp.formData[field]);
+			                      	 	}
+			                      	 }else if(data_type == "date(YYYY-MM-DD HH:mm:ss)" || data_type == "date(YYYY)" || data_type == "date(YYYY-MM)" || data_type == "date(YYYY-MM-DD)" || data_type == "date(HH:mm:ss)"){
+			                      	 	if(formApp.formData[field]){
+			                      	 		dataJson[field] = {$gte:formApp.formData[field]};
+			                      	 	}
+			                      	 }else{
+			                      	 	if(formApp.formData[field]){
+			                      	 		dataJson[field] =  formApp.formData[field];
+			                      	 	}
+			                      	 }
+			                    });
+			                    
+			                    //console.log(dataJson);
+			                      
+      	                        searchStatus.searchJson = dataJson;
+                                var reqData2 = 'action=findData&searchJson='+JSON.stringify(searchStatus.searchJson)+'&prePageNum='+searchStatus.prePageNum+'&currPage='+searchStatus.currPage+'&sortJson='+JSON.stringify(searchStatus.sortJson);
+								dataDBInt.findData(url,reqData2,dataInt);
+							}else {
+								//console.log('error submit');
+								return false;
+							}
+						});
+				      },
+				      resetForm() {
+				        this.$refs["formData"].resetFields();
+				        dataDBInt.findData(url,reqData,dataInt);
+				        searchStatus = { searchJson : {}, prePageNum : 10, currPage : 1, sortJson : {}}; 
+				      }
+				    }
+		         
+	        });
+        }
+        search();
+
+
+		
+	});
+</script>

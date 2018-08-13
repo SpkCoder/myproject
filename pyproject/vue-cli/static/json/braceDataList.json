@@ -1,0 +1,58 @@
+﻿{
+    "braceClass_id" : 1,
+    "parameterClass_id" : 1, 
+    "parameterClass_name" : "Catalyst-Elite / Catalyst-Propel", 
+    "slot_top" : "",
+    "slot_above_knee" : "",
+    "slot_below_knee" : "",
+    "slot_bottom" : "",
+    "foldover_top" : "",
+    "foldover_above_knee" : "",
+    "foldover_below_knee" : "",
+    "foldover_bottom" : "",
+    "overlap_strap_tip_top" : "",
+    "overlap_strap_tip_above_knee" : "",
+    "overlap_strap_tip_below_knee" : "",
+    "overlap_strap_tip_bottom" : "",
+    "overlap_back2back_top" : "",
+    "overlap_back2back_above_knee" : "",
+    "overlap_back2back_below_knee" : "",
+    "overlap_back2back_bottom" : "",
+    "strap_padding_gap_top" : "",
+    "strap_padding_gap_above_knee" : "",
+    "strap_padding_gap_below_knee" : "",
+    "strap_padding_gap_bottom" : "",
+    "final_strap_top" : "",
+    "final_strap_above_knee" : "",
+    "final_strap_below_knee" : "",
+    "final_strap_bottom" : ""
+}
+
+{
+    "braceClass_id" : 2,
+    "parameterClass_id" : 2, 
+    "parameterClass_name" : "Oactive", 
+    "scuff_slot_top" : "",
+    "scuff_slot_above_knee" : "",
+    "scuff_slot_below_knee" : "",
+    "scuff_slot_bottom" : "",
+    "foldover_top" : "",
+    "foldover_above_knee" : "",
+    "foldover_below_knee" : "",
+    "foldover_bottom" : "",
+    "ooverlap_strap_tip_top" : "",
+    "ooverlap_strap_tip_above_knee" : "",
+    "ooverlap_strap_tip_below_knee" : "",
+    "ooverlap_strap_tip_bottom" : "",
+    "overlap_back2back_top" : "",
+    "overlap_back2back_above_knee" : "",
+    "overlap_back2back_below_knee" : "",
+    "overlap_back2back_bottom" : "",
+    "strap_padding_gap_top" : "",
+    "strap_padding_gap_above_knee" : "",
+    "strap_padding_gap_below_knee" : "",
+    "strap_padding_gap_bottom" : ""
+}
+
+
+

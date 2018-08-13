@@ -1,0 +1,338 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>MONGO大数据平台</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black"> 
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="format-detection" content="telephone=no">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="/static/js/layui/css/layui.css"  media="all">
+  <link rel="stylesheet" href="/static/css/style.css"  media="all">
+</head>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+  <div class="layui-header">
+    <div class="layui-logo">
+      <a style="display: inline-block;height: 100%;" class="logo" href="/"><img class="img-pc" height="100%" src="/static/image/logo_pc.png"><img class="img-mobel" height="100%" src="/static/image/logo_mobel.png"></a>
+    </div>
+    <!-- 头部区域（可配合layui已有的水平导航） -->
+    <script id="laytpl_topMenu" type="text/html">
+      <ul class="layui-nav layui-layout-left topNav">
+      {{#  layui.each(d.rows, function(index, item){ }}
+          {{#  if(item.position == "top" && item.show == "true"){ }}
+               <li class="layui-nav-item">
+                  <a href="javascript:;"><i class="layui-icon topmenu-layui-icon">{{ item.iconfont }}</i>{{ item.name }}</a>
+                  <dl class="layui-nav-child">
+                     {{#  layui.each(item.children, function(index2, item2){ }}
+                        {{#  if(item2.show == "true"){ }}
+                           <dd><a href="{{ item2.href }}"><i class="layui-icon topmenu-layui-icon">{{ item.iconfont }}</i>{{ item2.name }}</a></dd>
+                        {{#  } }} 
+                     {{#  }); }}
+                  </dl>
+               </li>
+          {{#  } }} 
+      {{#  }); }}
+      {{#  if(d.rows.length == 0){ }}
+        <!-- 无数据 -->
+      {{#  } }} 
+      </ul>
+    </script>
+    
+
+    <ul class="layui-nav layui-layout-right topNav">
+      <li id="layui-side-arrow-moble" class="layui-side-arrow-close"><i class="icon-font" style="font-size: 22px;">&#xe600;</i></li>
+      <li class="layui-nav-item">
+        <a id="username" href="javascript:;">admin</a>
+        <dl class="layui-nav-child">
+          <dd><a id="changePassword" href="javascript:;">修改密码</a></dd>
+          <dd><a id="SignOut" href="javascript:;">安全退出</a></dd>
+        </dl>
+      </li>
+      <!--<li class="layui-nav-item"> 
+          <a href="javascript:;" style="font-size: 22px;" class="layui-icon">&#xe61b;</a>
+          <dl class="layui-nav-child">
+           <dd><a href="javascript:;" data-val="qingxin" title="清新">清新</a></dd>
+           <dd><a href="javascript:;" data-val="blue" title="蓝色">蓝色</a></dd>
+           <dd><a href="javascript:;" data-val="molv" title="墨绿">墨绿</a></dd>
+          </dl>
+      </li>-->
+      <li class="layui-nav-item">
+        <a href="javascript:;" style="font-size: 20px;" class="layui-icon">&#xe60b;</a>
+        <dl class="layui-nav-child">
+          <dd><a href="#/page/myUseHelp">使用说明</a></dd>
+        </dl>
+      </li>
+    </ul>
+
+  </div>
+  
+  <div class="layui-side layui-bg-black">
+    <div class="layui-side-scroll">
+      <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+      <script id="laytpl_leftMenu" type="text/html">
+      <ul class="layui-nav layui-nav-tree leftNav"  lay-filter="test">
+      {{#  layui.each(d.rows, function(index, item){ }}
+          {{#  if(item.position == "left" && item.show == "true"){ }}
+               <li class="layui-nav-item">
+                  <a href="javascript:;"><i class="layui-icon leftmenu-layui-icon">{{ item.iconfont }}</i>{{ item.name }}</a>
+                  <dl class="layui-nav-child">
+                     {{#  layui.each(item.children, function(index2, item2){ }}
+                        {{#  if(item2.show == "true"){ }}
+                           <dd><a href="{{ item2.href }}"><i class="layui-icon leftmenu-layui-icon">{{ item.iconfont }}</i>{{ item2.name }}</a></dd>
+                        {{#  } }} 
+                     {{#  }); }}
+                  </dl>
+               </li>
+          {{#  } }} 
+      {{#  }); }}
+      {{#  if(d.rows.length == 0){ }}
+        <!-- 无数据 -->
+      {{#  } }} 
+      </ul>
+    </script>
+     
+    </div>
+    <div id="layui-side-arrow-pc" class="layui-side-arrow"><i class="layui-icon" style="font-size: 12px;">&#xe603;</i></div>
+  </div>
+  
+  
+  <div id="layUI_routerView" class="layui-body">
+    <!-- 内容主体区域 -->
+    
+  </div>
+  
+  <div class="layui-footer">
+    <!-- 底部固定区域 -->
+    Copyright © 2018 1533165085@qq.com 保留所有权利。
+  </div>
+
+</div>
+<script type="text/javascript" src="/static/js/director/director.js" charset="utf-8"></script>
+<script type="text/javascript" src="/static/js/layui/layui.js" charset="utf-8"></script>
+<script type="text/javascript" src="/static/js/router/routerUrl.js" charset="utf-8"></script>
+<script type="text/javascript">
+if(!window.location.hash){
+  window.location.href = "/#/page/modelList";
+}
+var loginObj = {};
+var openArea = {};
+layui.config({
+  base: '/static/js/' //存放拓展模块的base目录
+}).extend({    //设定模块别名
+   directorRouter: 'router/directorRouter', //相对于上述base目录的子目录
+   formVerify: 'modeljs/formVerify',  //相对于上述base目录的子目录
+   dataDB: 'modeljs/dataDB' //相对于上述base目录的子目录
+});
+
+layui.use(['element',"laytpl",'directorRouter','dataDB'], function(){
+  var $ = layui.jquery;
+  var laytpl = layui.laytpl;
+  var directorRouter = layui.directorRouter;
+  var element = layui.element;
+  var dataDB = layui.dataDB;
+  
+
+  //当前设备信息
+  var device = layui.device();
+  console.log(device);
+
+  //设置弹窗宽高
+  if($("html,body").width() > 768){
+  	openArea = {"width": "600px", "height": "400px"}
+  }else{
+  	openArea = {"width": "100%", "height": "400px"}
+  }
+  
+
+  function _getMenu() {
+      $.ajax({
+              type: "GET",
+              url: url + "?action=findData&timeStamp=" +Date.now(),
+              dataType:"text",
+              success: function (data,status,xhr) {
+                try {data = JSON.parse(data) } catch(e) {console.log(e)}
+                console.log("请求菜单成功");
+                if(typeof data != "object"){
+				          alert(data);
+				          window.location.href = "/login.html";
+				          return;
+				        }
+                
+                //渲染topMenu
+                var Tpl_topMenu = laytpl_topMenu.innerHTML;
+                laytpl(Tpl_topMenu).render(data, function(html){
+                  $("#laytpl_topMenu").replaceWith(html);
+                });
+
+                //渲染leftMenu
+                var Tpl_leftMenu = laytpl_leftMenu.innerHTML;
+                laytpl(Tpl_leftMenu).render(data, function(html){
+                  $("#laytpl_leftMenu").replaceWith(html);
+                  element.init();
+                  directorRouter.init();
+                  _leftMenuInit();
+                });
+                
+                
+                  //获取指定名称的cookie值
+								  function getCookie(name)
+								  {
+								    var strCookie=document.cookie;
+								    var arrCookie=strCookie.split(";");
+								    for(var i=0;i<arrCookie.length;i++)
+								    {
+								      var arr=arrCookie[i].split("=");
+								      if($.trim(arr[0])==name){ return arr[1]};
+								    }
+								    return "";
+								  } 
+								  var loginingStr = getCookie("logining");
+								  //console.log(loginingStr);
+								     if(!loginingStr){
+								       alert("No login, please log in");
+								       window.location.href = "/login.html";
+								       return;
+								     }else{
+								        //获取登录信息
+											  loginObj = JSON.parse(decodeURIComponent(loginingStr).split("j:")[1]);
+											  //console.log(loginObj);
+											  $("#username").html(loginObj.username +'<span class="layui-nav-more"></span>');
+								     }
+
+                
+              },
+              error: function (xhr,status,error) {
+                console.log("请求菜单失败"); 
+              }
+      });
+  }
+  var url = "/nodejs/menu";
+  _getMenu(url);
+
+  
+  //初始化左侧折叠菜单开始
+  _leftMenuInit=function () {
+      if($("html,body").width()>768){
+        $("#layui-side-arrow-pc").on("click",function () {
+          if($(this).hasClass("layui-side-arrow-close")){
+            $(".layui-side").animate({"left":"0"},500);$(this).animate({"left":"200px"},500);$(this).removeClass("layui-side-arrow-close");$(".layui-body").animate({"left":"200px"},500);$(".layui-footer").animate({"left":"200px"},500);
+          }else{
+            $(".layui-side").animate({"left":"-200px"},500);$(this).animate({"left":"0"},500);$(this).addClass("layui-side-arrow-close");$(".layui-body").animate({"left":"0"},500);$(".layui-footer").animate({"left":"0"},500);
+          }
+        });
+      }else{
+         $("#layui-side-arrow-moble").on("click",function () {
+          if($(this).hasClass("layui-side-arrow-close")){
+            $(".layui-side").animate({"left":"0"},500);$(this).removeClass("layui-side-arrow-close");
+          }else{
+            $(".layui-side").animate({"left":"-200px"},500);$(this).addClass("layui-side-arrow-close");
+          }
+        });
+
+        $("#routerView").on("touchstart",function (e) {
+          if(!$("#layui-side-arrow-moble").hasClass("layui-side-arrow-close")){
+            $(".layui-side").animate({"left":"-200px"},500);$("#layui-side-arrow-moble").addClass("layui-side-arrow-close");
+            layui.stope(e);
+          }
+        });
+      }
+  }
+  //初始化左侧折叠菜单结束
+  
+  
+  
+  //修改密码
+	$("#changePassword").on("click",function(){
+	    var formStr = '<form class="layui-form" name="changePassword">';
+	    formStr+='<div class="layui-form-item"><label class="layui-form-label">'+"用户名"+'：</label><div class="layui-input-block"><input class="layui-input" type="text" name="'+"username"+'" value="'+loginObj.username+'" placeholder="" disabled></div></div>';
+	    formStr+='<div class="layui-form-item"><label class="layui-form-label">'+"密码"+'：</label><div class="layui-input-block"><input class="layui-input" type="password" name="'+"password"+'" value="" placeholder="请输入密码"></div></div>';
+	    formStr+='<div class="layui-form-item"><label class="layui-form-label">'+"确认密码"+'：</label><div class="layui-input-block"><input class="layui-input" type="password" name="'+"password2"+'" value="" placeholder="请再次输入密码"></div></div>';
+
+	    formStr+='<div class="layui-form-item"><div class="layui-input-block"><button class="layui-btn layui-btn-sm" lay-submit lay-filter="formDemo">提交</button><button class="layui-btn layui-btn-sm btn_esc">取消</button></div></div>';
+	    formStr+='</form>';
+	    layer.open({
+	      type: 1,  //type的值有：0（信息框，默认）1（页面层）2（iframe层）3（加载层）4（tips层）
+	      area: [openArea.width,openArea.height],
+	      fix: false, //不固定
+	      maxmin: true,
+	      shade:0.4,
+	      title: '修改密码',
+	      content: formStr,
+	      success: function(layero, index){
+	          //console.log(layero.selector);
+	          //console.log(index);
+	          
+	          form.render(); //重新渲染form
+	          $(".btn_esc").on("click",function () { layer.close(index); return false; });
+	         
+	          //监听提交
+	          form.on('submit(formDemo)', function(data){
+	              //console.log(data.field);
+	              if(!data.field.password || !data.field.password2){
+	              	layer.msg("密码不能为空",{time: 1000});
+	              	return false;
+	              }
+	              if(data.field.password != data.field.password2){
+	              	layer.msg("两次密码输入不一致密码",{time: 1000});
+	              	return false;
+	              }
+	              
+	              var searchJson={"username": data.field.username};
+	              var updateJson= {"password": data.field.password};
+	              var reqData2 = 'action=updateData&searchJson=' + JSON.stringify(searchJson) + '&updateJson=' + JSON.stringify(updateJson);
+	              dataDB.updateData("/nodejs/login",reqData2,function (data2) {
+	                layer.msg(data2,{time: 1000});
+	                if(data2 != "操作成功"){return;}
+	                layer.close(index);
+	
+	              });
+	              
+	              return false;
+	              
+	        });
+	        
+	      }
+	    });
+	
+	});
+  //修改密码 结束
+  
+  
+  
+  //退出登录
+  $("#SignOut").on("click",function () {
+  	 $.ajax({
+		      url: "/nodejs/login",
+		      type: "POST",
+		      dataType:"text",
+		      data:"action=SignOut",
+		      success: function (data,status,xhr) {
+		      	console.log("请求成功");
+		      	alert(data);
+		      	window.location.href = "/login.html";
+		      },
+		      error: function (xhr,status,error) {
+		      	console.log("请求失败"); 
+		      	window.location.href = "/login.html";
+		      }
+		});
+  });
+  //退出登录 结束
+  
+  // $(window).on("resize",function(){
+  //    location.reload();
+  // });
+
+});
+
+
+
+</script>
+
+</body>
+</html>

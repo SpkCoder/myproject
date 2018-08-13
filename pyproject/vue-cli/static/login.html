@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>eCast</title>
+  <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<link rel='stylesheet' href='js/element-ui/lib/theme-chalk/index.css'/>
+  <link rel='stylesheet' href='css/iconfont.css'/>
+  <link rel="stylesheet" href="css/login.css">
+
+</head>
+  
+  <body>
+     <div class="header-logo clearfix">
+		       <div class="container clearfix">
+		        <div class="logo-left"><img src="image/ecast.png"></div>
+			      <div class="logo-right">
+			        <img src="image/vqlogo.png">
+			        <span>Version 18-03-08</span> 
+			      </div>
+		    </div>
+		  </div>
+	
+	  <div class="header">
+  	  	<div class="container clearfix">
+	  		  
+	  		  <div class="nav-box">
+  		  	   <ul id="topNav" class="nav clearfix">
+	  		  	   	<li class="actived">
+	  		  	   		<a href="login.html">Login</a>
+	              </li>
+	  		  	   	<li>
+	  		  	   		<a href="register.html">Register</span></a>
+	              </li>
+	  		  	   	<li>
+	  		  	   		<a href="terms.html">Terms of Service</a>
+	              </li>
+	  		  	   	<li>
+	  		  	   		<a href="contact.html">Contact Us</a>
+	              </li>
+              </ul>
+				      
+  		    </div>
+  		  
+	  		  <div class="moblebar">
+	  		  	  <span id="nav-menu-moble" class="nav-close"><i class="icon-font" style="font-size: 22px;"></i></span>
+	  		  </div>
+  		  </div>
+  	</div>
+  	
+  	
+  	<!-- pageList -->
+	  <div class="vue-body">
+			   <div class="container clearfix">
+						
+							<div class="login-form" id="formApp">
+								<h1>Login</h1>
+							  <h2>Please Sign In</h2>
+								<el-form ref="formData" :model="formData">
+									<el-form-item>
+								    <el-input type="text" v-model="formData.UserName" placeholder="Please input UserName"></el-input>
+								  </el-form-item>  
+									<el-form-item>
+								    <el-input type="Password" v-model="formData.Password" placeholder="Please input Password"></el-input>
+								  </el-form-item>  
+								  <el-form-item label="Remember Me?">
+								    <el-switch v-model="formData.rememberMe"></el-switch>
+								  </el-form-item>
+								  <el-form-item>
+							    <el-button size="medium" type="primary" @click="submitForm">LOGIN</el-button>
+							    </el-form-item>
+								  
+								</el-form>    
+					    </div>
+						
+					</div>
+	  </div>
+	  
+
+
+
+<script type="text/javascript" src="js/jquery/jquery.js"></script>
+<script type="text/javascript" src="js/vue/vue.js"></script>
+<script type="text/javascript" src="js/element-ui/lib/index.js"></script>
+<script type="text/javascript" src="js/modeljs/device.js"></script>
+<script type="text/javascript">
+
+        //当前设备信息
+			  //console.log(device);
+
+         var formApp = new Vue({
+		         el: '#formApp',
+		         data() {
+				      return {
+				        formData: {
+				        	UserName: '',
+					        Password: '',
+					        rememberMe: false,
+				        }
+				      };
+				    },
+				    methods: {
+				      submitForm() {
+				       var _this = this;
+				       console.log(formApp.formData);
+	             device.px = screen.width +"x" + screen.height;
+	             var reqData = 'action=signIn&searchJson={"UserName":"'+formApp.formData.UserName+'","Password":"'+formApp.formData.Password+'"}' +'&osJson={"os":"'+device.os+'","px":"'+device.px+'"}';
+                $.ajax({
+				              url: "/api" + "/nodejs/login",
+				              type: "POST",
+				              dataType:"text",
+				              data:reqData,
+				              xhrFields: {withCredentials: true},
+				              success: function (data2,status,xhr) {
+				              	//console.log("请求成功");
+				              	if(data2 == "Login Success"){
+				              		
+				              		var obj = {"UserName":formApp.formData.UserName,"Password":formApp.formData.Password,"rememberMe":formApp.formData.rememberMe};
+					                if(formApp.formData.rememberMe == true){
+					                	localStorage.setItem("loginStatus",JSON.stringify(obj));
+					                }else{
+					                	localStorage.removeItem("loginStatus");
+					                }
+				              		window.location.href = "/";
+				              	}else{
+				              		_this.$message({duration: 1000, message: data2 });
+				              	}
+				              	
+				              },
+				              error: function (xhr,status,error) {
+				              	console.log("ajax err"); 
+				              }
+				    	  });
+                
+				      },
+				      resetForm() {
+				        this.$refs["formData"].resetFields();
+				      }
+				    }
+		         
+		    });
+		    
+		    
+		    //获取登录状态
+        if(localStorage.getItem("loginStatus")){
+        	 var loginStatus = JSON.parse(localStorage.getItem("loginStatus"));
+        	 formApp.formData.UserName = loginStatus.UserName;
+        	 formApp.formData.Password = loginStatus.Password;
+        	 formApp.formData.rememberMe = true;
+        }
+        
+        //top菜单折叠
+			  		  $("#topNav > li > a").on("click",function(){
+			  		    var _thisLi = $(this).parent("li");
+			  		    if(_thisLi.hasClass("actived")){
+			  		      _thisLi.removeClass("actived");
+			  		      _thisLi.find("dl").slideUp();
+			  		    }else{
+			  		      _thisLi.addClass("actived").siblings("li").removeClass("actived");
+			  		      _thisLi.siblings("li").find("dl").slideUp();
+			  		      _thisLi.find("dl").slideDown();
+			  		    }
+			  		  });
+			  		  
+			  		  $("#nav-menu-moble").on("click",function () {
+				          if($(this).hasClass("nav-close")){
+				            $("#topNav").slideDown();$(this).removeClass("nav-close");
+				          }else{
+				            $("#topNav").slideUp();$(this).addClass("nav-close");
+				          }
+				      });
+				      
+				      $(window).on("resize",function(){
+					      location.reload();
+					  });
+        
+        
+    </script>
+  </body>
+</html>

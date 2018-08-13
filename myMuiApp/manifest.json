@@ -1,0 +1,363 @@
+{
+	"@platforms": [
+		"android",
+		"iPhone",
+		"iPad"
+	],
+	"id": "H5D7F30D0",/*应用的标识，创建应用时自动生成，勿手动修改*/
+	"name": "myMuiApp",/*应用名称，程序桌面图标名称*/
+	"version": {
+		"name": "1.0.0",/*应用版本名称*/
+		"code": "83"
+	},
+	"description": "",/*应用描述信息*/
+	"icons": {
+		"72": "icon.png"
+	},
+	"launch_path": "index.html",/*应用的入口页面，默认为根目录下的index.html；支持网络地址，必须以http://或https://开头*/
+	"developer": {
+		"name": "",/*开发者名称*/
+		"email": "",/*开发者邮箱地址*/
+		"url": ""
+	},
+	"permissions": {
+		"Events": {
+			"description": "应用扩展事件"
+		},
+		"Accelerometer": {
+			"description": "加速度传感器"
+		},
+		"Audio": {
+			"description": "音频录制与播放"
+		},
+		"Cache": {
+			"description": "缓存管理"
+		},
+		"Camera": {
+			"description": "摄像头"
+		},
+		"Console": {
+			"description": "调试输出日志"
+		},
+		"Contacts": {
+			"description": "系统通讯录"
+		},
+		"Device": {
+			"description": "设备信息"
+		},
+		"Downloader": {
+			"description": "文件下载"
+		},
+		"Events": {
+			"description": "扩展事件"
+		},
+		"File": {
+			"description": "本地文件系统"
+		},
+		"Gallery": {
+			"description": "系统相册"
+		},
+		"Geolocation": {
+			"description": "位置信息"
+		},
+		"Invocation": {
+			"description": "Native.js能力"
+		},
+		"Messaging": {
+			"description": "消息通讯"
+		},
+		"Orientation": {
+			"description": "方向传感器"
+		},
+		"Proximity": {
+			"description": "距离传感器"
+		},
+		"Storage": {
+			"description": "本地数据存储"
+		},
+		"Webview": {
+			"description": "窗口管理"
+		},
+		"NativeObj": {
+			"description": "原生控件"
+		},
+		"NativeUI": {
+			"description": "原生UI控件"
+		},
+		"Navigator": {
+			"description": "浏览器信息"
+		},
+		"Uploader": {
+			"description": "文件上传"
+		},
+		"Runtime": {
+			"description": "运行环境"
+		},
+		"XMLHttpRequest": {
+			"description": "跨域网络请求"
+		},
+		"Zip": {
+			"description": "压缩与解压"
+		},
+		"Barcode": {
+			"description": "二维码扫描"
+		},
+		"Maps": {
+			"description": "地图"
+		},
+		"OAuth": {
+			"description": "登录授权"
+		},
+		"Payment": {
+			"description": "支付"
+		},
+		"Push": {
+			"description": "消息推送"
+		},
+		"Share": {
+			"description": "社交分享"
+		},
+		"Speech": {
+			"description": "语音识别"
+		},
+		"Statistic": {
+			"description": "统计"
+		}
+	},
+	"plus": {
+		"launchwebview": {
+			"titleNView": {
+				"backgroundcolor": "#f7f7f7",
+				"titletext": "首页",
+				"titlecolor": "#000000"
+			}
+		},
+		"statusbar": {
+			"immersed": "supportedDevice",
+			"style": "dark"
+		},
+		"popGesture": "close",/*设置应用默认侧滑返回关闭Webview窗口，none为无侧滑返回功能，hide为侧滑隐藏Webview窗口。参考ask.dcloud.net.cn/article/102*/
+		"splashscreen": {
+			"autoclose": false,/*如果为true，程序启动的图片可以自动关闭，如果为false，开发者需要手动关闭*/
+			"waiting": true
+		},
+		"runmode": "normal",/*两个值，liberate或normal，前者在应用安装时释放资源，后者不需要释放资源*/
+		"signature": "Sk9JTiBVUyBtYWlsdG86aHIyMDEzQGRjbG91ZC5pbw==",/*可选，保留给应用签名，暂不使用*/
+		"distribute": {
+			"plugins": {
+				"payment": {
+					"weixin": {
+						"description": "微信支付",
+						"appid": "mytestid000000"
+					},
+					"alipay": {
+						"description": "阿里支付",
+						"scheme": ""
+					},
+					"appleiap": {
+						"description": "Apple应用内支付"
+					}
+				},
+				"statics": {
+					"umeng": {
+						"appkey_ios": "mytestid000000",
+						"channelid_ios": "mytestid000000",
+						"appkey_android": "mytestid000000",
+						"channelid_android": "mytestid000000"
+					}
+				},
+				"push": {
+					"igexin": {
+						"appid": "mytestid000000",
+						"appkey": "mytestid000000",
+						"appsecret": "mytestid000000"
+					}
+				},
+				"share": {
+					"sina": {
+						"appkey": "mytestid000000",
+						"appsecret": "mytestid000000",
+						"redirect_uri": "mytestid000000",
+						"description": "可选，新浪微博分享"
+					},
+					"weixin": {
+						"appid": "mytestid000000",
+						"appsecret": "mytestid000000",
+						"description": "可选，微信分享"
+					}
+				},
+				"maps": {
+					"baidu": {
+						"appkey_ios": "mytestid000000",
+						"appkey_android": "mytestid000000",
+						"appkey": "",
+						"description": ""
+					}
+				},
+				"oauth": {
+					"qq": {
+						"appid": "mytestid000000"
+					},
+					"sina": {
+						"appkey": "mytestid000000",
+						"appsecret": "mytestid000000",
+						"redirect_uri": "mytestid000000"
+					},
+					"weixin": {
+						"appid": "mytestid000000",
+						"appsecret": "mytestid000000"
+					}
+				}
+			},
+			"debug": "",/*可选，是否为debug模式，可取值：true表示debug模式运行，false表示release模式运行，默认值为false*/
+			"apple": {
+				"appid": "",/*iOS必选，苹果开发网站申请的appid，如io.dcloud.HelloMUI*/
+				"mobileprovision": "",/*iOS必选，打包配置文件*/
+				"password": "",/*iOS必选，导入配置文件密码*/
+				"p12": "",/*iOS必选，打包配置文件关联的个人证书*/
+				"devices": "universal",/*iphone，可取值iphone/ipad/universal*/
+				"frameworks": []
+			},
+			"google": {
+				"packagename": "",/*Android必选，程序包名，如io.dcloud.HelloMUI*/
+				"keystore": "",/*Android必选，打包证书文件*/
+				"password": "",/*Android必选，打包证书密码*/
+				"aliasname": "",/*Android必选，打包证书别名*/
+				"permissions": [
+					"<uses-permission android:name=\"android.permission.CHANGE_NETWORK_STATE\"/>",
+					"<uses-permission android:name=\"android.permission.MOUNT_UNMOUNT_FILESYSTEMS\"/>",
+					"<uses-permission android:name=\"android.permission.READ_CONTACTS\"/>",
+					"<uses-permission android:name=\"android.permission.VIBRATE\"/>",
+					"<uses-permission android:name=\"android.permission.READ_LOGS\"/>",
+					"<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>",
+					"<uses-feature android:name=\"android.hardware.camera.autofocus\"/>",
+					"<uses-permission android:name=\"android.permission.SYSTEM_ALERT_WINDOW\"/>",
+					"<uses-permission android:name=\"android.permission.WRITE_CONTACTS\"/>",
+					"<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>",
+					"<uses-permission android:name=\"android.permission.RECEIVE_BOOT_COMPLETED\"/>",
+					"<uses-permission android:name=\"android.permission.CAMERA\"/>",
+					"<uses-permission android:name=\"android.permission.GET_ACCOUNTS\"/>",
+					"<uses-permission android:name=\"android.permission.RECORD_AUDIO\"/>",
+					"<uses-permission android:name=\"android.permission.MODIFY_AUDIO_SETTINGS\"/>",
+					"<uses-permission android:name=\"android.permission.SEND_SMS\"/>",
+					"<uses-permission android:name=\"android.permission.INTERNET\"/>",
+					"<uses-permission android:name=\"android.permission.READ_PHONE_STATE\"/>",
+					"<uses-permission android:name=\"android.permission.CHANGE_WIFI_STATE\"/>",
+					"<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>",
+					"<uses-permission android:name=\"android.permission.FLASHLIGHT\"/>",
+					"<uses-permission android:name=\"android.permission.CALL_PHONE\"/>",
+					"<uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\"/>",
+					"<uses-feature android:name=\"android.hardware.camera\"/>",
+					"<uses-permission android:name=\"android.permission.ACCESS_FINE_LOCATION\"/>",
+					"<uses-permission android:name=\"android.permission.RECEIVE_USER_PRESENT\"/>",
+					"<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\"/>",
+					"<uses-permission android:name=\"android.permission.WRITE_SETTINGS\"/>",
+					"<uses-permission android:name=\"android.permission.WRITE_SMS\"/>",
+					"<uses-permission android:name=\"android.permission.READ_SMS\"/>"
+				]
+			},
+			"orientation": [
+				"portrait-primary",
+				"landscape-primary",
+				"portrait-secondary",
+				"landscape-secondary"
+			],/*必选*/
+			"icons": {
+				"ios": {
+					"prerendered": "", /*必选，是否高亮显示*/
+					"auto": "", /*可选，512x512，用于自动生成各种尺寸图标的大分辨率程序图标*/
+					"iphone": {
+						"normal": "",/*可选，57x57，iPhone普通屏幕程序图标*/
+						"retina": "",/*可选，114x114，iPhone高分屏程序图标*/
+						"retina7": "",/*可选，120x120，iPhone iOS7高分屏程序图标*/
+						"spotlight-normal": "", /*可选，29x29，iPhone Spotlight搜索程序图标*/
+						"spotlight-retina": "", /*可选，58x58，iPhone高分屏Spotlight搜索程序图标*/
+						"spotlight-retina7": "",/*可选，80x80，iPhone iOS7高分屏Spotlight搜索程序图标*/
+						"settings-normal": "", /*可选，29x29，iPhone设置页面程序图标*/
+						"settings-retina": ""
+					},
+					"ipad": {
+						"normal": "", /*可选，72x72，iPad普通屏幕程序图标*/
+						"retina": "", /*可选，144x144，iPad高分屏程序图标*/
+						"normal7": "", /*可选，76x76，iPad iOS7程序图标*/
+						"retina7": "", /*可选，152x152，iPad iOS7高分屏程序图标*/
+						"spotlight-normal": "", /*可选，50x50，iPad Spotlight搜索程序图标*/
+						"spotlight-retina": "", /*可选，100x100，iPad高分屏Spotlight搜索程序图标*/
+						"spotlight-normal7": "",/*可选，40x40，iPad iOS7 Spotlight搜索程序图标*/
+						"spotlight-retina7": "",/*可选，80x80，iPad iOS7高分屏Spotlight搜索程序图标*/
+						"settings-normal": "",/*可选，29x29，iPad设置页面程序图标*/
+						"settings-retina": ""
+					}
+				},
+				"android": {
+					"mdpi": "", /*必选，48x48，普通屏程序图标*/
+					"ldpi": "", /*必选，48x48，大屏程序图标*/
+					"hdpi": "", /*必选，72x72，高分屏程序图标*/
+					"xhdpi": "",/*必选，96x96，720P高分屏程序图标*/
+					"xxhdpi": ""
+				}
+			},
+			"splashscreen": {
+				"ios": {
+					"iphone": {
+						"default": "", /*必选，320x480，iPhone3启动图片*/
+						"retina35": "",/*必选，640x960，3.5英寸设备(iPhone4)启动图片*/
+						"retina40": ""
+					},
+					"ipad": {
+						"portrait": "", /*可选，768x1004，需支持iPad时必选，iPad竖屏启动图片*/
+						"portrait-retina": "",/*可选，1536x2008，需支持iPad时必选，iPad高分屏竖屏图片*/
+						"landscape": "", /*可选，1024x748，需支持iPad时必选，iPad横屏启动图片*/
+						"landscape-retina": "", /*可选 ，2048x1496，需支持iPad时必选，iPad高分屏横屏启动图片*/
+						"portrait7": "", /*可选，768x1024，需支持iPad iOS7时必选，iPad竖屏启动图片*/
+						"portrait-retina7": "",/*可选，1536x2048，需支持iPad iOS7时必选，iPad高分屏竖屏图片*/
+						"landscape7": "", /*可选，1024x768，需支持iPad iOS7时必选，iPad横屏启动图片*/
+						"landscape-retina7": ""
+					}
+				},
+				"android": {
+					"mdpi": "", /*必选，240x282，普通屏启动图片*/
+					"ldpi": "", /*必选，320x442，大屏启动图片*/
+					"hdpi": "", /*必选，480x762，高分屏启动图片*/
+					"xhdpi": "", /*必选，720x1242，720P高分屏启动图片*/
+					"xxhdpi": ""
+				}
+			}
+		},
+		"schemeWhitelist": [
+			"market"
+		],"ads":{"rp":false,"splash":false,"push":false},"adid":""
+	},
+	"dependencies": {
+		"pages": {
+			"index.html": {
+				"resources": [],
+				"refer": [
+					"page/pullrefresh_main.html",
+					"page/guide.html",
+					"index-menu.html",
+					"page/ajax.html"
+				],
+				"priority": 0
+			},
+			"page/pullrefresh_main.html": {
+				"resources": [
+					"page/pullrefresh_sub.html"
+				],
+				"refer": [],
+				"priority": 0
+			}
+		},
+		"idle": {
+			"resources": [
+				"js/mui.min.js",
+				"fonts/mui.ttf",
+				"css/mui.min.css",
+				"css/style.css",
+				"js/mui.js",
+				"css/mui.css"
+			]
+		}
+	},
+	"fullscreen": true
+}

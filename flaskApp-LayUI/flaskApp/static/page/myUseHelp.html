@@ -1,0 +1,24 @@
+﻿<div class="list-page-point">
+   <i class="layui-icon" style="font-size: 14px;">&#xe715;</i>
+   <span></span>
+</div>
+
+
+<div class="list-page-box">
+	<iframe src="page/myUseHelp2.html" width="100%" height="100%" frameborder="no"></iframe>
+</div>
+
+
+<script type="text/javascript">
+layui.use(['jquery'], function(){
+  var $ = layui.$;
+  //当前定位
+  var this_href = "#"+$("#layUI_routerView").attr("data-href").split(".html")[0];
+  $(".list-page-point span").html("系统设置"+"&gt;&gt;"+"使用说明");
+
+
+});
+
+
+
+</script>

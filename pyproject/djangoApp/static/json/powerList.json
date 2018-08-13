@@ -1,0 +1,58 @@
+﻿﻿﻿{
+    "code": 0, 
+    "msg": "", 
+    "count": 100, 
+    "name_ch" :"角色权限",
+    "name_en" :"powerList",
+    "field_ch" :"角色ID;角色名称;模块ID;模块名称;数据表名称;功能中文名称;功能英文名称",
+    "field_en" :"id;name;modelId;modelName;dbName;function_ch;function_en",
+    "data_type" :"int(6);text;int(6);text;text;text;text",
+    "field_width" :"100;100;100;100;150;150;150",
+    "rows": [
+        {
+            "id": "1",
+            "name": "超级用户",
+            "modelId": "100001",
+            "modelName": "模块列表",
+            "dbName": "modelList", 
+            "function_ch": "查询",
+            "function_en": "findData"
+        },  
+        {   
+            "id": "1",
+            "name": "超级用户",
+            "modelId": "100001",
+            "modelName": "模块列表",
+            "dbName": "modelList",
+            "function_ch": "增加",
+            "function_en": "insertData"
+        }, 
+        {
+            "id": "1",
+            "name": "超级用户",
+            "modelId": "100001",
+            "modelName": "模块列表",
+            "dbName": "modelList",
+            "function_ch": "修改",
+            "function_en": "updateData"
+        },
+        {
+            "id": "1",
+            "name": "超级用户",
+            "modelId": "100001",
+            "modelName": "模块列表",
+            "dbName": "modelList",
+            "function_ch": "删除",
+            "function_en": "delData"
+        },
+        {
+            "id": "2",
+            "name": "普通用户",
+            "modelId": "100001",
+            "modelName": "模块列表",
+            "dbName": "modelList", 
+            "function_ch": "查询",
+            "function_en": "findData"
+        }
+    ]
+}

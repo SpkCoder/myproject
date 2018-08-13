@@ -1,0 +1,40 @@
+﻿/* 0 */
+{
+  "_id" : ObjectId("5aa8b57c39c4901f4029f297"),
+  "UserName" : "yuxian",
+  "dbName" : "userList",
+  "action" : "signIn",
+  "content" : "action=signIn",
+  "os" : "windows",
+  "px" : "1920x1080",
+  "ip" : "::1",
+  "time" : "2018-03-14 13:39:08"
+}
+
+/* 1 */
+{
+  "_id" : ObjectId("5aa8b58239c4901f4029f298"),
+  "UserName" : "yuxian",
+  "dbName" : "userList",
+  "action" : "signOut",
+  "content" : "action=signOut",
+  "os" : "windows",
+  "px" : "1920x1080",
+  "ip" : "::1",
+  "time" : "2018-03-14 13:39:14"
+}
+
+/* 2 */
+{
+  "_id" : ObjectId("5aa8b58f39c4901f4029f299"),
+  "UserName" : "yuxian",
+  "dbName" : "userList",
+  "action" : "signIn",
+  "content" : "action=signIn",
+  "os" : "windows",
+  "px" : "1920x1080",
+  "ip" : "::1",
+  "time" : "2018-03-14 13:39:27"
+}
+
+

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  	<title>MONGO大数据平台</title>
+    <meta charset="utf-8">
+	  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	  <link rel='stylesheet' href='/js/element-ui/lib/theme-chalk/index.css'/>
+  <link rel='stylesheet' href='/css/iconfont.css'/>
+  <link rel="stylesheet" href="css/login.css">
+
+</head>
+  
+  <body class="login-bg">
+    <div class="login-box">
+        <header>
+            <h1>MONGO大数据平台</h1>
+        </header>
+        <div class="login-main" id="formApp">
+					<el-form ref="formData" :model="formData">
+						<el-form-item>
+					    <el-input type="text" v-model="formData.username" placeholder="请输入用户名"></el-input>
+					  </el-form-item>  
+						<el-form-item>
+					    <el-input type="password" v-model="formData.password" placeholder="请输入密码"></el-input>
+					  </el-form-item>  
+					  <el-form-item label="记住帐号？">
+					    <el-switch v-model="formData.rememberMe"></el-switch>
+					  </el-form-item>
+					  <el-form-item>
+				    <el-button size="medium" type="primary" @click="submitForm">登录</el-button>
+				    </el-form-item>
+					  
+					</el-form>    
+		</div>
+      
+  </div>
+
+<script type="text/javascript" src="/js/jquery/jquery.js"></script>
+<script type="text/javascript" src="/js/vue/vue.js"></script>
+<script type="text/javascript" src="/js/element-ui/lib/index.js"></script>
+<script type="text/javascript" src="/js/modeljs/device.js"></script>
+<script type="text/javascript">
+
+        //当前设备信息
+			  //console.log(device);
+
+         var formApp = new Vue({
+		         el: '#formApp',
+		         data() {
+				      return {
+				        formData: {
+				        	username: '',
+					        password: '',
+					        rememberMe: false,
+				        }
+				      };
+				    },
+				    methods: {
+				      submitForm() {
+				       var _this = this;
+				       console.log(formApp.formData);
+	             device.px = screen.width +"x" + screen.height;
+	             var reqData = 'action=loginIn&searchJson={"username":"'+formApp.formData.username+'","password":"'+formApp.formData.password+'"}' +'&osJson={"os":"'+device.os+'","px":"'+device.px+'"}';
+                $.ajax({
+				              url: "/nodejs/login",
+				              type: "POST",
+				              dataType:"text",
+				              data:reqData,
+				              success: function (data2,status,xhr) {
+				              	console.log("请求成功");
+				              	if(data2 == "登录成功"){
+				              		
+				              		var obj = {"username":formApp.formData.username,"password":formApp.formData.password,"rememberMe":formApp.formData.rememberMe};
+					                if(formApp.formData.rememberMe == true){
+					                	localStorage.setItem("loginStatus",JSON.stringify(obj));
+					                }else{
+					                	localStorage.removeItem("loginStatus");
+					                }
+				              		
+				              		window.location.href = "/";
+				              	}else{
+				              		_this.msg(data2,{time: 1000});
+				              	}
+				              	
+				              },
+				              error: function (xhr,status,error) {
+				              	console.log("请求失败"); 
+				              }
+				    	  });
+                
+				      },
+				      resetForm() {
+				        this.$refs["formData"].resetFields();
+				      }
+				    }
+		         
+		    });
+		    
+		    
+		    //获取登录状态
+        if(localStorage.getItem("loginStatus")){
+        	 var loginStatus = JSON.parse(localStorage.getItem("loginStatus"));
+        	 formApp.formData.username = loginStatus.username;
+        	 formApp.formData.password = loginStatus.password;
+        	 formApp.formData.rememberMe = true;
+        }
+        
+    </script>
+  </body>
+</html>

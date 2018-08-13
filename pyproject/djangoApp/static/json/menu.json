@@ -1,0 +1,158 @@
+{
+    "name_ch" :"菜单",
+    "name_en" :"menu",
+    "rows": [
+        {
+        	"level": 1, 
+            "parentId": "", 
+            "id": 100000, 
+            "name": "系统设置", 
+            "position": "left",
+            "sort": 1,
+            "href": "",
+            "iconfont":"",
+            "show": "true", 
+            "children": [
+                {   
+                	"level": 2, 
+                    "parentId": 100000, 
+                    "id": 100001, 
+                    "name": "模块列表", 
+                    "position": "",
+                    "sort": 1,
+                    "href": "#/page/modelList", 
+                    "iconfont":"",
+                    "show": "true",
+                    "children": []
+                },
+                {
+                	"level": 2, 
+                    "parentId": 100000, 
+                    "id": 100002, 
+                    "name": "数据列表", 
+                    "position": "",
+                    "sort": 2,
+                    "href": "#/page/dataList", 
+                    "iconfont":"",
+                    "show": "true",
+                    "children": []
+                },
+                {
+                	"level": 2, 
+                    "parentId": 100000, 
+                    "id": 100003, 
+                    "name": "模块功能", 
+                    "position": "",
+                    "sort": 3,
+                    "href": "#/page/modelListFn", 
+                    "iconfont":"",
+                    "show": "true",
+                    "children": []
+                }
+
+            ]
+        }, 
+        {
+            "level": 1, 
+            "parentId": "", 
+            "id": 200000, 
+            "name": "商品管理", 
+            "position": "top",
+            "sort": 2,
+            "href": "", 
+            "iconfont":"",
+            "show": "true", 
+            "children": [
+                {   
+                    "level": 2, 
+                    "parentId": 200000, 
+                    "id": 200001, 
+                    "name": "邮件管理", 
+                    "position": "",
+                    "sort": 1,
+                    "href": "#/page/page6", 
+                    "iconfont":"",
+                    "show": "true",
+                    "children": []
+                },
+                {
+                    "level": 2, 
+                    "parentId": 100000, 
+                    "id": 200002, 
+                    "name": "消息管理", 
+                    "position": "",
+                    "sort": 2,
+                    "href": "#/page/page7", 
+                    "iconfont":"",
+                    "show": "true",
+                    "children": []
+                }
+
+            ]
+        }, 
+        {
+            "level": 1, 
+            "parentId": "", 
+            "id": 300000, 
+            "name": "所有商品", 
+            "position": "left",
+            "sort": 3,
+            "href": "", 
+            "iconfont":"&#xe61b;",
+            "show": "true", 
+            "children": [
+                {   
+                    "level": 2, 
+                    "parentId": 300000, 
+                    "id": 300001, 
+                    "name": "列表一", 
+                    "position": "",
+                    "sort": 1,
+                    "href": "#/page/page1", 
+                    "iconfont":"&#xe61b;",
+                    "show": "true",
+                    "children": []
+                },
+                {
+                    "level": 2, 
+                    "parentId": 300000, 
+                    "id": 300002, 
+                    "name": "列表二", 
+                    "position": "",
+                    "sort": 2,
+                    "href": "#/page/page2", 
+                    "iconfont":"&#xe61b;",
+                    "show": "true",
+                    "children": []
+                }
+
+            ]
+        }, 
+        {
+            "level": 1, 
+            "parentId": "", 
+            "id": 400000, 
+            "name": "解决方案", 
+            "position": "left",
+            "sort": 3,
+            "href": "", 
+            "iconfont":"&#xe61b;",
+            "show": "true", 
+            "children": [
+                {   
+                    "level": 2, 
+                    "parentId": 400000, 
+                    "id": 400001, 
+                    "name": "列表三", 
+                    "position": "",
+                    "sort": 1,
+                    "href": "#/page/page3", 
+                    "iconfont":"&#xe61b;",
+                    "show": "true",
+                    "children": []
+                }
+
+            ]
+        }
+    ]
+}

@@ -1,0 +1,42 @@
+(0.000) SELECT @@SQL_AUTO_IS_NULL; args=None
+(0.000) SET SESSION TRANSACTION ISOLATION LEVEL READ COMMITTED; args=None
+(0.000) SELECT VERSION(); args=None
+(0.000) SET SESSION TRANSACTION ISOLATION LEVEL READ COMMITTED; args=None
+(0.000) SHOW FULL TABLES; args=None
+(0.000) SELECT `django_migrations`.`app`, `django_migrations`.`name` FROM `django_migrations`; args=()
+(0.001) SELECT @@SQL_AUTO_IS_NULL; args=None
+(0.000) SET SESSION TRANSACTION ISOLATION LEVEL READ COMMITTED; args=None
+(0.000) SELECT COUNT(*) AS `__count` FROM `djangoApp_httptest`; args=()
+(0.000) SELECT VERSION(); args=None
+(0.000) SELECT `djangoApp_httptest`.`id`, `djangoApp_httptest`.`name`, `djangoApp_httptest`.`six`, `djangoApp_httptest`.`age`, `djangoApp_httptest`.`email` FROM `djangoApp_httptest` WHERE `djangoApp_httptest`.`name` = 'mick' ORDER BY `djangoApp_httptest`.`id` ASC LIMIT 10; args=('mick',)
+"GET /python/HttpTest/?action=findData&searchJson={%22name%22:%22mick%22}&sortJson={%22id%22:1}&fieldJson={}&prePageNum=10&currPage=1 HTTP/1.1" 200 239
+(0.001) SELECT @@SQL_AUTO_IS_NULL; args=None
+(0.000) SET SESSION TRANSACTION ISOLATION LEVEL READ COMMITTED; args=None
+(0.000) SELECT VERSION(); args=None
+(0.000) SET SESSION TRANSACTION ISOLATION LEVEL READ COMMITTED; args=None
+(0.001) SHOW FULL TABLES; args=None
+(0.000) SELECT `django_migrations`.`app`, `django_migrations`.`name` FROM `django_migrations`; args=()
+(0.001) SELECT @@SQL_AUTO_IS_NULL; args=None
+(0.000) SET SESSION TRANSACTION ISOLATION LEVEL READ COMMITTED; args=None
+(0.000) SELECT VERSION(); args=None
+(0.000) SET SESSION TRANSACTION ISOLATION LEVEL READ COMMITTED; args=None
+(0.001) SHOW FULL TABLES; args=None
+(0.000) SELECT `django_migrations`.`app`, `django_migrations`.`name` FROM `django_migrations`; args=()
+(0.000) SELECT @@SQL_AUTO_IS_NULL; args=None
+(0.000) SET SESSION TRANSACTION ISOLATION LEVEL READ COMMITTED; args=None
+(0.000) SELECT VERSION(); args=None
+(0.000) SET SESSION TRANSACTION ISOLATION LEVEL READ COMMITTED; args=None
+(0.001) SHOW FULL TABLES; args=None
+(0.001) SELECT `django_migrations`.`app`, `django_migrations`.`name` FROM `django_migrations`; args=()
+(0.000) SELECT @@SQL_AUTO_IS_NULL; args=None
+(0.000) SET SESSION TRANSACTION ISOLATION LEVEL READ COMMITTED; args=None
+(0.001) SELECT VERSION(); args=None
+(0.000) SET SESSION TRANSACTION ISOLATION LEVEL READ COMMITTED; args=None
+(0.001) SHOW FULL TABLES; args=None
+(0.001) SELECT `django_migrations`.`app`, `django_migrations`.`name` FROM `django_migrations`; args=()
+(0.000) SELECT @@SQL_AUTO_IS_NULL; args=None
+(0.000) SET SESSION TRANSACTION ISOLATION LEVEL READ COMMITTED; args=None
+(0.001) SELECT COUNT(*) AS `__count` FROM `djangoApp_httptest`; args=()
+(0.000) SELECT VERSION(); args=None
+(0.001) SELECT `djangoApp_httptest`.`id`, `djangoApp_httptest`.`name`, `djangoApp_httptest`.`six`, `djangoApp_httptest`.`age`, `djangoApp_httptest`.`email` FROM `djangoApp_httptest` WHERE `djangoApp_httptest`.`name` = 'mick' ORDER BY `djangoApp_httptest`.`id` ASC LIMIT 10; args=('mick',)
+"GET /python/HttpTest/?action=findData&searchJson={%22name%22:%22mick%22}&sortJson={%22id%22:1}&fieldJson={}&prePageNum=10&currPage=1 HTTP/1.1" 200 239

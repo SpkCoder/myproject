@@ -1,0 +1,475 @@
+﻿<div class="list-page-point">
+   <i class="layui-icon" style="font-size: 14px;">&#xe715;</i>
+   <span></span>
+</div>
+
+
+<div class="list-page-box">
+    <div class="list-page">
+    
+		<div id="btnApp">
+			<el-button-group>
+			  <el-button id="btn_add" size="medium"><i class="layui-icon">&#xe654;</i>增加</el-button>
+			  <el-button id="btn_delete" size="medium"><i class="layui-icon">&#xe640;</i>删除</el-button>
+			  <el-button id="btn_search" size="medium"><i class="layui-icon">&#xe615;</i>查询</el-button>
+			</el-button-group>
+		</div>
+	
+	    <div id="tableApp"></div>
+	    <div id="pageApp"></div>
+	    <div id="formApp" class="formBox"> </div>
+	    
+
+    </div>
+</div>
+<script type="text/javascript">
+	require(['jquery','Vue','dataDB','ELEMENT','drag','formVerify'], function ($,Vue,dataDB,ELEMENT,drag,formVerify) {
+	    //请求数据的url
+	    var url = $("#Vue_routerView").attr("data-href").replace(/\/page\//,"/nodejs/").replace(/\.html/,"");
+		//console.log(url);
+		//当前定位
+		var this_href = "#"+$("#Vue_routerView").attr("data-href").split(".html")[0];
+		var this_a = $(".nav a[href='"+this_href+"']");
+		$(".list-page-point span").html(this_a.parents("li").find("a").eq(0).text()+"&gt;&gt;"+this_a.text());
+	
+	    var dataDBInt = dataDB.int;
+	    Vue.use(ELEMENT); 
+        
+        var dragInt = drag.int;
+        
+        var searchStatus = { 
+        	searchJson : {},
+        	prePageNum : 10,
+        	currPage : 1,
+        	sortJson : {},
+        };
+       
+       
+        //按钮组
+	    var btnApp = new Vue({
+	    	el: '#btnApp'
+	    });
+       
+       
+        //加载data
+		var dataInt = function (data) {
+	        //console.log(data);
+	        
+	        if(typeof data != "object"){
+	          alert(data);
+	          return;
+	        }
+	        
+	        var tableWidth = 40 + 130;
+	        data.field_width.forEach(function (item,index) {
+	        	tableWidth += Number(item);
+	        });
+	        tableWidth += "px";
+	        
+	        var tableHtml ='<el-table :data="tableData" border  ref="multipleTable" tooltip-effect="dark" size="small" style="width:'+tableWidth+'" max-height="400" @selection-change="selectionChange" @sort-change="sortChange">';
+	        tableHtml +='<el-table-column fixed="left" type="selection" width="40"> </el-table-column>';
+	        data.colArr.forEach(function (item,index) {
+	        	tableHtml+='<el-table-column show-overflow-tooltip sortable="custom" prop="'+item.field+'" label="'+item.title+'" width="'+item.width+'"> </el-table-column>';
+	        });
+//	        tableHtml+='<el-table-column fixed="right" label="操作" width="130"> <template slot-scope="scope"> <el-button @click="details(scope.row)" type="text" size="small">查看</el-button> <el-button @click="edit(scope.row)" type="text" size="small">修改</el-button> <el-button @click="del(scope.row)" type="text" size="small">删除</el-button> </template> </el-table-column>';
+	        tableHtml+='<el-table-column fixed="right" label="操作" width="130"> <template slot-scope="scope"> <el-button @click="edit(scope.row)" type="text" size="small">修改</el-button> <el-button @click="del(scope.row)" type="text" size="small">删除</el-button> </template> </el-table-column>';
+	        tableHtml+=' </el-table>';
+	        $("#tableApp").html(tableHtml);
+	       
+	        
+	        var tableApp = new Vue({
+		        el: '#tableApp',
+                data(){
+			        return {
+				        tableData: data.rows,
+				        multipleSelection: []
+				    }		      
+		        },
+		        methods: {
+				      toggleSelection(rows) {
+				        if(rows) {
+				          rows.forEach(row => {
+				            this.$refs.multipleTable.toggleRowSelection(row);
+				          });
+				        }else {
+				          this.$refs.multipleTable.clearSelection();
+				        }
+			      },
+			      selectionChange(dataArr) {
+				        this.multipleSelection = dataArr;
+				        //选中的dataArr
+				        //console.log(dataArr);
+			      },
+			      sortChange(obj) {
+				        //排序
+				        //console.log(obj.prop +":"+obj.order);
+				        var sortJson = {};
+				        sortJson[obj.prop] = (obj.order == "descending") ? -1 : 1;
+			      	    searchStatus.sortJson = sortJson;
+			            var reqData2 = 'action=findData&searchJson='+JSON.stringify(searchStatus.searchJson)+'&prePageNum='+searchStatus.prePageNum+'&currPage='+searchStatus.currPage+'&sortJson='+JSON.stringify(searchStatus.sortJson);
+				        dataDBInt.findData(url,reqData2,dataInt);
+			      },
+			      details(row){
+			      	    //查看
+				      	//console.log(row);
+				      	//window.location.hash = "/page/detail/" +row.id;
+				      	//layer.msg("查看",{time: 1000});
+			      },
+			      search(){
+			      	    //搜索
+			      	    var _this = this;
+				      	var row = {}; 
+				      	var formHtml = '<h4 id="dragbur"><span>搜索</span><i class="icon-font closeBtn">&#xe618</i></h4>'
+				      	formHtml += '<el-form :model="formData" ref="formData" label-width="150px" name="search" class="demo-ruleForm">';
+			            for(let i = 0; i < data.field_en.length; i++){
+			               var data_type = data.data_type[i];
+			               var field_en = data.field_en[i];
+			               var field_ch = data.field_ch[i];
+			               row[field_en]="";
+			               formHtml+='<el-form-item label="'+field_ch+'"> <el-input v-model="formData.'+field_en+'" auto-complete="off" data-type="'+data_type+'" name="'+field_en+'"></el-input> </el-form-item>';
+			
+			            }
+			            formHtml+='<el-form-item> <el-button size="medium" type="primary" @click="submitForm()">提交</el-button> <el-button size="medium" class="closeBtn2">取消</el-button> </el-form-item>';
+			            formHtml+='</el-form>';
+				      	$("#formApp").html(formHtml);
+				      	var left_px = ($(window).width() - $("#formApp").width())/2 +"px";
+				      	var top_px = ($(window).height() - $("#formApp").height())/2 +"px";
+				      	$("#formApp").css({left:left_px,top:top_px});
+				      	$("#formApp").show();
+				      	setTimeout(function () {
+				      		dragInt.dragFn("formApp","window");
+				      		$(".closeBtn").on("click",function () {
+				      			$("#formApp").hide(); 
+				      		});
+				      		$(".closeBtn2").on("click",function () {
+				      			dataDBInt.findData(url,reqData,dataInt);
+				      			$("#formApp").hide(); 
+				      		});
+				      	},500);
+				      	
+                        var rules = formVerify.rules(row,data);
+				      	var formApp = new Vue({
+					         el: '#formApp',
+					         data() {
+							      return {
+							        formData: row
+							      };
+							    },
+							    methods: {
+							      submitForm() {
+							        this.$refs["formData"].validate (function (valid) {
+										if(valid) {
+											//console.log(formApp.formData);
+											var dataJson = {};
+											data.field_en.forEach(function(item,index){
+						                         var field_type_this = data.data_type[index];
+						                      	 if(field_type_this == "int" || field_type_this == "int(6)" || field_type_this == "decimal(2)" || field_type_this == "decimal(4)"){
+						                      	 	if(formApp.formData[item]){
+						                      	 		dataJson[item] = Number(formApp.formData[item]);
+						                      	 	}
+						                      	 }else if(field_type_this == "date(YYYY-MM-DD HH:mm:ss)" || field_type_this == "date(YYYY)" || field_type_this == "date(YYYY-MM)" || field_type_this == "date(YYYY-MM-DD)" || field_type_this == "date(HH:mm:ss)"){
+						                      	 	if(formApp.formData[item]){
+						                      	 		dataJson[item] = {$gte:formApp.formData[item]};
+						                      	 	}
+						                      	 }else{
+						                      	 	if(formApp.formData[item]){
+						                      	 		dataJson[item] =  formApp.formData[item];
+						                      	 	}
+						                      	 }
+						                    });
+						                    
+						                    //console.log(dataJson);
+						                      
+			      	                        searchStatus.searchJson = dataJson;
+			                                var reqData2 = 'action=findData&searchJson='+JSON.stringify(searchStatus.searchJson)+'&prePageNum='+searchStatus.prePageNum+'&currPage='+searchStatus.currPage+'&sortJson='+JSON.stringify(searchStatus.sortJson);
+											dataDBInt.findData(url,reqData2,dataInt);
+										}else {
+											//console.log('error submit');
+											return false;
+										}
+									});
+							      },
+							      resetForm() {
+							        //this.$refs["formData"].resetFields();
+							      }
+							    }
+					         
+				        });
+			      	
+			      },
+			      add(){
+			      	    //增加
+			      	    var _this = this;
+				      	var row = {}; 
+				      	var formHtml = '<h4 id="dragbur"><span>增加</span><i class="icon-font closeBtn">&#xe618</i></h4>'
+				      	formHtml += '<el-form :model="formData" :rules="rules" ref="formData" label-width="150px" name="add" class="demo-ruleForm">';
+			            for(let i = 0; i < data.field_en.length; i++){
+			               var data_type = data.data_type[i];
+			               var field_en = data.field_en[i];
+			               var field_ch = data.field_ch[i];
+			               row[field_en]="";
+			               formHtml+='<el-form-item label="'+field_ch+'" prop="'+field_en+'"> <el-input v-model="formData.'+field_en+'" auto-complete="off" data-type="'+data_type+'" name="'+field_en+'"></el-input> </el-form-item>';
+			
+			            }
+			            formHtml+='<el-form-item> <el-button size="medium" type="primary" @click="submitForm()">提交</el-button> <el-button size="medium" class="closeBtn">取消</el-button> </el-form-item>';
+			            formHtml+='</el-form>';
+				      	$("#formApp").html(formHtml);
+				      	var left_px = ($(window).width() - $("#formApp").width())/2 +"px";
+				      	var top_px = ($(window).height() - $("#formApp").height())/2 +"px";
+				      	$("#formApp").css({left:left_px,top:top_px});
+				      	$("#formApp").show();
+				      	setTimeout(function () {
+				      		dragInt.dragFn("formApp","window");
+				      		$(".closeBtn").on("click",function () {
+				      			formApp.resetForm();
+				      			$("#formApp").hide(); 
+				      		});
+				      	},500);
+				      	
+                        var rules = formVerify.rules(row,data);
+				      	var formApp = new Vue({
+					         el: '#formApp',
+					         data() {
+							      return {
+							        formData: row,
+							        rules: rules
+							      };
+							    },
+							    methods: {
+							      submitForm() {
+							        this.$refs["formData"].validate (function (valid) {
+										if(valid) {
+											//console.log(formApp.formData);
+											var dataJson = {};
+											data.field_en.forEach(function(item,index){
+						                         var field_type_this = data.data_type[index];
+						                      	 if(field_type_this == "int" || field_type_this == "int(6)" || field_type_this == "decimal(2)" || field_type_this == "decimal(4)"){
+						                      	 	dataJson[item] = Number(formApp.formData[item]);
+						                      	 }else{
+						                      	 	dataJson[item] = formApp.formData[item];
+						                      	 }
+						                    });
+						                    //console.log(dataJson);
+						                      
+						                    var dataArr=[];
+                                            dataArr.push(dataJson);
+                                            var reqData2 = 'action=insertData&dataArr=' + JSON.stringify(dataArr);
+						                    dataDBInt.insertData(url,reqData2,function (data2) {
+						                        _this.$message({duration: 1000, message: data2 });
+		                                        if(data2 != "操作成功"){return;}
+		                
+			                                    var reqData3 = 'action=findData&searchJson='+JSON.stringify(searchStatus.searchJson)+'&prePageNum='+searchStatus.prePageNum+'&currPage='+searchStatus.currPage+'&sortJson='+JSON.stringify(searchStatus.sortJson);
+		                                        dataDBInt.findData(url,reqData3,dataInt);
+						                    });
+										}else {
+											//console.log('error submit');
+											return false;
+										}
+									});
+							      },
+							      resetForm() {
+							        this.$refs["formData"].resetFields();
+							      }
+							    }
+					         
+				        });
+			      	
+			      },
+			      edit(row){
+			      	    //修改
+			      	    var _this = this;
+				      	//console.log(row); 
+				      	var formHtml = '<h4 id="dragbur"><span>修改</span><i class="icon-font closeBtn">&#xe618</i></h4>'
+				      	formHtml += '<el-form :model="formData" :rules="rules" ref="formData" label-width="150px" name="edit" class="demo-ruleForm">';
+			            for(let i = 0; i < data.field_en.length; i++){
+			               var data_type = data.data_type[i];
+			               var field_en = data.field_en[i];
+			               var field_ch = data.field_ch[i];
+			               formHtml+='<el-form-item label="'+field_ch+'" prop="'+field_en+'"> <el-input v-model="formData.'+field_en+'" auto-complete="off" data-type="'+data_type+'" name="'+field_en+'"></el-input> </el-form-item>';
+			
+			            }
+			            formHtml+='<el-form-item> <el-button type="primary" size="medium" @click="submitForm()">提交</el-button> <el-button size="medium" class="closeBtn">取消</el-button> </el-form-item>';
+			            formHtml+='</el-form>';
+				      	$("#formApp").html(formHtml);
+				      	var left_px = ($(window).width() - $("#formApp").width())/2 +"px";
+				      	var top_px = ($(window).height() - $("#formApp").height())/2 +"px";
+				      	$("#formApp").css({left:left_px,top:top_px});
+				      	$("#formApp").show();
+				      	setTimeout(function () {
+				      		dragInt.dragFn("formApp","window");
+				      		$(".closeBtn").on("click",function () {
+				      			formApp.resetForm();
+				      			$("#formApp").hide(); 
+				      		});
+				      	},500);
+				      	
+                        var rules = formVerify.rules(row,data);
+				      	var formApp = new Vue({
+					         el: '#formApp',
+					         data() {
+							      return {
+							        formData: row,
+							        rules: rules
+							      };
+							    },
+							    methods: {
+							      submitForm() {
+							        this.$refs["formData"].validate (function (valid) {
+										if(valid) {
+											//console.log(formApp.formData);
+											var dataJson = {};
+											data.field_en.forEach(function(item,index){
+						                         var field_type_this = data.data_type[index];
+						                      	 if(field_type_this == "int" || field_type_this == "int(6)" || field_type_this == "decimal(2)" || field_type_this == "decimal(4)"){
+						                      	 	dataJson[item] = Number(formApp.formData[item]);
+						                      	 }else{
+						                      	 	dataJson[item] = formApp.formData[item];
+						                      	 }
+						                    });
+						                    //console.log(dataJson);
+						                      
+						                    var searchJson={"id":formApp.formData.id};
+						                    delete dataJson.id;
+						                    var reqData2 = 'action=updateData&searchJson=' + JSON.stringify(searchJson) + '&updateJson=' + JSON.stringify(dataJson);
+						                    dataDBInt.updateData(url,reqData2,function (data2) {
+						                        _this.$message({duration: 1000, message: data2 });
+		                                        if(data2 != "操作成功"){return;}
+		                
+		                                        var reqData3 = 'action=findData&searchJson='+JSON.stringify(searchStatus.searchJson)+'&prePageNum='+searchStatus.prePageNum+'&currPage='+searchStatus.currPage+'&sortJson='+JSON.stringify(searchStatus.sortJson);
+		                                        dataDBInt.findData(url,reqData3,dataInt);
+						                    });
+										}else {
+											//console.log('error submit');
+											return false;
+										}
+									});
+							      },
+							      resetForm() {
+							        this.$refs["formData"].resetFields();
+							      }
+							    }
+					         
+				        });
+			      	
+			      },
+			      del(row){
+			      	//删除
+			      	//console.log(row);
+			      	var _this = this;
+			      	this.$confirm('确定删除?', '删除', {
+			          confirmButtonText: '确定',
+			          cancelButtonText: '取消',
+			          type: 'warning'
+			        }).then(function () {
+			          var dataJson = {"id":{"$in":[row.id]}};
+		              var reqData2 = 'action=delData&dataJson=' +JSON.stringify(dataJson);
+		              dataDBInt.delData(url,reqData2,function (data2) {
+		                _this.$message({duration: 1000, message: data2 });
+		                if(data2 != "操作成功"){return;}
+		                
+		                var reqData3 = 'action=findData&searchJson='+JSON.stringify(searchStatus.searchJson)+'&prePageNum='+searchStatus.prePageNum+'&currPage='+searchStatus.currPage+'&sortJson='+JSON.stringify(searchStatus.sortJson);
+		                dataDBInt.findData(url,reqData3,dataInt);
+		              });
+			        }).catch(function () {
+			        	//
+			        });
+			      }
+			    }
+		    });
+	        
+	        //设置勾选状态
+	        //tableApp.toggleSelection([tableApp.tableData[1], tableApp.tableData[2]]);
+	        
+	        //新增
+            $("#btn_add").on("click",function(){
+           	   tableApp.add();
+            });
+            
+	        //查询
+            $("#btn_search").on("click",function(){
+           	   tableApp.search();
+            });
+	       
+	       
+	        //批量删除
+	        $("#btn_delete").on("click",function(){
+	        	var multipleSelection = tableApp.multipleSelection;
+	        	//console.log(multipleSelection);
+	        	if(multipleSelection.length == 0){
+	        		tableApp.$message({duration: 1000, message: "请勾选要删除的行" });
+	        		return;
+	        	}
+
+		       tableApp.$confirm('确定删除?', '删除', {
+		          confirmButtonText: '确定',
+		          cancelButtonText: '取消',
+		          type: 'warning'
+		        }).then(function () {
+		            var idArr = [];
+		            for(var i=0; i<multipleSelection.length; i++){
+		            	idArr.push(multipleSelection[i].id);
+		            }
+		            //console.log(idArr);
+		            var dataJson = {"id":{"$in":idArr}};
+			        var reqData2 = 'action=delData&dataJson=' +JSON.stringify(dataJson);
+		            dataDBInt.delData(url,reqData2,function (data2) {
+		                _this.$message({duration: 1000, message: data2 });
+		                if(data2 != "操作成功"){return;}
+		                
+		                var reqData3 = 'action=findData&searchJson='+JSON.stringify(searchStatus.searchJson)+'&prePageNum='+searchStatus.prePageNum+'&currPage='+searchStatus.currPage+'&sortJson='+JSON.stringify(searchStatus.sortJson);
+		                dataDBInt.findData(url,reqData3,dataInt);
+		            });
+		        }).catch(function () {
+		        	//
+		        });
+	        });
+	        
+	       
+	       
+	        //分页
+	        if($("html,body").width()>768){
+	        	var pageHtml ='<el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currPage" :page-sizes="[10,20,50,100,200,500,1000]" :page-size="prePageNum" layout="prev, pager, next, jumper, total, sizes" :total="count"> </el-pagination>';
+	        }else{
+	        	var pageHtml ='<el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currPage" :page-sizes="[10,20,50,100,200,500,1000]" :page-size="prePageNum" layout="prev, pager, next, total" :total="count"> </el-pagination>';
+	        }
+	        $("#pageApp").html(pageHtml);
+	        
+	        var pageApp = new Vue({
+		         el: '#pageApp',
+		         data() {
+			      return {
+			        currPage: data.currPage,
+			        prePageNum: data.prePageNum,
+			        count: data.count
+			      };
+			     },
+                 methods: {
+			      handleSizeChange(num) {
+			      	searchStatus.prePageNum = num;
+			        var reqData2 = 'action=findData&searchJson='+JSON.stringify(searchStatus.searchJson)+'&prePageNum='+searchStatus.prePageNum+'&currPage='+searchStatus.currPage+'&sortJson='+JSON.stringify(searchStatus.sortJson);
+			        dataDBInt.findData(url,reqData2,dataInt);
+			      },
+			      handleCurrentChange(num) {
+			      	searchStatus.currPage = num;
+			        var reqData2 = 'action=findData&searchJson='+JSON.stringify(searchStatus.searchJson)+'&prePageNum='+searchStatus.prePageNum+'&currPage='+searchStatus.currPage+'&sortJson='+JSON.stringify(searchStatus.sortJson);
+			        dataDBInt.findData(url,reqData2,dataInt);
+			      }
+			    }
+	        });
+	        
+	        
+	        
+	        
+	        
+       }
+
+
+        //初始化数据
+		var reqData = 'action=findData&searchJson=&prePageNum=10&currPage=1';
+		dataDBInt.findData(url,reqData,dataInt);
+		//初始化数据 结束
+
+
+		
+	});
+</script>

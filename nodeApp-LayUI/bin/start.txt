@@ -1,0 +1,18 @@
+﻿//安装forever
+npm install forever -g
+
+
+# 启动
+forever start -o ../log/out.log -e ../log/err.log ./www
+
+
+# 重启
+forever restart ./www  
+
+
+# 停止
+forever stop ./www  
+
+
+# 查看forever守护的应用列表
+forever list

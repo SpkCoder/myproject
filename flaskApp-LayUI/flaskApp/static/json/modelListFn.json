@@ -1,0 +1,41 @@
+﻿﻿﻿{
+    "code": 0, 
+    "msg": "", 
+    "count": 100, 
+    "name_ch" :"模块功能",
+    "name_en" :"dataList",
+    "field_ch" :"模块ID;模块名称;数据表名称;功能中文名称;功能英文名称",
+    "field_en" :"id;modelName;dbName;function_ch;function_en",
+    "data_type" :"int(6);text;text;text;text",
+    "field_width" :"100;100;150;150;150",
+    "rows": [
+        {
+            "id": "100001",
+            "modelName": "模块列表",
+            "dbName": "modelList", 
+            "function_ch": "查询",
+            "function_en": "findData"
+        },  
+        {
+            "id": "100001", 
+            "modelName": "模块列表",
+            "dbName": "modelList",
+            "function_ch": "增加",
+            "function_en": "insertData"
+        }, 
+        {
+            "id": "100001", 
+            "modelName": "模块列表",
+            "dbName": "modelList",
+            "function_ch": "修改",
+            "function_en": "updateData"
+        },
+        {
+            "id": "100001", 
+            "modelName": "模块列表",
+            "dbName": "modelList",
+            "function_ch": "删除",
+            "function_en": "delData"
+        }
+    ]
+}

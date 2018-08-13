@@ -1,0 +1,1 @@
+var routerUrl = ["/static/static/page/myUseHelp","/static/page/modelList","/static/page/dataList","/static/page/dataListDetail/:id","/static/page/modelListFn","/static/page/userList","/static/page/powerList","/static/page/fileList","/static/page/recordList","/static/page/roleClass","/static/page/testList"]

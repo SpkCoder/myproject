@@ -1,0 +1,75 @@
+﻿﻿﻿﻿{
+    "code": 0, 
+    "msg": "", 
+    "count": 10, 
+    "name_ch" :"用户列表",
+    "name_en" :"userList",
+    "field_ch" :"用户名;电子邮箱;电话;姓名;性别;年龄;备注",
+    "field_en" :"username;email;phone;name;sex;age;remarks",
+    "data_type" :"text;text;int;text;text;int;text",
+    "field_width" :"100;150;150;100;100;100;150",
+    "rows": [
+        {
+            "username": "Mary", 
+            "password": "123456", 
+            "email": "1533265@qq.com", 
+            "phone": "13189768881", 
+            "name": "匿名", 
+            "sex": "女", 
+            "age": "18", 
+            "remarks": ""
+        }, 
+        {
+            "username": "Rose", 
+            "password": "123456", 
+            "email": "1533167@qq.com", 
+            "phone": "13189768882", 
+            "name": "匿名", 
+            "sex": "女", 
+            "age": "18", 
+            "remarks": ""
+        }, 
+        {
+            "username": "John", 
+            "password": "123456", 
+            "email": "1539165@qq.com", 
+            "phone": "13189768883", 
+            "name": "匿名", 
+            "sex": "男", 
+            "age": "18", 
+            "remarks": ""
+        }, 
+        {
+            "username": "Van", 
+            "password": "123456", 
+            "email": "1539465@qq.com", 
+            "phone": "13189768884", 
+            "name": "匿名", 
+            "sex": "男", 
+            "age": "18", 
+            "remarks": ""
+        }, 
+        {
+            "username": "admin", 
+            "password": "123456", 
+            "email": "1539465@qq.com", 
+            "phone": "13189768885", 
+            "name": "匿名", 
+            "sex": "男", 
+            "age": "18", 
+            "remarks": ""
+        }, 
+        {
+            "username": "yuxian", 
+            "password": "bnm123", 
+            "email": "1533165085@qq.com", 
+            "phone": "13189767765",
+            "name": "匿名",  
+            "sex": "男", 
+            "age": "25", 
+            "remarks": ""
+        }
+        
+        
+    ]
+}

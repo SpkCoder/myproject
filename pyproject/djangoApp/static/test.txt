@@ -1,0 +1,14 @@
+﻿python manage.py makemigrations djangoApp
+python manage.py migrate
+
+
+python manage.py showmigrations   //显示所有migrations
+
+
+CREATE TABLE HttpTest (
+	 	id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+	 	name VARCHAR(20) NOT NULL,
+	 	six VARCHAR(20) NOT NULL,
+	 	email VARCHAR(20)
+	 )
+

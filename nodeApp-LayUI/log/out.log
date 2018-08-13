@@ -1,0 +1,659 @@
+Listening on port 3000
+[0mGET / [36m304 [0m4.473 ms - -[0m
+[0mGET /js/layui/css/layui.css [36m304 [0m1.769 ms - -[0m
+[0mGET /css/style.css [36m304 [0m1.466 ms - -[0m
+[0mGET /js/director/director.js [36m304 [0m2.841 ms - -[0m
+[0mGET /js/layui/layui.js [36m304 [0m1.221 ms - -[0m
+[0mGET /js/router/routerUrl.js [36m304 [0m1.124 ms - -[0m
+[0mGET /image/logo_pc.png [36m304 [0m1.113 ms - -[0m
+[0mGET /image/logo_mobel.png [36m304 [0m1.118 ms - -[0m
+[0mGET /js/layui/lay/modules/element.js [36m304 [0m0.547 ms - -[0m
+[0mGET /js/layui/font/iconfont.woff?v=220 [36m304 [0m0.328 ms - -[0m
+[0mGET /js/layui/lay/modules/jquery.js [36m304 [0m0.300 ms - -[0m
+[0mGET /js/layui/lay/modules/laytpl.js [36m304 [0m0.592 ms - -[0m
+[0mGET /js/router/directorRouter.js [36m304 [0m0.939 ms - -[0m
+[0mGET /js/modeljs/dataDB.js [36m304 [0m0.323 ms - -[0m
+{ action: 'findData', timeStamp: '1527057200302' }
+查询了12条数据，共12条数据
+[0mGET /nodejs/menu?action=findData&timeStamp=1527057200302 [32m200 [0m30.025 ms - 3617[0m
+[0mGET /page/testListTwo.html [36m304 [0m0.407 ms - -[0m
+[0mGET /js/layui/lay/modules/laydate.js [36m304 [0m1.906 ms - -[0m
+[0mGET /js/layui/css/modules/laydate/default/laydate.css?v=5.0.9 [36m304 [0m0.414 ms - -[0m
+[0mGET /js/layui/lay/modules/laypage.js [36m304 [0m0.442 ms - -[0m
+[0mGET /js/layui/lay/modules/layer.js [36m304 [0m0.301 ms - -[0m
+[0mGET /js/layui/css/modules/layer/default/layer.css?v=3.1.0 [36m304 [0m0.791 ms - -[0m
+[0mGET /js/layui/lay/modules/table.js [36m304 [0m0.734 ms - -[0m
+[0mGET /js/layui/lay/modules/form.js [36m304 [0m0.309 ms - -[0m
+[0mGET /js/layui/lay/modules/upload.js [36m304 [0m0.425 ms - -[0m
+[0mGET /js/modeljs/formVerify.js [36m304 [0m0.505 ms - -[0m
+{ action: 'findData',
+  searchJson: '',
+  prePageNum: '1',
+  currPage: '1' }
+查询了1条数据，共1条数据
+[0mGET /nodejs/testListTwo?action=findData&searchJson=&prePageNum=1&currPage=1 [36m304 [0m13.270 ms - -[0m
+{ currPage: '1', prePageNum: '10', action: 'findData' }
+查询了1条数据，共1条数据
+[0mGET /nodejs/testListTwo?currPage=1&prePageNum=10&action=findData [36m304 [0m11.119 ms - -[0m
+[0mGET /page/dataList.html [36m304 [0m0.398 ms - -[0m
+{ action: 'findDataAll',
+  searchJson: '',
+  prePageNum: '1',
+  currPage: '1' }
+查询了1条数据，共56条数据
+[0mGET /nodejs/dataList?action=findDataAll&searchJson=&prePageNum=1&currPage=1 [36m304 [0m13.700 ms - -[0m
+{ currPage: '1', prePageNum: '5000', action: 'findDataAll' }
+查询了56条数据，共56条数据
+[0mGET /nodejs/dataList?currPage=1&prePageNum=5000&action=findDataAll [36m304 [0m19.052 ms - -[0m
+[0mGET /page/modelList.html [36m304 [0m0.596 ms - -[0m
+{ action: 'findData',
+  searchJson: '',
+  prePageNum: '1',
+  currPage: '1' }
+查询了1条数据，共12条数据
+[0mGET /nodejs/modelList?action=findData&searchJson=&prePageNum=1&currPage=1 [36m304 [0m9.437 ms - -[0m
+{ currPage: '1', prePageNum: '10', action: 'findData' }
+查询了10条数据，共12条数据
+[0mGET /nodejs/modelList?currPage=1&prePageNum=10&action=findData [36m304 [0m11.314 ms - -[0m
+[0mGET /page/dataList.html [36m304 [0m0.393 ms - -[0m
+{ action: 'findDataAll',
+  searchJson: '',
+  prePageNum: '1',
+  currPage: '1' }
+查询了1条数据，共56条数据
+[0mGET /nodejs/dataList?action=findDataAll&searchJson=&prePageNum=1&currPage=1 [36m304 [0m11.056 ms - -[0m
+{ currPage: '1', prePageNum: '5000', action: 'findDataAll' }
+查询了56条数据，共56条数据
+[0mGET /nodejs/dataList?currPage=1&prePageNum=5000&action=findDataAll [36m304 [0m11.571 ms - -[0m
+[0mGET /page/modelListFn.html [36m304 [0m0.424 ms - -[0m
+{ action: 'findData',
+  searchJson: '',
+  prePageNum: '1',
+  currPage: '1' }
+查询了1条数据，共31条数据
+[0mGET /nodejs/modelListFn?action=findData&searchJson=&prePageNum=1&currPage=1 [32m200 [0m12.112 ms - 538[0m
+{ currPage: '1', prePageNum: '10', action: 'findData' }
+查询了10条数据，共31条数据
+[0mGET /nodejs/modelListFn?currPage=1&prePageNum=10&action=findData [36m304 [0m9.430 ms - -[0m
+[0mGET /page/modelList.html [36m304 [0m0.392 ms - -[0m
+{ action: 'findData',
+  searchJson: '',
+  prePageNum: '1',
+  currPage: '1' }
+查询了1条数据，共12条数据
+[0mGET /nodejs/modelList?action=findData&searchJson=&prePageNum=1&currPage=1 [36m304 [0m9.462 ms - -[0m
+{ currPage: '1', prePageNum: '10', action: 'findData' }
+查询了10条数据，共12条数据
+[0mGET /nodejs/modelList?currPage=1&prePageNum=10&action=findData [36m304 [0m11.303 ms - -[0m
+[0mGET /page/dataList.html [36m304 [0m0.472 ms - -[0m
+{ action: 'findDataAll',
+  searchJson: '',
+  prePageNum: '1',
+  currPage: '1' }
+查询了1条数据，共56条数据
+[0mGET /nodejs/dataList?action=findDataAll&searchJson=&prePageNum=1&currPage=1 [36m304 [0m11.022 ms - -[0m
+{ currPage: '1', prePageNum: '5000', action: 'findDataAll' }
+查询了56条数据，共56条数据
+[0mGET /nodejs/dataList?currPage=1&prePageNum=5000&action=findDataAll [36m304 [0m12.805 ms - -[0m
+[0mGET /page/dataListDetail.html?110002 [36m304 [0m0.487 ms - -[0m
+{ action: 'findData',
+  searchJson: '{"id":110002}',
+  prePageNum: '1',
+  currPage: '1' }
+查询了1条数据，共1条数据
+[0mGET /nodejs/dataList?action=findData&searchJson={%22id%22:110002}&prePageNum=1&currPage=1 [36m304 [0m10.567 ms - -[0m
+{ currPage: '1',
+  prePageNum: '10',
+  action: 'findData',
+  searchJson: '{"id":110002}' }
+查询了1条数据，共1条数据
+[0mGET /nodejs/dataList?currPage=1&prePageNum=10&action=findData&searchJson=%7B%22id%22%3A110002%7D [32m200 [0m11.567 ms - 663[0m
+[0mGET /page/dataList.html [36m304 [0m0.333 ms - -[0m
+{ action: 'findDataAll',
+  searchJson: '',
+  prePageNum: '1',
+  currPage: '1' }
+查询了1条数据，共56条数据
+[0mGET /nodejs/dataList?action=findDataAll&searchJson=&prePageNum=1&currPage=1 [36m304 [0m11.598 ms - -[0m
+{ currPage: '1', prePageNum: '5000', action: 'findDataAll' }
+查询了56条数据，共56条数据
+[0mGET /nodejs/dataList?currPage=1&prePageNum=5000&action=findDataAll [36m304 [0m10.708 ms - -[0m
+[0mGET /js/layui/css/modules/layer/default/icon.png [36m304 [0m1.094 ms - -[0m
+{ action: 'delData',
+  dataJson: '{"id":110001,"name":"testList"}' }
+var routerUrl = ["/page/myUseHelp","/page/modelList","/page/dataList","/page/dataListDetail/:id","/page/modelListFn","/page/userList","/page/powerList","/page/fileList","/page/recordList","/page/roleClass","/page/testListTwo"]
+module.exports = {"dburl":"mongodb://localhost:27017/mydb","routerUrls":[{"reqUrl":"/nodejs/httpTest","resUrl":"./routes/httpTest"},{"reqUrl":"/nodejs/httpTest_mysql","resUrl":"./routes/httpTest_mysql"},{"reqUrl":"/nodejs/fileList","resUrl":"./routes/fileList"},{"reqUrl":"/nodejs/login","resUrl":"./routes/login"},{"reqUrl":"/nodejs/menu","resUrl":"./routes/menu"},{"reqUrl":"/nodejs/modelList","resUrl":"./routes/modelList"},{"reqUrl":"/nodejs/dataList","resUrl":"./routes/dataList"},{"reqUrl":"/nodejs/modelListFn","resUrl":"./routes/modelListFn"},{"reqUrl":"/nodejs/userList","resUrl":"./routes/userList"},{"reqUrl":"/nodejs/powerList","resUrl":"./routes/powerList"},{"reqUrl":"/nodejs/recordList","resUrl":"./routes/recordList"},{"reqUrl":"/nodejs/roleClass","resUrl":"./routes/roleClass"},{"reqUrl":"/nodejs/testListTwo","resUrl":"./routes/testListTwo"}]}
+删除了2条数据
+[0mPOST /nodejs/dataList [32m200 [0m24.931 ms - 12[0m
+给routerUrl.js删除/page/testList成功
+给settings.js删除{"reqUrl":"/nodejs/testList","resUrl":"./routes/testList"}成功
+[ '删除文件testList.html成功',
+  '删除文件testList.js成功',
+  '给routerUrl.js删除/page/testList成功',
+  '给settings.js删除{"reqUrl":"/nodejs/testList","resUrl":"./routes/testList"}成功' ]
+操作记录成功dataJson={'id':110001,'name':'testList'}
+{ currPage: '1', prePageNum: '5000', action: 'findDataAll' }
+查询了54条数据，共54条数据
+[0mGET /nodejs/dataList?currPage=1&prePageNum=5000&action=findDataAll [32m200 [0m14.087 ms - 4480[0m
+Listening on port 3000
+[0mGET /js/layui/css/modules/layer/default/loading-2.gif [36m304 [0m8.074 ms - -[0m
+[0mGET / [36m304 [0m1.481 ms - -[0m
+[0mGET /js/layui/css/layui.css [36m304 [0m1.236 ms - -[0m
+[0mGET /css/style.css [36m304 [0m2.423 ms - -[0m
+[0mGET /js/director/director.js [36m304 [0m2.362 ms - -[0m
+[0mGET /js/layui/layui.js [36m304 [0m2.546 ms - -[0m
+[0mGET /image/logo_pc.png [36m304 [0m3.468 ms - -[0m
+[0mGET /image/logo_mobel.png [36m304 [0m3.569 ms - -[0m
+[0mGET /js/router/routerUrl.js [32m200 [0m5.621 ms - 226[0m
+[0mGET /js/layui/lay/modules/element.js [36m304 [0m0.320 ms - -[0m
+[0mGET /js/layui/font/iconfont.woff?v=220 [36m304 [0m0.749 ms - -[0m
+[0mGET /js/layui/lay/modules/jquery.js [36m304 [0m0.435 ms - -[0m
+[0mGET /js/layui/lay/modules/laytpl.js [36m304 [0m0.409 ms - -[0m
+[0mGET /js/router/directorRouter.js [36m304 [0m0.454 ms - -[0m
+[0mGET /js/modeljs/dataDB.js [36m304 [0m0.422 ms - -[0m
+{ action: 'findData', timeStamp: '1527057408955' }
+查询了12条数据，共12条数据
+[0mGET /nodejs/menu?action=findData&timeStamp=1527057408955 [32m200 [0m27.512 ms - 3617[0m
+[0mGET /page/modelList.html [36m304 [0m0.430 ms - -[0m
+[0mGET /js/layui/lay/modules/laydate.js [36m304 [0m0.344 ms - -[0m
+[0mGET /js/layui/css/modules/laydate/default/laydate.css?v=5.0.9 [36m304 [0m0.436 ms - -[0m
+[0mGET /js/layui/lay/modules/laypage.js [36m304 [0m0.378 ms - -[0m
+[0mGET /js/layui/lay/modules/layer.js [36m304 [0m0.313 ms - -[0m
+[0mGET /js/layui/css/modules/layer/default/layer.css?v=3.1.0 [36m304 [0m0.518 ms - -[0m
+[0mGET /js/layui/lay/modules/table.js [36m304 [0m0.464 ms - -[0m
+[0mGET /js/layui/lay/modules/form.js [36m304 [0m0.449 ms - -[0m
+[0mGET /js/layui/lay/modules/upload.js [36m304 [0m0.427 ms - -[0m
+[0mGET /js/modeljs/formVerify.js [36m304 [0m0.345 ms - -[0m
+{ action: 'findData',
+  searchJson: '',
+  prePageNum: '1',
+  currPage: '1' }
+查询了1条数据，共12条数据
+[0mGET /nodejs/modelList?action=findData&searchJson=&prePageNum=1&currPage=1 [36m304 [0m11.458 ms - -[0m
+{ currPage: '1', prePageNum: '10', action: 'findData' }
+查询了10条数据，共12条数据
+[0mGET /nodejs/modelList?currPage=1&prePageNum=10&action=findData [36m304 [0m10.229 ms - -[0m
+[0mGET / [36m304 [0m0.636 ms - -[0m
+[0mGET /js/layui/css/layui.css [36m304 [0m0.720 ms - -[0m
+[0mGET /css/style.css [36m304 [0m0.771 ms - -[0m
+[0mGET /js/director/director.js [36m304 [0m0.724 ms - -[0m
+[0mGET /js/layui/layui.js [36m304 [0m1.658 ms - -[0m
+[0mGET /image/logo_pc.png [36m304 [0m0.958 ms - -[0m
+[0mGET /image/logo_mobel.png [36m304 [0m0.885 ms - -[0m
+[0mGET /js/router/routerUrl.js [36m304 [0m1.721 ms - -[0m
+[0mGET /js/layui/lay/modules/element.js [36m304 [0m0.409 ms - -[0m
+[0mGET /js/layui/font/iconfont.woff?v=220 [36m304 [0m0.531 ms - -[0m
+[0mGET /js/layui/lay/modules/jquery.js [36m304 [0m0.336 ms - -[0m
+[0mGET /js/layui/lay/modules/laytpl.js [36m304 [0m0.335 ms - -[0m
+[0mGET /js/router/directorRouter.js [36m304 [0m0.447 ms - -[0m
+[0mGET /js/modeljs/dataDB.js [36m304 [0m0.423 ms - -[0m
+{ action: 'findData', timeStamp: '1527057416233' }
+查询了12条数据，共12条数据
+[0mGET /nodejs/menu?action=findData&timeStamp=1527057416233 [32m200 [0m6.854 ms - 3617[0m
+[0mGET /page/modelList.html [36m304 [0m0.367 ms - -[0m
+[0mGET /js/layui/lay/modules/laydate.js [36m304 [0m0.303 ms - -[0m
+[0mGET /js/layui/css/modules/laydate/default/laydate.css?v=5.0.9 [36m304 [0m0.656 ms - -[0m
+[0mGET /js/layui/lay/modules/laypage.js [36m304 [0m0.786 ms - -[0m
+[0mGET /js/layui/lay/modules/layer.js [36m304 [0m0.343 ms - -[0m
+[0mGET /js/layui/css/modules/layer/default/layer.css?v=3.1.0 [36m304 [0m0.465 ms - -[0m
+[0mGET /js/layui/lay/modules/table.js [36m304 [0m0.448 ms - -[0m
+[0mGET /js/layui/lay/modules/form.js [36m304 [0m0.550 ms - -[0m
+[0mGET /js/layui/lay/modules/upload.js [36m304 [0m0.329 ms - -[0m
+[0mGET /js/modeljs/formVerify.js [36m304 [0m0.287 ms - -[0m
+{ action: 'findData',
+  searchJson: '',
+  prePageNum: '1',
+  currPage: '1' }
+查询了1条数据，共12条数据
+[0mGET /nodejs/modelList?action=findData&searchJson=&prePageNum=1&currPage=1 [36m304 [0m8.787 ms - -[0m
+{ currPage: '1', prePageNum: '10', action: 'findData' }
+查询了10条数据，共12条数据
+[0mGET /nodejs/modelList?currPage=1&prePageNum=10&action=findData [36m304 [0m10.376 ms - -[0m
+[0mGET /page/dataList.html [36m304 [0m0.533 ms - -[0m
+{ action: 'findDataAll',
+  searchJson: '',
+  prePageNum: '1',
+  currPage: '1' }
+查询了1条数据，共54条数据
+[0mGET /nodejs/dataList?action=findDataAll&searchJson=&prePageNum=1&currPage=1 [32m200 [0m13.331 ms - 4477[0m
+{ currPage: '1', prePageNum: '5000', action: 'findDataAll' }
+查询了54条数据，共54条数据
+[0mGET /nodejs/dataList?currPage=1&prePageNum=5000&action=findDataAll [36m304 [0m18.345 ms - -[0m
+[0mGET /page/modelList.html [36m304 [0m0.574 ms - -[0m
+{ action: 'findData',
+  searchJson: '',
+  prePageNum: '1',
+  currPage: '1' }
+查询了1条数据，共12条数据
+[0mGET /nodejs/modelList?action=findData&searchJson=&prePageNum=1&currPage=1 [36m304 [0m9.343 ms - -[0m
+{ currPage: '1', prePageNum: '10', action: 'findData' }
+查询了10条数据，共12条数据
+[0mGET /nodejs/modelList?currPage=1&prePageNum=10&action=findData [36m304 [0m11.127 ms - -[0m
+[0mGET / [36m304 [0m0.398 ms - -[0m
+[0mGET /js/layui/css/layui.css [36m304 [0m0.470 ms - -[0m
+[0mGET /css/style.css [36m304 [0m0.493 ms - -[0m
+[0mGET /js/director/director.js [36m304 [0m2.168 ms - -[0m
+[0mGET /js/layui/layui.js [36m304 [0m1.207 ms - -[0m
+[0mGET /js/router/routerUrl.js [36m304 [0m1.075 ms - -[0m
+[0mGET /image/logo_pc.png [36m304 [0m1.072 ms - -[0m
+[0mGET /image/logo_mobel.png [36m304 [0m0.960 ms - -[0m
+[0mGET /js/layui/lay/modules/element.js [36m304 [0m0.394 ms - -[0m
+[0mGET /js/layui/font/iconfont.woff?v=220 [36m304 [0m0.781 ms - -[0m
+[0mGET /js/layui/lay/modules/jquery.js [36m304 [0m0.346 ms - -[0m
+[0mGET /js/layui/lay/modules/laytpl.js [36m304 [0m0.393 ms - -[0m
+[0mGET /js/router/directorRouter.js [36m304 [0m0.318 ms - -[0m
+[0mGET /js/modeljs/dataDB.js [36m304 [0m0.354 ms - -[0m
+{ action: 'findData', timeStamp: '1527057443735' }
+查询了12条数据，共12条数据
+[0mGET /nodejs/menu?action=findData&timeStamp=1527057443735 [32m200 [0m5.123 ms - 3617[0m
+[0mGET /page/modelList.html [36m304 [0m0.358 ms - -[0m
+[0mGET /js/layui/lay/modules/laydate.js [36m304 [0m0.374 ms - -[0m
+[0mGET /js/layui/css/modules/laydate/default/laydate.css?v=5.0.9 [36m304 [0m0.410 ms - -[0m
+[0mGET /js/layui/lay/modules/laypage.js [36m304 [0m0.380 ms - -[0m
+[0mGET /js/layui/lay/modules/layer.js [36m304 [0m0.329 ms - -[0m
+[0mGET /js/layui/css/modules/layer/default/layer.css?v=3.1.0 [36m304 [0m0.403 ms - -[0m
+[0mGET /js/layui/lay/modules/table.js [36m304 [0m0.422 ms - -[0m
+[0mGET /js/layui/lay/modules/form.js [36m304 [0m0.808 ms - -[0m
+[0mGET /js/layui/lay/modules/upload.js [36m304 [0m0.402 ms - -[0m
+[0mGET /js/modeljs/formVerify.js [36m304 [0m0.357 ms - -[0m
+{ action: 'findData',
+  searchJson: '',
+  prePageNum: '1',
+  currPage: '1' }
+查询了1条数据，共12条数据
+[0mGET /nodejs/modelList?action=findData&searchJson=&prePageNum=1&currPage=1 [36m304 [0m9.459 ms - -[0m
+{ currPage: '1', prePageNum: '10', action: 'findData' }
+查询了10条数据，共12条数据
+[0mGET /nodejs/modelList?currPage=1&prePageNum=10&action=findData [36m304 [0m9.878 ms - -[0m
+[0mGET /page/dataList.html [36m304 [0m0.403 ms - -[0m
+{ action: 'findDataAll',
+  searchJson: '',
+  prePageNum: '1',
+  currPage: '1' }
+查询了1条数据，共54条数据
+[0mGET /nodejs/dataList?action=findDataAll&searchJson=&prePageNum=1&currPage=1 [36m304 [0m11.413 ms - -[0m
+{ currPage: '1', prePageNum: '5000', action: 'findDataAll' }
+查询了54条数据，共54条数据
+[0mGET /nodejs/dataList?currPage=1&prePageNum=5000&action=findDataAll [36m304 [0m14.299 ms - -[0m
+[0mGET /page/testListTwo.html [36m304 [0m0.337 ms - -[0m
+{ action: 'findData',
+  searchJson: '',
+  prePageNum: '1',
+  currPage: '1' }
+查询了1条数据，共1条数据
+[0mGET /nodejs/testListTwo?action=findData&searchJson=&prePageNum=1&currPage=1 [36m304 [0m12.774 ms - -[0m
+{ currPage: '1', prePageNum: '10', action: 'findData' }
+查询了1条数据，共1条数据
+[0mGET /nodejs/testListTwo?currPage=1&prePageNum=10&action=findData [36m304 [0m9.838 ms - -[0m
+[0mGET /page/dataList.html [36m304 [0m0.387 ms - -[0m
+{ action: 'findDataAll',
+  searchJson: '',
+  prePageNum: '1',
+  currPage: '1' }
+查询了1条数据，共54条数据
+[0mGET /nodejs/dataList?action=findDataAll&searchJson=&prePageNum=1&currPage=1 [36m304 [0m10.793 ms - -[0m
+{ currPage: '1', prePageNum: '5000', action: 'findDataAll' }
+查询了54条数据，共54条数据
+[0mGET /nodejs/dataList?currPage=1&prePageNum=5000&action=findDataAll [36m304 [0m10.969 ms - -[0m
+{ action: 'findData',
+  searchJson: '{"level":2}',
+  sortJson: '{"id":1}',
+  prePageNum: '100000',
+  currPage: '1' }
+查询了10条数据，共10条数据
+[0mGET /nodejs/modelList?action=findData&searchJson={%22level%22:2}&sortJson={%22id%22:1}&prePageNum=100000&currPage=1 [36m304 [0m9.515 ms - -[0m
+[0mGET /js/layui/css/modules/layer/default/icon.png [36m304 [0m0.365 ms - -[0m
+{ action: 'findDataAll',
+  searchJson: '{"id":110001}',
+  prePageNum: '1000',
+  currPage: '1' }
+查询了0条数据，共0条数据
+[0mGET /nodejs/dataList?action=findDataAll&searchJson={%22id%22:110001}&prePageNum=1000&currPage=1 [32m200 [0m8.040 ms - 448[0m
+{ action: 'findDataAll',
+  searchJson: '{"name":"testList"}',
+  prePageNum: '1000',
+  currPage: '1' }
+查询了0条数据，共0条数据
+[0mGET /nodejs/dataList?action=findDataAll&searchJson={%22name%22:%22testList%22}&prePageNum=1000&currPage=1 [32m200 [0m6.734 ms - 448[0m
+{ action: 'insertData',
+  dataArr: '[{"id":110001,"name":"testList","name_ch":"示例模块子一","field_ch":"ID","field_en":"id"}]' }
+插入了1条数据
+[0mPOST /nodejs/dataList [32m200 [0m41.282 ms - 12[0m
+var routerUrl = ["/page/myUseHelp","/page/modelList","/page/dataList","/page/dataListDetail/:id","/page/modelListFn","/page/userList","/page/powerList","/page/fileList","/page/recordList","/page/roleClass","/page/testListTwo","/page/testList"]
+module.exports = {"dburl":"mongodb://localhost:27017/mydb","routerUrls":[{"reqUrl":"/nodejs/httpTest","resUrl":"./routes/httpTest"},{"reqUrl":"/nodejs/httpTest_mysql","resUrl":"./routes/httpTest_mysql"},{"reqUrl":"/nodejs/fileList","resUrl":"./routes/fileList"},{"reqUrl":"/nodejs/login","resUrl":"./routes/login"},{"reqUrl":"/nodejs/menu","resUrl":"./routes/menu"},{"reqUrl":"/nodejs/modelList","resUrl":"./routes/modelList"},{"reqUrl":"/nodejs/dataList","resUrl":"./routes/dataList"},{"reqUrl":"/nodejs/modelListFn","resUrl":"./routes/modelListFn"},{"reqUrl":"/nodejs/userList","resUrl":"./routes/userList"},{"reqUrl":"/nodejs/powerList","resUrl":"./routes/powerList"},{"reqUrl":"/nodejs/recordList","resUrl":"./routes/recordList"},{"reqUrl":"/nodejs/roleClass","resUrl":"./routes/roleClass"},{"reqUrl":"/nodejs/testListTwo","resUrl":"./routes/testListTwo"},{"reqUrl":"/nodejs/testList","resUrl":"./routes/testList"}]}
+给settings.js添加{"reqUrl":"/nodejs/testList","resUrl":"./routes/testList"}成功
+给routerUrl.js添加/page/testList成功
+[ '复制文件testList.html成功',
+  '复制文件testList.js成功',
+  '写入routerUrl.js成功',
+  '写入settings.js成功' ]
+操作记录成功dataArr=[{'id':110001,'name':'testList','name_ch':'示例模块子一','field_ch':'ID','field_en':'id','data_type':'int','field_width':'100','field_sort':1,'create_name':'yuxian','create_time':'2018-05-23 14:40:21','_id':'5b050cd5d5b9ae2f2411c963'}]
+{ currPage: '1', prePageNum: '5000', action: 'findDataAll' }
+查询了55条数据，共55条数据
+[0mGET /nodejs/dataList?currPage=1&prePageNum=5000&action=findDataAll [32m200 [0m12.952 ms - 4721[0m
+Listening on port 3000
+[0mGET /js/layui/css/modules/layer/default/loading-2.gif [36m304 [0m8.474 ms - -[0m
+[0mGET / [36m304 [0m1.613 ms - -[0m
+[0mGET /js/layui/css/layui.css [36m304 [0m1.187 ms - -[0m
+[0mGET /css/style.css [36m304 [0m1.228 ms - -[0m
+[0mGET /js/director/director.js [36m304 [0m1.286 ms - -[0m
+[0mGET /js/layui/layui.js [36m304 [0m2.932 ms - -[0m
+[0mGET /image/logo_pc.png [36m304 [0m2.104 ms - -[0m
+[0mGET /image/logo_mobel.png [36m304 [0m2.051 ms - -[0m
+[0mGET /js/router/routerUrl.js [32m200 [0m7.882 ms - 243[0m
+[0mGET /js/layui/lay/modules/element.js [36m304 [0m0.310 ms - -[0m
+[0mGET /js/layui/font/iconfont.woff?v=220 [36m304 [0m0.375 ms - -[0m
+[0mGET /js/layui/lay/modules/jquery.js [36m304 [0m0.420 ms - -[0m
+[0mGET /js/layui/lay/modules/laytpl.js [36m304 [0m1.467 ms - -[0m
+[0mGET /js/router/directorRouter.js [36m304 [0m0.277 ms - -[0m
+[0mGET /js/modeljs/dataDB.js [36m304 [0m0.283 ms - -[0m
+{ action: 'findData', timeStamp: '1527057626390' }
+查询了12条数据，共12条数据
+[0mGET /nodejs/menu?action=findData&timeStamp=1527057626390 [32m200 [0m26.493 ms - 3617[0m
+[0mGET /page/modelList.html [36m304 [0m0.421 ms - -[0m
+[0mGET /js/layui/lay/modules/laydate.js [36m304 [0m0.323 ms - -[0m
+[0mGET /js/layui/css/modules/laydate/default/laydate.css?v=5.0.9 [36m304 [0m0.476 ms - -[0m
+[0mGET /js/layui/lay/modules/laypage.js [36m304 [0m0.660 ms - -[0m
+[0mGET /js/layui/lay/modules/layer.js [36m304 [0m0.354 ms - -[0m
+[0mGET /js/layui/css/modules/layer/default/layer.css?v=3.1.0 [36m304 [0m0.404 ms - -[0m
+[0mGET /js/layui/lay/modules/table.js [36m304 [0m0.416 ms - -[0m
+[0mGET /js/layui/lay/modules/form.js [36m304 [0m0.294 ms - -[0m
+[0mGET /js/layui/lay/modules/upload.js [36m304 [0m0.326 ms - -[0m
+[0mGET /js/modeljs/formVerify.js [36m304 [0m0.565 ms - -[0m
+{ action: 'findData',
+  searchJson: '',
+  prePageNum: '1',
+  currPage: '1' }
+查询了1条数据，共12条数据
+[0mGET /nodejs/modelList?action=findData&searchJson=&prePageNum=1&currPage=1 [36m304 [0m10.207 ms - -[0m
+{ currPage: '1', prePageNum: '10', action: 'findData' }
+查询了10条数据，共12条数据
+[0mGET /nodejs/modelList?currPage=1&prePageNum=10&action=findData [36m304 [0m10.488 ms - -[0m
+[0mGET /page/testList.html [32m200 [0m1.243 ms - 18434[0m
+{ action: 'findData',
+  searchJson: '',
+  prePageNum: '1',
+  currPage: '1' }
+查询了1条数据，共1条数据
+[0mGET /nodejs/testList?action=findData&searchJson=&prePageNum=1&currPage=1 [32m200 [0m12.205 ms - 228[0m
+{ currPage: '1', prePageNum: '10', action: 'findData' }
+查询了1条数据，共1条数据
+[0mGET /nodejs/testList?currPage=1&prePageNum=10&action=findData [32m200 [0m8.739 ms - 229[0m
+[0mGET /page/dataList.html [36m304 [0m0.479 ms - -[0m
+{ action: 'findDataAll',
+  searchJson: '',
+  prePageNum: '1',
+  currPage: '1' }
+查询了1条数据，共55条数据
+[0mGET /nodejs/dataList?action=findDataAll&searchJson=&prePageNum=1&currPage=1 [32m200 [0m13.165 ms - 4718[0m
+{ currPage: '1', prePageNum: '5000', action: 'findDataAll' }
+查询了55条数据，共55条数据
+[0mGET /nodejs/dataList?currPage=1&prePageNum=5000&action=findDataAll [36m304 [0m18.385 ms - -[0m
+[0mGET /page/dataListDetail.html?110001 [32m200 [0m1.412 ms - 25865[0m
+{ action: 'findData',
+  searchJson: '{"id":110001}',
+  prePageNum: '1',
+  currPage: '1' }
+查询了1条数据，共1条数据
+[0mGET /nodejs/dataList?action=findData&searchJson={%22id%22:110001}&prePageNum=1&currPage=1 [32m200 [0m10.856 ms - 659[0m
+{ currPage: '1',
+  prePageNum: '10',
+  action: 'findData',
+  searchJson: '{"id":110001}' }
+查询了1条数据，共1条数据
+[0mGET /nodejs/dataList?currPage=1&prePageNum=10&action=findData&searchJson=%7B%22id%22%3A110001%7D [32m200 [0m10.477 ms - 660[0m
+[0mGET /js/layui/css/modules/layer/default/icon.png [36m304 [0m0.474 ms - -[0m
+{ action: 'insertData',
+  dataArr: '[{"field_ch":"信息","field_en":"meg","data_type":"text","field_width":300,"field_sort":2,"id":110001,"name":"testList","name_ch":"示例模块子一"}]' }
+插入列meg共1条数据
+插入了1条数据
+[0mPOST /nodejs/dataList [32m200 [0m30.310 ms - 12[0m
+操作记录成功dataArr=[{'field_ch':'信息','field_en':'meg','data_type':'text','field_width':300,'field_sort':2,'id':110001,'name':'testList','name_ch':'示例模块子一','create_name':'yuxian','create_time':'2018-05-23 14:42:35','_id':'5b050d5b1b51dc0898eed1ad'}]
+{ currPage: '1',
+  prePageNum: '10',
+  action: 'findData',
+  searchJson: '{"id":110001}' }
+查询了2条数据，共2条数据
+[0mGET /nodejs/dataList?currPage=1&prePageNum=10&action=findData&searchJson=%7B%22id%22%3A110001%7D [32m200 [0m9.017 ms - 904[0m
+[0mGET /page/testList.html [36m304 [0m0.389 ms - -[0m
+{ action: 'findData',
+  searchJson: '',
+  prePageNum: '1',
+  currPage: '1' }
+查询了1条数据，共1条数据
+[0mGET /nodejs/testList?action=findData&searchJson=&prePageNum=1&currPage=1 [32m200 [0m11.034 ms - 257[0m
+{ currPage: '1', prePageNum: '10', action: 'findData' }
+查询了1条数据，共1条数据
+[0mGET /nodejs/testList?currPage=1&prePageNum=10&action=findData [32m200 [0m10.783 ms - 258[0m
+{ action: 'delData', dataJson: '{"id":{"$in":[""]}}' }
+删除了1条数据
+[0mPOST /nodejs/testList [32m200 [0m7.923 ms - 12[0m
+操作记录成功dataJson={'id':{'$in':['']}}
+{ currPage: '1', prePageNum: '10', action: 'findData' }
+查询了0条数据，共0条数据
+[0mGET /nodejs/testList?currPage=1&prePageNum=10&action=findData [32m200 [0m11.452 ms - 207[0m
+{ action: 'insertData',
+  dataArr: '[{"id":1,"meg":"要增加更多字段请点击数据列表查看字段"}]' }
+插入了1条数据
+[0mPOST /nodejs/testList [32m200 [0m9.177 ms - 12[0m
+操作记录成功dataArr=[{'id':1,'meg':'要增加更多字段请点击数据列表查看字段','create_name':'yuxian','create_time':'2018-05-23 14:43:24','_id':'5b050d8c1b51dc0898eed1b0'}]
+{ currPage: '1', prePageNum: '10', action: 'findData' }
+查询了1条数据，共1条数据
+[0mGET /nodejs/testList?currPage=1&prePageNum=10&action=findData [32m200 [0m9.797 ms - 370[0m
+[0mGET /page/modelList.html [36m304 [0m0.385 ms - -[0m
+{ action: 'findData',
+  searchJson: '',
+  prePageNum: '1',
+  currPage: '1' }
+查询了1条数据，共12条数据
+[0mGET /nodejs/modelList?action=findData&searchJson=&prePageNum=1&currPage=1 [36m304 [0m9.112 ms - -[0m
+{ currPage: '1', prePageNum: '10', action: 'findData' }
+查询了10条数据，共12条数据
+[0mGET /nodejs/modelList?currPage=1&prePageNum=10&action=findData [36m304 [0m11.970 ms - -[0m
+[0mGET / [36m304 [0m0.476 ms - -[0m
+[0mGET /js/layui/css/layui.css [36m304 [0m0.653 ms - -[0m
+[0mGET /css/style.css [36m304 [0m0.634 ms - -[0m
+[0mGET /js/director/director.js [36m304 [0m0.802 ms - -[0m
+[0mGET /js/layui/layui.js [36m304 [0m1.789 ms - -[0m
+[0mGET /js/router/routerUrl.js [36m304 [0m1.430 ms - -[0m
+[0mGET /image/logo_pc.png [36m304 [0m1.458 ms - -[0m
+[0mGET /image/logo_mobel.png [36m304 [0m1.469 ms - -[0m
+[0mGET /js/layui/lay/modules/element.js [36m304 [0m0.403 ms - -[0m
+[0mGET /js/layui/font/iconfont.woff?v=220 [36m304 [0m0.309 ms - -[0m
+[0mGET /js/layui/lay/modules/jquery.js [36m304 [0m0.384 ms - -[0m
+[0mGET /js/layui/lay/modules/laytpl.js [36m304 [0m0.464 ms - -[0m
+[0mGET /js/router/directorRouter.js [36m304 [0m0.327 ms - -[0m
+[0mGET /js/modeljs/dataDB.js [36m304 [0m0.359 ms - -[0m
+{ action: 'findData', timeStamp: '1527057818999' }
+查询了12条数据，共12条数据
+[0mGET /nodejs/menu?action=findData&timeStamp=1527057818999 [32m200 [0m5.874 ms - 3617[0m
+[0mGET /page/modelList.html [36m304 [0m0.379 ms - -[0m
+[0mGET /js/layui/lay/modules/laydate.js [36m304 [0m0.985 ms - -[0m
+[0mGET /js/layui/css/modules/laydate/default/laydate.css?v=5.0.9 [36m304 [0m0.475 ms - -[0m
+[0mGET /js/layui/lay/modules/laypage.js [36m304 [0m0.460 ms - -[0m
+[0mGET /js/layui/lay/modules/layer.js [36m304 [0m0.668 ms - -[0m
+[0mGET /js/layui/css/modules/layer/default/layer.css?v=3.1.0 [36m304 [0m0.423 ms - -[0m
+[0mGET /js/layui/lay/modules/table.js [36m304 [0m0.431 ms - -[0m
+[0mGET /js/layui/lay/modules/form.js [36m304 [0m0.310 ms - -[0m
+[0mGET /js/layui/lay/modules/upload.js [36m304 [0m0.408 ms - -[0m
+[0mGET /js/modeljs/formVerify.js [36m304 [0m0.441 ms - -[0m
+{ action: 'findData',
+  searchJson: '',
+  prePageNum: '1',
+  currPage: '1' }
+查询了1条数据，共12条数据
+[0mGET /nodejs/modelList?action=findData&searchJson=&prePageNum=1&currPage=1 [36m304 [0m11.008 ms - -[0m
+{ currPage: '1', prePageNum: '10', action: 'findData' }
+查询了10条数据，共12条数据
+[0mGET /nodejs/modelList?currPage=1&prePageNum=10&action=findData [36m304 [0m9.619 ms - -[0m
+[0mGET /page/testListTwo.html [36m304 [0m0.343 ms - -[0m
+{ action: 'findData',
+  searchJson: '',
+  prePageNum: '1',
+  currPage: '1' }
+查询了1条数据，共1条数据
+[0mGET /nodejs/testListTwo?action=findData&searchJson=&prePageNum=1&currPage=1 [36m304 [0m11.475 ms - -[0m
+{ currPage: '1', prePageNum: '10', action: 'findData' }
+查询了1条数据，共1条数据
+[0mGET /nodejs/testListTwo?currPage=1&prePageNum=10&action=findData [36m304 [0m12.017 ms - -[0m
+[0mGET /page/dataList.html [36m304 [0m0.425 ms - -[0m
+{ action: 'findDataAll',
+  searchJson: '',
+  prePageNum: '1',
+  currPage: '1' }
+查询了1条数据，共56条数据
+[0mGET /nodejs/dataList?action=findDataAll&searchJson=&prePageNum=1&currPage=1 [32m200 [0m11.288 ms - 4742[0m
+{ currPage: '1', prePageNum: '5000', action: 'findDataAll' }
+查询了56条数据，共56条数据
+[0mGET /nodejs/dataList?currPage=1&prePageNum=5000&action=findDataAll [32m200 [0m12.640 ms - 4745[0m
+[0mGET /js/layui/css/modules/layer/default/icon.png [36m304 [0m0.394 ms - -[0m
+{ action: 'delData',
+  dataJson: '{"id":110002,"name":"testListTwo"}' }
+module.exports = {"dburl":"mongodb://localhost:27017/mydb","routerUrls":[{"reqUrl":"/nodejs/httpTest","resUrl":"./routes/httpTest"},{"reqUrl":"/nodejs/httpTest_mysql","resUrl":"./routes/httpTest_mysql"},{"reqUrl":"/nodejs/fileList","resUrl":"./routes/fileList"},{"reqUrl":"/nodejs/login","resUrl":"./routes/login"},{"reqUrl":"/nodejs/menu","resUrl":"./routes/menu"},{"reqUrl":"/nodejs/modelList","resUrl":"./routes/modelList"},{"reqUrl":"/nodejs/dataList","resUrl":"./routes/dataList"},{"reqUrl":"/nodejs/modelListFn","resUrl":"./routes/modelListFn"},{"reqUrl":"/nodejs/userList","resUrl":"./routes/userList"},{"reqUrl":"/nodejs/powerList","resUrl":"./routes/powerList"},{"reqUrl":"/nodejs/recordList","resUrl":"./routes/recordList"},{"reqUrl":"/nodejs/roleClass","resUrl":"./routes/roleClass"},{"reqUrl":"/nodejs/testList","resUrl":"./routes/testList"}]}
+var routerUrl = ["/page/myUseHelp","/page/modelList","/page/dataList","/page/dataListDetail/:id","/page/modelListFn","/page/userList","/page/powerList","/page/fileList","/page/recordList","/page/roleClass","/page/testList"]
+删除了1条数据
+[0mPOST /nodejs/dataList [32m200 [0m12.111 ms - 12[0m
+给settings.js删除{"reqUrl":"/nodejs/testListTwo","resUrl":"./routes/testListTwo"}成功
+给routerUrl.js删除/page/testListTwo成功
+[ '删除文件testListTwo.html成功',
+  '删除文件testListTwo.js成功',
+  '给routerUrl.js删除/page/testListTwo成功',
+  '给settings.js删除{"reqUrl":"/nodejs/testListTwo","resUrl":"./routes/testListTwo"}成功' ]
+操作记录成功dataJson={'id':110002,'name':'testListTwo'}
+{ currPage: '1', prePageNum: '5000', action: 'findDataAll' }
+查询了55条数据，共55条数据
+[0mGET /nodejs/dataList?currPage=1&prePageNum=5000&action=findDataAll [32m200 [0m15.818 ms - 4501[0m
+Listening on port 3000
+[0mGET /js/layui/css/modules/layer/default/loading-2.gif [36m304 [0m8.612 ms - -[0m
+[0mGET / [36m304 [0m1.499 ms - -[0m
+[0mGET /js/layui/css/layui.css [36m304 [0m1.955 ms - -[0m
+[0mGET /css/style.css [36m304 [0m1.680 ms - -[0m
+[0mGET /js/director/director.js [36m304 [0m0.622 ms - -[0m
+[0mGET /js/layui/layui.js [36m304 [0m2.384 ms - -[0m
+[0mGET /image/logo_pc.png [36m304 [0m3.506 ms - -[0m
+[0mGET /image/logo_mobel.png [36m304 [0m3.582 ms - -[0m
+[0mGET /js/router/routerUrl.js [32m200 [0m5.864 ms - 223[0m
+[0mGET /js/layui/lay/modules/element.js [36m304 [0m0.291 ms - -[0m
+[0mGET /js/layui/font/iconfont.woff?v=220 [36m304 [0m0.361 ms - -[0m
+[0mGET /js/layui/lay/modules/jquery.js [36m304 [0m0.320 ms - -[0m
+[0mGET /js/layui/lay/modules/laytpl.js [36m304 [0m0.419 ms - -[0m
+[0mGET /js/router/directorRouter.js [36m304 [0m0.403 ms - -[0m
+[0mGET /js/modeljs/dataDB.js [36m304 [0m0.329 ms - -[0m
+{ action: 'findData', timeStamp: '1527057901941' }
+查询了12条数据，共12条数据
+[0mGET /nodejs/menu?action=findData&timeStamp=1527057901941 [32m200 [0m27.393 ms - 3617[0m
+[0mGET /page/modelList.html [36m304 [0m0.393 ms - -[0m
+[0mGET /js/layui/lay/modules/laydate.js [36m304 [0m0.370 ms - -[0m
+[0mGET /js/layui/css/modules/laydate/default/laydate.css?v=5.0.9 [36m304 [0m0.445 ms - -[0m
+[0mGET /js/layui/lay/modules/laypage.js [36m304 [0m0.380 ms - -[0m
+[0mGET /js/layui/lay/modules/layer.js [36m304 [0m0.328 ms - -[0m
+[0mGET /js/layui/css/modules/layer/default/layer.css?v=3.1.0 [36m304 [0m0.396 ms - -[0m
+[0mGET /js/layui/lay/modules/table.js [36m304 [0m0.413 ms - -[0m
+[0mGET /js/layui/lay/modules/form.js [36m304 [0m0.282 ms - -[0m
+[0mGET /js/layui/lay/modules/upload.js [36m304 [0m0.325 ms - -[0m
+[0mGET /js/modeljs/formVerify.js [36m304 [0m0.335 ms - -[0m
+{ action: 'findData',
+  searchJson: '',
+  prePageNum: '1',
+  currPage: '1' }
+查询了1条数据，共12条数据
+[0mGET /nodejs/modelList?action=findData&searchJson=&prePageNum=1&currPage=1 [36m304 [0m11.409 ms - -[0m
+{ currPage: '1', prePageNum: '10', action: 'findData' }
+查询了10条数据，共12条数据
+[0mGET /nodejs/modelList?currPage=1&prePageNum=10&action=findData [36m304 [0m8.167 ms - -[0m
+[0mGET /page/testList.html [36m304 [0m0.584 ms - -[0m
+{ action: 'findData',
+  searchJson: '',
+  prePageNum: '1',
+  currPage: '1' }
+查询了1条数据，共1条数据
+[0mGET /nodejs/testList?action=findData&searchJson=&prePageNum=1&currPage=1 [32m200 [0m12.677 ms - 369[0m
+{ currPage: '1', prePageNum: '10', action: 'findData' }
+查询了1条数据，共1条数据
+[0mGET /nodejs/testList?currPage=1&prePageNum=10&action=findData [36m304 [0m9.154 ms - -[0m
+[0mGET /page/testList.html [36m304 [0m0.397 ms - -[0m
+{ action: 'findData',
+  searchJson: '',
+  prePageNum: '1',
+  currPage: '1' }
+查询了1条数据，共1条数据
+[0mGET /nodejs/testList?action=findData&searchJson=&prePageNum=1&currPage=1 [36m304 [0m10.154 ms - -[0m
+{ currPage: '1', prePageNum: '10', action: 'findData' }
+查询了1条数据，共1条数据
+[0mGET /nodejs/testList?currPage=1&prePageNum=10&action=findData [36m304 [0m10.394 ms - -[0m
+[0mGET /page/modelList.html [36m304 [0m0.508 ms - -[0m
+{ action: 'findData',
+  searchJson: '',
+  prePageNum: '1',
+  currPage: '1' }
+查询了1条数据，共12条数据
+[0mGET /nodejs/modelList?action=findData&searchJson=&prePageNum=1&currPage=1 [36m304 [0m9.775 ms - -[0m
+{ currPage: '1', prePageNum: '10', action: 'findData' }
+查询了10条数据，共12条数据
+[0mGET /nodejs/modelList?currPage=1&prePageNum=10&action=findData [36m304 [0m9.719 ms - -[0m
+[0mGET /page/dataList.html [36m304 [0m0.417 ms - -[0m
+{ action: 'findDataAll',
+  searchJson: '',
+  prePageNum: '1',
+  currPage: '1' }
+查询了1条数据，共55条数据
+[0mGET /nodejs/dataList?action=findDataAll&searchJson=&prePageNum=1&currPage=1 [32m200 [0m15.063 ms - 4498[0m
+{ currPage: '1', prePageNum: '5000', action: 'findDataAll' }
+查询了55条数据，共55条数据
+[0mGET /nodejs/dataList?currPage=1&prePageNum=5000&action=findDataAll [36m304 [0m16.621 ms - -[0m
+[0mGET / [36m304 [0m0.445 ms - -[0m
+[0mGET /js/layui/css/layui.css [36m304 [0m1.647 ms - -[0m
+[0mGET /css/style.css [36m304 [0m1.562 ms - -[0m
+[0mGET /js/director/director.js [36m304 [0m3.277 ms - -[0m
+[0mGET /js/layui/layui.js [36m304 [0m1.709 ms - -[0m
+[0mGET /js/router/routerUrl.js [36m304 [0m1.365 ms - -[0m
+[0mGET /image/logo_pc.png [36m304 [0m1.305 ms - -[0m
+[0mGET /image/logo_mobel.png [36m304 [0m1.307 ms - -[0m
+[0mGET /js/layui/lay/modules/element.js [36m304 [0m1.068 ms - -[0m
+[0mGET /js/layui/font/iconfont.woff?v=220 [36m304 [0m0.385 ms - -[0m
+[0mGET /js/layui/lay/modules/jquery.js [36m304 [0m0.353 ms - -[0m
+[0mGET /js/layui/lay/modules/laytpl.js [36m304 [0m0.541 ms - -[0m
+[0mGET /js/router/directorRouter.js [36m304 [0m0.459 ms - -[0m
+[0mGET /js/modeljs/dataDB.js [36m304 [0m0.315 ms - -[0m
+{ action: 'findData', timeStamp: '1527058467971' }
+查询了12条数据，共12条数据
+[0mGET /nodejs/menu?action=findData&timeStamp=1527058467971 [32m200 [0m4.562 ms - 3617[0m
+[0mGET /page/dataList.html [36m304 [0m0.401 ms - -[0m
+[0mGET /js/layui/lay/modules/laydate.js [36m304 [0m0.325 ms - -[0m
+[0mGET /js/layui/css/modules/laydate/default/laydate.css?v=5.0.9 [36m304 [0m0.537 ms - -[0m
+[0mGET /js/layui/lay/modules/laypage.js [36m304 [0m0.537 ms - -[0m
+[0mGET /js/layui/lay/modules/layer.js [36m304 [0m0.353 ms - -[0m
+[0mGET /js/layui/css/modules/layer/default/layer.css?v=3.1.0 [36m304 [0m0.495 ms - -[0m
+[0mGET /js/layui/lay/modules/table.js [36m304 [0m0.486 ms - -[0m
+[0mGET /js/layui/lay/modules/form.js [36m304 [0m0.592 ms - -[0m
+[0mGET /js/layui/lay/modules/upload.js [36m304 [0m0.319 ms - -[0m
+[0mGET /js/modeljs/formVerify.js [36m304 [0m0.308 ms - -[0m
+{ action: 'findDataAll',
+  searchJson: '',
+  prePageNum: '1',
+  currPage: '1' }
+查询了1条数据，共55条数据
+[0mGET /nodejs/dataList?action=findDataAll&searchJson=&prePageNum=1&currPage=1 [36m304 [0m9.977 ms - -[0m
+{ currPage: '1', prePageNum: '5000', action: 'findDataAll' }
+查询了55条数据，共55条数据
+[0mGET /nodejs/dataList?currPage=1&prePageNum=5000&action=findDataAll [36m304 [0m15.932 ms - -[0m
+[0mGET /page/modelListFn.html [36m304 [0m0.418 ms - -[0m
+{ action: 'findData',
+  searchJson: '',
+  prePageNum: '1',
+  currPage: '1' }
+查询了1条数据，共31条数据
+[0mGET /nodejs/modelListFn?action=findData&searchJson=&prePageNum=1&currPage=1 [36m304 [0m10.847 ms - -[0m
+{ currPage: '1', prePageNum: '10', action: 'findData' }
+查询了10条数据，共31条数据
+[0mGET /nodejs/modelListFn?currPage=1&prePageNum=10&action=findData [36m304 [0m9.552 ms - -[0m
+[0mGET /page/dataList.html [36m304 [0m0.367 ms - -[0m
+{ action: 'findDataAll',
+  searchJson: '',
+  prePageNum: '1',
+  currPage: '1' }
+查询了1条数据，共55条数据
+[0mGET /nodejs/dataList?action=findDataAll&searchJson=&prePageNum=1&currPage=1 [36m304 [0m11.069 ms - -[0m
+{ currPage: '1', prePageNum: '5000', action: 'findDataAll' }
+查询了55条数据，共55条数据
+[0mGET /nodejs/dataList?currPage=1&prePageNum=5000&action=findDataAll [36m304 [0m11.981 ms - -[0m

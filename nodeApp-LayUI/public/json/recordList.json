@@ -1,0 +1,27 @@
+﻿﻿﻿﻿{
+    "code": 0, 
+    "msg": "", 
+    "count": 100, 
+    "name" :"recordList",
+    "name_ch" :"操作记录",
+    "field_ch" :"用户名;模块ID;模块名称;数据表名称;动作;内容;操作系统;屏幕像素;时间",
+    "field_en" :"username;modelId;modelName;dbName;action;content;os;px;time",
+    "data_type" :"text;int(6);text;text;text;text;text;text;text",
+    "field_width" :"100;100;100;150;100;200;100;100;150",
+    "rows": [
+        
+        {
+          "username": "admin",
+          "modelId": "100001",
+          "modelName": "模块列表",
+          "dbName": "modelList",
+          "action" : "增加",
+          "content" : "dataArr=[{'name':'mick','age':18},{'name':'tina','age':35}]",
+          "os" : "window",
+          "px" : "1366x768",
+          "time" : "18-02-11 16:04:21"
+        }
+
+        
+    ]
+}

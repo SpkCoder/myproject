@@ -1,0 +1,87 @@
+﻿/* 0 */
+{
+  "_id" : ObjectId("5aa8f187401ed10908ab81b4"),
+  "UserName" : "yuxian",
+  "id" : 1,
+  "CompanyName" : "",
+  "Name" : "xian",
+  "Email" : "a@a.com",
+  "Phone" : "",
+  "Address" : "",
+  "Address2" : "",
+  "Country" : "",
+  "Province" : "",
+  "City" : "",
+  "PostCode" : "",
+  "CustomerNumber" : "A000",
+  "isDefault" : "false",
+  "create_name" : "yuxian",
+  "create_time" : "2018-03-14 17:55:19",
+  "update_name" : "yuxian",
+  "update_time" : "2018-04-03 16:52:53"
+}
+
+/* 1 */
+{
+  "_id" : ObjectId("5aa8f196401ed10908ab81b6"),
+  "UserName" : "yuxian",
+  "id" : 2,
+  "CompanyName" : "",
+  "Name" : "xian",
+  "Email" : "a@a.com",
+  "Phone" : "",
+  "Address" : "",
+  "Address2" : "",
+  "Country" : "",
+  "Province" : "",
+  "City" : "",
+  "PostCode" : "",
+  "CustomerNumber" : "A000",
+  "isDefault" : "true",
+  "create_name" : "yuxian",
+  "create_time" : "2018-03-14 17:55:34",
+  "update_name" : "yuxian",
+  "update_time" : "2018-04-03 16:53:59"
+}
+
+/* 2 */
+{
+  "_id" : ObjectId("5aa8f1a8401ed10908ab81b8"),
+  "UserName" : "admin",
+  "id" : 1,
+  "CompanyName" : "",
+  "Name" : "test",
+  "Email" : "a@a.com",
+  "Phone" : "",
+  "Address" : "",
+  "Address2" : "",
+  "Country" : "",
+  "Province" : "",
+  "City" : "",
+  "PostCode" : "",
+  "CustomerNumber" : "A000",
+  "isDefault" : "true",
+  "create_name" : "yuxian",
+  "create_time" : "2018-03-14 17:55:52"
+}
+
+/* 3 */
+{
+  "_id" : ObjectId("5aaa1774c664fc042897bd5a"),
+  "UserName" : "test",
+  "id" : 1,
+  "CompanyName" : "a",
+  "Name" : "a",
+  "Email" : "",
+  "Phone" : "",
+  "Address" : "a",
+  "Address2" : "",
+  "Country" : "a",
+  "Province" : "a",
+  "City" : "a",
+  "PostCode" : "",
+  "CustomerNumber" : "A000",
+  "isDefault" : "true"
+}
+
+

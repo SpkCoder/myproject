@@ -1,0 +1,197 @@
+﻿<div class="list-page-point">
+   <div class="container">
+     <p><i class="layui-icon" style="font-size: 14px;">&#xe715;</i><span></span></p>
+   </div>
+</div>
+
+
+<div class="list-page-box">
+  <div class="container2">
+    <div class="list-page">
+    
+	    
+	    <div id="DetailFormApp" class="DetailFormApp"></div>
+	    <div id="formApp" class="formBox"> </div>
+	    
+
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+	require(['jquery','Vue','dataDB','ELEMENT','drag','formVerify'], function ($,Vue,dataDB,ELEMENT,drag,formVerify) {
+	    //请求数据的url
+	    var url = "/nodejs/productList";
+	    var arg = window.location.hash.split("/")[3];
+	    var product_id = Number(arg.split("-")[0]);
+	    var modelClass_id = Number(arg.split("-")[1]);
+		//console.log(product_id);
+		//当前定位
+		$(".list-page-point span").html("Products"+">>"+"Product List");
+	
+	    var dataDBInt = dataDB.int;
+	    Vue.use(ELEMENT);
+        
+       
+       
+       
+        //加载data
+		var dataInt = function (data) {
+	        //console.log(data);
+	        
+	        
+	        if(typeof data != "object"){
+	          alert(data);
+	          return;
+	        }
+	        var row = data.rows[0];
+
+	        data.colArr = [
+	           {"title":"Id","field":"id","width":"80","data_type":"int"},
+	           {"title":"Name","field":"name","width":"120","data_type":"text"},
+	           {"title":"ProductClass_id","field":"productClass_id","width":"150","data_type":"int"},
+	           {"title":"ProductClass_name","field":"productClass_name","width":"170","data_type":"text"},
+	           {"title":"ModelClass_id","field":"modelClass_id","width":"150","data_type":"int"},
+	           {"title":"ModelClass_name","field":"modelClass_name","width":"170","data_type":"text"},
+	           {"title":"colorClass_id","field":"colorClass_id","width":"150","data_type":"int"},
+	           {"title":"optionClass_id","field":"optionClass_id","width":"150","data_type":"int"},
+	           {"title":"accessoriesClass_id","field":"accessoriesClass_id","width":"150","data_type":"int"},
+	           {"title":"Image","field":"image_url","width":"150","data_type":"text"}
+	        ];
+	        
+	      	formHtml = '<el-form :model="formData" ref="formData" size="small" name="detail">';
+            for(var i = 0; i < data.colArr.length; i++){
+               //var data_type = data.colArr[i].data_type;
+               var field = data.colArr[i].field;
+               var title = data.colArr[i].title;
+               if(field == "colorClass_id"){
+               	 formHtml+='<div class="itemDiv"><p><label>colorClass:</label></p><ul>';
+               	   formHtml+='<li v-for="item in colorClassList" :key="item.id" :data-id="item.id"><span v-bind:style="{ color: item.class_color_code}">{{item.class_name}}</span></li>';
+               	 formHtml+='<ul></div>';
+               }else if(field == "optionClass_id"){
+               	 formHtml+='<div class="itemDiv"><p><label>optionClass:</label></p><ul>';
+               	   formHtml+='<li v-for="item in optionClassList" :key="item.id" :data-id="item.id"><span>{{item.class_name}}</span><a href="javascript:;" @click="lookOptionValue(item.id)">Option Value</a></li>';
+               	 formHtml+='<ul></div>';
+               }else if(field == "accessoriesClass_id"){
+               	 formHtml+='<div class="itemDiv"><p><label>accessoriesClass:</label></p><ul>';
+               	   formHtml+='<li v-for="item in optionClassList" :key="item.id" :data-id="item.id"><span>{{item.class_name}}</span><a href="javascript:;" @click="lookAccessoriesValue(item.id)">Accessories Value</a></li>';
+               	 formHtml+='<ul></div>';
+               }else if(field == "image_url"){
+               	 formHtml+='<div class="itemDiv"><p><label>'+title+':'+'</label></p><div><a target="_blank" :href="formData.'+field+' | sliceUrl"><img style="max-width:600px" :src="formData.'+field+' | sliceUrl"></a></div></div>';
+               }else{
+               	 formHtml+='<div class="itemDiv"><p><label>'+title+':'+'</label></p><div v-text="formData.'+field+'"></div></div>';
+               }			
+            }
+            formHtml+='<div><input id="file" type="file" accept="image/*" name="file" value=""><br><br><el-button @click="uploadFile" type="primary">Upload</el-button></div>';
+			formHtml+='</el-form>';
+           
+	        $("#DetailFormApp").html(formHtml);
+	       
+	        
+	        var DetailFormApp = new Vue({
+		        el: '#DetailFormApp',
+		        data: {
+		        	formData: row,
+			        colorClassList: [],
+			        optionClassList: [],
+			        accessoriesClassList:[]
+		        },
+			    filters: {
+				  sliceUrl: function (value) {
+				    if(value){
+				    	return value.slice(7);
+				    } 
+				  }
+				},
+		        methods: {
+			      uploadFile(){
+			      	var _this = this;
+			    	var formData = new FormData(document.forms['detail']);
+			    	var files = document.getElementById("file").files;
+			    	//console.log(files);
+			    	if(files[0].size > 1024*1024*1){
+			    		_this.$message({duration: 1000, message: "The picture size must be less than 1M" });
+			    		return;
+			    	}
+			    	formData.append("fileArr",files);
+			    	formData.append("dataJson",JSON.stringify({"class_name":"productList", "file_id": product_id}));
+			    	formData.append("action","insertData");
+			    	//console.log("dataJson:"+formData.get("dataJson")+"action:"+formData.get("action"));
+			    	$.ajax({
+			              url: "/nodejs/fileList",
+			              type: "POST",
+			              data:formData,
+			              contentType: false,  
+			              processData: false,  
+			              success: function (data,status,xhr) {
+			              	_this.$message({duration: 1000, message: data });
+                            if(data != "Success"){return;}
+    
+                            dataDBInt.findData(url,reqData,dataInt);
+			              },
+			              error: function (xhr,status,error) {
+			              	//console.log("请求失败"); 
+			              }
+			    	});
+			      },
+			      lookOptionValue (optionId) {
+			      	//console.log(optionId);
+			      	window.location.hash = "/page/optionValueRelationship/" +product_id+"-"+modelClass_id+"-"+optionId;
+			      	
+			      },
+			      lookAccessoriesValue (optionId) {
+			      	//console.log(optionId);
+			      	window.location.hash = "/page/accessoriesValueRelationship/" +product_id+"-"+modelClass_id+"-"+optionId;
+			      }
+			    }
+		    });
+	        
+	       
+	        
+	        
+	        //
+            $("#btn_add").on("click",function(){
+           	   tableApp.add();
+            });
+            
+	       
+	       
+	        //加载colorClass
+	        var colorClassList = [];
+	        var url_colorClass = '/nodejs/colorClass';
+	        var reqData_colorClass = 'action=findData&searchJson='+JSON.stringify({"id": {"$in":row.colorClass_id}})+'&prePageNum=100000&currPage=1';
+			dataDBInt.findData(url_colorClass,reqData_colorClass,function (data) {
+				DetailFormApp.colorClassList = data.rows;
+			});
+			
+			
+			//加载optionClass
+	        var optionClassList = [];
+	        var url_optionClass = '/nodejs/optionClass';
+	        var reqData_optionClass = 'action=findData&searchJson='+JSON.stringify({"id": {"$in":row.optionClass_id}})+'&prePageNum=100000&currPage=1';
+			dataDBInt.findData(url_optionClass,reqData_optionClass,function (data) {
+				DetailFormApp.optionClassList = data.rows;
+			});
+			
+			//加载accessoriesClass
+	        var accessoriesClassList = [];
+	        var url_accessoriesClass = '/nodejs/accessoriesClass';
+	        var reqData_accessoriesClass = 'action=findData&searchJson='+JSON.stringify({"id": {"$in":row.accessoriesClass_id}})+'&prePageNum=100000&currPage=1';
+			dataDBInt.findData(url_accessoriesClass,reqData_accessoriesClass,function (data) {
+				DetailFormApp.accessoriesClassList = data.rows;
+			});
+	        
+	        
+       }
+
+
+        //初始化数据
+		var reqData = 'action=findData&searchJson='+JSON.stringify({"id": product_id, "modelClass_id": modelClass_id})+'&prePageNum=10&currPage=1';
+		dataDBInt.findData(url,reqData,dataInt);
+		//初始化数据 结束
+
+
+		
+
+		
+	});
+</script>

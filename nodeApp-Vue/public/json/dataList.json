@@ -1,0 +1,336 @@
+﻿﻿﻿﻿{
+    "code": 0, 
+    "msg": "", 
+    "count": 100, 
+    "name" :"dataList",
+    "name_ch" :"数据列表",
+    "field_ch" :"模块ID;数据表名称;数据中文名;中文字段;英文字段;字段数据类型;字段列宽;字段排序",
+    "field_en" :"id;name;name_ch;field_ch;field_en;data_type;field_width;field_sort",
+    "data_type" :"int(6);text;text;text;text;text;int;int",
+    "field_width" :"100;100;150;100;100;100;100;1000",
+    "rows": [
+        
+        {
+          "id" : "100001",
+          "name" : "modelList",
+          "name_ch" : "模块列表",
+          "field_en" : "level",
+          "field_ch" : "模块级别",
+          "data_type" : "int",
+          "field_width" : "100",
+          "field_sort" : "1"
+        },
+        {
+          "id" : "100001",
+          "name" : "modelList",
+          "name_ch" : "模块列表",
+          "field_en" : "id",
+          "field_ch" : "模块ID",
+          "data_type" : "int(6)",
+          "field_width" : "100",
+          "field_sort" : "2"
+        },
+        {
+          "id" : "100001",
+          "name" : "modelList",
+          "name_ch" : "模块列表",
+          "field_en" : "parentId",
+          "field_ch" : "父模块ID",
+          "data_type" : "int(6)",
+          "field_width" : "100",
+          "field_sort" : "3"
+        },
+        {
+          "id" : "100001",
+          "name" : "modelList",
+          "name_ch" : "模块列表",
+          "field_en" : "name",
+          "field_ch" : "模块名称",
+          "data_type" : "text",
+          "field_width" : "100",
+          "field_sort" : "4"
+        },
+        {
+          "id" : "100001",
+          "name" : "modelList",
+          "name_ch" : "模块列表",
+          "field_en" : "position",
+          "field_ch" : "模块位置",
+          "data_type" : "text",
+          "field_width" : "100",
+          "field_sort" : "5"
+        },
+        {
+          "id" : "100001",
+          "name" : "modelList",
+          "name_ch" : "模块列表",
+          "field_en" : "sort",
+          "field_ch" : "排序",
+          "data_type" : "text",
+          "field_width" : "100",
+          "field_sort" : "6"
+        },
+        {
+          "id" : "100001",
+          "name" : "modelList",
+          "name_ch" : "模块列表",
+          "field_en" : "href",
+          "field_ch" : "链接",
+          "data_type" : "text",
+          "field_width" : "100",
+          "field_sort" : "7"
+        },
+        {
+          "id" : "100001",
+          "name" : "modelList",
+          "name_ch" : "模块列表",
+          "field_en" : "iconfont",
+          "field_ch" : "字体图标",
+          "data_type" : "text",
+          "field_width" : "100",
+          "field_sort" : "8"
+        },
+        {
+          "id" : "100001",
+          "name" : "modelList",
+          "name_ch" : "模块列表",
+          "field_en" : "show",
+          "field_ch" : "是否显示",
+          "data_type" : "text",
+          "field_width" : "100",
+          "field_sort" : "9"
+        },
+        {
+          "id" : "100002",
+          "name" : "dataList",
+          "name_ch" : "数据列表",
+          "field_en" : "id",
+          "field_ch" : "模块ID",
+          "data_type" : "int(6)",
+          "field_width" : "100",
+          "field_sort" : "1"
+        },
+        {
+          "id" : "100002",
+          "name" : "dataList",
+          "name_ch" : "数据列表",
+          "field_en" : "name",
+          "field_ch" : "数据表名称",
+          "data_type" : "text",
+          "field_width" : "150",
+          "field_sort" : "2"
+        },
+        {
+          "id" : "100002",
+          "name" : "dataList",
+          "name_ch" : "数据列表",
+          "field_en" : "name_ch",
+          "field_ch" : "数据表中文名",
+          "data_type" : "text",
+          "field_width" : "150",
+          "field_sort" : "3"
+        },
+        {
+          "id" : "100002",
+          "name" : "dataList",
+          "name_ch" : "数据列表",
+          "field_ch" : "中文字段",
+          "field_en" : "field_ch",
+          "data_type" : "text",
+          "field_width" : "200",
+          "field_sort" : "4"
+        },
+        {
+          "id" : "100002",
+          "name" : "dataList",
+          "name_ch" : "数据列表",
+          "field_en" : "field_en",
+          "field_ch" : "英文字段",
+          "data_type" : "text",
+          "field_width" : "200",
+          "field_sort" : "5"
+        },
+        {
+          "id" : "100002",
+          "name" : "dataList",
+          "name_ch" : "数据列表",
+          "field_en" : "data_type",
+          "field_ch" : "字段数据类型",
+          "data_type" : "text",
+          "field_width" : "200",
+          "field_sort" : "6"
+        },
+        {
+          "id" : "100002",
+          "name" : "dataList",
+          "name_ch" : "数据列表",
+          "field_en" : "field_width",
+          "field_ch" : "字段列宽",
+          "data_type" : "text",
+          "field_width" : "200",
+          "field_sort" : "7"
+        },
+        {
+          "id" : "100002",
+          "name" : "dataList",
+          "name_ch" : "数据列表",
+          "field_en" : "field_sort",
+          "field_ch" : "字段排序",
+          "data_type" : "text",
+          "field_width" : "100",
+          "field_sort" : "8"
+        },
+        {
+          "id" : "100003",
+          "name" : "modelListFn",
+          "name_ch" : "模块功能",
+          "field_en" : "id",
+          "field_ch" : "模块ID",
+          "data_type" : "int(6)",
+          "field_width" : "100",
+          "field_sort" : "1"
+        },
+        {
+          "id" : "100003",
+          "name" : "modelListFn",
+          "name_ch" : "模块功能",
+          "field_en" : "modelName",
+          "field_ch" : "模块名称",
+          "data_type" : "text",
+          "field_width" : "100",
+          "field_sort" : "2"
+        },
+        {
+          "id" : "100003",
+          "name" : "modelListFn",
+          "name_ch" : "模块功能",
+          "field_en" : "dbName",
+          "field_ch" : "数据表名称",
+          "data_type" : "text",
+          "field_width" : "150",
+          "field_sort" : "3"
+        },
+        {
+          "id" : "100003",
+          "name" : "modelListFn",
+          "name_ch" : "模块功能",
+          "field_en" : "function_ch",
+          "field_ch" : "功能中文名称",
+          "data_type" : "text",
+          "field_width" : "150",
+          "field_sort" : "4"
+        },
+        {
+          "id" : "100003",
+          "name" : "modelListFn",
+          "name_ch" : "模块功能",
+          "field_en" : "function_en",
+          "field_ch" : "功能英文名称",
+          "data_type" : "text",
+          "field_width" : "150",
+          "field_sort" : "5"
+        },
+        {
+          "id" : "100004",
+          "name" : "userList",
+          "name_ch" : "用户列表",
+          "field_en" : "username",
+          "field_ch" : "用户名",
+          "data_type" : "text",
+          "field_width" : "150",
+          "field_sort" : "1"
+        },
+        {
+          "id" : "100004",
+          "name" : "userList",
+          "name_ch" : "用户列表",
+          "field_en" : "email",
+          "field_ch" : "电子邮箱",
+          "data_type" : "text",
+          "field_width" : "150",
+          "field_sort" : "2"
+        },
+        {
+          "id" : "100004",
+          "name" : "userList",
+          "name_ch" : "用户列表",
+          "field_en" : "phone",
+          "field_ch" : "电话",
+          "data_type" : "int",
+          "field_width" : "150",
+          "field_sort" : "3"
+        },
+        {
+          "id" : "100004",
+          "name" : "userList",
+          "name_ch" : "用户列表",
+          "field_en" : "sex",
+          "field_ch" : "性别",
+          "data_type" : "text",
+          "field_width" : "100",
+          "field_sort" : "4"
+        },
+        {
+          "id" : "100004",
+          "name" : "userList",
+          "name_ch" : "用户列表",
+          "field_en" : "age",
+          "field_ch" : "年龄",
+          "data_type" : "text",
+          "field_width" : "100",
+          "field_sort" : "5"
+        },
+        {
+          "id" : "100004",
+          "name" : "userList",
+          "name_ch" : "用户列表",
+          "field_en" : "remarks",
+          "field_ch" : "备注",
+          "data_type" : "text",
+          "field_width" : "150",
+          "field_sort" : "6"
+        },
+        {
+          "id" : "100005",
+          "name" : "powerList",
+          "name_ch" : "角色权限",
+          "field_en" : "id",
+          "field_ch" : "ID",
+          "data_type" : "int",
+          "field_width" : "100",
+          "field_sort" : "1"
+        },
+        {
+          "id" : "100006",
+          "name" : "fileList",
+          "name_ch" : "文件列表",
+          "field_en" : "class_name",
+          "field_ch" : "文件分类",
+          "data_type" : "text",
+          "field_width" : "100",
+          "field_sort" : "1"
+        },
+        {
+          "id" : "100006",
+          "name" : "fileList",
+          "name_ch" : "文件列表",
+          "field_en" : "name",
+          "field_ch" : "文件名",
+          "data_type" : "text",
+          "field_width" : "150",
+          "field_sort" : "2"
+        },
+        {
+          "id" : "100006",
+          "name" : "fileList",
+          "name_ch" : "文件列表",
+          "field_en" : "url",
+          "field_ch" : "URL",
+          "data_type" : "text",
+          "field_width" : "200",
+          "field_sort" : "3"
+        }
+
+        
+    ]
+}

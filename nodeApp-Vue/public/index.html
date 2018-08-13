@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  	<title>MONGO大数据平台</title>
+    <meta charset="utf-8">
+	  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel='stylesheet' href='/css/iconfont.css'/>
+    <link rel='stylesheet' href='/js/element-ui/lib/theme-chalk/index.css'/>
+    <link rel='stylesheet' href='/css/style.css'/>
+    <link rel='stylesheet' href='/css/pagelist.css'/>
+  </head>
+  <body>
+  	  <!--header-->
+  	  <div class="header">
+	  		  <div class="logo">
+	  		  	 <a style="display: inline-block;height: 100%;" href="/">
+	  		  	 	<img class="img-pc" height="100%" src="/image/logo_pc.png">
+	  		  	  <img class="img-mobel" height="100%" src="/image/logo_mobel.png">
+	  		  	 </a>
+	  		  </div>
+	  		  <div class="nav-container">
+  		  	   <ul id="topNav" class="nav clearfix">
+							  <li v-for='(item, index) in rows' v-if='item.position == "top" && item.show == "true"'>
+							  	  <a href="javascript:;"><i class="layui-icon topmenu-layui-icon">{{ item.iconfont }}</i>{{ item.name }}<span class="nav-more"></span></a>
+							  	  <dl>
+									    <dd v-for='(item2, index2) in item.children' v-if='item2.show == "true"'>
+									    	<a v-bind:href="item2.href"><i class="layui-icon">{{ item2.iconfont }}</i>{{ item2.name }}</a>
+									    </dd>
+									  </dl>
+							  </li>
+							</ul>
+				      
+				      <ul class="nav nav-right">
+				        <li class="adminLi">
+				          <a id="username" href="javascript:;"><i class="layui-icon"></i>admin<span class="nav-more"></span></a>
+				          <dl>
+				            <dd><a id="changePassword" href="javascript:;"><i class="layui-icon"></i>修改密码</a></dd>
+				            <dd><a id="loginOut" href="javascript:;"><i class="layui-icon"></i>安全退出</a></dd>
+				          </dl>
+				        </li>
+				        <!--<li class="colorLi">
+				          <a href="javascript:;"><i class="layui-icon topmenu-layui-icon"></i>换肤<span class="nav-more"></span></a>
+				          <dl>
+				            <dd><a href="javascript:;" data-val="qingxin" title="清新"><i class="layui-icon"></i>清新</a></dd>
+				            <dd><a href="javascript:;" data-val="blue" title="蓝色"><i class="layui-icon"></i>蓝色</a></dd>
+				            <dd><a href="javascript:;" data-val="molv" title="墨绿"><i class="layui-icon"></i>墨绿</a></dd>
+				          </dl>
+				        </li>-->
+				        <li class="useLi">
+				          <a href="javascript:;"><i class="layui-icon topmenu-layui-icon"></i>使用说明<span class="nav-more"></span></a>
+				          <dl>
+				            <dd><a id="changePassword" href="#/page/myUseHelp"><i class="layui-icon"></i>使用说明</a></dd>
+				          </dl>
+				        </li>
+				      </ul>
+  		    </div>
+  		  
+	  		  <div class="moblebar">
+	  		  	  <span id="nav-side-arrow-moble" class="nav-side-arrow-close"><i class="icon-font" style="font-size: 22px;">&#xe600;</i></span>
+	  		  </div>
+  		  
+  	</div>
+    
+	  <!--aside-left-->
+	  <div class="aside-left">
+	  	 <div class="nav-container">
+		  	<ul id="leftNav" class="nav clearfix">
+				  <li v-for='(item, index) in rows' v-if='item.position == "left" && item.show == "true"'>
+				  	  <a href="javascript:;"><i class="layui-icon leftmenu-layui-icon">{{ item.iconfont }}</i>{{ item.name }}<span class="nav-more"></span></a>
+				  	  <dl>
+						    <dd v-for='(item2, index2) in item.children' v-if='item2.show == "true"'>
+						    	<a v-bind:href="item2.href"><i class="layui-icon leftmenu-layui-icon">{{ item2.iconfont }}</i>{{ item2.name }}</a>
+						    </dd>
+						  </dl>
+				  </li>
+				</ul>
+			</div>
+			<div id="nav-side-arrow-pc" class="nav-side-arrow"><i class="layui-icon" style="font-size: 12px;"></i></div>
+	  </div>
+	  
+	  
+	  
+	  <!-- pageList -->
+	  <div id="Vue_routerView" class="vue-body"></div>
+	    
+	  
+	
+    <!-- footer -->
+    <div class="footer">mongo 大数据平台 </div>
+
+
+<script type="text/javascript" src="/js/jquery/jquery.js"></script>
+<script type="text/javascript" src="/js/router/routerUrl.js" charset="utf-8"></script>
+<script type="text/javascript" src="/js/requirejs/js/require.js" data-main="/js/app.js"></script>
+</body>
+</html>

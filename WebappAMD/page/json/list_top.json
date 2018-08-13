@@ -1,0 +1,14 @@
+[
+    {
+        "model_id": "120000", 
+        "model_name": "资产设备", 
+        "img_path": "", 
+        "children": [
+            {
+                "model_id": "121000", 
+                "model_name": "资产设备基本信息", 
+                "url": "#/page/object/object_base/list"
+            }
+        ]
+    }
+]

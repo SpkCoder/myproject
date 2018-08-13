@@ -1,0 +1,71 @@
+[
+    {
+        "model_id": "100000", 
+        "model_name": "系统管理", 
+        "img_path": "../images/leftmenu_icon01.png", 
+        "children": [
+            {
+                "model_id": "101000", 
+                "model_name": "站点信息", 
+                "url": "#/page/system/local_site/list"
+            }, 
+            {
+                "model_id": "101100", 
+                "model_name": "部门管理", 
+                "url": "#/page/system/dept/list"
+            }, 
+            {
+                "model_id": "101200", 
+                "model_name": "模块列表", 
+                "url": "#/page/system/model_base/list"
+            }, 
+            {
+                "model_id": "101300", 
+                "model_name": "用户列表", 
+                "url": "#/page/system/user/list"
+            }, 
+            {
+                "model_id": "101400", 
+                "model_name": "角色管理", 
+                "url": "#/page/system/role/list"
+            }, 
+            {
+                "model_id": "101500", 
+                "model_name": "用户角色", 
+                "url": "#/page/system/user_role/list"
+            }, 
+            {
+                "model_id": "101600", 
+                "model_name": "在线用户", 
+                "url": "#/page/system/user_online/list"
+            }, 
+            {
+                "model_id": "101700", 
+                "model_name": "日志记录", 
+                "url": "#/page/system/user_log/list"
+            }, 
+            {
+                "model_id": "101800", 
+                "model_name": "列表显示模板", 
+                "url": "#/page/system/page_list_template/list"
+            }
+        ]
+    }, 
+    {
+        "model_id": "110000", 
+        "model_name": "工作管理", 
+        "img_path": "../images/leftmenu_icon02.png", 
+        "children": [
+            {
+                "model_id": "111000", 
+                "model_name": "工作流程", 
+                "url": "#/page/work/work_flow/list"
+            }, 
+            {
+                "model_id": "111200", 
+                "model_name": "发起的工作", 
+                "url": "#/page/work/work_do/list"
+            }
+        ]
+    }
+]

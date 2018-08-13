@@ -1,0 +1,116 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <title></title>
+    <style type="text/css">
+        body, html{width: 100%;height: 100%;margin:0;padding: 0; font-family:"微软雅黑";}
+         #noneMap{ font-size: 14px; color: #333; text-indent: 10px;}
+        .editBtn { padding: 5px;}
+        .editBtn a{display: inline-block; font-size: 14px; color: #333; text-decoration: none; padding: 4px 10px; border-radius: 5px; background: #f2f2f2; margin-right: 5px;}
+    </style>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=T8hYm6wyqCruiZVVCfpq7mXuOPcHMte0"></script>
+    <script type="text/javascript" src="../../../js/common/http.js"></script>
+    <script type="text/javascript" src="../../../js/common/jquery-1.11.0.min.js"></script>
+</head>
+<body>
+    <div class="editBtn"> 
+        <a href="javascript:;" onclick="window.history.go(-1)">返回</a>
+     </div>
+     <div id="noneMap"></div>
+     <div id="bMap" style="height:100%;width:100%;"></div>
+</body>
+</html>
+<script type="text/javascript">
+
+    var pointUrl=top.location.href;
+    //console.log(pointUrl);
+    var ID=pointUrl.split("?")[1];
+    var user_name;
+    var longitude;
+    var latitude;
+    var update_time;
+
+  
+    var getGPS = http+"/handler/system/user_online/list.ashx?"+idStr+"&sortField=&searchCondition=ID="+ID+"&pageNumber=1&pageSize="+10+"&totalRecord=0&action=GetPages&timeStamp=" + Date.parse(new Date());
+    $.ajax({
+              type: "GET",
+              url: getGPS,
+              dataType: "json",
+              success: function (data, status, headers, config) {
+                 user_name = (data.rows[0]).user_name;
+                 longitude = (data.rows[0]).longitude;
+                 latitude = (data.rows[0]).latitude;
+                 update_time = (data.rows[0]).update_time;
+
+                 if(longitude && latitude){
+                     showMap();
+                  }else{
+                     document.getElementById("noneMap").innerHTML="用户不在岗位";
+                  }
+
+
+              },
+              error: function (xhr) {
+                  //alert("加载失败");  
+              }
+          });
+
+
+
+    function showMap() {
+
+        // 百度地图API功能
+        var map = new BMap.Map("bMap");
+        var point = new BMap.Point(longitude,latitude);
+
+        //坐标转换
+        var convertor = new BMap.Convertor();
+        var pointArr = [];
+        pointArr.push(point);
+        convertor.translate(pointArr, 1, 5, translateCallback);
+
+         //坐标转换完之后的回调函数
+         function translateCallback(data){
+            if(data.status === 0) {
+              var marker = new BMap.Marker(data.points[0]);
+              map.addOverlay(marker);
+              var label = new BMap.Label(user_name+" "+update_time,{offset:new BMap.Size(20,-10)});
+              marker.setLabel(label); //添加百度label
+              //map.setCenter(data.points[0]);
+              map.centerAndZoom(data.points[0],19);         //设置中心点和缩放级别
+              map.enableScrollWheelZoom(true);     //设置是否滚动缩放
+            }
+          }
+
+
+        
+        
+       
+       //左上角，添加比例尺
+       map.addControl(new BMap.ScaleControl({anchor: BMAP_ANCHOR_TOP_LEFT})); 
+       //左上角，添加默认缩放平移控件       
+       map.addControl(new BMap.NavigationControl());   
+       //右上角仅包含平移和缩放按钮  
+       map.addControl(new BMap.NavigationControl({anchor: BMAP_ANCHOR_TOP_RIGHT, type: BMAP_NAVIGATION_CONTROL_SMALL}));
+
+
+       // var marker_1 = new BMap.Marker(point);  // 创建标注
+       // map.addOverlay(marker_1);               // 将标注添加到地图中
+       // //map.removeOverlay(marker_2);    移除标注          
+
+       // //设置文字标签
+       // marker_1.setLabel(new BMap.Label(user_name+" "+update_time,{offset:new BMap.Size(20,-10)}));
+
+
+
+    
+
+    }
+
+
+
+    
+
+
+</script>

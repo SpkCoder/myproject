@@ -1,0 +1,98 @@
+<!doctype html>
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+
+<title>
+	主副钩历史数据
+</title>
+<link href="js/My97DatePicker/WdatePicker.css" rel="stylesheet" type="text/css" />
+<link id="easyuiTheme" rel="stylesheet" type="text/css" href="js/easyui.css" />
+<link rel="Stylesheet" type="text/css" href="js/Common.css" />
+<link rel="Stylesheet" type="text/css" href="js/icon.css" /> 
+    <script src="js/jquery-1.8.2.min.js" type="text/javascript"></script>
+    <script src="js/My97DatePicker/WdatePicker.js" type="text/javascript"></script>
+     
+</head>
+<body>
+
+
+<div>
+
+	
+</div>
+    <div>
+    <table><tr>
+    <td style="width:60px;">开始时间： </td><td style="width:80px;">   <input type="text" id="ipt_starttime" name="ipt_starttime"  class="Wdate" onfocus="showDatePicker()"  style=" border: 1px solid #C0C0C0;height: 18px;"/></td>
+     <td style="width:60px;">结束时间：</td>
+    <td style="width:80px;">    <input type="text" id="ipt_endtime"  name="ipt_endtime" class="Wdate" onfocus="showDatePicker()" style=" border: 1px solid #C0C0C0;height: 18px;"/></td>
+
+       <td style="width:60px;">驾驶人：</td>
+    <td style="width:80px;">
+<link href="js/Site.css" rel="stylesheet" type="text/css" />
+<link href="js/zTreeStyle.css" rel="stylesheet" type="text/css" />
+<div class="sel-box">
+    <input type="text" id="funmodelTexts"   readonly="readonly" onfocus="if(this.value=='请选择')this.value='';" class="sel-v num" value="请选择" />
+    <input type="hidden" class="funmodelValuesclass" id="funmodelValues"  name="funmodelValues"  value="" />
+     <input type="hidden"   id="deptuserid"  name="deptuserid"   />
+     <input type="hidden"   id="deptusername"  name="deptusername"   />
+    <div class="sel-cont">
+        <table class="sel-bg" border="0" style="border: 1px solid #C0C0C0">
+            <tr>
+                <td ></td>
+                <td  ></td>
+                <td  ></td>
+            </tr>
+            <tr>
+                <td  ></td>
+                <td class="cc-cont">
+                    <div class="sel-nav">
+                        <ul id="sel_FunModel" class="ztree"></ul>
+                    </div>
+                </td>
+                <td  ></td>
+            </tr>
+            <tr>
+                <td  ></td>
+                <td ></td>
+                <td  ></td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+
+</td>
+
+      <td><input type="button" id="btnSearch"  value="查询"/></td>
+      <td style="width:40px; text-align:right" > 
+               
+          <img src="js/xls.gif" alt="导出Excel" onclick="dcx()" />
+      </td>
+      <td style="width:40px; text-align:right">  <input type="image" name="print" id="print" title="打 印" src="js/print.png" alt="打 印" onclick="javascript:print();return false;" style="border-width:0px;width: 16px" /> </td>
+    </tr></table>
+ <input name="fields" type="hidden" id="fields" />
+
+         <input name="name" type="hidden" id="name" />
+         <input name="ziduan" type="hidden" id="ziduan" />
+    <div>
+   <!--列表内容显示区域-->
+       <div class="panel datagrid" style="width: auto;"><div class="datagrid-wrap panel-body panel-body-noheader" title="" style="width: 1262px; height: auto;"><div class="datagrid-view" style="width: 1262px; height: 25px;"><div class="datagrid-view1" style="width: 0px;"><div class="datagrid-header" style="width: 0px; height: 24px;"><div class="datagrid-header-inner" style="display: block;"><table class="datagrid-htable" border="0" cellspacing="0" cellpadding="0" style="height: 25px;"><tbody></tbody></table></div></div><div class="datagrid-body" style="width: 0px; height: 0px;"><div class="datagrid-body-inner"></div></div><div class="datagrid-footer" style="width: 0px;"><div class="datagrid-footer-inner" style="display: none;"></div></div></div><div class="datagrid-view2" style="width: 1262px;"><div class="datagrid-header" style="width: 1262px; height: 24px;"><div class="datagrid-header-inner" style="display: block;"><table class="datagrid-htable" border="0" cellspacing="0" cellpadding="0" style="height: 25px;"><tbody><tr class="datagrid-header-row"><td field="dt"><div class="datagrid-cell datagrid-cell-c1-dt" style="text-align: center;"><span>时 间</span><span class="datagrid-sort-icon">&nbsp;</span></div></td><td field="f38"><div class="datagrid-cell datagrid-cell-c1-f38" style="text-align: center;"><span>累计工作时间(小时)</span><span class="datagrid-sort-icon">&nbsp;</span></div></td><td field="f39" class=""><div class="datagrid-cell datagrid-cell-c1-f39" style="text-align: center;"><span>累计工作循环时间(小时)</span><span class="datagrid-sort-icon">&nbsp;</span></div></td><td field="f57" class=""><div class="datagrid-cell datagrid-cell-c1-f57" style="text-align: center;"><span>整机工作循环次数</span><span class="datagrid-sort-icon">&nbsp;</span></div></td><td field="f853"><div class="datagrid-cell datagrid-cell-c1-f853" style="text-align: center;"><span>当天循环次数</span><span class="datagrid-sort-icon">&nbsp;</span></div></td><td field="f854" class=""><div class="datagrid-cell datagrid-cell-c1-f854" style="text-align: center;"><span>工作循环时间(分钟)</span><span class="datagrid-sort-icon">&nbsp;</span></div></td><td field="f855" class=""><div class="datagrid-cell datagrid-cell-c1-f855" style="text-align: center;"><span>当天工作循环时间(分钟)</span><span class="datagrid-sort-icon">&nbsp;</span></div></td><td field="user_name"><div class="datagrid-cell datagrid-cell-c1-user_name" style="text-align: center;"><span>驾驶人</span><span class="datagrid-sort-icon">&nbsp;</span></div></td></tr></tbody></table></div></div><div class="datagrid-body" style="width: 1262px; overflow-x: hidden; height: 0px;"></div><div class="datagrid-footer" style="width: 1262px;"><div class="datagrid-footer-inner" style="display: none;"></div></div></div><table id="MainRunRecordHisList" style="display: none;">
+        </table><style type="text/css" easyui="true">
+.datagrid-cell-c1-dt{width:184px}
+.datagrid-cell-c1-f38{width:120px}
+.datagrid-cell-c1-f39{width:120px}
+.datagrid-cell-c1-f57{width:120px}
+.datagrid-cell-c1-f853{width:120px}
+.datagrid-cell-c1-f854{width:120px}
+.datagrid-cell-c1-f855{width:120px}
+.datagrid-cell-c1-user_name{width:120px}
+</style></div><div class="datagrid-pager pagination"><table cellspacing="0" cellpadding="0" border="0"><tbody><tr><td><select class="pagination-page-list"><option>20</option><option>50</option><option>75</option><option>100</option><option>150</option><option>200</option><option>500</option></select></td><td><div class="pagination-btn-separator"></div></td><td><a href="javascript:void(0)" class="l-btn l-btn-small l-btn-plain l-btn-disabled l-btn-plain-disabled" group="" id=""><span class="l-btn-left l-btn-icon-left"><span class="l-btn-text l-btn-empty">&nbsp;</span><span class="l-btn-icon pagination-first">&nbsp;</span></span></a></td><td><a href="javascript:void(0)" class="l-btn l-btn-small l-btn-plain l-btn-disabled l-btn-plain-disabled" group="" id=""><span class="l-btn-left l-btn-icon-left"><span class="l-btn-text l-btn-empty">&nbsp;</span><span class="l-btn-icon pagination-prev">&nbsp;</span></span></a></td><td><div class="pagination-btn-separator"></div></td><td><span style="padding-left:6px;">第</span></td><td><input class="pagination-num" type="text" value="1" size="2"></td><td><span style="padding-right:6px;">页    共 1 页</span></td><td><div class="pagination-btn-separator"></div></td><td><a href="javascript:void(0)" class="l-btn l-btn-small l-btn-plain l-btn-disabled l-btn-plain-disabled" group="" id=""><span class="l-btn-left l-btn-icon-left"><span class="l-btn-text l-btn-empty">&nbsp;</span><span class="l-btn-icon pagination-next">&nbsp;</span></span></a></td><td><a href="javascript:void(0)" class="l-btn l-btn-small l-btn-plain l-btn-disabled l-btn-plain-disabled" group="" id=""><span class="l-btn-left l-btn-icon-left"><span class="l-btn-text l-btn-empty">&nbsp;</span><span class="l-btn-icon pagination-last">&nbsp;</span></span></a></td><td><div class="pagination-btn-separator"></div></td><td><a href="javascript:void(0)" class="l-btn l-btn-small l-btn-plain" group="" id=""><span class="l-btn-left l-btn-icon-left"><span class="l-btn-text l-btn-empty">&nbsp;</span><span class="l-btn-icon pagination-load">&nbsp;</span></span></a></td><td><div class="pagination-btn-separator"></div></td><td><a href="javascript:void(0)" class="l-btn l-btn-small l-btn-plain" group="" id=""><span class="l-btn-left l-btn-icon-left"><span class="l-btn-text l-btn-empty">&nbsp;</span><span class="l-btn-icon icon-search">&nbsp;</span></span></a></td></tr></tbody></table><div class="pagination-info">当前显示 1 - 10 条记录   共 10 条记录</div><div style="clear:both;"></div></div></div></div>
+     
+            
+    </div>
+    </div>
+    </form>
+</body>
+</html>

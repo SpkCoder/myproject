@@ -1,0 +1,142 @@
+[
+  {
+    "model_function_id": "26",
+    "model_id": "100000",
+    "function_e_name": "btn_query",
+    "function_c_name": "查询",
+    "model_name": "系统管理",
+    "function_id": "1",
+    "function_type": "1",
+    "children": [ ]
+  },
+  {
+    "model_function_id": "27",
+    "model_id": "110000",
+    "function_e_name": "btn_query",
+    "function_c_name": "查询",
+    "model_name": "工作管理",
+    "function_id": "1",
+    "function_type": "1",
+    "children": [ ]
+  },
+  {
+    "model_function_id": "36",
+    "model_id": "120000",
+    "function_e_name": "btn_query",
+    "function_c_name": "查询",
+    "model_name": "资产设备",
+    "function_id": "1",
+    "function_type": "1",
+    "children": [ ]
+  },
+  {
+    "model_function_id": "66",
+    "model_id": "130000",
+    "function_e_name": "btn_query",
+    "function_c_name": "查询",
+    "model_name": "设备点检",
+    "function_id": "1",
+    "function_type": "1",
+    "children": [ ]
+  },
+  {
+    "model_function_id": "87",
+    "model_id": "140000",
+    "function_e_name": "btn_query",
+    "function_c_name": "查询",
+    "model_name": "故障维修",
+    "function_id": "1",
+    "function_type": "1",
+    "children": [ ]
+  },
+  {
+    "model_function_id": "108",
+    "model_id": "150000",
+    "function_e_name": "btn_query",
+    "function_c_name": "查询",
+    "model_name": "特种设备管理",
+    "function_id": "1",
+    "function_type": "1",
+    "children": [ ]
+  },
+  {
+    "model_function_id": "117",
+    "model_id": "160000",
+    "function_e_name": "btn_query",
+    "function_c_name": "查询",
+    "model_name": "检查整改",
+    "function_id": "1",
+    "function_type": "1",
+    "children": [ ]
+  },
+  {
+    "model_function_id": "130",
+    "model_id": "170000",
+    "function_e_name": "btn_query",
+    "function_c_name": "查询",
+    "model_name": "维护保养",
+    "function_id": "1",
+    "function_type": "1",
+    "children": [ ]
+  },
+  {
+    "model_function_id": "147",
+    "model_id": "180000",
+    "function_e_name": "btn_query",
+    "function_c_name": "查询",
+    "model_name": "备件管理",
+    "function_id": "1",
+    "function_type": "1",
+    "children": [ ]
+  },
+  {
+    "model_function_id": "168",
+    "model_id": "210000",
+    "function_e_name": "btn_query",
+    "function_c_name": "查询",
+    "model_name": "事故事件",
+    "function_id": "1",
+    "function_type": "1",
+    "children": [ ]
+  },
+  {
+    "model_function_id": "177",
+    "model_id": "230000",
+    "function_e_name": "btn_query",
+    "function_c_name": "查询",
+    "model_name": "文档管理",
+    "function_id": "1",
+    "function_type": "1",
+    "children": [ ]
+  },
+  {
+    "model_function_id": "190",
+    "model_id": "240000",
+    "function_e_name": "btn_query",
+    "function_c_name": "查询",
+    "model_name": "合同管理",
+    "function_id": "1",
+    "function_type": "1",
+    "children": [ ]
+  },
+  {
+    "model_function_id": "219",
+    "model_id": "260000",
+    "function_e_name": "btn_query",
+    "function_c_name": "查询",
+    "model_name": "经济业务立项",
+    "function_id": "1",
+    "function_type": "1",
+    "children": [ ]
+  },
+  {
+    "model_function_id": "236",
+    "model_id": "280000",
+    "function_e_name": "btn_query",
+    "function_c_name": "查询",
+    "model_name": "安全管理考核评分",
+    "function_id": "1",
+    "function_type": "1",
+    "children": [ ]
+  }
+]

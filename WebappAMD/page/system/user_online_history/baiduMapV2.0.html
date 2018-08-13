@@ -1,0 +1,233 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <title></title>
+    <style type="text/css">
+        body, html{width: 100%;height: 100%;margin:0;padding: 0; font-family:"微软雅黑";}
+         #noneMap{ font-size: 14px; color: #333; text-indent: 10px;}
+        .editBtn { padding: 5px; width: 620px;}
+        .editBtn a{display: inline-block; font-size: 14px; color: #333; text-decoration: none; padding: 4px 10px; border-radius: 5px; background: #f2f2f2; margin-right: 5px;}
+        .editBtn input{height: 26px;padding-left: 10px;width: 150px; border: 1px solid #bbb;}
+        .editBtn label{color: #333; font-size: 14px;}
+    </style>
+    <link rel="stylesheet" type="text/css" href="../../../css/lq.datetimepick.css">
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=T8hYm6wyqCruiZVVCfpq7mXuOPcHMte0"></script>
+    <script type="text/javascript" src="../../../js/common/http.js"></script>
+    <script type="text/javascript" src="../../../js/common/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../../../My97DatePicker/WdatePicker.js"></script>
+</head>
+<body>
+
+    <div class="editBtn"> 
+        <label>开始时间：</label><input class="Wdate" type="text" id="time_start" onClick="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:00:00'})">&nbsp; &nbsp; 
+        <label>截止时间：</label><input class="Wdate" type="text" id="time_end" onClick="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:00:00'})"> &nbsp; &nbsp; 
+        <a href="javascript:;" onclick="btn_search()">查询</a>
+        <a href="javascript:;" onclick="window.history.go(-1)">返回</a>
+     </div>
+     <div id="noneMap"></div>
+     <div id="bMap" style="height:100%;width:100%;"></div>
+</body>
+</html>
+<script type="text/javascript">
+
+    var pointUrl=top.location.href;
+    //console.log(pointUrl);
+    var user_id=pointUrl.split("?")[1];
+    var userList=[];
+    var userList2=[];
+    var PointList=[];
+    var timeList=[];
+    var center_longitude;
+    var center_latitude;
+
+  
+    var getGPSurl = http+"/handler/system/user_online_history/list.ashx?"+idStr+"&sortField=&searchCondition=user_id="+user_id+"&pageNumber=1&pageSize="+60+"&totalRecord=0&action=GetPages&timeStamp=" + Date.parse(new Date());
+
+    function getUserList(url){
+         $.ajax({
+              type: "GET",
+              url: url,
+              dataType: "json",
+              success: function (data, status, headers, config) {
+                 userList2=[];
+                 PointList=[];
+                 timeList=[];
+                 userList = data.rows;
+                 
+                 for(var i=0; i<userList.length; i++){
+                   if(userList[i].longitude && userList[i].latitude){
+                      userList2.push(userList[i]);
+                   }
+                 }
+                 console.log(userList2);
+
+                 if(userList2.length>0){
+                     center_longitude=userList2[0].longitude;
+                     center_latitude=userList2[0].latitude;
+
+                     for(var i=0; i<userList2.length; i++){
+                          var longitude=userList2[i].longitude;
+                          var latitude=userList2[i].latitude;
+                          var point = new BMap.Point(longitude, latitude);
+                          PointList.push(point);
+                          timeList.push(((userList2[i].update_time).split(" "))[1]);
+                     }
+                     //console.log(PointList);
+                     showMap(PointList);
+
+                 }else{
+                      alert("用户没有历史轨迹");
+                  }
+
+                 
+              },
+              error: function (xhr) {
+                  //alert("加载失败");  
+              }
+          });
+
+   }
+  
+
+
+   getUserList(getGPSurl);
+
+
+
+
+    function showMap(PointList) {
+      
+
+        var points = PointList;
+        console.log(points);
+        console.log(timeList);
+
+        //地图初始化
+        var map = new BMap.Map("bMap");
+        map.centerAndZoom(points[0],19);     //设置中心点和缩放级别
+        map.enableScrollWheelZoom(true);     //设置是否滚动缩放
+        //左上角，添加比例尺
+        map.addControl(new BMap.ScaleControl({anchor: BMAP_ANCHOR_TOP_LEFT})); 
+        //左上角，添加默认缩放平移控件       
+        map.addControl(new BMap.NavigationControl());   
+        //右上角仅包含平移和缩放按钮  
+        map.addControl(new BMap.NavigationControl({anchor: BMAP_ANCHOR_TOP_RIGHT, type: BMAP_NAVIGATION_CONTROL_SMALL}));
+
+
+
+        //坐标转换完之后的回调函数
+        // var translateCallback = function (data){
+        //   if(data.status === 0) {
+        //         var marker = new BMap.Marker(data.points[0]);
+        //         map.addOverlay(marker);  
+        //         // 将标注添加到地图中
+        //         //marker.setLabel(new BMap.Label(markerList[i],{offset:new BMap.Size(20,-10)}));
+        //         //创建折线
+        //         var polyline = new BMap.Polyline(data.points, {strokeColor:"blue", strokeWeight:2, strokeOpacity:0.5});   
+        //         map.addOverlay(polyline);  //增加折线
+        //         map.setCenter(data.points[0]);
+            
+        //   }
+        // };
+        // setTimeout(function(){
+        //     var convertor = new BMap.Convertor();
+        //     convertor.translate(points, 1, 5, translateCallback)
+        // }, 1000);
+
+
+       var total = 0; //总记录数
+        var groupCount = 0; //每次转十条
+        if (points.length % 10 > 0) {
+            groupCount = (points.length / 10) + 1;
+        }
+        else {
+            groupCount = (points.length / 10);
+        }
+
+        for(var i=0;i<groupCount;i++){ //外层循环，有多少组十条
+            var pos = new Array();
+            // var timepos = new Array();
+            for(var j=0;j<10;j++){ //内层循环，每组十条
+                if(total<points.length){ //不超过总记录数结束
+                    var point = new BMap.Point(points[(i * 10) + j].lng,points[(i * 10) + j].lat);
+                    // var timepoint = timeList[(i * 10) + j];
+                    pos.push(point);
+                    // timepos.push(timepoint);
+                }
+                total++;
+            }
+            
+            
+              var convertor = new BMap.Convertor();
+              convertor.translate(pos, 1, 5, function(data){
+                  if(data.status === 0) {
+                      
+                      var k=0;
+                      for (var i = 0; i < data.points.length; i++) {
+                          var marker = new BMap.Marker(data.points[i]);
+                          map.addOverlay(marker); //创建点 
+                          map.setCenter(data.points[i]);
+                          var timepoint = timeList[(k * 10) + i];
+                          var Label = new BMap.Label(timepoint,{offset:new BMap.Size(20,-10)});
+                          marker.setLabel(Label);
+                          //console.log(timepoint);
+                          
+                      }
+                      k++;
+                      var polyline = new BMap.Polyline(data.points, {strokeColor:"blue", strokeWeight:2, strokeOpacity:0.5});   
+                      map.addOverlay(polyline);  //增加折线
+
+
+                    }
+              });
+           
+            
+
+       }
+
+   }
+    
+
+
+
+
+
+    function btn_search(){
+
+
+          var searchCondition="";
+   
+          var time_end = $("#time_end").val();
+          var time_start = $("#time_start").val();
+          //2017-08-04 17:00:00
+          var isOneday=function(){
+             if(time_end.substr(0,10)==time_start.substr(0,10)){
+                return true;
+             }else{
+                return false;
+             }
+          };
+          var h=parseInt(time_end.substr(11,2)) - parseInt(time_start.substr(11,2));
+          //console.log(h);
+          if(isOneday && h==1){
+               searchCondition += " and update_time>='" +time_start+ "'";
+               searchCondition += " and update_time<='" +time_end+ "'";
+               var getGPS2 = http+"/handler/system/user_online_history/list.ashx?"+idStr+"&sortField=&searchCondition=user_id="+user_id+searchCondition+"&pageNumber=1&pageSize="+10000+"&totalRecord=0&action=GetPages&timeStamp=" + Date.parse(new Date());
+              getUserList(getGPS2);
+              
+          }else{
+                
+             alert("查询时间段只能是一个小时");
+          }
+  
+ //http://192.168.1.201:8001/handler/system/user_online_history/list.ashx?sid=di12vmjtesg5peamkuz0oh5o&sortField=&searchCondition=user_id=5 and update_time>='2017-08-04 17:00:00' and update_time<='2017-08-04 18:00:00'&pageNumber=1&pageSize=10&totalRecord=0&action=GetPages&timeStamp=1501904914000
+
+    }
+  
+
+
+
+
+
+</script>

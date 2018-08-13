@@ -1,0 +1,89 @@
+
+
+<div class="seaObject">
+	<div class="search" style="width:1120px;"> 
+          <div class="sea_div"> 
+              <span>合同类型:</span>
+              <select ng-model="search_contract_type_id">
+                 <option value=""></option>
+                 <option value="1">1 收入合同</option>
+                 <option value="2">2 支出合同</option>
+              </select>&nbsp;&nbsp;
+              <span>分类名称:</span>
+              <select ng-model="search_class_id">
+                 <option value=""></option>
+                 <option ng-repeat="i in search_class_list" value="{{i.class_id}}">{{i['class_code']+' '+i['class_name']}}</option>
+              </select>
+              <span>合同号：</span><input type="search" ng-model="search_contract_No" />&nbsp;&nbsp;
+         </div>
+         <div class="sea_div" ng-show="isPCShow"> 
+             <span>订单号：</span><input type="search" ng-model="search_order_No" />&nbsp;&nbsp;
+         </div>
+         <div class="sea_div"> 
+             <button ng-click="btn_getComSearch()">查询合同</button>&nbsp;&nbsp;<button ng-click="getComSearch_cancel()">取消</button>
+         </div>
+   </div>
+	
+	<div id="com_title" class="user_title" style="width:1320px;">合同基本信息</div>
+    <table id="com_table" border="0" cellspacing="0" cellpadding="0" width="1320">
+		<thead>
+			<tr>
+				<td width="33"><span ng-show="showComCheckbox"><input type="checkbox" name="checkboxAll" id="checkboxAll" ng-click="getComCheckedAll('contract_id')"/><label for="checkboxAll"></label></span>
+				<span ng-show="showComRadio"><input id="noCheckAll"  type="radio" name="radio" ng-click="noCheckAll()"/><label for="noCheckAll"></label></span>
+				</td>
+				<td width="100">合同id</td>
+				<td width="200">合同类型</td>
+				<td width="200">分类名称</td>
+				<td width="200">部门</td>
+				<td width="100">经办人</td>
+				<td width="200">合同号</td>
+				<td width="200" ng-show="isPCShow">订单号</td>
+				<td width="200" ng-show="isPCShow">批文号</td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="i in ComSearchList">
+				<td width="33"><span ng-show="showComCheckbox"><input id="{{'checkbox'+$index}}"  type="checkbox" name="checkbox" ng-click="getComCheckedOne(i.contract_id,'contract_id')"/><label for="{{'checkbox'+$index}}"></label></span>
+				<span ng-show="showComRadio"><input id="{{'radio'+$index}}"  type="radio" name="radio" ng-click="getComCheckedOne(i.contract_id,'contract_id')"/><label for="{{'radio'+$index}}"></label></span>
+				</td>
+				<td>{{i.contract_id}}</td>
+				<td>{{i.contract_type_name}}</td>
+				<td>{{i.class_name}}</td>
+				<td>{{i.dept_name}}</td>
+				<td>{{i.operator_name}}</td>
+				<td>{{i.contract_No}}</td>
+				<td ng-show="isPCShow">{{i.order_No}}</td>
+				<td ng-show="isPCShow">{{i.batch_file}}</td>
+			</tr>
+		</tbody> 
+	</table>
+
+
+
+     <!-- pagination -->  
+    <div class="pagination" style="width:{{tableWidth}}">
+        <select ng-change="ComSearch_load_pernum(ComSearch_p_pernum)" ng-model="ComSearch_p_pernum" ng-options="x for x in options">
+        </select>
+        <a ng-class="{true:'disabled'}[ComSearch_p_current==1]" class="pagination-first" href="javascript:;" ng-click="ComSearch_p_index()"></a>
+        <a ng-class="{true:'disabled'}[ComSearch_p_current==1]" class="pagination-pre" href="javascript:;" ng-click="ComSearch_p_pre()"></a>
+        <span>第</span><input  type="text" ng-model="ComSearch_p_current"  ng-change="ComSearch_load_page(ComSearch_p_current)"><span>页 共 {{ComSearch_p_all_page}} 页</span>
+        <a ng-class="{true:'disabled'}[ComSearch_p_current==ComSearch_p_all_page]" class="pagination-next" href="javascript:;" ng-click="ComSearch_p_next()"></a>
+        <a ng-class="{true:'disabled'}[ComSearch_p_current==ComSearch_p_all_page]" class="pagination-last" href="javascript:;" ng-click="ComSearch_p_last()"></a>
+        <a class="pagination-search" href="javascript:;" ng-click="ComSearch_load_page(ComSearch_p_current)"></a>
+       <span>共 {{ComSearch_count}} 条记录</span>
+    </div>
+ 
+
+
+	<br ng-init="searchObjectFineshed=true" />
+	
+
+	<script>
+		if($("html,body").width()<768){
+			$('#com_table').attr('width','920');
+			$('#com_title').css('width','920px');
+		}
+	</script>
+		
+</div>
+

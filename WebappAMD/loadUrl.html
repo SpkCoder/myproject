@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>选择要用的网站</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0, user-scalable=yes">
+		<style>
+			body{
+				padding-left: 20px;
+				font-size: 14px;
+			}
+		</style>
+	</head>
+	<body>
+		<p><strong>请选择站点：</strong></p>
+		<!--<p><input type="radio" name="url" onclick="getUrl('http://121.12.148.53:8002')"/> 中远外网</p>
+		<p><input type="radio" name="url" onclick="getUrl('http://172.50.70.163')"/> 中远内网</p>-->
+		<p><input type="radio" name="url" onclick="getUrl('http://192.168.1.201:8002')"/> 益尔内网</p>
+		<p><input type="radio" name="url" onclick="getUrl('http://121.12.148.53:8002/login2.html')"/> 益尔外网</p>
+		
+		<script>
+			function getUrl(url){
+				window.location.href = url;
+			}
+		</script>
+	</body>
+</html>

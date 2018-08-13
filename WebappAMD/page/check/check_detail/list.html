@@ -1,0 +1,78 @@
+<div class="point">
+	<p><img alt="" src="../images/point.png">设备点检 &gt;设备点检明细</p>
+</div>
+	
+<!--设备点检明细-->
+
+<script  src="../js/common/listCtrCom.js"></script>
+<script src="../../../js/common/approveCom2.js" type="text/javascript" charset="utf-8"></script>
+<div class="listPage">
+	<div class="edit"> 
+   		<p class="editBtn noPrint">   
+	        <a href="javascript:history.go(-1);">返回</a>
+	        <a href="javascript:;" ng-click="btn_print()">打印</a>
+       </p>
+    </div>
+    <div class="overbox">
+    	<div class="needPrint">
+    		<h2>{{detail_title}}</h2>
+	    	<div style="width:{{tableWidth}};">
+	    		<ul id="detail_ul" class="clearfix">
+		    		<li><span><strong>公司：</strong>{{checkData.company_name}}</span></li>
+		    		<li><span><strong>部门：</strong>{{checkData.dept_name}}</span></li>
+		    		<li><span><strong>完成状态：</strong>{{checkData.finish_status}}<!--<i ng-show="isBtnNoShow">已完成</i><i ng-show="isBtnShow">未完成</i>--></span></li>
+		    		<li><span><strong>点检周期：</strong>{{checkData.period_name}}</span></li>
+		    		<li><span><strong>设备分类：</strong>{{checkData.class_name}}</span></li>
+		    		<li><span><strong>设备编码：</strong>{{checkData.object_code}}</span></li>
+		    		<li><span><strong>设备名称：</strong>{{checkData.object_name}}</span></li>
+		    		<li><span><strong>规格型号：</strong>{{checkData.object_model}}</span></li>
+		    		<li><span><strong>点检负责人：</strong>{{checkData.check_user_name}}</span></li>
+		    		<li><span><strong>计划开始日期：</strong>{{checkData.plan_date_start}}</span></li>
+		    		<li><span><strong>计划结束日期：</strong>{{checkData.plan_date_end}}</span></li>
+	            </ul>
+	    	</div>
+		    <div class="user_title" style="width:{{tableWidth}};">{{subject}}</div>
+		    <table id="mainTable" border="0" cellspacing="0" cellpadding="0" width="{{tableWidth}}">
+				<thead>
+					<tr>
+						<td ng-repeat="i in fields_c" width="{{trWidthArr[$index]}}">{{i}}<span ng-click="sortFn($index)" ng-class="tdBj"></span></td>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="i in list">
+						<td ng-repeat="k in fields_e" ng-bind-html="i[k] | trustHtml"></td>
+					</tr>
+				</tbody> 
+			</table>
+			 <!-- pagination -->  
+		    <div class="pagination" style="width:{{tableWidth}};">
+		        <select ng-change="load_pernum(p_pernum)" ng-model="p_pernum" ng-options="x for x in options">
+		        </select>
+		        <a ng-class="{true:'disabled'}[p_current==1]" class="pagination-first" href="javascript:;" ng-click="p_index()"></a>
+		        <a ng-class="{true:'disabled'}[p_current==1]" class="pagination-pre" href="javascript:;" ng-click="p_pre()"></a>
+		        <span>第</span><input  type="text" ng-model="p_current"  ng-change="load_page(p_current)"><span>页 共 {{p_all_page}} 页</span>
+		        <a ng-class="{true:'disabled'}[p_current==p_all_page]" class="pagination-next" href="javascript:;" ng-click="p_next()"></a>
+		        <a ng-class="{true:'disabled'}[p_current==p_all_page]" class="pagination-last" href="javascript:;" ng-click="p_last()"></a>
+		        <a class="pagination-search" href="javascript:;" ng-click="load_page(p_current)"></a>
+		       <span>共 {{count}} 条记录</span>
+		    </div>
+		    <br /><br />
+    	</div>
+	    	
+	    <approve></approve>  <!--公共审批-->
+	    
+    </div>
+   
+    <script type=text/javascript>
+	    $(function(){
+         	
+         	setTimeout(function(){
+	            $("table").tableresize();
+	        },1000);
+
+	    });
+	</script>
+	    
+
+</div>
+

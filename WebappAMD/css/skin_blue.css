@@ -1,0 +1,214 @@
+
+
+/*淡蓝*/
+
+
+
+/*字体颜色*/
+
+.leftmenu dd .menuson li a{ color:#fff;}
+.leftmenu dd .menuson li a:hover{ color:#363636;}
+.leftmenu dd .menuson li.curr a{ color:#363636;}
+
+/*.leftmenu dd .m-title1 b{ color: #000;}*/
+.leftmenu dd .m-title1 b{ color: #fff;}
+
+/*箭头*/
+.leftmenu dd .menuson li span{background:url("../images/menuson_icon3_w.png") no-repeat center;}
+.leftmenu dd .menuson li:hover span{background:url("../images/menuson_icon.png") no-repeat center;}
+.leftmenu dd .menuson li.curr span{background:url("../images/menuson_icon.png") no-repeat center;}
+
+.right_header .nav .nav_menu li{background:url("../images/menuson_icon3_w.png") no-repeat left;}
+.right_header .nav .nav_menu li:hover{background: url("../images/menuson_icon.png") no-repeat left;}
+
+
+.index_top a{color: #333;}
+.index_top .right { background: #fff;}
+.right_header .nav .nav_menu li:hover a{color: #363636; }
+.right_header .nav .nav_menu li a{color: #fff;}
+
+
+.right_header .user p{ color: #f1f1f1;}
+.right_header .huanfu ul li:hover {color: #3c8dbc;}
+.right_header .user ul li:hover a{color: #3c8dbc;}
+
+.listPage a{color: #333;}
+.listPage .overbox table tbody tr a{color:#3c8dbc;}
+
+.index_bottom .container p a{color: #dfdfdf;}
+
+
+
+/*背景及边框颜色*/
+.index_top .left_header { background:#4f93ba;}
+/*.left_body{background:#e0ecff;}*/
+.left_body{background:#6299b9;}
+
+.index_top .right_header{background:#6299b9;}
+.right_header .nav .nav_menu{background:#3E90C6;}
+.right_header .nav dd.curr>span{background: #367fa9 url("../images/icon02.png") no-repeat right center;}
+.right_header .nav dd:hover>span{background: #367fa9 url("../images/icon02.png") no-repeat right center;}
+.right_header .user ul,.right_header .huanfu ul{box-shadow: 0px 0px 3px #6299b9;}
+
+.index_bottom .container {background:#49748d; }
+
+.listPage .editBox {background: #fff;border: 1px solid #6299b9;}
+.listPage .edit input,.listPage .edit textarea,.listPage .edit select,.listPage .edit button{border: 1px solid #6299b9;}
+.listPage .editBtn a{border: 1px solid #6299b9;}
+.listPage .editBtn a:hover{background: #6299b9;color: #fff;}
+
+.user_title{background: #6299b9;}
+.listPage .overbox table thead tr{background: #F4F4F4;}
+.listPage .overbox table tbody tr:nth-child(even){ background: #F4F4F4;}
+.listPage .overbox table tbody tr:hover{background:#e0ecff;}
+.listPage .overbox table{border-top: 1px solid #6299b9; border-left: 1px solid #6299b9;}
+.listPage .overbox table td{border-bottom: 1px solid #6299b9; border-right: 1px solid #6299b9;}
+#workDoWarm{background: #6299b9;border: 1px solid #49748d;}
+#workDoWarm div{border: 1px solid #49748d;}
+
+
+.listPage .detaiBox{border: 2px solid #6299b9;background: #fff;color: #333;}
+.listPage .detaiBox h3{background: #6299b9;}
+
+.listPage .bigPicBox{border: 1px solid #6299b9;}
+
+.listPage .search input,.listPage .search select,.listPage .search button{border: 1px solid #6299b9;}
+
+.listPage .workChange input,.listPage .workChange button{border: 1px solid #6299b9;}
+
+.listPage .model_tree,.listPage .dept_tree{border: 1px solid #6299b9;}
+
+
+.listPage .overbox .approveBox input,.listPage .overbox .approveBox select{border: 1px solid #6299b9; height: 24px;}
+.listPage .overbox .approveBox button,.listPage .overbox .approveBox textarea{border: 1px solid #6299b9;}
+
+
+.welcome{position: relative; margin-top:150px; text-align: center; }
+.welcome span{display: inline-block; width: 120px; height: 120px; background:url("../images/welcome.png") no-repeat center; background-size: 100% auto;}
+.welcome h3{font-weight: normal; font-size: 16px;}
+
+
+.search_yu .search_Choice .text{ border: 1px solid #6299b9;}
+.editBox_yu .Choice .text{border: 1px solid #6299b9;}
+.editBox_yu .Choice .ztree_box{border: 1px solid #6299b9;}
+.search_yu > div > select{border: 1px solid #6299b9;}
+.search_yu > div > button{ border: 1px solid #6299b9;}
+.search_yu .search_Choice .ztree_box{ border: 1px solid #6299b9;}
+
+
+.zTree_Bg {border: 1px solid #6299b9;}
+.zTreeedit .editBox2 input{border: 1px solid #6299b9;}
+ #contact_box .span2{border: 1px solid #6299b9;}
+.zTreeedit .editBox2 select{border: 1px solid #6299b9;}
+.zTreeedit .editBox2 button{border: 1px solid #6299b9;}
+
+#ResetPassWord form p input{border: 1px solid #6299b9;}
+#ResetPassWord form p button{border: 1px solid #6299b9;}
+
+.passwordBox > div{border: 2px solid #6299b9;}
+.passwordBox > div h4{background: #6299b9;}
+
+
+#ipMeg{border: 2px solid #6299b9;}
+#ipMeg h4{background: #6299b9;}
+
+
+/*tab选项卡*/
+.fujian .tabmenu ul li{border: 1px solid #6299b9; border-width: 1px 1px 0px 1px;}
+.fujian .tabmenu ul li.selected { color:#fff; background: #6299b9;}
+.fujian .tabbox dd{border: 1px solid #6299b9;}
+.fujian .tabbox dd .title a{color: #6299b9; }
+.fujian .tabbox dd table .a1{ color: #6299b9;}
+
+/*实时监控*/
+.monitorBox .lightBox .light:hover{background: #6299b9;}
+.monitorBox .dataBox .data:hover{background: #6299b9;}
+.monitorBox .lightBox{border: 1px solid #6299b9;}
+.monitorBox .dataBox{border: 1px solid #6299b9;}
+.monitorBox .dataBox{border-bottom: 0;}
+.monitorBox .dataBox .data{border-right: 1px solid #6299b9;border-bottom: 1px solid #6299b9;}
+.monitorBox .dataBox .data:nth-child(2n){border-right: 0;}
+.monitorBox .dataBox .data .dataName{border-right: 1px solid #6299b9;}
+
+.monitorBox .historyBox .historyData{border: 1px solid #6299b9;border-right: 0;}
+.monitorBox .historyBox .historyData li{border-right: 1px solid #6299b9;}
+.monitorBox #chooseMonitor{border: 1px solid #6299b9;}
+.monitorBox #chooseMonitor:hover{background: #6299b9;}
+.monitorBox .objectPicBox .move:hover{background: #6299b9;}
+
+.monitor2 .monitorBoxLeft>div>p{background: #6299b9;}
+.monitor2 .classBox{border: 1px solid #6299b9;}
+.monitor2 .lightBox{border: 0;}
+.monitor2 .dataBox{border: 1px solid #6299b9;}
+.monitor2 .dataBox{border-bottom: 0;border-right:0;}
+.monitor2 .dataBox .data{border-right: 1px solid #6299b9;border-bottom: 1px solid #6299b9;}
+.monitor2 .dataBox .data:nth-child(2n){border-right: 1px solid #6299b9;}
+
+
+
+
+
+
+
+
+
+
+@media (max-width:1279px) {
+	
+ 
+
+
+}
+
+
+
+
+
+
+@media (max-width:1200px) {
+	
+}
+
+
+
+
+
+
+
+@media (max-width:980px) {
+
+
+}
+
+
+
+
+
+
+
+@media (max-width:768px) {
+
+.welcome{position: relative; margin-top:100px; text-align: center; }
+.welcome span{display: inline-block; width: 100px; height: 100px; background:url("../images/welcome.png") no-repeat center; background-size: 100% auto;}
+.welcome h3{font-weight: normal; font-size: 14px;}
+
+
+}
+
+
+
+
+
+
+
+
+
+@media (max-width:480px) {
+
+.monitorBox .dataBox .data:nth-child(2n){border-right: 1px solid #6299b9;}
+
+
+
+
+}
+

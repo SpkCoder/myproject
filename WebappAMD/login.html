@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0, user-scalable=yes">
+<meta http-equiv ="proma" content = "no-cache"/>
+<meta http-equiv="cache-control" content="no cache" />
+<meta http-equiv="expires" content="0" />
+<title id="headTitle">广东中远船务</title>
+<link id="headLink" rel="shortcut icon" href="zyfavicon.ico">
+<link href="css/login.css" type="text/css" rel="stylesheet">
+</head>
+<!--[if lte IE9]>
+<script src="js/common/html5shiv.js"></script>
+<link href="css/html5shiv.css" rel="stylesheet" type="text/css">
+<![endif]-->
+<body>
+
+<div class="login">
+    <div class="message">
+        <img src="images/zyLogo.png" alt=""/>
+        <span>广东中远船务工程有限公司</span>
+    </div>
+    <div id="darkbannerwrap"></div>
+    <div id="login-form" >
+
+        <input type="text" id="user" placeholder="请输用户名" onblur="check_user()"/>
+        <span class="spanTxt" id="ale" >用户名为8-16位字母或数字</span>
+        <hr class="hr15">
+
+        <input type="password" id="pwd" placeholder="请输入密码" onblur="check_pwd()"/>
+        <span class="spanTxt" id="alee" >密码为6-12位字母或数字</span>
+        <hr class="hr15">
+        <p id="aletr"></p>
+
+        <!--<input  class="check" id="txtCheckCode" placeholder="请输入验证码" onblur="check_code()"/>-->
+        <!--<img name="imgCheckCode" align="absmiddle" src="" id="imgCheckCode" >-->
+        <!--<a class="text-primary" onclick="ReloadCheckCode();"  >看不清?换一张</a> <br/>-->
+        <!--<span class="spanTxt" id="aleee" >验证码4位字母或数字</span>-->
+        <!--<hr class="hr15">-->
+        <label for="che1">
+            <input id="che1" type="checkbox"  />  <b>记住我的用户名</b>
+        </label>
+        <label for="che2">
+            <input id="che2" type="checkbox" />  <b>记住我的密码</b>
+        </label>
+        <hr class="hr15">
+        <input value="登 录" style="width:100%;" type="button" id="bt-login">
+        <hr class="hr20">
+         <!--帮助 <a  href="http://www.yetec.cn" >忘记密码</a>-->
+    </div>
+    <!--<a id="versions" style="display: none;"></a>-->
+</div>
+
+<script src="js/common/jquery-1.11.0.min.js"></script>
+<script  src="js/common/http.js"></script>
+<script src="js/common/login.js?1.22052"></script>
+
+</body>
+</html>

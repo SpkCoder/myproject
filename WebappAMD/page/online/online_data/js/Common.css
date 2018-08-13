@@ -1,0 +1,7 @@
+﻿body{font-size:12px;} 
+a {font-size:12px}
+a:link {color: blue; text-decoration:none;}  
+a:active:{color: red; } 
+a:visited {color:purple;text-decoration:none;}  
+a:hover {color: red; text-decoration:underline;} 
+ 

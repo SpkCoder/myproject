@@ -1,0 +1,120 @@
+[
+    {
+        "dept_id": "1", 
+        "dept_name": "中远船务", 
+        "dept_parent": "", 
+        "company_code": "3039", 
+        "dept_code": "", 
+        "depth": "1", 
+        "dept_type": "1", 
+        "pca_code": "440305", 
+        "open": "true", 
+        "children": [
+            {
+                "dept_id": "2", 
+                "dept_name": "广东中远东莞分公司一", 
+                "dept_parent": "1", 
+                "company_code": "0039", 
+                "dept_code": "005", 
+                "depth": "2", 
+                "dept_type": "1", 
+                "pca_code": "632823", 
+                "open": "true", 
+                "children": [
+                    {
+                        "dept_id": "7", 
+                        "dept_name": "部门一", 
+                        "dept_parent": "2", 
+                        "company_code": "0039", 
+                        "dept_code": "005", 
+                        "depth": "3", 
+                        "dept_type": "2", 
+                        "pca_code": "632626", 
+                        "children": [
+                            {
+                                "dept_id": "8", 
+                                "dept_name": "车间", 
+                                "dept_parent": "7", 
+                                "company_code": "003902", 
+                                "dept_code": "00502", 
+                                "depth": "4", 
+                                "dept_type": "2", 
+                                "pca_code": "411681", 
+                                "children": [ ]
+                            }
+                        ]
+                    }, 
+                    {
+                        "dept_id": "4", 
+                        "dept_name": "部门二", 
+                        "dept_parent": "2", 
+                        "company_code": "003902", 
+                        "dept_code": "0056", 
+                        "depth": "3", 
+                        "dept_type": "2", 
+                        "pca_code": "500119", 
+                        "children": [ ]
+                    }, 
+                    {
+                        "dept_id": "12", 
+                        "dept_name": "部门三", 
+                        "dept_parent": "2", 
+                        "company_code": "0039", 
+                        "dept_code": "005", 
+                        "depth": "3", 
+                        "dept_type": "2", 
+                        "pca_code": "623027", 
+                        "children": [ ]
+                    }, 
+                    {
+                        "dept_id": "16", 
+                        "dept_name": "部门四", 
+                        "dept_parent": "2", 
+                        "company_code": "0039", 
+                        "dept_code": "005", 
+                        "depth": "3", 
+                        "dept_type": "2", 
+                        "pca_code": "511923", 
+                        "children": [ ]
+                    }
+                ]
+            }, 
+            {
+                "dept_id": "3", 
+                "dept_name": "广东中远东莞分公司二", 
+                "dept_parent": "1", 
+                "company_code": "0039", 
+                "dept_code": "005", 
+                "depth": "2", 
+                "dept_type": "1", 
+                "pca_code": "440608", 
+                "open": "true", 
+                "children": [
+                    {
+                        "dept_id": "6", 
+                        "dept_name": "部门一", 
+                        "dept_parent": "3", 
+                        "company_code": "0039", 
+                        "dept_code": "006", 
+                        "depth": "3", 
+                        "dept_type": "2", 
+                        "pca_code": "350583", 
+                        "children": [ ]
+                    }
+                ]
+            }, 
+            {
+                "dept_id": "5", 
+                "dept_name": "广东中远东莞分公司三", 
+                "dept_parent": "1", 
+                "company_code": "0039", 
+                "dept_code": "005", 
+                "depth": "2", 
+                "dept_type": "1", 
+                "pca_code": "440305", 
+                "open": "true", 
+                "children": [ ]
+            }
+        ]
+    }
+]

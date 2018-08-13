@@ -1,0 +1,210 @@
+<div class="point">
+	<p><img alt="" src="../images/point.png">预警 &gt;预警运行记录</p>
+</div>
+
+<div class="listPage">
+<script src="../js/common/listCtrCom.js"></script>
+<script src="../js/common/objectCtrCom.js"></script>
+
+
+   <div class="edit" id="edit_yu" style="width:{{tableWidth}}"> 
+      
+       <div id="editBox1" class="editBox editBox_yu"  ng-show="show_add">
+          <form name="form" novalidate>
+          
+          <p><label>上次累计值:</label>
+              <input type="text" name="total_amount" maxlength="9" ng-model="total_amount" ng-keyup="total_amount_blur()">
+              <span ng-init="total_amount=false" style="display: block; color: red;" ng-show="total_amount_show">必须是整数且长度不超过9</span>
+           </p>
+           <p><label>当前运行值:</label>
+              <input type="text" name="run_record" maxlength="9" ng-model="run_record" ng-keyup="run_record_blur()">
+              <span ng-init="run_record=false" style="display: block; color: red;" ng-show="run_record_show">必须是整数且长度不超过9</span>
+           </p>
+          <p>
+              <button type="button" ng-init="btn_disabled=false" ng-disabled="btn_disabled" ng-click="btn_confirm()">确认</button>
+              <button type="button" ng-click="btn_esc()">取消</button>
+          </p>
+
+          </form>
+
+      </div> 
+
+      <div id="editBox2" class="editBox editBox_yu"  ng-show="show_modify">
+        <form name="form2" novalidate>
+         
+          <p><label>上次累计值:</label>
+              <input type="text" name="total_amount" maxlength="9" ng-model="total_amount" ng-keyup="total_amount_blur()">
+              <span ng-init="total_amount=false" style="display: block; color: red;" ng-show="total_amount_show">必须是整数且长度不超过9</span>
+           </p>
+           <p><label>当前运行值:</label>
+              <input type="text" name="run_record" maxlength="9" ng-model="run_record" ng-keyup="run_record_blur()">
+              <span ng-init="run_record=false" style="display: block; color: red;" ng-show="run_record_show">必须是整数且长度不超过9</span>
+           </p>
+         <p>
+              <button type="button" ng-init="btn_disabled=false" ng-disabled="btn_disabled" ng-click="btn_confirm()">确认</button>
+              <button type="button" ng-click="btn_esc()">取消</button>
+          </p>
+
+          </form>
+      </div>
+
+    </div>
+
+
+
+   <div class="overbox">
+
+     
+     <div class="search" style="width:950px;"> 
+          <object></object>
+      </div>
+
+
+
+      <div class="search" style="width:850px;"> 
+       <div class="sea_div"> 
+            
+            <span>预警类型：</span>
+          <select ng-model="task_search_task_type" >
+              <option value=""></option>
+              <option value="1润滑">润滑</option>
+            </select>&nbsp;&nbsp;
+            <span>周期：</span>
+          <select ng-model="task_search_period" >
+              <option value=""></option>
+              <option value="1一周">一周</option>
+              <option value="2一月">一月</option>
+              <option value="3一季">一季</option>
+              <option value="4一年">一年</option>
+            </select>&nbsp;&nbsp;
+            
+             <span>机构名称：</span><input type="text" name="" ng-model="task_search_mechanism_name">&nbsp;&nbsp;
+        <button ng-click="searchTaskCheck()">查询预警任务库</button>
+        </div>
+      </div>
+
+      <div class="user_title" style="width:850px;">预警任务库</div>
+      <table border="0" cellspacing="0" cellpadding="0" width="850">
+      <thead>
+        <tr>
+          <td width="33"><input class="commonCheckbox" type="radio" name="object_all" id="object_all" ng-click="getTaskAllObject()"/><label for="object_all"></label></td>
+          <td width="100">预警类型</td>
+          <td width="100">周期</td>
+          <td width="150">资产设备分类</td>
+          <td width="100">机构名称</td>
+          <td width="100">部件</td>
+          <td width="100">预警阀值</td>
+          <td width="auto">预警内容</td>
+          
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="i in taskCheckList">
+          <td><input id="{{'k'+$index}}" type="radio" name="taskCheck" ng-click="getTaskCheckId(i.smooth_task_id)"><label for="{{'k'+$index}}"></label></td>
+          <td>{{i.task_type_name}}</td>
+          <td>{{i.period_name}}</td>
+          <td>{{i.class_name}}</td>
+          <td>{{i.mechanism_name}}</td>
+          <td>{{i.component_name}}</td>
+          <td>{{i.rum_time_refernce}}</td>
+          <td>{{i.check_method}}</td>
+        </tr>
+      </tbody> 
+    </table>
+    <div><br><br></div>
+
+
+
+     <div class="edit" style="width:{{tableWidth}}"> 
+       <p class="editBtn">   
+         <a href="javascript:;" ng-repeat="i in pageBtns" ng-click="btnClick(i)">{{btn_c[$index]}}</a>
+       </p>
+     </div>
+
+     <div class="search" style="width:{{tableWidth}};"> 
+          <div class="sea_div">
+              <label>开始日期：</label><input class="Wdate" type="text" id="create_time_start" ng-model="create_time_start" onClick="WdatePicker()"> 
+            </div>
+            <div class="sea_div">
+              <label>截止日期：</label><input class="Wdate" type="text" id="create_time_end" ng-model="create_time_end" onClick="WdatePicker()"> 
+              <button ng-click="btn_search()">查询</button>
+            </div>
+      </div>
+
+
+
+
+     <div class="user_title" style="width:{{tableWidth}}">{{subject}}</div>
+     <table id="mainTable" border="0" cellspacing="0" cellpadding="0" width="{{tableWidth}}">
+      <thead>
+        <tr>
+        <td width="33px"><input id="flag" type="checkbox" ng-model="select_all" ng-change="selectAll()"><label for="flag"></label></td>
+        <td ng-repeat="i in fields_c" width="{{trWidthArr[$index]}}">{{i}}<span ng-click="sortFn($index)" ng-class="tdBj"></span></td>
+       </tr>
+      </thead>
+      <tbody>
+          <tr ng-repeat="i in list">
+             <td><input id="{{i['RowNumber']}}" type="checkbox" ng-model="i.checked" ng-change="selectOne()"> <label for="{{i['RowNumber']}}"></label></td>
+             <td ng-repeat="k in fields_e" ng-bind-html="i[k] | trustHtml"></td>
+          </tr>
+        </tbody> 
+    </table>
+
+
+
+      
+   <!-- pagination -->  
+   <div class="pagination" style="width:{{tableWidth}}">
+        <select ng-change="load_pernum(p_pernum)" ng-model="p_pernum" ng-options="x for x in options">
+        </select>
+        <a ng-class="{true:'disabled'}[p_current==1]" class="pagination-first" href="javascript:;" ng-click="p_index()"></a>
+        <a ng-class="{true:'disabled'}[p_current==1]" class="pagination-pre" href="javascript:;" ng-click="p_pre()"></a>
+        <span>第</span><input  type="text" ng-model="p_current"  ng-change="load_page(p_current)"><span>页 共 {{p_all_page}} 页</span>
+        <a ng-class="{true:'disabled'}[p_current==p_all_page]" class="pagination-next" href="javascript:;" ng-click="p_next()"></a>
+        <a ng-class="{true:'disabled'}[p_current==p_all_page]" class="pagination-last" href="javascript:;" ng-click="p_last()"></a>
+        <a class="pagination-search" href="javascript:;" ng-click="load_page(p_current)"></a>
+       <span>共 {{count}} 条记录</span>
+  </div>
+
+
+
+</div>
+
+   
+
+
+
+
+
+<script type=text/javascript>
+    $(function(){
+        //取消冒泡
+        $(".editBox form").on("mousedown",function(e){
+            stopBubble(e)
+        });
+
+        //拖拽
+        var drag1 = new drag("editBox1","window");
+        drag1.dragFn();
+        var drag2 = new drag("editBox2","window");
+        drag2.dragFn();
+        
+
+        setTimeout(function(){
+           $("table").tableresize();
+        },1000);
+
+    });
+
+
+
+</script>
+
+  
+
+
+
+</div>
+
+
+

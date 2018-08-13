@@ -1,0 +1,81 @@
+﻿
+
+/*------------------------------车牌号下拉框样式------------------------------*/
+.sel-box {
+	float:left;
+}
+.panel_content .sel-box
+{
+	margin:5px 3px 0px 0px;
+}
+
+.sel-box .sel-v {
+	cursor:pointer;
+	background:#fff url(/Images/select_box.png) right 9px no-repeat;
+	line-height:22px;
+	text-indent:3px;
+}
+.sel-box .num {
+	float:left;
+	width:auto;
+	height:22px;
+	border: 1px solid #ABC1D6;
+	line-height:22px;
+	text-indent:3px;
+}
+.panel_content .num
+{
+	width:180px;
+	margin-bottom:5px;
+}
+.sel-box .sel-cont {
+	position:absolute;
+	display:none;
+	z-index:60;
+	margin-top:26px;
+	_margin-left:-155px;
+}
+.sel-bg {
+	width:auto;
+	border-collapse:collapse;
+}
+.sel-bg .lt,.sel-bg .rt,.sel-bg .lb,.sel-bg .rb {
+	width:1px;
+	height:1px;
+	overflow:hidden;
+}
+.sel-bg .lt {background:url(../images/sel_bg.png) 0 0 no-repeat;}
+.sel-bg .rt {background:url(../images/sel_bg.png) -3px 0 no-repeat;}
+.sel-bg .lb {background:url(../images/sel_bg.png) 0 -3px no-repeat;}
+.sel-bg .rb {background:url(../images/sel_bg.png) -3px -3px no-repeat;}
+.sel-bg .tc {
+	border-top:1px solid #869aaa;
+	background:#dcdcdc;
+}
+.sel-bg .lc {
+	border-left:1px solid #869aaa;
+	background:#dcdcdc;
+}
+.sel-bg .bc {
+	border-bottom:1px solid #869aaa;
+	background:#dcdcdc;
+}
+.sel-bg .rc {
+	border-right:1px solid #869aaa;
+	background:#dcdcdc;
+}
+.sel-bg .cc-cont {
+	background:#fff;
+}
+.sel-bg .sel-nav {
+	height:190px;
+	min-width:155px;
+	_width:155px;
+	padding:5px 8px 5px 2px;
+	margin:1px;
+	overflow-y:scroll;
+	overflow-x:hidden;
+	border:1px solid #eee;
+}
+.sel-bg .sel-nav .ztree li a  span{  _float:none;}
+

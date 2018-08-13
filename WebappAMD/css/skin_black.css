@@ -1,0 +1,218 @@
+/*墨黑*/
+
+
+
+/*字体颜色*/
+
+.leftmenu dd .menuson li a{ color:#fff;}
+.leftmenu dd .menuson li a:hover{ color:#44a7dd;}
+.leftmenu dd .menuson li.curr a{ color:#44a7dd;}
+
+
+
+.leftmenu dd .m-title1 b{ color: #fff;}
+
+/*箭头*/
+.leftmenu dd .menuson li span{background:url("../images/menuson_icon3_w.png") no-repeat center;}
+.leftmenu dd .menuson li:hover span{background:url("../images/menuson_icon2.png") no-repeat center;}
+.leftmenu dd .menuson li.curr span{background:url("../images/menuson_icon2.png") no-repeat center;}
+
+.index_top .nav_menu li{background:url("../images/menuson_icon3_w.png") no-repeat left;}
+.index_top .nav_menu li:hover{background: url("../images/menuson_icon2.png") no-repeat left;}
+.index_top a{color: #fff;}
+.index_top .right { background: #fff;}
+.right_header .nav .nav_menu li:hover a{color: #44a7dd;}
+.right_header .nav .nav_menu li a{color: #fff;}
+
+
+.right_header .user p{ color: #fff;}
+
+.right_header .huanfu ul li:hover {color: #44a7dd;}
+.right_header .user ul li a{color: #333;}
+.right_header .user ul li a:hover{color:#44a7dd;}
+
+.point p{color:#fff;}
+.point p a{color:#fff;}
+
+.listPage a{color: #fff;}
+.listPage{color: #fff;}
+.listPage .overbox table tbody tr a{color:#44a7dd;}
+.listPage .model_tree .zTreeedit{color: #333;}
+.listPage .bigPicBox h3{color: #333;}
+
+.pagination{color: #fff;}
+
+.index_bottom .container p a{color: #fff;}
+
+
+
+/*背景及边框颜色*/
+.index_top .left_header { background:#2b2a2a;}
+.left_body{background:#666;}
+.right_body{background: #666;}
+.index_top .right_header{background:#3d3d3d;}
+.right_header .nav .nav_menu{background:#666;border: 1px solid #fff;}
+.right_header .nav .nav dd.curr>span{background: #2b2a2a url("../images/icon02.png") no-repeat right center;}
+.right_header .nav .nav dd:hover>span{background: #2b2a2a url("../images/icon02.png") no-repeat right center;}
+.right_header .user ul,.right_header .huanfu ul{box-shadow: 0px 0px 3px #3d3d3d;}
+
+.index_bottom .container {background:#2b2a2a; }
+
+.listPage .editBox {background: #666;border: 1px solid #fff;}
+.listPage .edit input,.listPage .edit textarea,.listPage .edit select,.listPage .edit button{border: 1px solid #3d3d3d;}
+.listPage .editBtn a{border: 1px solid #2b2a2a;}
+.listPage .editBtn a:hover{background: #2b2a2a;}
+
+.user_title{background:#3d3d3d;}
+.listPage .overbox table thead tr{background: #666;}
+.listPage .overbox table tbody tr:hover{background:#555;}
+.listPage .overbox table{border-top: 1px solid #3d3d3d; border-left: 1px solid #3d3d3d;}
+.listPage .overbox table td{border-bottom: 1px solid #3d3d3d; border-right: 1px solid #3d3d3d;}
+#workDoWarm{background: #3d3d3d;border: 1px solid #fff;color: #fff;}
+#workDoWarm div{border: 1px solid #fff;background: #666;}
+
+.listPage .detaiBox{border: 2px solid #3d3d3d;background: #fff;color: #333;}
+.listPage .detaiBox h3{background: #3d3d3d;}
+
+.listPage .bigPicBox{border: 1px solid #3d3d3d;}
+
+.listPage .search input,.listPage .search select,.listPage .search button{border: 1px solid #3d3d3d;}
+
+.listPage .workChange input,.listPage .workChange button{border: 1px solid #3d3d3d;}
+
+.listPage .model_tree,.listPage .dept_tree{border: 1px solid #3d3d3d;}
+
+.listPage .overbox .approveBox input,.listPage .overbox .approveBox select{border: 1px solid #3d3d3d;  height: 24px;}
+.listPage .overbox .approveBox button,.listPage .overbox .approveBox textarea{border: 1px solid #3d3d3d;}
+
+
+
+
+
+
+
+.welcome{position: relative; margin-top:150px; text-align: center; }
+.welcome span{display: inline-block; width: 120px; height: 120px; background:url("../images/welcome4.png") no-repeat center; background-size: 100% auto;}
+.welcome h3{font-weight: normal; font-size: 16px; color: #fff;}
+
+
+.search_yu .search_Choice .text{ border: 1px solid #2b2a2a;background:#fff;}
+.editBox_yu .Choice .text{border: 1px solid #2b2a2a; background:#fff;}
+.editBox_yu .Choice .ztree_box{border: 1px solid #2b2a2a; background: #fff;}
+.search_yu > div > select{border: 1px solid #2b2a2a; }
+.search_yu > div > button{ border: 1px solid #2b2a2a;}
+.search_yu .search_Choice .ztree_box{ border: 1px solid #a3afbc; }
+
+.zTree_Bg {border: 1px solid #2b2a2a;}
+.zTreeedit .editBox2 input{border: 1px solid #2b2a2a;}
+ #contact_box .span2{border: 1px solid #2b2a2a; background: #fff; color: #000;}
+.zTreeedit .editBox2 select{border: 1px solid #2b2a2a;}
+.zTreeedit .editBox2 button{border: 1px solid #2b2a2a;}
+.zTreeedit .editBox2 .btn{color: #fff;}
+
+#ResetPassWord form p input{border: 1px solid #2b2a2a;}
+#ResetPassWord form p button{border: 1px solid #2b2a2a;}
+#ResetPassWord form .p4 i{color: #fff;}
+
+.passwordBox > div{border: 2px solid #2b2a2a;}
+.passwordBox > div h4{background: #2b2a2a;}
+
+#ipMeg{border: 2px solid #2b2a2a;}
+#ipMeg h4{background: #2b2a2a;}
+
+.listPage .editBox .login_form .dept_style,.listPage .editBox .login_form .dept_sty{
+ border: 1px solid #2b2a2a;
+ background: #fff;
+ color:#2b2a2a;
+}
+
+
+
+/*tab选项卡*/
+.fujian .tabmenu ul li{border: 1px solid #2b2a2a; border-width: 1px 1px 0px 1px;}
+.fujian .tabmenu ul li.selected { color:#fff; background: #2b2a2a;}
+.fujian .tabbox dd{border: 1px solid #2b2a2a;}
+.fujian .tabbox dd .title a{color: #fff; }
+.fujian .tabbox dd table .a1{ color: #fff;}
+
+/*实时监控*/
+.monitorBox .lightBox .light:hover{background: #2b2a2a;}
+.monitorBox .dataBox .data:hover{background: #2b2a2a;}
+.monitorBox .lightBox{border: 1px solid #2b2a2a;}
+.monitorBox .dataBox{border: 1px solid #2b2a2a;}
+.monitorBox .dataBox{border-bottom: 0;}
+.monitorBox .dataBox .data{border-right: 1px solid #2b2a2a;border-bottom: 1px solid #2b2a2a;}
+.monitorBox .dataBox .data:nth-child(2n){border-right: 0;}
+.monitorBox .dataBox .data .dataName{border-right: 1px solid #2b2a2a;}
+.monitorBox .historyBox .historyData{border: 1px solid #2b2a2a;border-right: 0;}
+.monitorBox .historyBox .historyData li{border-right: 1px solid #2b2a2a;}
+.monitorBox #chooseMonitor{border: 1px solid #2b2a2a;}
+.monitorBox #chooseMonitor:hover{background: #2b2a2a;color: #fff;}
+.monitorBox .objectPicBox .move:hover{background: #2b2a2a;color: #fff;}
+
+.monitor2 .monitorBoxLeft>div>p{background: #2b2a2a;}
+.monitor2 .classBox{border: 1px solid #2b2a2a;}
+.monitor2 .lightBox{border: 0;}
+.monitor2 .dataBox{border: 1px solid #2b2a2a;}
+.monitor2 .dataBox{border-bottom: 0;border-right:0;}
+.monitor2 .dataBox .data{border-right: 1px solid #2b2a2a;border-bottom: 1px solid #2b2a2a;}
+.monitor2 .dataBox .data:nth-child(2n){border-right: 1px solid #2b2a2a;}
+
+@media (max-width:1279px) {
+	
+ 
+
+
+}
+
+
+
+
+
+
+@media (max-width:1200px) {
+	
+}
+
+
+
+
+
+
+
+@media (max-width:980px) {
+
+
+}
+
+
+
+
+
+
+
+@media (max-width:768px) {
+
+.welcome{position: relative; margin-top:100px; text-align: center; }
+.welcome span{display: inline-block; width: 100px; height: 100px; background:url("../images/welcome4.png") no-repeat center; background-size: 100% auto;}
+.welcome h3{font-weight: normal; font-size: 14px;}
+
+
+}
+
+
+
+
+
+
+
+
+
+@media (max-width:480px) {
+
+
+.monitorBox .dataBox .data:nth-child(2n){border-right: 1px solid #2b2a2a;}
+
+
+
+}

@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>监控自定义</title>
+		<style>
+			p{margin: 0;padding: 2px;}
+			.monitor2{width: 1060px;}
+			.monitor2 .monitorBox{width: 100%;}
+			.monitor2 .monitorBoxLeft{float:left;width: 1000px;min-height:100px;border-right: 1px solid #333;border-bottom: 1px solid #333;}
+			.monitor2 .monitorBoxLeft>div{float: left;}
+			.monitor2 .monitorBoxLeft>div>p{background: greenyellow;}
+			.monitor2 .monitorBox .dragBtn{float: right;}
+			.monitor2 .monitorBoxRight{float:right;width: 50px;}
+			.monitor2 .editorBox{width: 800px;border: 1px solid #333;position: absolute;left: 200px;top:200px;z-index: 3;background: #fff;}
+			
+			.clearfix:after {content: " ";display: block;clear: both; height: 0;}
+			.clearfix {zoom: 1;}
+			
+			.monitor2 .monitorCheck{width: 800px;padding:10px;border: 1px solid #333;position: absolute;left: 200px;top:200px;z-index: 3;background: #fff;}
+			.monitor2 .lightBox{width: 750px;min-height:80px;text-align: center;padding: 0 0 3px 3px;}
+			.monitor2 .lightBox .light{padding: 3px 3px 0 0;height: 80px;float: left;}
+			.monitor2 .lightBox .light .lightName{width: 97px;line-height: 16px;}
+			.monitor2 .lightBox .light .lightPic{width: 97px;}
+			.monitor2 .lightBox .light .lightPic img{width: 35px;}
+			
+			.monitor2 .dataBox{overflow: hidden;width: 481px;}
+			.monitor2 .dataBox .data{width: 240px;float: left;}
+			.monitor2 .dataBox .data .dataName{width: 159px;float: left;padding: 2px 10px 2px 0;word-break: keep-all;text-align: right;}
+			.monitor2 .dataBox .data .dataValue{color: #0000FF;width: 60px;float: left;padding: 2px 0 2px 10px;word-break: keep-all;}
+			
+			.monitor2 #intergratedMove{position: relative;}
+			.monitor2 #intergratedMove .move{position: absolute;}
+			
+			.monitor2 .lightBox .light:hover{background: #6299b9;}
+			.monitor2 .dataBox .data:hover{background: #6299b9;}
+			.monitor2 .dataBox{border: 1px solid #6299b9;}
+			.monitor2 .dataBox{border-bottom: 0;}
+			.monitor2 .dataBox .data{border-right: 1px solid #6299b9;border-bottom: 1px solid #6299b9;}
+			.monitor2 .dataBox .data:nth-child(2n){border-right: 0;}
+			.monitor2 .dataBox .data .dataName{border-right: 1px solid #6299b9;}
+		</style>
+		<script src="js/jquery.min.js"></script>
+		<script>
+			$(function(){
+				if(localStorage.getItem('html')){
+					$('body').html(localStorage.getItem('html'));
+				}
+			})
+				
+		</script>
+	</head>
+	<body>
+		<div class="monitorWrapper">
+			<div class="monitor2">
+				<div class="monitorBox clearfix">
+					<div class="monitorBoxLeft monitorTop clearfix">
+						<!--<div class="classBox" style="width: 1000px;height: 200px;background:red;" id="">
+							<p><button class="dragBtn">编辑监控项</button>整机警报灯</p>
+						</div>-->
+					</div>
+					<div class="monitorBoxRight"><button class="editBtn">编辑</button></div>
+				</div>
+				<div class="monitorBox clearfix">
+					<div class="monitorBoxLeft monitorCenter clearfix"></div>
+					<div class="monitorBoxRight"><button class="editBtn">编辑</button></div>
+				</div>
+				
+				<div class="monitorBox clearfix">
+					<div class="monitorBoxLeft monitorFooter clearfix"></div>
+					<div class="monitorBoxRight"><button class="editBtn">编辑</button></div>
+				</div>
+				
+			</div>
+			<div class="editorBox">
+				<p>
+					<label>请选择编辑方式：</label>
+					<select id="editorSelect">
+						<option></option>
+						<option value="新增">新增栏目</option>
+						<option value="修改">修改栏目</option>
+						<option value="删除">删除栏目</option>
+					</select>
+				</p>
+				<p id="editorSelectChangeBox">
+					<label>请选择需要修改的框：</label>
+					<select id="editorSelectBox">
+					</select>
+				</p>
+				<p id="editorSelectDelBox">
+					<label>请选择需要删除的框：</label>
+					<select id="editorSelectBox2">
+					</select>
+				</p>
+				<div id="editorAdd">
+					<p>
+						<label>栏目宽度：</label><input type="text" id="addWidth" />
+					</p>
+					<p>
+						<label>栏目高度：</label><input type="text" id="addHeight" />
+					</p>
+					<p id="editorTypeBox">
+						<label>栏目类型：</label>
+						<select id="typeSelect">
+							<option></option>
+							<option value="intergratedLight">整机警报灯</option>
+							<option value="intergratedCurrent">整机实时数据</option>
+							<option value="bigCarLight">大车警报灯</option>
+							<option value="bigCarCurrent">大车实时数据</option>
+							<option value="smallCarLight">小车警报灯</option>
+							<option value="smallCarCurrent">小车实时数据</option>
+							<option value="frequencyLight">主钩警报灯</option>
+							<option value="frequencyCurrent">主钩实时数据</option>
+							<option value="frequency2Light">副钩警报灯</option>
+							<option value="frequency2Current">副钩实时数据</option>
+							<option value="intergratedMove">动画</option>
+						</select><i id="typeSelectShow" style="color: red;">该栏目类型已存在，请选择其他栏目类型</i>
+					</p>
+					<p>
+						<label>背景颜色：</label>
+						<select id="colorSelect">
+							<option value="red">红色</option>
+							<option value="yellow">黄色</option>
+							<option value="green">绿色</option>
+							<option value="black">黑色</option>
+						</select>
+					</p>
+				</div>
+				<p>
+					<button id="save">保存</button>
+					<button id="cancel">取消</button>
+				</p>
+					
+			</div>
+			<div class="monitorCheck">
+				<p style="text-align: right;"><button id="closemonitorCheck">X</button></p>
+				<div id="checkLightBox">
+					警报灯
+					<ul>
+						<li><input name="checkLight" class="checkLight" type="checkbox" value="1" /><span>namename1</span></li>
+						<li><input name="checkLight" class="checkLight" type="checkbox" value="2" /><span>namename2</span></li>
+						<li><input name="checkLight" class="checkLight" type="checkbox" value="3" /><span>namename3</span></li>
+						<li><input name="checkLight" class="checkLight" type="checkbox" value="4" /><span>namename4</span></li>
+					</ul>
+				</div>
+					
+				<!--<div class="lightBox clearfix">
+					<div class="light">
+						<div class="lightPic"><img id="1" src="img/huise.png"/></div>
+						<div class="lightName">namename1</div>
+					</div>
+				</div>-->
+				<div id="checkDataBox">
+					实时数据
+					<ul>
+						<li><input name="checkData" class="checkData" type="checkbox" value="5" /><span>名称名称5</span></li>
+						<li><input name="checkData" class="checkData" type="checkbox" value="6" /><span>名称名称6</span></li>
+						<li><input name="checkData" class="checkData" type="checkbox" value="7" /><span>名称名称7</span></li>
+						<li><input name="checkData" class="checkData" type="checkbox" value="8" /><span>名称名称8</span></li>
+					</ul>
+				</div>
+					
+				<!--<div class="dataBox clearfix">
+					<div class="data clearfix">
+						<div class="dataName">名称名称5</div>
+						<div class="dataValue" id="5">1111</div>
+					</div>
+				</div>-->
+				<p><button id="checkSure">确定</button><button id="checkCancel">取消</button></p>
+			</div>
+		</div>
+		<script>
+			
+			
+			var index;
+			$('.editorBox').hide();
+			$('.monitorCheck').hide();
+			$('#editorSelectChangeBox').hide();
+			$('#editorSelectDelBox').hide();
+			$('#typeSelectShow').hide();
+			$('.editBtn').each(function(i,e){
+				$(this).click(function(){
+					$('.editorBox').show();
+					$('#save').click(function(){
+						if($('#editorSelect').val() == "新增"){
+							if($('#addWidth').val() && $('#addHeight').val() && $('#typeSelect').val()){
+								if($('#typeSelectShow').css('display')!="none"){
+									alert("请重新选择栏目类型");
+									return;
+								}
+								
+								var val = $('#typeSelect').val();
+								var text = getText(val);
+								
+								var addHtml = '<div class="classBox" style="width: '+$('#addWidth').val()+'px;height: '+$('#addHeight').val()
+								+'px;background:'+$('#colorSelect').val()+';" id="'+$('#typeSelect').val()
+								+'"><p><button class="dragBtn">编辑监控项</button>'+text+'</p></div>';
+								
+								$('.monitorBoxLeft').eq(i).append(addHtml);
+								
+								//隐藏编辑框并存储html
+								$('.editorBox').hide();
+								var html = $('body').html();
+								localStorage.setItem('html',html);
+								$('body').html(html);
+							}
+						}else if($('#editorSelect').val() == "修改"){
+							if($('#addWidth').val() && $('#addHeight').val() && $('#editorSelectBox').val()){
+								//设置修改框的css
+								$('#'+$('#editorSelectBox').val()).css({'width':$('#addWidth').val(),'height':$('#addHeight').val(),'background':$('#colorSelect').val()});
+								
+								//隐藏编辑框并存储html
+								$('.editorBox').hide();
+								var html = $('body').html();
+								localStorage.setItem('html',html);
+								$('body').html(html);
+							}
+						}else if($('#editorSelect').val() == "删除"){
+							if($('#editorSelectBox2').val()){
+								//删除需要删除的编辑框
+								if(confirm("确定删除该编辑框？")){
+									$('#'+$('#editorSelectBox2').val()).remove();
+									
+									//隐藏编辑框并存储html
+									$('.editorBox').hide();
+									var html = $('body').html();
+									localStorage.setItem('html',html);
+									$('body').html(html);
+								}
+								
+								
+							}
+						}
+						
+					})
+					
+					
+					$('#typeSelect').change(function(){
+						var val = $(this).val();
+						var arr = [];
+						var flag = true;
+						$('.monitorBoxLeft').each(function(i,e){
+							$.each($(this).children(),function(){
+								arr.push($(this));
+							})
+						})
+						$.each(arr, function() {
+							if(val == $(this).attr('id')){
+								flag = false;
+							}
+						});
+						if(flag){
+							$('#typeSelectShow').hide();
+						}else{
+							$('#typeSelectShow').show();
+						}
+					})
+					
+					
+					$('#editorSelect').change(function(){
+						console.log($(this).val());
+						if($(this).val() == "新增"){
+							$('#editorSelectChangeBox').hide();
+							$('#editorSelectDelBox').hide();
+							$('#editorTypeBox').show();
+							$('#editorAdd').show();
+						}else if($(this).val() == "修改"){
+							$('#editorSelectDelBox').hide();
+							$('#editorTypeBox').hide();
+							$('#editorAdd').show();
+							var changeArr = $('.monitorBoxLeft').eq(i).children();
+							
+							
+							var editorSelectBoxHtml="";
+							$.each(changeArr, function(i,e) {
+								var val = $(this).attr('id');
+								
+								var text = getText(val);
+								editorSelectBoxHtml += '<option value="'+val+'">'+text+'</option>'
+							});
+							$('#editorSelectBox').html(editorSelectBoxHtml);
+							$('#editorSelectChangeBox').show();
+						}else if($(this).val() == "删除"){
+							$('#editorSelectChangeBox').hide();
+							$('#editorAdd').hide();
+							var delArr = $('.monitorBoxLeft').eq(i).children();
+							var editorSelectBox2Html="";
+							$.each(delArr, function(i,e) {
+								var val = $(this).attr('id');
+								var text = getText(val);
+								editorSelectBox2Html += '<option value="'+val+'">'+text+'</option>'
+							});
+							$('#editorSelectBox2').html(editorSelectBox2Html);
+							$('#editorSelectDelBox').show();
+						}
+					})
+				})
+			})
+			
+			$('#cancel').click(function(){
+				$('.editorBox').hide();
+			})
+			$('.dragBtn').each(function(i){
+				$(this).click(function(){
+					$('.monitorCheck').show();
+					var arrLight = $(this).parents('.classBox').find('.light');
+					var arrData = $(this).parents('.classBox').find('.data');
+					var arrMove = $(this).parents('.classBox').find('.move');
+					var classBoxId = $(this).parents('.classBox').attr('id');
+					console.log(classBoxId);
+					if(classBoxId.indexOf('Light') != -1){
+						$('#checkLightBox').show();
+						$('#checkDataBox').hide();
+					}else{
+						$('#checkLightBox').hide();
+						$('#checkDataBox').show();
+					}
+					//选择灯
+					if(arrLight.length != 0){
+						$.each($('.checkLight'),function(){
+							var val = $(this).val();
+							var flag = true;
+							$.each(arrLight, function() {
+								if(val == $(this).attr('id')){
+									flag = false;
+								}
+							})
+							if(flag){
+								$(this).prop('checked',false);
+							}else{
+								$(this).prop('checked',true);
+							}
+							
+						})
+						
+						
+					}
+					//选择实时数据
+					if(arrData.length != 0){
+						$.each($('.checkData'),function(){
+							var val = $(this).val();
+							var flag = true;
+							$.each(arrData, function() {
+								if(val == $(this).attr('id')){
+									flag = false;
+								}
+							})
+							if(flag){
+								$(this).prop('checked',false);
+							}else{
+								$(this).prop('checked',true);
+							}
+							
+						})
+					}
+					
+					//选择动画
+					if(arrMove.length != 0){
+						$.each($('.checkData'),function(){
+							var val = $(this).val();
+							var flag = true;
+							$.each(arrMove, function() {
+								if(val == $(this).attr('id')){
+									flag = false;
+								}
+							})
+							if(flag){
+								$(this).prop('checked',false);
+							}else{
+								$(this).prop('checked',true);
+							}
+							
+						})
+					}
+					
+					
+					$('#checkSure').click(function(){
+						//报警灯
+						if(classBoxId.indexOf('Light') != -1){
+							var width = $('#'+classBoxId).width;
+							var checkLightHtml = '<div style="width:'+width+'px;" class="lightBox clearfix">';
+							$('.checkLight').each(function(){
+								if($(this).prop('checked')){
+									var name = $(this).next().html();
+									checkLightHtml +='<div class="light" id="'+$(this).val()
+									+'"><div class="lightPic"><img src="img/huise.png"/></div><div class="lightName">'+name+'</div></div>';
+								}
+							})
+							checkLightHtml += '</div>';
+							if($('#'+classBoxId).find('.lightBox').length>0){
+								$('#'+classBoxId).find('.lightBox').replaceWith(checkLightHtml);
+							}else{
+								$('#'+classBoxId).append(checkLightHtml);
+							}
+							
+							//隐藏编辑框并存储html
+							$('.monitorCheck').hide();
+							var html = $('body').html();
+							localStorage.setItem('html',html);
+							$('body').html(html);
+						//动画
+						}else if(classBoxId.indexOf('Move') != -1){
+							var width = $('#'+classBoxId).width;
+							var checkMoveHtml = '';
+							var k=0;
+							$('.checkData').each(function(){
+								if($(this).prop('checked')){
+									k++;
+									var name = $(this).next().html();
+									checkMoveHtml +='<div class="move" style="left:0;top:'+k*25+'px" id="'+$(this).val()
+									+'"><span class="moveName">'+name+'</span><span class="moveValue">value5</span></div>';
+								}
+							})
+							
+							$('.move').remove();
+							$('#'+classBoxId).append(checkMoveHtml);
+							//隐藏编辑框并存储html
+							$('.monitorCheck').hide();
+							var html = $('body').html();
+							localStorage.setItem('html',html);
+							$('body').html(html);
+							
+							
+							
+							
+						//实时数据
+						}else{
+							var width = $('#'+classBoxId).width;
+							var checkDataHtml = '<div style="width:'+width+'px;" class="dataBox clearfix">';
+							$('.checkData').each(function(){
+								if($(this).prop('checked')){
+									var name = $(this).next().html();
+									checkDataHtml +='<div class="data clearfix" id="'+$(this).val()
+									+'"><div class="dataName">'+name+'</div><div class="dataValue">1111</div></div>';
+								}
+							})
+							checkDataHtml += '</div>';
+							
+							if($('#'+classBoxId).find('.dataBox').length>0){
+								$('#'+classBoxId).find('.dataBox').replaceWith(checkDataHtml);
+							}else{
+								$('#'+classBoxId).append(checkDataHtml);
+							}
+							
+							//隐藏编辑框并存储html
+							$('.monitorCheck').hide();
+							var html = $('body').html();
+							localStorage.setItem('html',html);
+							$('body').html(html);
+						}
+					})
+						
+				})
+			})
+			$('#closemonitorCheck').click(function(){
+				$('.monitorCheck').hide();
+			})
+			
+			
+			
+				
+			$('.monitorCheck').mousedown(function(e){
+				var el;
+				el=$(this);
+				
+                var os = el.offset(); dx = e.pageX-os.left, dy = e.pageY-os.top;
+                
+                document.onmousemove=function(e){
+                	el.offset({top: e.pageY-dy, left: e.pageX-dx});
+                }
+                
+                document.onmouseup = function(e){
+					document.onmousemove=null;
+      				document.onmouseup=null;  
+					
+				}
+			})
+			
+			$('.move').mousedown(function(e){
+				var el;
+				el=$(this);
+				
+                var os = el.offset(); dx = e.pageX-os.left, dy = e.pageY-os.top;
+                
+                document.onmousemove=function(e){
+                	el.offset({top: e.pageY-dy, left: e.pageX-dx});
+                }
+                
+                document.onmouseup = function(e){
+					document.onmousemove=null;
+      				document.onmouseup=null;  
+					var html = $('body').html();
+					localStorage.setItem('html',html);
+					$('body').html(html);
+				}
+			})
+			
+			function getText(val){
+				var text;
+				if(val == "intergratedLight"){
+					text = "整机警报灯";
+				}else if(val == "intergratedCurrent"){
+					text = "整机实时数据";
+				}else if(val == "bigCarLight"){
+					text = "大车警报灯";
+				}else if(val == "bigCarCurrent"){
+					text = "大车实时数据";
+				}else if(val == "smallCarLight"){
+					text = "小车警报灯";
+				}else if(val == "smallCarCurrent"){
+					text = "小车实时数据";
+				}else if(val == "frequencyLight"){
+					text = "主钩警报灯";
+				}else if(val == "frequencyCurrent"){
+					text = "主钩实时数据";
+				}else if(val == "frequency2Light"){
+					text = "副钩警报灯";
+				}else if(val == "frequency2Current"){
+					text = "副钩实时数据";
+				}else if(val == "intergratedMove"){
+					text = "动画";
+				}
+				return text;
+			}
+				
+		</script>	
+		
+	</body>
+</html>

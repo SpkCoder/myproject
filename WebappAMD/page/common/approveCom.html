@@ -1,0 +1,71 @@
+<div>
+	<div class="needPrint" ng-show="isApproveResultShow">
+    	<div class="user_title" style="width: 800px;" >工作流程结果</div>
+	    <table border="0" cellspacing="0" cellpadding="0" width="800">
+			<thead>
+				<tr>
+					<td width="70">节点序号</td>
+					<td width="150">节点名称</td>
+					<td width="100">工作结果</td>
+					<td width="240">工作意见</td>
+					<td width="100">经办人</td>
+					<td width="140">经办时间</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="i in approveResultData">
+					<td>{{i.sequence}}</td>
+					<td>{{i.sequence_name}}</td>
+					<td>{{i.result_name}}</td>
+					<td  ng-bind-html="i.description | trustHtml"></td>
+					<td>{{i.shenpi_name}}</td>
+					<td>{{i.create_time}}</td>
+				</tr>
+			</tbody> 
+		</table>
+    	<br />
+	</div>
+   
+	<!--审批表单-->
+    <div ng-show="isApproveShow">
+    	<div class="approveBox">
+    		<p>当前节点：{{current_work_jiedian}}</p>
+			<p>
+				<span>结果：</span>
+				<input name="result" type="radio" ng-model="result" value="1同意" ng-click="getNextWorkFlow()"/>同意
+				<input name="result" type="radio" ng-model="result" value="2不同意" ng-click="getNextWorkFlow()" />不同意
+			</p>
+			<p ng-show="isBackWorkJiedianShow">
+				<span>请选择返回的工作节点：</span>
+				<select ng-model="sequence_return" ng-change="getNextWorkFlow()">
+					<option ng-repeat="i in workJiedianBackList" value="{{i.sequence}}">节点序号：{{i.sequence}} 节点名称：{{i.sequence_name}}</option>
+				</select>
+			</p>
+			<p>
+				<label>意见：</label>
+				<textarea maxlength="1000" ng-model="description" rows="5" cols="30"></textarea>
+			</p>
+			<p ng-show="isNextWorkFlowShow">
+				<span>下一节点：</span>{{nextWorkFlow.sequence_name}}<br />
+				<div  ng-show="nextWorkFlow.user_name">
+					<span>下一经办人：</span>{{nextWorkFlow.user_name}}
+				</div>
+   				<div ng-show="isNextUserShow">
+   					<span>下一经办人：</span>
+   					<div class="tree_div">
+   						<input ng-model="next_user_name" id="next_user" ng-click="zTree2Show()"/>
+		       			<div class="ztreeBox">
+							<div id="treeDemo2" class="ztree">
+								
+							</div>
+						</div>
+   					</div>
+   				</div>
+			</p>
+			<p  class="isSure">
+				<p  class="isSure"><button ng-disabled="approveDisabled" ng-click="approveSure()">提交</button></p>
+			</p>
+		</div>
+		<br ng-init="searchObjectFineshed=true" />
+    </div>
+</div>

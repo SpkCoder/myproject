@@ -1,0 +1,56 @@
+{
+  "total_width": "99%",
+  "subject": "用户列表",
+  "pk_name": "user_id",
+  "row_quantity": 10,
+  "fields_e": "user_name;sex;mobile;dept_name",
+  "fields_c": "用户名称;性别;手机号码;部门",
+  "col_width": "20%;20%;20%;20%",
+  "hide_e": "user_id",
+  "hide_c": "用户ID",
+  "page": 1,
+  "total": 1,
+  "records": 70,
+  "rows": [
+    {
+      "RowNumber": "1",
+      "user_name": "李卫华",
+      "sex": "男",
+      "mobile": "13316878520",
+      "dept_name": "中远船务",
+      "user_id": "8"
+    },
+    {
+      "RowNumber": "2",
+      "user_name": "余仙",
+      "sex": "男",
+      "mobile": "13189767765",
+      "dept_name": "中远船务",
+      "user_id": "6"
+    },
+    {
+      "RowNumber": "3",
+      "user_name": "达旭",
+      "sex": "女",
+      "mobile": "18390711666",
+      "dept_name": "中远船务",
+      "user_id": "5"
+    },
+    {
+      "RowNumber": "4",
+      "user_name": "吴林峰",
+      "sex": "男",
+      "mobile": "18682299065",
+      "dept_name": "中远船务",
+      "user_id": "4"
+    },
+    {
+      "RowNumber": "5",
+      "user_name": "罗福盛",
+      "sex": "男",
+      "mobile": "15986847784",
+      "dept_name": "中远船务",
+      "user_id": "3"
+    }
+  ]
+}

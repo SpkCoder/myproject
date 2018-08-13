@@ -1,0 +1,201 @@
+
+/*青翠*/
+
+
+
+/*字体颜色*/
+.leftmenu dd .menuson li a:hover{ color:#3c8dbc;}
+.leftmenu dd .menuson li a{ color:#333;}
+.leftmenu dd .menuson li.curr a{ color:#3c8dbc;}
+
+.leftmenu dd .m-title1 b{ color: #000;}
+
+.index_top a{color: #333;}
+.index_top .right { background: #fff;}
+.right_header .nav .nav_menu li:hover a{color: #367fa9; }
+.right_header .nav .nav_menu li a{color: #333;}
+
+.right_header .user p{ color: #f1f1f1;}
+.right_header .huanfu ul li:hover {color: #3c8dbc;}
+.right_header .user ul li:hover a{color: #3c8dbc;}
+
+.listPage a{color: #333;}
+.listPage .overbox table tbody tr a{color:#3c8dbc;}
+
+
+
+.index_bottom .container p a{color: #dfdfdf;}
+
+
+/*背景及边框颜色*/
+.index_top .left_header { background:#a7af71;}
+.left_body{background:#d9ddc3;}
+
+.index_top .right_header{background:#bcc775;}
+.right_header .nav .nav_menu{background:#d9ddc3;}
+.right_header .nav dd.curr>span{background: #a7af71 url("../images/icon02.png") no-repeat right center;}
+.right_header .nav dd:hover>span{background: #a7af71 url("../images/icon02.png") no-repeat right center;}
+.right_header .user ul,.right_header .huanfu ul{box-shadow: 0px 0px 3px #bcc775;}
+
+
+.index_bottom .container {background:#a7af71; }
+
+
+.listPage .editBox {background: #fff;border: 1px solid #bcc775;}
+.listPage .edit input,.listPage .edit textarea,.listPage .edit select,.listPage .edit button{border: 1px solid #bcc775;}
+.listPage .editBtn a{border: 1px solid #bcc775;}
+.listPage .editBtn a:hover{background: #bcc775;color: #fff;}
+
+.user_title{background:#bcc775;}
+.listPage .overbox table thead tr{background: #F4F4F4;}
+.listPage .overbox table tbody tr:nth-child(even){ background: #F4F4F4;}
+.listPage .overbox table tbody tr:hover{background:#d9ddc3;}
+.listPage .overbox table{border-top: 1px solid #bcc775; border-left: 1px solid #bcc775;}
+.listPage .overbox table td{border-bottom: 1px solid #bcc775; border-right: 1px solid #bcc775;}
+#workDoWarm{background: #d9ddc3;border: 1px solid #bcc775;}
+#workDoWarm div{border: 1px solid #bcc775;}
+
+
+.listPage .detaiBox{border: 2px solid #bcc775;background: #fff;color: #333;}
+.listPage .detaiBox h3{background: #bcc775;}
+
+.listPage .bigPicBox{border: 1px solid #bcc775;}
+
+.listPage .search input,.listPage .search select,.listPage .search button{border: 1px solid #bcc775;}
+
+.listPage .workChange input,.listPage .workChange button{border: 1px solid #bcc775;}
+
+.listPage .model_tree,.listPage .dept_tree{border: 1px solid #bcc775;}
+
+.listPage .overbox .approveBox input,.listPage .overbox .approveBox select{border: 1px solid #bcc775;  height: 24px;}
+.listPage .overbox .approveBox button,.listPage .overbox .approveBox textarea{border: 1px solid #bcc775;}
+
+
+
+.welcome{position: relative; margin-top:150px; text-align: center; }
+.welcome span{display: inline-block; width: 120px; height: 120px; background:url("../images/welcome2.png") no-repeat center; background-size: 100% auto;}
+.welcome h3{font-weight: normal; font-size: 16px;}
+
+
+.search_yu .search_Choice .text{ border: 1px solid #bcc775;}
+.editBox_yu .Choice .text{border: 1px solid #bcc775;}
+.editBox_yu .Choice .ztree_box{border: 1px solid #bcc775;}
+.search_yu > div > select{border: 1px solid #bcc775;}
+.search_yu > div > button{ border: 1px solid #bcc775;}
+.search_yu .search_Choice .ztree_box{ border: 1px solid #bcc775;}
+
+.zTree_Bg {border: 1px solid #bcc775;}
+.zTreeedit .editBox2 input{border: 1px solid #bcc775;}
+ #contact_box .span2{border: 1px solid #bcc775;}
+.zTreeedit .editBox2 select{border: 1px solid #bcc775;}
+.zTreeedit .editBox2 button{border: 1px solid #bcc775;}
+
+#ResetPassWord form p input{border: 1px solid #bcc775;}
+#ResetPassWord form p button{border: 1px solid #bcc775;}
+
+.passwordBox > div{border: 2px solid #bcc775;}
+.passwordBox > div h4{background: #bcc775;}
+
+
+#ipMeg{border: 2px solid #bcc775;}
+#ipMeg h4{background: #bcc775;}
+
+
+.listPage .editBox .login_form .dept_style,.listPage .editBox .login_form .dept_sty{
+ border: 1px solid #bcc775;
+}
+
+
+
+
+/*tab选项卡*/
+.fujian .tabmenu ul li{border: 1px solid #bcc775; border-width: 1px 1px 0px 1px;}
+.fujian .tabmenu ul li.selected { color:#fff; background: #bcc775;}
+.fujian .tabbox dd{border: 1px solid #bcc775;}
+.fujian .tabbox dd .title a{color: #bcc775; }
+.fujian .tabbox dd table .a1{ color: #bcc775;}
+
+/*实时监控*/
+.monitorBox .lightBox .light:hover{background: #bcc775;}
+.monitorBox .dataBox .data:hover{background: #bcc775;}
+.monitorBox .lightBox{border: 1px solid #bcc775;}
+.monitorBox .dataBox{border: 1px solid #bcc775;}
+.monitorBox .dataBox{border-bottom: 0;}
+.monitorBox .dataBox .data{border-right: 1px solid #bcc775;border-bottom: 1px solid #bcc775;}
+.monitorBox .dataBox .data:nth-child(2n){border-right: 0;}
+.monitorBox .dataBox .data .dataName{border-right: 1px solid #bcc775;}
+.monitorBox .historyBox .historyData{border: 1px solid #bcc775;border-right: 0;}
+.monitorBox .historyBox .historyData li{border-right: 1px solid #bcc775;}
+.monitorBox #chooseMonitor{border: 1px solid #bcc775;}
+.monitorBox #chooseMonitor:hover{background: #bcc775;}
+.monitorBox .objectPicBox .move:hover{background: #bcc775;}
+
+.monitor2 .monitorBoxLeft>div>p{background: #bcc775;}
+.monitor2 .classBox{border: 1px solid #bcc775;}
+.monitor2 .lightBox{border: 0;}
+.monitor2 .dataBox{border: 1px solid #bcc775;}
+.monitor2 .dataBox{border-bottom: 0;border-right:0;}
+.monitor2 .dataBox .data{border-right: 1px solid #bcc775;border-bottom: 1px solid #bcc775;}
+.monitor2 .dataBox .data:nth-child(2n){border-right: 1px solid #bcc775;}
+
+
+@media (max-width:1279px) {
+	
+ 
+
+
+}
+
+
+
+
+
+
+@media (max-width:1200px) {
+	
+}
+
+
+
+
+
+
+
+@media (max-width:980px) {
+
+
+}
+
+
+
+
+
+
+
+@media (max-width:768px) {
+
+.welcome{position: relative; margin-top:100px; text-align: center; }
+.welcome span{display: inline-block; width: 100px; height: 100px; background:url("../images/welcome2.png") no-repeat center; background-size: 100% auto;}
+.welcome h3{font-weight: normal; font-size: 14px;}
+
+
+}
+
+
+
+
+
+
+
+
+
+@media (max-width:480px) {
+
+
+
+.monitorBox .dataBox .data:nth-child(2n){border-right: 1px solid #bcc775;}
+
+
+
+}
+

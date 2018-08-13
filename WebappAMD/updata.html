@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0, user-scalable=yes">
+<meta http-equiv ="proma" content = "no-cache"/>
+<meta http-equiv="cache-control" content="no cache" />
+<meta http-equiv="expires" content="0" />
+<title id="headTitle">中远海运重工</title>
+<link id="headLink" rel="shortcut icon" href="zyfavicon.ico">
+<link href="css/login.css" type="text/css" rel="stylesheet">
+<style type="text/css">
+   .login .updata{text-align: center; margin-top: 20%; }
+   .login .updata p{font-size:16px; letter-spacing: 2px;}
+   .login .updata p span{display: none;}
+</style>
+</head>
+<!--[if lte IE9]>
+<script src="js/common/html5shiv.js"></script>
+<link href="css/html5shiv.css" rel="stylesheet" type="text/css">
+<![endif]-->
+<body>
+
+<div class="login">
+    <div class="updata">
+        <img src="images/updata.png" alt=""/>
+        <p>系统正在升级中<span class="span1">.</span><span class="span2">.</span><span class="span3">.</span></p>
+    </div>
+   
+</div>
+
+<script src="js/common/jquery-1.11.0.min.js"></script>
+<script  src="js/common/http.js"></script>
+<script src="js/common/login.js"></script>
+<script>
+$(function(){
+
+   setInterval(function(){
+       $(".updata .span1").show(200,"linear",function(){
+           $(".updata .span2").show(200,"linear",function(){
+               $(".updata .span3").show(200,"linear",function(){
+                  $(".updata span").hide();
+           
+               });
+           
+           });
+           
+       });
+
+   },1000);
+
+})
+
+
+
+</script>
+
+</body>
+</html>

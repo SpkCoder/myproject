@@ -1,0 +1,259 @@
+﻿<!doctype html>
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+<meta name="renderer" content="webkit"> 
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0, user-scalable=yes">
+<title id="headTitle">益尔智控</title>
+<link id="headLink" rel="shortcut icon" href="yefavicon.ico">
+<script src="../js/common/jquery-1.11.0.min.js"></script>
+<script data-main="../js/angular/main.js" src="../js/angular/require.js"></script>
+<script type="text/javascript">
+   var timeStamp="?1.22076";  //清除缓存  
+   document.write('<link rel="stylesheet" type="text/css" href="../css/style.css'+ timeStamp +'">'); 
+   document.write('<link rel="stylesheet" type="text/css" href="../css/list.css'+ timeStamp +'">'); 
+   document.write('<script type="text/javascript" src="../js/common/http.js'+ timeStamp +'"><\/script>'); 
+
+   //android 调用js方法
+    function showInfoFromJava(str){
+		if(str){
+			str = str.split("/")[1];
+			str = str.substr(5);
+		}
+
+		if(location.href !=httpBefore+"/page/index.html#/page/objects/NFC_write/list"){
+			location.href ="/page/index.html#/page/objects/NFC_read/list/"+str;
+		}
+		
+	}
+    
+</script>
+
+<link rel="stylesheet" type="text/css" id="changeSkin">
+<link rel="stylesheet" type="text/css" href="../css/zTreelist.css">
+<link rel="stylesheet" type="text/css" href="../css/zTreeStyle/zTreeStyle.css">
+<link rel="stylesheet" type="text/css" href="../css/lq.datetimepick.css">
+
+
+
+<style media="print">
+    .noPrint{display: none;}
+</style>
+
+
+<!--[if lte IE9]> 
+<script src="../js/html5shiv.js"></script>
+<link href="css/html5shiv.css" rel="stylesheet" type="text/css"> 
+<![endif]-->
+</head>
+<body id="myApp" class="index_body">
+
+<!--======index_top========-->
+<div class="index_top clearfix">
+  <div class="container clearfix">
+    
+
+      <!--======left========-->
+     <div class="left clearfix noPrint">
+        <div class="left_header" style="background: #FFFFFF"> <a class="logo" href="/page/index.html" target="_self"><img alt="" src="../images/logo11.png"></a></div>
+        <div class="left_body">
+             <dl class="leftmenu">
+              <dd ng-repeat="(key, value) in menu" on-finish-render-index>
+                <div id="{{value.model_id}}" class="m-title1"><img alt="" ng-src="{{value.img_path}}"><b>{{value.model_name}}</b><span></span> </div>
+                <ul class="menuson">
+                    <li id="{{value2.model_id}}" ng-repeat="(key2, value2) in value.children"><span></span><a  href="{{value2.url}}">{{value2.model_name}}</a></li>
+                 </ul>
+              </dd>
+             
+            </dl>
+            <!--待办事项提醒-->
+			<!--<div id="workDoWarm" ng-show="isWorkDoWarmShow">
+				<h4><button ng-click="isWorkDoWarmShow=false">x</button>待办工作提醒</h4>
+				<div>您还有<i>{{workWaitCount}}</i>项待办工作</div>
+			</div>-->
+
+        </div>
+        
+     </div>
+    <!--======left结束========-->
+
+
+    
+
+     <!--======right=======-->
+    <div class="right clearfix">
+
+       <!--======right_header=======-->
+      <div class="right_header noPrint">
+          <div class="toggle_icon toggle_left"></div>
+          <topMenu></topMenu>
+
+          <dl class="nav clearfix">
+              <dd ng-repeat="(key, value) in nav">
+                 <span id="{{value.model_id}}" class="title">{{value.model_name}}</span>
+                 <div class="menubox">
+                    <ul class="nav_menu clearfix">
+                       <li id="{{value2.model_id}}" ng-repeat="(key2, value2) in value.children"><a class="a2" href="{{value2.url}}">{{value2.model_name}}</a></li>
+                    </ul>
+                 </div>
+              </dd>
+              
+          </dl>
+          
+          
+
+          <div class="user">
+             <p>
+                <svg class="icon" style="width: 23px; height: 23px; color: #fff; vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4724"><path d="M852.412 735.493l-180.797-70.459s-34.481-13.386-47.875-26.55c-8.609-8.463-7.987-28.427-0.368-53.928 7.618-25.502 100.303-129.139 100.303-223.281C723.675 215.883 628.09 98 510.191 98 392.3 98 296.724 215.883 296.724 361.283c0 90.169 82.592 197.664 92.783 217.202 10.199 19.538 7.716 49.316-0.336 58.336-12.092 13.549-56.271 27.132-56.271 27.132l-162.988 72.638C131.835 750.272 102 786.185 102 826.703v53.234c0 44.22 35.914 37.263 80.052 37.263h658.219c44.147 0 80.061 6.958 80.061-37.263v-53.234c0-40.526-29.835-77.537-67.92-91.21m0 0" p-id="4725"></path></svg>
+                <i id="user"></i><span></span></p>
+             <ul>
+               <li><img alt="" src="../images/user02.png"><a id="changePassword" target="_self" href="javascript:;">修改密码</a></li>
+               <!-- <li><img alt="" src="../images/user03.png"><a target="_self" href="#/peopledata">个人资料</a></li> -->
+               <li><img alt="" src="../images/user04.png"><a target="_self" href="javascript:;" onclick="SignOut()">退出</a></li>
+             </ul>
+          </div>
+
+          <div class="huanfu">
+             <p>
+               <svg class="icon" style="width: 22px; height: 22px; color: #fff; vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4021"><path d="M1004.24704 443.37152 866.85696 564.5824c-15.28832 13.50656-36.096 15.86176-53.84192 8.84736l0 3.56352 0 314.10176c0 43.34592-35.15392 78.53056-78.53056 78.53056L289.50528 969.6256c-43.3664 0-78.52032-35.1744-78.52032-78.53056L210.98496 576.99328l0-4.92544c-17.98144 8.1408-39.65952 5.7344-55.33696-8.32512L19.57888 441.9584c-21.46304-19.21024-23.5008-52.45952-4.57728-74.22976L272.26112 67.59424c4.94592-5.70368 10.93632-9.63584 17.32608-12.41088 0-0.28672-0.03072-0.54272-0.03072-0.80896l53.7088 0c7.19872 87.32672 79.54432 156.19072 168.72448 156.19072 89.18016 0 161.52576-68.864 168.72448-156.19072l53.7088 0-0.0512 1.75104c5.43744 2.72384 10.36288 9.73824 14.71488 14.66368l259.75808 298.71104C1027.98336 391.14752 1025.92512 424.21248 1004.24704 443.37152L1004.24704 443.37152zM963.80928 380.16 726.3232 110.99136C701.2864 198.656 620.77952 262.89152 525.08672 262.89152l-26.17344 0c-97.45408 0-179.11808-66.67264-202.46528-156.78464L59.60704 378.39872c-9.45152 10.89536-8.42752 27.51488 2.304 37.12l114.2784 102.92224c10.15808 9.1136 25.15968 8.32512 34.78528-0.91136l0-45.2608c0-14.46912 11.69408-26.17344 26.17344-26.17344 10.41408 0 19.24096 6.20544 23.4496 15.02208l2.72384 11.15136 0 0 0 47.09376 0 57.62048 0 52.34688 0 235.58144c0 28.89728 23.4496 52.35712 52.34688 52.35712l392.63232 0c28.89728 0 52.35712-23.45984 52.35712-52.35712L760.65792 629.31968l0-52.34688 0-53.61664 0-51.0976 0 0 1.61792-8.1408c3.45088-10.3936 12.9536-18.03264 24.55552-18.03264 14.46912 0 26.18368 11.70432 26.18368 26.17344l0 47.90272c9.728 7.50592 23.48032 7.79264 33.05472-0.63488l115.43552-102.42048C972.3392 407.53152 973.3632 390.99392 963.80928 380.16L963.80928 380.16zM963.80928 380.16" p-id="4022"></path></svg>
+             </p>
+             <ul>
+               <li class="li1">天蓝</li>
+               <li class="li2">淡绿</li>
+               <li class="li3">银灰</li>
+               <li class="li4">墨黑</li>
+             </ul>
+          </div>
+
+          <!--<div class="mobile">
+             <p><svg class="mobile_icon" style="width: 20px; height: 20px; color: #fff; vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"><path d="M682.667008 47.65184 341.984256 47.65184c-42.635264 0-77.44 34.884608-77.44 77.436928l0 774.513664c0 42.59328 34.804736 77.44 77.44 77.44l340.682752 0c42.597376 0 77.441024-34.84672 77.441024-77.44L760.108032 125.087744C760.108032 82.536448 725.264384 47.65184 682.667008 47.65184zM465.854464 109.584384l92.944384 0c8.556544 0 15.545344 6.946816 15.545344 15.504384 0 8.602624-6.987776 15.504384-15.545344 15.504384l-92.944384 0c-8.51968 0-15.422464-6.90176-15.422464-15.504384C450.432 116.5312 457.33376 109.584384 465.854464 109.584384zM512.285696 946.034688c-25.637888 0-46.470144-20.754432-46.470144-46.43328s20.832256-46.512128 46.470144-46.512128c25.757696 0 46.512128 20.83328 46.512128 46.512128S538.044416 946.034688 512.285696 946.034688zM729.220096 822.162432 295.552 822.162432 295.552 202.528768l433.668096 0L729.220096 822.162432z"></path></svg></p>
+             <ul class="clearfix">
+               <li style="margin-right:10px;">
+                  <img alt="" src="../images/android.png">
+                  <p>安卓APP下载</p>
+               </li>
+               <li>
+                  <img alt="" src="../images/uc.png">
+                  <p>手机浏览器查看</p>
+               </li>
+             </ul>
+          </div>-->
+
+          <div id="m_menu" class="nav_icon menuicon-out">
+              <span class="menuicon-top"></span>
+              <span class="menuicon-middle"></span>
+              <span class="menuicon-bottom"></span>
+          </div>
+
+          <div class="home_icon">
+              <a href="#/page/system/welcome/list">
+                 <svg class="icon" style="width: 26px; height: 26px; color: #fff; vertical-align: middle;fill:currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1811"><path d="M759.557724 556.556798c0-18.629289 15.361873-33.670867 34.126238-33.670867 18.84009 0 34.209126 15.042601 34.209126 33.670867l0 329.20886c0 18.636452-15.369036 33.686217-34.209126 33.686217l-0.88823 0L230.247476 919.451876c-18.847254 0-34.209126-15.049764-34.209126-33.686217l0-0.709151L196.03835 556.556798c0-18.629289 15.361873-33.670867 34.209126-33.670867 19.003819 0 34.208103 15.042601 34.208103 33.670867l0 295.694559 109.906156 0L374.361735 520.100492c0-11.146874 9.143241-20.147876 20.458961-20.147876l0.568958 0L629.193631 499.952616c11.323906 0 20.452821 9.001001 20.452821 20.147876l0 0.552585 0 331.597257 109.912295 0L759.558747 556.556798 759.557724 556.556798zM415.362544 852.250334 415.362544 852.250334l193.199187 0L608.561731 540.312836 415.362544 540.312836 415.362544 852.250334 415.362544 852.250334zM125.918339 565.795207 125.918339 565.795207l386.084219-379.915729 385.928676 379.915729c13.337773 12.902868 35.014468 12.902868 48.360428 0 13.345959-13.216 13.345959-34.549887 0-47.611367L536.755312 115.00836l-0.567935-0.781806c-13.428847-12.903891-34.94079-12.903891-48.362474 0L77.639776 518.182816c-13.256932 13.062504-13.256932 34.395368 0 47.611367C90.977549 578.698075 112.737132 578.698075 125.918339 565.795207L125.918339 565.795207z" p-id="1812"></path></svg>
+              </a>
+          </div>
+
+      </div>
+       <!--======right_header结束=======-->
+      
+
+
+
+      <!--======right_body=======-->
+      <div class="right_body">
+      	<div class="point2">
+		</div>
+        <div class="right_list">
+            <div ng-view></div>
+        </div>
+          
+
+      </div>
+        <!--======right_body结束=======-->
+ 
+    </div>
+
+  </div>
+</div>
+<!--======index_top结束========-->
+
+
+
+
+
+
+
+
+<!--======bottom========-->
+<div class="index_bottom">
+   <div class="container clearfix"> 
+    <p><a href="http://www.yetec.cn" target="_blank">技术支持：深圳市益尔智控技术有限公司</a></p>
+    </div>
+</div>
+<!--======bottom结束========-->
+
+
+
+
+
+
+
+
+
+<div class="passwordBox">
+  <div>
+    <h4>修改密码<img id="ChaPassWord" src="../images/nav_hide.png"></h4>
+    <form>
+       <p class="p1"><label>用户名称：</label><span></span></p>
+       <p class="p2"><label>旧密码：</label><input type="password" value=""><i>密码错误</i></p>
+       <p class="p3"><label>新密码 ：</label><input type="password" value=""><i>密码只能由数字、字母、下划线组合</i></p>
+       <p class="p4"><label>密码强度：</label><span></span><i>无</i></p>
+       <p class="p5"><label>确认新密码 ：</label><input type="password" value=""><i>输入密码不一致</i></p>
+       <p class="p6">
+          <label>&nbsp;</label>
+          <button type="button"  id="UpdatePassWord">保存</button>
+          <button type="button" id="EscPassWord" >取消</button>
+       </p>
+    </form>
+  </div>
+</div>
+
+
+
+<div id="editBox1" class="detaiBox" style="display: none;">
+      <h3>温馨提示<button onclick="$('#editBox1').hide();"><img src="../images/nav_hide.png"></button></h3>
+      <p></p>
+</div>
+
+
+
+<div id="ipMeg">
+  <h4>温馨提示<img src="../images/nav_hide.png"></h4>
+  <form>
+     <p class="p1"><span>本次登陆地址：</span><span class="pan1"></span>&nbsp;&nbsp;<span>时间：</span><span class="pan2"></span></p>
+     <p class="p2"><span>上次登陆地址：</span><span class="pan1"></span>&nbsp;&nbsp;<span>时间：</span><span class="pan2"></span></p>
+     
+  </form>
+</div>
+
+
+
+
+
+<script type="text/javascript">
+   document.write('<script type="text/javascript" src="../js/common/changeLogo.js'+ timeStamp +'"><\/script>');
+   document.write('<script type="text/javascript" src="../js/common/common.js'+ timeStamp +'"><\/script>'); 
+   document.write('<script type="text/javascript" src="../js/common/jquery.ztree.core.js'+ timeStamp +'"><\/script>'); 
+   document.write('<script type="text/javascript" src="../js/common/jquery.ztree.excheck.js'+ timeStamp +'"><\/script>'); 
+   document.write('<script type="text/javascript" src="../js/common/jquery.table.rowspan.js'+ timeStamp +'"><\/script>'); 
+   document.write('<script type="text/javascript" src="../js/common/jquery.tableresize.js'+ timeStamp +'"><\/script>'); 
+   document.write('<script type="text/javascript" src="../js/My97DatePicker/WdatePicker.js'+ timeStamp +'"><\/script>');
+
+
+</script>
+
+
+
+</body>
+</html>

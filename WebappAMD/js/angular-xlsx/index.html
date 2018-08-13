@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>angular 与  excel</title>
+		<script src="angular.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="jszip.js"></script>
+		<script src="xlsx.flow.js" type="text/javascript" charset="utf-8"></script>
+		<script src='xlsx-model.js'></script>
+		<script type="text/javascript">
+			var myApp = angular.module('myApp', ['xlsx-model']);
+			myApp.controller('ctrl',function($scope){
+				
+			
+				
+			})
+//			window.onload = function(){
+//				document.getElementById('input').onchange = function(){
+//					setTimeout(function(){
+//						var data = document.getElementById('#data').html();
+//						console.log(data);
+//					},1000)
+//					
+//				}
+//			}
+			
+		</script>
+	</head>
+	<body ng-app="myApp" ng-controller="ctrl">
+		<input type='file' xlsx-model='excel' id="input">
+		<pre id="data">{{excel | json}}</pre>
+	</body>
+</html>

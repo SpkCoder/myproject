@@ -1,0 +1,204 @@
+
+<!--check--check-->
+
+
+<script  src="../js/common/listCtrCom.js"></script>
+<div class="listPage">
+	
+	<div class="edit"> 
+   		<p class="editBtn">   
+	        <a href="javascript:;" ng-repeat="i in pageBtns" ng-click="btnClick(i)" ng-show="isBtnShow">{{btn_c[$index]}}</a>
+	        <a href="javascript:;" ng-show="isBtnShow" ng-click="btn_repaire()">申报维修</a>
+	        <a href="javascript:;" ng-click="btn_print()">打印</a>
+	        <a href="javascript:history.go(-1);">返回</a>
+       </p>
+       <div id="editBox1" class="editBox" ng-show="isChangeShow">
+       		<form name="form" novalidate>
+	       		<h4>点检记录详情：</h4>
+	       		<p>
+	       			<label><b>*</b>开始检查时间：</label>
+	       			<input class="Wdate" type="text" id="date_start" ng-model="date_start" onClick="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm:ss'})"> 
+	       		</p>
+	       		<p>
+	       			<label><b>*</b>结束检查时间：</label>
+	       			<input class="Wdate" type="text" id="date_end" ng-model="date_end" onClick="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm:ss'})"> 
+	       		</p>
+	       		
+	       			
+       			<div style="padding: 5px">
+       			    <span><b style="color: red">*</b>检查人：</span>
+       				<input ng-model="check_user" id="check_user" ng-click="zTree1Show()"/>
+	       			<div class="ztreeBox">
+						<div id="treeDemo1" class="ztree">
+							
+						</div>
+					</div>
+       			</div>
+		       			
+	       		
+	       		<p>
+	       			<span><b>*</b>检查结果：</span>
+	       			<select ng-model="result">
+	       				<option value="1合格">合格</option>
+	       				<option value="2不合格">不合格</option>
+	       				<option value="3待检">待检</option>
+	       			</select>
+	       		</p>
+	       		<p>
+	       			<label><b>*</b>处理记录：</label>
+	       			<textarea type="text" maxlength="500" ng-model="process_remark"> </textarea>
+	       		</p>
+	       		
+	       		<p  class="isSure"><button ng-click="changeSure()">确认</button>&nbsp;<button ng-click="isChangeShow=false">取消</button><b>*代表必填</b></p>
+       		</form>
+       </div>
+       <div id="editBox3" class="editBox" ng-show="isDelFileShow">
+	   		<form name="form" novalidate>
+	       		<h4>请选择需要删除的图片：</h4>
+	       		<p ng-repeat="i in fileList">
+	       			<input style="width: 33px;" ng-click="getDelFileId(i.file_id)" name="delFile" type="checkbox" value="{{i.file_id}}"/>第{{i.index}}条中的图片：<img style="width:100px;text-align: center;background:#ccc;" src="{{i.file_url}}"  />
+	       		</p>
+	       		<p  class="isSure"><button ng-disabled="delFileDisabled" ng-click="delFileSure()">确认删除</button>&nbsp;<button ng-click="isDelFileShow=false">取消删除</button></p>
+	   		</form>
+	    </div>
+	    <div id="editBox4" class="editBox" ng-show="isAddFileShow">
+	   		<form name="form" novalidate>
+	       		<p>
+	       			
+	   				<label>新增图片：</label>
+	   				<input id="file" name="file" type="file" accept="image/*;capture=camera" />
+	       			
+	       		</p>
+	       		<p  class="isSure"><button ng-disabled="addFileDisabled" ng-click="addFileSure()">确认</button>&nbsp;<button ng-click="isAddFileShow=false">取消</button></p>
+	   		</form>
+	    </div>
+
+	    <div id="editBox5" class="editBox" ng-show="isRepaireAddShow">
+       		<form name="form" novalidate>
+	       		<h4>新增维修申报：</h4>
+	       		<p>
+	       			<label>部门：</label>
+	       			<div>
+	       				<input ng-model="dept_name" id="dept_name" ng-click="zTree2Show()"/>
+		       			<div class="ztreeBox">
+							<div id="treeDemo2" class="ztree">
+								
+							</div>
+						</div>
+	       			</div>
+	       		</p>
+	       		<p>
+	       			<label>主题：</label>
+	       			<input type="text" placeholder="主题" ng-model="sub" maxlength="50"/><br />
+	       		</p>
+	       		<p>
+	       			<label>故障内容：</label>
+	       			<textarea maxlength="1000" placeholder="故障内容" ng-model="content"></textarea>
+	       		</p>
+	       		<p class="isSure"><button ng-click="repaireAddSure()">确认新增</button>&nbsp;<button ng-click="isRepaireAddShow=false">取消新增</button></p>
+       		</form>
+       </div>
+
+   </div>
+    <div class="overbox">
+    	<div class="needPrint">
+    		<h2 style="width:{{tableWidth}};">{{detail_title}}</h2>
+	    	<div style="width:{{tableWidth}};">
+	    		<ul id="detail_ul" class="clearfix">
+		    		<li><span><strong>公司：</strong>{{checkData.company_name}}</span></li>
+		    		<li><span><strong>部门：</strong>{{checkData.dept_name}}</span></li>
+		    		<li><span><strong>完成状态：</strong>{{checkData.finish_status}}<!--<i ng-show="isBtnNoShow">已完成</i><i ng-show="isBtnShow">未完成</i>--></span></li>
+		    		<li><span><strong>点检周期：</strong>{{checkData.period_name}}</span></li>
+		    		<li><span><strong>设备分类：</strong>{{checkData.class_name}}</span></li>
+		    		<li><span><strong>设备编码：</strong>{{checkData.object_code}}</span></li>
+		    		<li><span><strong>设备名称：</strong>{{checkData.object_name}}</span></li>
+		    		<li><span><strong>规格型号：</strong>{{checkData.object_model}}</span></li>
+		    		<li><span><strong>点检负责人：</strong>{{checkData.check_user_name}}</span></li>
+		    		<li><span><strong>计划开始日期：</strong>{{checkData.plan_date_start}}</span></li>
+		    		<li><span><strong>计划结束日期：</strong>{{checkData.plan_date_end}}</span></li>
+	            </ul>
+	    	</div>
+	    	
+		    <div class="user_title" style="width:{{tableWidth}};">{{subject}}</div>
+		    <table id="mainTable" border="0" cellspacing="0" cellpadding="0" width="{{tableWidth}}">
+				<thead>
+					<tr>
+						<td width="33"><input id="flag" type="checkbox" ng-model="select_all" ng-change="selectAll()"><label for="flag"></label></td>
+						<td ng-repeat="i in fields_c" width="{{trWidthArr[$index]}}">{{i}}<span ng-click="sortFn($index)" ng-class="tdBj"></span></td>
+						<td width="100">附件</td>
+					</tr>
+				</thead>
+				<tbody>
+					
+					<tr ng-repeat="i in list">
+						<td><input id="{{i['RowNumber']}}" type="checkbox" ng-model="i.checked" ng-change="selectOne()"> <label for="{{i['RowNumber']}}"></label></td>
+						<td ng-repeat="k in fields_e" ng-bind-html="i[k] | trustHtml"></td>
+						<!--图片显示-->
+						<td>
+							<img ng-repeat="j in i.file_icon" ng-show="{{i.file_icon}}" src="{{j}}" ng-click="getBigPic(i.check_detail_id,$index)"/>
+						</td>
+					</tr>
+					
+				</tbody> 
+			</table>
+			<!-- pagination -->  
+		    <div class="pagination" style="width:{{tableWidth}};">
+		        <select ng-change="load_pernum(p_pernum)" ng-model="p_pernum" ng-options="x for x in options">
+		        </select>
+		        <a ng-class="{true:'disabled'}[p_current==1]" class="pagination-first" href="javascript:;" ng-click="p_index()"></a>
+		        <a ng-class="{true:'disabled'}[p_current==1]" class="pagination-pre" href="javascript:;" ng-click="p_pre()"></a>
+		        <span>第</span><input  type="text" ng-model="p_current"  ng-change="load_page(p_current)"><span>页 共 {{p_all_page}} 页</span>
+		        <a ng-class="{true:'disabled'}[p_current==p_all_page]" class="pagination-next" href="javascript:;" ng-click="p_next()"></a>
+		        <a ng-class="{true:'disabled'}[p_current==p_all_page]" class="pagination-last" href="javascript:;" ng-click="p_last()"></a>
+		        <a class="pagination-search" href="javascript:;" ng-click="load_page(p_current)"></a>
+		        <span>共 {{count}} 条记录</span>
+		    </div>
+    	</div>
+    </div>
+    <div id="editBox2" class="bigPicBox" ng-show="isBigPicBocShow">
+		<h3><button ng-click="isBigPicBocShow=false">x</button>图片详情</h3>
+		<img id="bigPic"/>
+	</div>
+		
+	<script type=text/javascript>
+	    $(function(){
+	        //取消冒泡
+	        $(".editBox form").on("mousedown",function(e){
+	            stopBubble(e)
+	        });
+	        $("#editBox2").on("mousedown",function(e){
+	            stopBubble(e)
+	        });
+	
+	        //拖拽
+         	var drag1 = new drag("editBox1","window");
+         	drag1.dragFn();
+         	var drag2 = new drag("editBox2","window");
+         	drag2.dragFn();
+         	var drag3 = new drag("editBox3","window");
+	        drag3.dragFn();
+	        var drag4 = new drag("editBox4","window");
+	        drag4.dragFn();
+	        var drag5 = new drag("editBox5","window");
+	        drag5.dragFn();
+         	
+         	
+         	setTimeout(function(){
+	            $("table").tableresize();
+	        },1000);
+
+	    });
+	</script>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+

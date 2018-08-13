@@ -1,0 +1,74 @@
+
+
+<div class="seaObject">
+	<div class="search" style="width:1120px;"> 
+          <div class="sea_div"> 
+              <span>资产设备分类：</span>
+              <select  ng-model="search_class_id">
+                 <option value=""></option>
+                 <option ng-repeat="i in class_list" value="{{i.class_id}}">{{i['class_code']+' '+i['class_name']}}</option>
+              </select>
+              <span>项目：</span><input type="search" ng-model="search_items" />&nbsp;&nbsp;
+              <button ng-click="btn_getComSearch()">查询模板</button>&nbsp;&nbsp;<button ng-click="getComSearch_cancel()">取消</button>
+         </div>
+
+   </div>
+	
+	<div class="user_title" style="width:1300px;">起重机安全考核模板</div>
+    <table id="com_table" border="0" cellspacing="0" cellpadding="0" width="1300">
+		<thead>
+			<tr>
+				<td width="33"><span ng-show="showComCheckbox"><input type="checkbox" name="checkboxAll" id="checkboxAll" ng-click="getComCheckedAll('grade_class_template_id')"/><label for="checkboxAll"></label></span>
+				<span ng-show="showComRadio"><input id="noCheckAll"  type="radio" name="radio" ng-click="noCheckAll()"/><label for="noCheckAll"></label></span>
+				</td>
+				<td width="100">模板id</td>
+				<td width="100">分类代码</td>
+				<td width="200">分类名称</td>
+				<td width="100">序号</td>
+				<td width="200">项目</td>
+				<td width="300">检查内容和标准</td>
+				<td width="100">标准分数</td>
+				<td width="auto">检查评估方法</td>
+				
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="i in ComSearchList">
+				<td width="33"><span ng-show="showComCheckbox"><input id="{{'checkbox'+$index}}"  type="checkbox" name="checkbox" ng-click="getComCheckedOne(i.grade_class_template_id,'grade_class_template_id')"/><label for="{{'checkbox'+$index}}"></label></span>
+				<span ng-show="showComRadio"><input id="{{'radio'+$index}}"  type="radio" name="radio" ng-click="getComCheckedOne(i.grade_class_template_id,'grade_class_template_id')"/><label for="{{'radio'+$index}}"></label></span>
+				</td>
+				<td>{{i.grade_class_template_id}}</td>
+				<td>{{i.class_code}}</td>
+				<td>{{i.class_name}}</td>
+				<td>{{i.sequence}}</td>
+				<td>{{i.items}}</td>
+				<td ng-bind-html="i.contents | trustHtml"></td>
+				<td>{{i.standard_score}}</td>
+				<td>{{i.guide}}</td>
+				
+			</tr>
+		</tbody> 
+	</table>
+
+
+
+      <!-- pagination -->  
+    <div class="pagination" style="width:{{tableWidth}}">
+        <select ng-change="ComSearch_load_pernum(ComSearch_p_pernum)" ng-model="ComSearch_p_pernum" ng-options="x for x in options">
+        </select>
+        <a ng-class="{true:'disabled'}[ComSearch_p_current==1]" class="pagination-first" href="javascript:;" ng-click="ComSearch_p_index()"></a>
+        <a ng-class="{true:'disabled'}[ComSearch_p_current==1]" class="pagination-pre" href="javascript:;" ng-click="ComSearch_p_pre()"></a>
+        <span>第</span><input  type="text" ng-model="ComSearch_p_current"  ng-change="ComSearch_load_page(ComSearch_p_current)"><span>页 共 {{ComSearch_p_all_page}} 页</span>
+        <a ng-class="{true:'disabled'}[ComSearch_p_current==ComSearch_p_all_page]" class="pagination-next" href="javascript:;" ng-click="ComSearch_p_next()"></a>
+        <a ng-class="{true:'disabled'}[ComSearch_p_current==ComSearch_p_all_page]" class="pagination-last" href="javascript:;" ng-click="ComSearch_p_last()"></a>
+        <a class="pagination-search" href="javascript:;" ng-click="ComSearch_load_page(ComSearch_p_current)"></a>
+       <span>共 {{ComSearch_count}} 条记录</span>
+    </div>
+ 
+
+
+	<br ng-init="searchObjectFineshed=true" />
+	
+		
+</div>
+

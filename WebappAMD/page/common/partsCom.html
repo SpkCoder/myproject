@@ -1,0 +1,81 @@
+<!--备件查询html模板-->
+
+
+<div class="seaObject">
+	<div style="width:1160px;">
+		<div class="sea_div">
+	    	<span>备件id：</span><input type="text" ng-model="search_parts_id" /> 
+	    </div>
+	    <div class="sea_div" ng-show="isPCShow">
+	    	<span>物料编码：</span><input type="text" ng-model="search_material_code" /> 
+	    </div>
+	    <div class="sea_div">
+	    	<span>物料描述：</span><input type="text" ng-model="search_material_name" /> 
+	    </div>
+		<div class="sea_div">
+	    	<span>物料分类:</span>
+	        <select ng-model="search_material_class_id">
+	            <option value=""></option>
+	            <option ng-repeat="i in search_material_class_list" value="{{i.class_id}}">{{i.class_name}}</option>
+	        </select>
+	    </div>
+	    <div class="sea_div">
+	    	&nbsp;&nbsp;<button ng-click="search_parts()">查询备件</button>&nbsp;<button ng-click="search_parts_cancel()">取消</button>
+	    </div>
+	</div>
+		
+	<div id="com_title" class="user_title" style="width:1160px;margin-top: 10px;">备件信息</div>
+    <table id="com_table" border="0" cellspacing="0" cellpadding="0" width="1160">
+		<thead>
+			<tr>
+				<td width="33"></td>
+				<td width="100">备件id</td>
+				<td width="150" ng-show="isPCShow">物料编码</td>
+				<td width="250">物料描述</td>
+				<td width="150">物料分类</td>
+				<td width="150" ng-show="isPCShow">型号规格</td>
+				<td width="100">品牌</td>
+				<td width="100" ng-show="isPCShow">参考单价</td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="i in partsList">
+				<td width="33"><input id="{{'k'+$index}}" class="commonCheckbox partsCla" type="radio" name="parts_base" ng-click="getCheckedPartsId(i.parts_id)"/><label for="{{'k'+$index}}"></td>
+				<td>{{i.parts_id}}</td>
+				<td ng-show="isPCShow">{{i.material_code}}</td>
+				<td>{{i.material_name}}</td>
+				<td>{{i.material_class_name}}</td>
+				<td ng-show="isPCShow">{{i.specification}}</td>
+				<td>{{i.brand_name}}</td>
+				<td ng-show="isPCShow">{{i.price_refernce}}</td>
+			</tr>
+		</tbody> 
+	</table>
+
+
+
+     <!-- pagination -->  
+    <div class="pagination" style="width:{{tableWidth}}">
+        <select ng-change="parts_load_pernum(parts_p_pernum)" ng-model="parts_p_pernum" ng-options="x for x in options">
+        </select>
+        <a ng-class="{true:'disabled'}[parts_p_current==1]" class="pagination-first" href="javascript:;" ng-click="parts_p_index()"></a>
+        <a ng-class="{true:'disabled'}[parts_p_current==1]" class="pagination-pre" href="javascript:;" ng-click="parts_p_pre()"></a>
+        <span>第</span><input  type="text" ng-model="parts_p_current"  ng-change="parts_load_page(parts_p_current)"><span>页 共 {{parts_p_all_page}} 页</span>
+        <a ng-class="{true:'disabled'}[parts_p_current==parts_p_all_page]" class="pagination-next" href="javascript:;" ng-click="parts_p_next()"></a>
+        <a ng-class="{true:'disabled'}[parts_p_current==parts_p_all_page]" class="pagination-last" href="javascript:;" ng-click="parts_p_last()"></a>
+        <a class="pagination-search" href="javascript:;" ng-click="parts_load_page(parts_p_current)"></a>
+       <span>共 {{parts_count}} 条记录</span>
+    </div>
+ 
+
+
+	<br ng-init="searchPartsFineshed=true" />
+	
+	<script>
+		if($("html,body").width()<768){
+			$('#com_table').attr('width','800');
+			$('#com_title').css('width','800px');
+		}
+	</script>	
+</div>
+

@@ -1,0 +1,64 @@
+{
+  "total_width": "99%",
+  "subject": "角色列表",
+  "pk_name": "user_id",
+  "row_quantity": 10,
+  "fields_e": "role_name;description;permission",
+  "fields_c": "角色名;职能备注;角色权限",
+  "col_width": "20%;20%;",
+  "hide_e": "role_id",
+  "hide_c": "角色ID",
+  "page": 1,
+  "total": 1,
+  "records": 70,
+  "rows": [
+    {
+      "RowNumber": "1",
+      "role_id": "8",
+      "role_name": "系统管理员",
+      "description": "可以配置起重机参数",
+      "url": "#/page/system/role_permission/list"
+
+    },
+    {
+      "RowNumber": "2",
+      "role_id": "8",
+      "role_name": "超级管理员",
+      "description": "可以操作整个系统",
+      "url": "#/page/system/role_permission/list"
+    },
+    {
+      "RowNumber": "3",
+      "role_id": "8",
+      "role_name": "工厂普通员工",
+      "description": "工厂普通员工",
+      "url": "#/page/system/role_permission/list"
+
+
+    },
+    {
+      "RowNumber": "4",
+      "role_id": "8",
+      "role_name": "设备体检",
+      "description": "有设备体检栏目全部权限",
+      "url": "#/page/system/role_permission/list"
+
+    },
+    {
+      "RowNumber": "5",
+      "role_id": "8",
+      "role_name": "实时监控",
+      "description": "有实时监控模块的所有权限",
+      "url": "#/page/system/role_permission/list"
+
+    },{
+      "RowNumber": "6",
+      "role_id": "8",
+      "role_name": "工厂管理员",
+      "description": "适合工厂管理层",
+      "url": "#/page/system/role_permission/list"
+
+    }
+
+  ]
+}

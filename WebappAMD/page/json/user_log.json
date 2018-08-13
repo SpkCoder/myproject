@@ -1,0 +1,81 @@
+{
+  "total_width": "99%",
+  "subject": "日志列表",
+  "pk_name": "user_id",
+  "row_quantity": 10,
+  "fields_e": "user_log_id;user_name;login_ip;model_id;active_log;login_time;",
+  "fields_c": "日志编号;用户名称;登录IP;功能模块;日志内容;登录时间",
+  "col_width": "10%;15%;15%;20%;25%;25%;",
+  "hide_e": "user_id",
+  "hide_c": "角色ID",
+  "page": 1,
+  "total": 1,
+  "records": 70,
+  "rows": [
+    {
+      "RowNumber": "1",
+      "user_log_id": "1900",
+      "user_name": "吴林峰",
+      "login_ip": "113.92.128.33",
+      "model_id": "职能管理",
+      "active_log":"查看系统日志列表",
+      "login_time":"2017/3/24 11:44:27"
+
+    },
+    {
+      "RowNumber": "2",
+      "user_log_id": "1900",
+      "user_name": "吴林峰",
+      "login_ip": "113.92.128.33",
+      "model_id": "职能管理",
+      "active_log":"查看系统日志列表",
+      "login_time":"2017/3/24 11:44:27"
+
+    },
+    {
+      "RowNumber": "3",
+      "user_log_id": "1900",
+      "user_name": "吴林峰",
+      "login_ip": "113.92.128.33",
+      "model_id": "职能管理",
+      "active_log":"查看系统日志列表",
+      "login_time":"2017/3/24 11:44:27"
+
+
+
+    },
+    {
+      "RowNumber": "4",
+      "user_log_id": "1900",
+      "user_name": "吴林峰",
+      "login_ip": "113.92.128.33",
+      "model_id": "职能管理",
+      "active_log":"查看系统日志列表",
+      "login_time":"2017/3/24 11:44:27"
+
+
+    },
+    { "RowNumber": "5",
+      "user_log_id": "1900",
+      "user_name": "吴林峰",
+      "login_ip": "113.92.128.33",
+      "model_id": "职能管理",
+      "active_log":"查看系统日志列表",
+      "login_time":"2017/3/24 11:44:27"
+
+
+    },
+    {
+      "RowNumber": "6",
+      "user_log_id": "1900",
+      "user_name": "吴林峰",
+      "login_ip": "113.92.128.33",
+      "model_id": "职能管理",
+      "active_log":"查看系统日志列表",
+      "login_time":"2017/3/24 11:44:27"
+
+
+    }
+
+  ]
+}

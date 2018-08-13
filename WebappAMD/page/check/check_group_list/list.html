@@ -1,0 +1,135 @@
+<div class="point">
+	<p><img alt="" src="../images/point.png">设备点检 &gt;点检任务清单明细</p>
+</div>
+<!--check--check_group_list--点检任务清单明细-->
+
+
+<script  src="../js/common/listCtrCom.js"></script>
+<div class="listPage">
+	
+	
+    <div class="overbox">
+    	
+    	<div class="search" style="width:{{tableWidth}};"> 
+	        <span>资产设备分类：</span>
+	        <select ng-model="task_search_class_id">
+	        	<option value=""></option>
+       			<option ng-repeat="i in object_class" value="{{i.class_id}}">{{i.class_code}} {{i.class_name}}</option>
+       		</select>&nbsp;&nbsp;
+	        <span>周期：</span>
+	        <select ng-model="task_search_period_id">
+	        	<option value=""></option>
+       			<option value="1">日检</option>
+       			<option value="2">周检</option>
+       			<option value="3">月检</option>
+       			<option value="4">季检</option>
+       			<option value="5">半年检</option>
+       			<option value="6">年检</option>
+       		</select>&nbsp;&nbsp;
+	        <span>机构：</span><input type="search" ng-model="task_search_mechanism_name" />&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			<button ng-click="searchTaskCheck()">查询点检任务库</button>
+	    </div>
+	   
+	    
+	    <div class="user_title" style="width:{{tableWidth}};">点检任务库</div>
+	    <table border="0" cellspacing="0" cellpadding="0" width="{{tableWidth}}">
+			<thead>
+				<tr>
+					<td width="33"><input class="commonCheckbox" type="checkbox" name="object_all" id="object_all" ng-click="getTaskAllObject()"/><label for="object_all"></label></td>
+					<td ng-repeat="i in fields_c" width="{{trWidthArr[$index]}}">{{i}}</td>
+					
+				</tr>
+			</thead>
+			<tbody>
+				
+				<tr ng-repeat="i in taskCheckList">
+					<td><input id="{{'k'+$index}}" type="checkbox" name="taskCheck" ng-click="getTaskCheckId(i.task_check_id)"><label for="{{'k'+$index}}"></label></td>
+					<td ng-repeat="k in fields_e">{{i[k]}}</td>
+				</tr>
+			</tbody> 
+		</table>
+		<br />
+		
+	    <h2>{{check_group_title}}</h2>
+	    <div class="edit"> 
+	   		<p class="editBtn">   
+		        <a href="javascript:;" ng-repeat="i in pageBtns" ng-click="btnClick(i)">{{btn_c[$index]}}</a>
+		        <a href="javascript:history.go(-1);" >返回</a>
+	        </p>
+       
+   		</div>
+	    <div class="search" style="width:{{tableWidth}};"> 
+	        <span>资产设备分类：</span>
+	        <select ng-model="search_class_id">
+	        	<option value=""></option>
+       			<option ng-repeat="i in object_class" value="{{i.class_id}}">{{i.class_code}} {{i.class_name}}</option>
+       		</select>&nbsp;&nbsp;
+	        <span>周期：</span>
+	        <select ng-model="search_period_id">
+	        	<option value=""></option>
+       			<option value="1">日检</option>
+       			<option value="2">周检</option>
+       			<option value="3">月检</option>
+       			<option value="4">季检</option>
+       			<option value="5">半年检</option>
+       			<option value="6">年检</option>
+       		</select>&nbsp;&nbsp;
+	        <span>机构：</span><input type="search" ng-model="search_mechanism_name" />&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;
+			<button ng-click="search()">查询</button>
+	    </div>
+	     
+	    <div class="user_title" style="width:{{tableWidth}};">{{subject}}</div>
+	    <table id="mainTable" border="0" cellspacing="0" cellpadding="0" width="{{tableWidth}}">
+			<thead>
+				<tr>
+					<td width="33"><input id="flag" type="checkbox" ng-model="select_all" ng-change="selectAll()"><label for="flag"></label></td>
+					<td ng-repeat="i in fields_c" width="{{trWidthArr[$index]}}">{{i}}<span ng-click="sortFn($index)" ng-class="tdBj"></span></td>
+					
+				</tr>
+			</thead>
+			<tbody>
+				
+				<tr ng-repeat="i in list">
+					<td><input id="{{i['RowNumber']}}" type="checkbox" ng-model="i.checked" ng-change="selectOne()"> <label for="{{i['RowNumber']}}"></label></td>
+					<td ng-repeat="k in fields_e" ng-bind-html="i[k] | trustHtml"></td>
+					
+				</tr>
+				
+			</tbody> 
+		</table>
+		<!-- pagination -->  
+	    <div class="pagination" style="width:{{tableWidth}};">
+	        <select ng-change="load_pernum(p_pernum)" ng-model="p_pernum" ng-options="x for x in options">
+	        </select>
+	        <a ng-class="{true:'disabled'}[p_current==1]" class="pagination-first" href="javascript:;" ng-click="p_index()"></a>
+	        <a ng-class="{true:'disabled'}[p_current==1]" class="pagination-pre" href="javascript:;" ng-click="p_pre()"></a>
+	        <span>第</span><input  type="text" ng-model="p_current"  ng-change="load_page(p_current)"><span>页 共 {{p_all_page}} 页</span>
+	        <a ng-class="{true:'disabled'}[p_current==p_all_page]" class="pagination-next" href="javascript:;" ng-click="p_next()"></a>
+	        <a ng-class="{true:'disabled'}[p_current==p_all_page]" class="pagination-last" href="javascript:;" ng-click="p_last()"></a>
+	        <a class="pagination-search" href="javascript:;" ng-click="load_page(p_current)"></a>
+	       <span>共 {{count}} 条记录</span>
+	    </div>
+    </div>
+	<script type=text/javascript>
+	    $(function(){
+	        
+	        setTimeout(function(){
+	            $("table").tableresize();
+	        },1000);
+	    });
+	</script>    
+
+</div>
+
+
+
+
+
+
+
+
+
+
+

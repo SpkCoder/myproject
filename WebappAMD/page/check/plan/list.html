@@ -1,0 +1,258 @@
+<div class="point">
+	<p><img alt="" src="../images/point.png">设备点检 &gt;点检计划</p>
+</div>
+<!--check--plan-->
+
+<script  src="../../../js/common/listCtrCom.js"></script>
+<script type="text/javascript" src="../../../js/common/objectCtrCom.js?0.1" ></script>
+<div class="listPage">
+	
+	<div class="edit">
+       <div id="editBox1" class="editBox" ng-show="isAddShow">
+       		<form name="form" novalidate>
+	       		<h4>新增点检计划：</h4>
+	       		<p>
+	       			<label>资产设备:{{objectDetail}}</label>
+	       		</p>
+	       		
+	       		<p>
+	       			<span>周期：</span>
+	       			<select ng-model="period" ng-change="getCheckGroupList(period)">
+		       			<option value="1日检">日检</option>
+		       			<option value="2周检">周检</option>
+		       			<option value="3月检">月检</option>
+		       			<option value="4季检">季检</option>
+		       			<option value="5半年检">半年检</option>
+		       			<option value="6年检">年检</option>
+		       		</select>
+	       		</p>
+	       		<p>
+	       			<span>点检清单：</span>
+	       			<select ng-model="check_group_id">
+		       			<option ng-repeat="i in check_group_list" value="{{i.check_group_id}}">{{i.subject}}</option>
+		       		</select>
+	       		</p>
+	       		<p>
+	       			<span>点检负责人：</span>
+	       			<div>
+	       				<input placeholder="如不选择负责人则默认为创建该点检计划的人" ng-model="check_user" id="check_user" ng-click="zTree1Show()"/>
+		       			<div class="ztreeBox">
+							<div id="treeDemo1" class="ztree">
+								
+							</div>
+						</div>
+	       			</div>
+		       			
+	       		</p>
+	       		<p>
+	               <label>计划开始时间：</label>
+	               <input class="Wdate" type="text" id="plan_date_start" ng-model="plan_date_start" onClick="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm'})"> 
+	            </p>
+	            <p>
+	               <label>计划结束时间：</label>
+	               <input class="Wdate" type="text" id="plan_date_end" ng-model="plan_date_end" onClick="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm'})">
+	            </p>
+	       		
+	       		<p class="isSure"><button ng-disabled="addDisabled" ng-click="addSure()">确认新增</button>&nbsp;<button ng-click="isAddShow=false">取消新增</button></p>
+      		</form>
+       </div>
+       <div id="editBox2" class="editBox" ng-show="isChangeShow">
+       		<form name="form" novalidate>
+	       		<h4>修改点检计划：</h4>
+	       		<p>
+	       			<label>资产设备详细信息：</label>
+	       			<strong>公司：</strong>{{change_objectData.company_name}} <strong>部门：</strong>{{change_objectData.dept_name}} <strong>设备分类：</strong>{{change_objectData.class_code}}{{change_objectData.class_name}}
+	       			<strong>资产设备：</strong>{{change_objectData.object_code}}{{change_objectData.object_name}}
+	       		</p>
+	       		
+	       		<p>
+	       			<span>周期：</span>
+	       			<select ng-model="change_period" ng-change="getCheckGroupList(change_period)">
+		       			<option value="1日检">日检</option>
+		       			<option value="2周检">周检</option>
+		       			<option value="3月检">月检</option>
+		       			<option value="4季检">季检</option>
+		       			<option value="5半年检">半年检</option>
+		       			<option value="6年检">年检</option>
+		       		</select>
+	       		</p>
+	       		<p>
+	       			<span>点检负责人：</span>
+	       			<div>
+	       				<input ng-model="change_check_user" id="change_check_user" ng-click="zTree2Show()"/>
+		       			<div class="ztreeBox">
+							<div id="treeDemo2" class="ztree">
+								
+							</div>
+						</div>
+	       			</div>
+	       		</p>
+	       		<p>
+	               <label>计划开始时间：</label>
+	               <input class="Wdate" type="text" id="change_plan_date_start" ng-model="change_plan_date_end" onClick="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm'})">
+	            </p>
+	            <p>
+	               <label>计划结束时间：</label>
+	               <input class="Wdate" type="text" id="change_plan_date_end" ng-model="change_plan_date_end" onClick="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm'})">
+	            </p>
+	       		
+	       		<p  class="isSure"><button ng-disabled="changeDisabled" ng-click="changeSure()">确认修改</button>&nbsp;<button ng-click="isChangeShow=false">取消修改</button></p>
+       		</form>
+       </div>
+       <div id="editBox3" class="editBox" ng-show="isSubmitApproveShow">
+     		<form name="form" novalidate>
+	       		<h4>提交审批点检计划：</h4>
+	       		<p>
+	               <span>工作名称：</span>{{work_do_name}}
+	            </p>
+	       		<p>
+	       			<span>工作流程：</span>
+	       			<select ng-model="work_flow_id" ng-change="getWorkJiedian()">
+		       			<option ng-repeat="i in work_flow_list" value="{{i.work_flow_id}}">{{i.work_flow_name}}</option>
+		       		</select>
+	       		</p>
+	       		<p ng-show="work_flow_id">
+	       			<label>节点信息：</label>
+	       			<span>当前节点序号：{{work_jiedian.sequence}}</span><br />
+	       			<span>当前节点名称：{{work_jiedian.sequence_name}}</span><br />
+	       			<span>审批人：</span><i ng-show="work_jiedian.user_name">{{work_jiedian.user_name}}</i>
+	       			<div ng-show="isWorkJiedianUserShow">
+	       				<input ng-model="work_jiedian_user" id="work_jiedian_user" ng-click="zTree3Show()"/>
+		       			<div class="ztreeBox">
+							<div id="treeDemo3" class="ztree">
+								
+							</div>
+						</div>
+	       			</div>
+	       			
+	       		</p>
+	       		
+	       		<p  class="isSure"><button ng-disabled="approveDisabled" ng-click="submitApproveSure()">确认提交</button>&nbsp;<button ng-click="isSubmitApproveShow=false">取消提交</button></p>
+			</form>
+       </div>
+   </div>
+    <div class="overbox">
+    	<div class="search" style="width:{{tableWidth}};"> 
+    		<object ng-show="isComObjectShow"></object>  <!--搜索资产设备-->
+    		<div class="edit"> 
+		   		<p class="editBtn">   
+			        <a href="javascript:;" ng-repeat="i in pageBtns" ng-click="btnClick(i)">{{btn_c[$index]}}</a>
+		       </p>
+		    </div>
+		    <div class="sea_div">
+            	<label>编号：</label><input type="text" ng-model="search_check_id" /> 
+            </div>
+    		<div class="sea_div">
+            	<label>周期：</label><select ng-model="search_period_id">
+		        	<option value=""></option>
+	       			<option value="1">日检</option>
+	       			<option value="2">周检</option>
+	       			<option value="3">月检</option>
+	       			<option value="4">季检</option>
+	       			<option value="5">半年检</option>
+	       			<option value="6">年检</option>
+	       		</select>
+            </div>
+            <div class="sea_div">
+	        	<span>负责人：</span>
+	        	<div class="sea_div">
+	        		<input ng-model="search_check_user_name" id="search_check_user_name" ng-click="zTree4Show()"/>
+		   			<div class="ztreeBox">
+						<div id="treeDemo4" class="ztree">
+							
+						</div>
+					</div>
+	        	</div>
+	        </div>
+	        <div class="sea_div">
+            	<label>工作状态：</label><select ng-model="search_work_state">
+		        	<option value=""></option>
+	       			<option value="1">正在办理</option>
+	       			<option value="2">正常结束</option>
+	       			<option value="3">已被驳回</option>
+	       		</select>
+            </div>
+            <div class="sea_div" ng-show="isPCShow">
+            	<label>开始时间：</label><input class="Wdate" type="text" id="create_time_start" ng-model="create_time_start" onClick="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm'})"> 
+            </div>
+            <div class="sea_div" ng-show="isPCShow">
+            	<label>截止时间：</label><input class="Wdate" type="text" id="create_time_end" ng-model="create_time_end" onClick="WdatePicker({ dateFmt: 'yyyy-MM-dd HH:mm'})"> 
+            </div>
+            <div class="sea_div">
+	       		<button ng-click="btn_search()">查询</button>
+            </div>
+	        
+	    </div>
+	    <div class="user_title" style="width:{{tableWidth}};">{{subject}}</div>
+	    <table id="mainTable" border="0" cellspacing="0" cellpadding="0" width="{{tableWidth}}">
+			<thead>
+				<tr>
+					<td width="33"><input id="flag" type="checkbox" ng-model="select_all" ng-change="selectAll()"><label for="flag"></label></td>
+					<td ng-repeat="i in fields_c" width="{{trWidthArr[$index]}}">{{i}}<span ng-click="sortFn($index)" ng-class="tdBj"></span></td>
+					<td width="70">工作状态</td>
+					<td width="70">提交审批</td>
+					<td width="50">明细</td>
+					
+				</tr>
+			</thead>
+			<tbody>
+				
+				<tr ng-repeat="i in list">
+					<td><input id="{{i['RowNumber']}}" type="checkbox" ng-model="i.checked" ng-change="selectOne()"> <label for="{{i['RowNumber']}}"></label></td>
+					<td ng-repeat="k in fields_e" ng-bind-html="i[k] | trustHtml"></td>
+					<td class="status">{{arrWorkState[$index]}}</td>
+					<td><a href="javascript:;" ng-click="btn_submitApprove(i.check_id)" ng-show="arrShows[$index]">提交审批</a></td>
+					<td><a href="#/page/check/check_detail/list/{{i.check_id}}/{{i.work_do_id}}/{{i.work_state}}">明细</a></td>
+				</tr>
+				
+			</tbody> 
+		</table>
+		<!-- pagination -->  
+	    <div class="pagination" style="width:{{tableWidth}};">
+	        <select ng-change="load_pernum(p_pernum)" ng-model="p_pernum" ng-options="x for x in options">
+	        </select>
+	        <a ng-class="{true:'disabled'}[p_current==1]" class="pagination-first" href="javascript:;" ng-click="p_index()"></a>
+	        <a ng-class="{true:'disabled'}[p_current==1]" class="pagination-pre" href="javascript:;" ng-click="p_pre()"></a>
+	        <span>第</span><input  type="text" ng-model="p_current"  ng-change="load_page(p_current)"><span>页 共 {{p_all_page}} 页</span>
+	        <a ng-class="{true:'disabled'}[p_current==p_all_page]" class="pagination-next" href="javascript:;" ng-click="p_next()"></a>
+	        <a ng-class="{true:'disabled'}[p_current==p_all_page]" class="pagination-last" href="javascript:;" ng-click="p_last()"></a>
+	        <a class="pagination-search" href="javascript:;" ng-click="load_page(p_current)"></a>
+	       <span>共 {{count}} 条记录</span>
+	    </div>
+		
+		
+
+    </div>
+    <script type=text/javascript>
+	    $(function(){
+	        //取消冒泡
+	        $(".editBox form").on("mousedown",function(e){
+	            stopBubble(e)
+	        });
+	
+	        //拖拽
+         	var drag1 = new drag("editBox1","window");
+         	drag1.dragFn();
+	        var drag2 = new drag("editBox2","window");
+	        drag2.dragFn();
+	        var drag3 = new drag("editBox3","window");
+	        drag3.dragFn();
+	        
+	        
+	        setTimeout(function(){
+	            $("table").tableresize();
+	        },1000);
+	    });
+	</script>
+
+</div>
+
+
+
+
+
+
+
+
+
+

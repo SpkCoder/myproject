@@ -1,0 +1,582 @@
+.right_list{overflow: scroll}
+.listPage{padding: 20px;}
+.listPage .overbox{position:relative; width: 100%;}
+.listPage .overbox h2{min-width: 400px;padding: 20px 0 20px 200px;}
+.listPage .overbox i{font-style: normal;}
+.listPage .overbox img.detailPic{width: 30px; margin-right: 5px;}
+.listPage .overbox table{font-size: 12px;}
+.listPage .overbox table thead tr{font-weight: bold;}
+.listPage .overbox table thead tr td{overflow: hidden;text-align: center;}
+/*.listPage .overbox table thead tr td strong{display:inline-block;}*/
+.listPage .overbox table thead tr td span{display:inline-block;  float: right; width: 15px; height: 14px; margin-right: 5px;}
+.listPage .overbox table thead tr td span.default{background:url(../images/sort01.png) no-repeat center;}
+.listPage .overbox table thead tr td span.desc{background:url(../images/sort02.png) no-repeat center;}
+.listPage .overbox table tr td{box-sizing: border-box;padding: 5px 8px 5px 8px;}
+.listPage .overbox table tr td{line-height: 14px;overflow: hidden;}
+.listPage .overbox table tr td img{width: 25px;height: 25px;display: inline-block;margin-right: 3px;}
+.listPage .overbox table tr input[type="checkbox"] + label{position: relative;display: inline-block; width: 13px; height: 13px; background:url(../images/checked01.png) no-repeat center; cursor: pointer;}
+.listPage .overbox table tr input[type="checkbox"]:checked + label{ background:url(../images/checked02.png) no-repeat center;}
+.listPage .overbox table tr input[type="radio"] + label{position: relative;display: inline-block; width: 13px; height: 13px; background:url(../images/radio01.png) no-repeat center; cursor: pointer;}
+.listPage .overbox table tr input[type="radio"]:checked + label{ background:url(../images/radio02.png) no-repeat center;}
+.listPage .overbox table tr input{display: none;}
+.listPage .overbox table tr .td_yu {vertical-align: top; overflow: visible;}
+.listPage .overbox table tr .td_yu input{display: block;  border: 1px solid #999; width: 100%; margin-top: 8px; height: 22px;}
+.listPage .overbox table tr .td_yu textarea{display: block;  border: 1px solid #999; width: 100%; margin: 8px 0px;}
+.listPage .overbox table td.trHide{display: none;}
+.listPage .overbox .costH4{width: 1000px;overflow: hidden;}
+.listPage .overbox .costSpan{display: inline-block;width: 120px;float: right;}
+.listPage .overbox table tr td a:hover{text-decoration: underline;}
+.listPage .overbox table tr td .qrcode img{width: 130px;height: 130px;}
+
+.user_title{height: 30px; line-height: 30px; color: #fff;text-indent: 10px;}
+
+.pagination{position: relative;margin: 5px 0px 20px; font-size: 13px;}
+.pagination select{width: 50px; height: 18px;  border: 1px solid #95B8E7 !important; margin-right: 5px;}
+.pagination a{display: inline-block; font-size: 13px; width: 18px; height: 15px; border-right: 1px solid #bbb; margin-right: 5px;}
+.pagination input{display: inline-block; width: 30px; height: 15px; line-height: 15px; border: 1px solid #95B8E7 !important;}
+.pagination a.pagination-first{background:url(../images/pagination_icons.png) no-repeat 1px center; }
+.pagination a.pagination-pre{background:url(../images/pagination_icons.png) no-repeat -16px center; }
+.pagination a.pagination-next{background:url(../images/pagination_icons.png) no-repeat -30px center; }
+.pagination a.pagination-last{background:url(../images/pagination_icons.png) no-repeat -47px center; }
+.pagination a.pagination-search{background:url(../images/search.png) no-repeat center; }
+.pagination a.disabled{opacity:0.6;}
+
+
+.listPage .edit{position: relative; }
+.listPage .editBtn{ overflow: hidden;}
+.listPage .editBtn a{display: inline-block; padding: 0 4px; margin-right: 10px; margin-bottom:5px; background:none;cursor: default;}
+
+
+.listPage .editBox {position:fixed; z-index:9999999; background: #eee; width:60%;  max-height:70%; top:15%; left: 20%; overflow: auto;}
+.listPage .editBox form{margin:10px 5px;}
+.listPage .editBox h4{padding: 5px;}
+.listPage .editBox p{padding: 5px;}
+.listPage .editBox p b{font-style: normal;color: red;font-weight: normal;}
+.listPage .editBox p i{font-style: normal;}
+.listPage .editBox label{display: inline-block;height: 24px; width: 100%; overflow: hidden;; margin-right: 10px;}
+.listPage .editBox input{height: 24px; font-size: 12px; text-indent: 5px; width: 98%; color: #333;}
+.listPage .editBox input[type=radio],.listPage .editBox input[type=checkbox]{width: 16px;}
+.listPage .editBox select{color: #333; min-width: 100px; height: 24px;}
+.listPage .editBox textarea{height: 100px;width:98%;}
+.listPage .editBox button{border: 1px solid #bbb;padding: 2px; margin-right: 10px;}
+.listPage .editBox .seaObject{padding: 20px;}
+.listPage .editBox .edit_div{display: inline-block;}
+
+
+/*daxu2017/03/28*/
+
+.listPage .edit p.isSure{text-align: center;}
+
+#workDoWarm{width: 280px;height: 140px;border-radius: 4px;position: fixed;left: 50%;top: 50%;margin-left: -150px;margin-top: -70px;z-index: 1000;}
+#workDoWarm h4{overflow: hidden;padding: 0 10px;}
+#workDoWarm h4 button{float: right;padding: 0 3px;font-size: 16px;margin-top: 4px;}
+#workDoWarm div{width: 248px;height:50px;margin: 10px;border-radius: 4px;padding-left: 10px;padding-top:30px;background: #fff;}
+#workDoWarm div i{font-style: normal;color: red;}
+
+.listPage .seaOverbox{width:100%; margin-bottom: 10px;}
+
+.listPage .search{width:100%; margin-bottom:10px;}
+.listPage .search .sea_div input{height: 26px;padding-left: 10px; width: 150px;}
+.listPage .search .sea_div select{height: 26px;width: 160px;}
+.listPage .search .sea_div button{padding: 3px 4px;}
+.listPage .search .sea_p{display: inline-block;}
+.listPage .search .sea_div{display: inline-block;margin-bottom: 2px;}
+.listPage .search .sea_div i{font-style: normal;}
+.listPage .search .seaObject{padding: 0;}
+.listPage .search .seaObject label{display: inline-block;width: 100px;text-align: right;}
+.listPage .search .seaObject table label{display: inline-block;width: 13px;text-align: left;}
+
+.listPage .editBox .overbox .sea_div{display: inline-block;margin-bottom: 3px;} 
+.listPage .editBox .overbox .sea_div label{display: inline-block;width: 100px;text-align: right;}
+.listPage .editBox .overbox .sea_div table label{display: inline-block;width: 13px;text-align: left;}
+.listPage .editBox .overbox .pagination input[type=text]{width: 30px;height: 18px;}
+
+
+.listPage .detaiBox{word-break: break-all;width: 60%;height:250px;position: fixed; top: 25%;left: 20%;overflow: auto;}
+.listPage .detaiBox h3{text-indent: 10px; font-size: 16px; height: 30px;line-height: 30px; color: #fff;}
+.listPage .detaiBox h3 button{float: right; display: inline-block; background: none;}
+.listPage .detaiBox p{padding: 0px 20px;}
+
+
+.listPage .ztreeBox{position: relative;}
+.listPage .ztreeBox #treeDemo1,.listPage .ztreeBox #treeDemo2,.listPage .ztreeBox #treeDemo3,.listPage .ztreeBox #treeDemo4{width: 200px;height: 180px;overflow: scroll;border: 1px solid #bbb;position: absolute;background: #fff;z-index: 1000;display: none;}
+.listPage .ztreeBox .treeDemoDa{width: 200px;height: 180px;overflow: scroll;border: 1px solid #bbb;position: absolute;background: #fff;z-index: 1000;display: none;}
+
+.listPage .workChange{position: absolute;top: 50px;width: 500px;left: 50%;margin-left: -250px;}
+.listPage .workChange .box{padding: 5px 0;}
+.listPage .workChange div label{font-size: 16px;}
+.listPage .workChange div input{padding: 3px;font-size: 14px;}
+.listPage .workChange p button{padding: 2px 4px;}
+.listPage .workChange p.isSure{padding-left: 120px;}
+.listPage .workChange i{color: red;font-style: normal;}
+.listPage .workChange .ztreeWrap{display: inline-block;}
+
+
+.listPage .overbox .approveBox p{padding: 2px 0;}
+.listPage .overbox .approveBox p input{height: 20px;padding-left: 10px;}
+.listPage .overbox .approveBox p button{padding: 2px 4px;}
+.listPage .overbox .approveBox .tree_div{display: inline-block;}
+
+.listPage .bigPicBox{width: 55%;position: absolute;top: 15%;left: 20%;background: #eee;z-index: 1000;}
+.listPage .bigPicBox button{float: right;font-size: 20px;border: 1px solid #bbb;padding: 0 6px;background: #fff;}
+.listPage .bigPicBox #bigPic{width: 100%;display: block;border: 0;}
+/*角色权限样式*/
+.listPage .model_tree{overflow: auto;width: 320px;height: 350px;background: #F4F4F4;}
+.listPage .model_tree .zTree_Bg{border: 0;margin-left: 30px;}
+.listPage .model_tree .treeText{padding: 10px 0 0 30px;}
+
+/*保存按钮 */
+.listPage .model_tree .zTreeedit{padding: 10px 30px;font-size: 14px;}
+
+/*用户角色样式*/
+
+.listPage .dept_tree{overflow: auto;width: 320px;height: 200px;background: #F4F4F4;margin-bottom: 10px;}
+.listPage .dept_tree .zTree_Bg{border: 0;margin-left: 30px;}
+
+/*nfc_read*/
+.listPage .nfcReadBox{width: 500px;}
+.listPage .nfcReadBox p{overflow: hidden;padding: 4px 0;}
+.listPage .nfcReadBox p span{display: inline-block;float: left;width: 250px;}
+
+
+
+
+
+/*资产设备基本信息*/
+.search_yu {position:relative; margin-bottom:5px;}
+.search_yu > div{position:relative; float: left;}
+.search_yu > div > select{width:100%;height: 24px; }
+.search_yu3 > div > span{display: inline-block; width: 100px; text-align: right;}
+.search_yu2 span{display: inline-block; width: 100px; text-align: right;}
+.search_yu2 input{width: 160px;}
+.search_yu > div > button{padding: 2px 4px; }
+.search_yu .search_Choice{position:relative;  width:152px;  margin-right: 10px;}
+.search_yu .search_Choice .text{width:98%; height: 26px; font-size: 12px; text-indent: 5px;}
+.search_yu .search_Choice select{height: 26px; }
+.search_yu .search_Choice .ztree_box{display: none; position: absolute; top:26px; left:0px; z-index: 99999;  max-height:150px; background: #fff;  overflow: scroll;}
+
+.search_yu5 .search_Choice{position:relative;  width:152px;}
+.search_yu5 .search_Choice .text{width:98%; height: 26px; font-size: 12px; text-indent: 5px;}
+.search_yu5 .search_Choice select{height: 26px; }
+.search_yu5 .search_Choice .ztree_box{display: none; position: absolute; top:26px; left:0px; z-index: 99999;  max-height:150px; background: #fff;  overflow: scroll; border: 1px solid #bbb;}
+
+
+.editBox_yu .Choice {position:relative; padding:0 5px;}
+.editBox_yu .Choice .text{width:98%; height: 24px; font-size: 12px; text-indent: 5px; color: #333;}
+.editBox_yu .Choice .ztree_box{display: none; position: relative;  width:98%;  max-height:150px; overflow: scroll; }
+
+
+
+
+#overbox_yu{min-height: 250px;}
+.listPage .overbox .table_yu select{font-size: 12px;color: #333; height: 20px;line-height: 20px;}
+
+
+
+.seaObject .sea_div input{width: 140px;}
+.seaObject .sea_div select{width: 160px; height: 26px;}
+
+
+/*查看技术信息*/
+#editBox_4 form{position: replace; min-height: 200px; }
+#editBox_4 form .show_close{display: inline-block; width:20px; height: 20px; line-height: 20px; text-align: center; font-size: 20px; position: absolute; z-index:2; top: 10px; right: 10px; cursor: default;}
+
+
+
+
+#com_table .Choice{position: relative;}
+#com_table .ztree_box{display: none; position:absolute; z-index: 9; left: 0px; top: 24px; width: 200px; max-height:150px; border: 1px solid #999; overflow: scroll; background: #fff;}
+#com_table .ztree_box a{color:#333;}
+
+#mainTable .Choice{position: relative;}
+#mainTable .ztree_box{display: none; position:absolute; z-index: 9; left: 0px; top: 24px; width: 200px; max-height:150px; border: 1px solid #999; overflow: scroll; background: #fff;}
+#mainTable .ztree_box a{color:#333;}
+
+
+#detail_ul{position: relative;}
+#detail_ul li{float: left; width: 300px; margin-right: 30px;}
+
+
+/*实时监控样式*/
+.monitorBox{width: 1203px;}
+.monitorBox h2,.monitorBox h3{padding: 10px 0 10px 0px;text-align: center;}
+.monitorBox #chooseMonitor{padding: 2px;}
+.monitorBox .lightBox{width: 1200px;height:160px;text-align: center;padding: 0 0 3px 3px;position: relative;}
+.monitorBox .connectStatus{height: 24px;width: 1200px;overflow: hidden;margin-bottom: 5px;}
+.monitorBox .connectStatus img{height: 20px;}
+.monitorBox .lightBox .light{padding: 3px 3px 0 0;height: 80px;position: absolute;}
+.monitorBox .lightBox .light .lightName{width: 97px;line-height: 16px;}
+.monitorBox .lightBox .light .lightPic{width: 97px;}
+.monitorBox .lightBox .light .lightPic img{width: 35px;}
+.monitorBox .currentData{overflow: hidden;width: 1205px;margin: 20px 0;}
+.monitorBox .objectPicBox{width:700px;height:400px;background: #fff;float: left;position: relative;background-image: url(../images/QJ.png);background-size:700px;}
+.monitorBox .objectPicBox .move{position: absolute;padding: 3px 5px;}
+.monitorBox .historySearch{float: right;width: 470px;}
+.monitorBox .historySearch p a{color: #0000FF;}
+.monitorBox a:hover{text-decoration: underline;}
+.monitorBox .dataBox{overflow: hidden;width: 481px;float: right;}
+.monitorBox .dataBox .data{width: 240px;float: left;overflow: hidden;}
+.monitorBox .dataBox .data .dataName{width: 159px;float: left;padding: 2px 10px 2px 0;overflow: hidden;word-break: keep-all;text-align: right;}
+.monitorBox .dataBox .data .dataValue{color: #0000FF;width: 60px;float: left;padding: 2px 0 2px 10px;overflow: hidden;word-break: keep-all;}
+
+.monitorBox .historyBox{width: 1205px;}
+.monitorBox .historyBox h3{overflow: hidden;}
+.monitorBox .historyBox h3 a{color: #0000FF;font-size: 12px;float: right;}
+.monitorBox .historyBox .historyData{width: 1204px;overflow: hidden;}
+.monitorBox .historyBox .historyData li{float: left;padding: 4px 0;text-align: center;}
+
+
+.monitor2{width: 1060px;}
+.monitor2 .monitorBox{width: 100%;}
+.monitor2 .monitorBoxLeft{float:left;width: 1005px;min-height:100px;border-right: 1px solid #333;border-bottom: 1px solid #333;}
+.monitor2 .monitorBoxLeft>div{float: left;}
+.monitor2 .monitorBoxLeft>div>p{margin-bottom: 10px;}
+.monitor2 .monitorBox .dragBtn{float: right;}
+.monitor2 .monitorBoxRight{float:right;width: 50px;}
+
+.monitor2 .monitorBox .lightBox{text-align: center;padding: 0 0 3px 3px;}
+.monitor2 .monitorBox .lightBox .light{padding: 3px 3px 0 0;height: 80px;float: left;position: relative;}
+.monitor2 .monitorBox .lightBox .light .lightName{width: 97px;line-height: 16px;}
+.monitor2 .monitorBox .lightBox .light .lightPic{width: 97px;}
+
+.monitor2 .dataBox{overflow: hidden;width: 481px;margin-right: 5px;float: left;margin-left: 5px;}
+.monitor2 .dataBox .data{width: 240px;float: left;}
+.monitor2 .dataBox .data .dataName{width: 159px;float: left;padding: 2px 10px 2px 0;word-break: keep-all;text-align: right;}
+.monitor2 .dataBox .data .dataValue{color: #0000FF;width: 60px;float: left;padding: 2px 0 2px 10px;word-break: keep-all;}
+
+.monitor2 #intergratedMove{position: relative;}
+.monitor2 #intergratedMove .move{position: absolute;}
+
+
+
+.listPage .workbox{display: none;}
+
+
+
+
+
+#loading{position:fixed; z-index: 99999999; left: 0px; top:0px; width: 100%; height: 100%; background: rgba(0,0,0,0.5);}
+#loading .loadBox{position: relative; left: 50%; top: 50%; width:65px; height: 65px; margin-left:-32px; margin-top:-32px; text-align: center;}
+#loading .loadBox img{
+-webkit-animation: rotate 0.8s linear infinite;
+-moz-animation: rotate 0.8s linear infinite;
+-o-animation: rotate 0.8s linear infinite;
+animation: rotate 0.8s linear infinite;
+
+}
+
+@-webkit-keyframes rotate {
+  0%{-webkit-transform:rotate(0deg);}
+  100% {-webkit-transform:rotate(360deg);}
+}
+
+@-moz-keyframes rotate {
+  0%{-webkit-transform:rotate(0deg);}
+  100% {-webkit-transform:rotate(360deg);}
+}
+
+@-o-keyframes rotate {
+   0%{-webkit-transform:rotate(0deg);}
+  100% {-webkit-transform:rotate(360deg);}
+}
+@keyframes rotate {
+  0%{-webkit-transform:rotate(0deg);}
+  100% {-webkit-transform:rotate(360deg);}
+}
+
+
+
+
+
+
+
+
+
+/*角色管理模块样式*/
+a.permissin{
+  padding: 3px;
+  color:#589DF6;
+}
+a.permissin:hover{
+  text-decoration:underline;
+
+}
+/*用户列表查询框样式*/
+.listPage .seach_box{
+  margin-bottom: 5px;
+}
+.listPage .seach_box .sea{
+  display: inline-block;
+  width: 40%;
+
+}
+.listPage .seach_box .sea b{
+  margin-left: 2%;
+}
+.listPage .seach_box .sea input{
+  padding: 3px;
+  border: 1px solid #6299b9;
+
+}
+.listPage .seach_box .sea button{
+  margin-left: 3px;
+  padding: 2px 4px;
+  background: #fff;
+  border: 1px solid #6299b9;
+}
+.listPage .seach_box .sea button:hover{
+  color:#fff;
+  background: #6299B9;
+}
+
+.listPage select[name=user_type]{
+  width: 78px;
+}
+
+/*用户列表新增单选框样式*/
+.listPage .edit .login_form input[type=radio]{
+  width: 15px;
+
+}
+
+.listPage .edit .add_user{
+  margin-left: 20px;
+}
+
+.listPage .editBox .login_form b{
+  font-size: 10px;
+  color: red;
+  margin-left: 32%;
+  font-weight: normal;
+}
+.listPage .editBox .spa{
+  font-size: 10px;
+  color: red;
+
+}
+.listPage .editBox .login_form label{
+  width:31%;
+  margin-right: 0;
+  text-align: right;
+}
+
+/*确认取消按钮样式*/
+.listPage .editBox .confirm{
+  margin-top: 3%;
+  text-align: center;
+}
+.listPage .editBox .confirm .btn_con,.listPage .editBox .confirm .btn_esc{
+  padding: 3px 12px;
+  cursor: pointer;
+}
+
+/*部门框*/
+.listPage .editBox .login_form .dept_style{
+  display: inline-block;
+  border: 1px solid #6299B9;
+  width: 57%;
+  height: 22px;
+  overflow: hidden;
+}
+
+
+.listPage .editBox .login_form .dept_style1{
+  width:31%;
+  margin-right: 0;
+  text-align: right;
+}
+
+.listPage .editBox .login_form .dept_sty{
+  display: inline-block;
+  border: 1px solid #6299B9;
+  width: 57%;
+  height: 22px;
+
+}
+.listPage .editBox .login_form .dept_sty2{
+  width:31%;
+  margin-right: 0;
+  text-align: right;
+}
+
+
+.listPage .editBox .login_form label.typ{
+  width:70%;
+  text-align: justify;
+  margin-left: 26%;
+  
+
+}
+.listPage .editBox .login_form label.ty{
+  width:70%;
+  text-align: justify;
+  margin-left: 22%;
+
+}
+
+.listPage .editBox .login_form input[type=text],.listPage .editBox .login_form input[type=password]{
+  width:57%;
+  color: #000;
+}
+
+
+/*仓库基本信息新增样式*/
+.listPage .editBox .treeNaes{padding: 5px}
+.listPage .editBox .dept_che{padding: 5px;position: relative;}
+.listPage .editBox .login_form .dometr1,.listPage .editBox .login_form .user_admin_tree,.listPage .editBox .login_form .view_user_tree{
+  margin-left: 40%;
+  max-width: 241px;
+  background: #F4F4F4;
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+.listPage .editBox .login_form .dometr{
+  position: absolute;
+  top:92%;
+  left: 36%;
+  max-width: 200px;
+  background: #F4F4F4;
+}
+
+/*备件入库信息*/
+.listPage .table_list{width: 800px;}
+.listPage .search .sea_p select{max-width: 150px}
+
+
+
+@media (max-width:1279px) {
+
+  .listPage .editBox .login_form .dometr1,.listPage .editBox .login_form .user_admin_tree,.listPage .editBox .login_form .view_user_tree{
+    margin-left: 36%;
+
+  }
+  .listPage .editBox .login_form .dometr{top:93%;  left: 32%;max-width: 180px;}
+
+}
+
+
+
+
+
+
+@media (max-width:1200px) {
+  .listPage .editBox .login_form .dometr1,.listPage .editBox .login_form .user_admin_tree,.listPage .editBox .login_form .view_user_tree{
+    margin-left: 36%;
+
+  }
+  .listPage .editBox .login_form .dometr{top:93%;  left: 17%;max-width: 180px;}
+}
+
+
+
+
+
+
+
+@media (max-width:980px) {
+  .listPage .editBox .login_form .dometr1,.listPage .editBox .login_form .user_admin_tree,.listPage .editBox .login_form .view_user_tree{
+    margin-left: 36%;
+  }
+  .listPage .editBox .login_form .dometr{top:93%;  left: 32%;max-width: 180px;}
+
+}
+
+
+
+
+@media (max-width:768px) {
+.listPage{padding: 10px;}
+.right_list{overflow: auto}
+.listPage .seaOverbox{overflow: auto; margin-bottom: 10px;}
+.listPage .overbox h2{font-size: 18px;}
+.listPage .search .sea_div span{font-weight:normal;}
+.listPage .search .sea_p b{font-weight: normal}
+.listPage .editBox {width: 90%; left: 5%;}
+
+.listPage .detaiBox{word-break: break-all;width:86%;height:280px;padding: 5%;position: fixed; top: 30%; left: 2%;border-radius:8px;overflow: auto;z-index: 1000;}
+.listPage .workChange{position: absolute;top: 50px;width: 300px;left: 50%;margin-left: -150px;}
+/*.listPage .search .sea_p{display:block;}*/
+.listPage .seach_box .sea{display: block;}
+.listPage .editBox p{padding: 5px;margin-right:0; }
+.listPage .editBox .login_form .dometr{top:93%;  left: 29%;max-width: 180px;}
+.listPage .editBox .login_form .dometr1,.listPage .editBox .login_form .user_admin_tree,.listPage .editBox .login_form .view_user_tree{max-width: 180px;}
+
+
+ .welcome{display: none;}
+ .listPage .workbox{display: block;}
+
+
+ .listPage .welwork{font-size: 16px; text-indent: 20px; font-weight: bold;}
+ .listPage .welwork span{position: relative; top: -2px; color: #f00;}
+ 
+
+ .listPage .workbox ul{margin-top: 20px;}
+ .listPage .workbox ul li{display: none; float: left; width:30%; margin-right: 5%; margin-bottom:20px; text-align: center;}
+ .listPage .workbox ul li:nth-child(3n){ margin-right: 0%;}
+ .listPage .workbox ul li a{font-sizze: 14px;}
+ .listPage .workbox ul li img{width:60px;}
+ 
+
+
+
+}
+
+
+
+
+
+
+
+
+
+@media (max-width:480px) {
+  /*.listPage .search .sea_p{display:block;}*/
+  .listPage .search .sea_p b{font-weight: normal}
+  .listPage .search .sea_p input{width: 150px}
+  .listPage .seach_box .sea{display: block;}
+  .listPage .editBox p{padding: 5px;margin-right:0; }
+  .listPage .search .sea_p select{width: 150px}
+  .listPage .editBox .login_form .dometr{ top:96%;  left: 28%;max-width: 180px;}
+  /*.listPage .table_list{width: 500px;}*/
+   .listPage .ztreeBox #treeDemo1,.listPage .ztreeBox #treeDemo2,.listPage .ztreeBox #treeDemo3{width: 240px;height: 180px;overflow: scroll;border: 1px solid #bbb;position: absolute;left: 0px;background: #fff;z-index: 1000;display: none;}
+  .listPage .editBox .login_form .dometr1,.listPage .editBox .login_form .user_admin_tree,.listPage .editBox .login_form .view_user_tree{max-width: 180px;}
+  
+  .listPage .workChange .ztreeWrap{display:block;}
+  .listPage .bigPicBox{width: 300px;position: absolute;top: 70px;left: 50%;margin-left:-150px;background: #eee;z-index: 1000;}
+  
+  .listPage .bigPicBox #bigPic{width: 300px;display: block;border: 0;}
+	
+	
+   .onlineData{width:100%;}
+   .onlineData .databox {margin: 20px 0px 10px;}
+   .onlineData .databox .dataleft{border:none;}
+   .onlineData .databox .dataright{float:left; width: 252px;}
+
+	
+	
+	.monitorBox{width: 1203px;font-size: 12px;}
+	.monitorBox h2,.monitorBox h3{padding:0;text-align: center;width: 305px;}
+	.monitorBox .connectStatus{height: 25px;line-height:20px;width: 400px;font-size: 12px;}
+	.monitorBox .connectStatus img{width: 10px;height:10px;}
+	.monitorBox #chooseMonitor{padding: 2px;font-size: 12px;}
+	.monitorBox .lightBox{width: 300px;height:160px;text-align: center;padding: 0 0 3px 3px;position: relative;}
+	.monitorBox .lightBox .light{padding: 3px 3px 0 0;height: 50px;position: absolute;}
+	.monitorBox .lightBox .light .lightName{width: 72px;line-height: 15px;}
+	.monitorBox .lightBox .light .lightPic{width: 72px;}
+	.monitorBox .lightBox .light .lightPic img{width: 20px;}
+	.monitorBox .currentData{overflow: hidden;width: 350px;margin: 10px 0;}
+	.monitorBox .objectPicBox{width:350px;height:200px;background: #fff;float: left;position: relative;background-image: url(../images/QJ.png);background-size:350px;}
+	.monitorBox .objectPicBox .move{position: absolute;padding: 3px 5px;}
+	
+	.monitorBox .historySearch{float: right;width: 280px;}
+	.monitorBox .historySearch p a{color: #0000FF;}
+	.monitorBox a:hover{text-decoration: underline;}
+	.monitorBox .dataBox{overflow: hidden;width: 301px;float: left;}
+	.monitorBox .dataBox .data{width: 300px;float: left;overflow: hidden;}
+	.monitorBox .dataBox .data .dataName{width: 199px;float: left;padding: 2px 10px 2px 0;overflow: hidden;word-break: keep-all;text-align: center;}
+	.monitorBox .dataBox .data .dataValue{width: 80px;float: left;padding: 2px 0 2px 10px;overflow: hidden;word-break: keep-all;}
+	.monitorBox .historyBox h3{overflow: hidden;}
+	.monitorBox .historyBox h3 a{color: #0000FF;font-size: 12px;float: right;}
+}
+
+

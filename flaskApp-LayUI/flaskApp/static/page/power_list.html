@@ -28,7 +28,7 @@
 <script type="text/javascript">
 layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'dataDB', 'formVerify'], function(){
   var $ = layui.$;
-  var url = $("#layUI_routerView").attr("data-href").replace(/\/page\//,"/nodejs/").replace(/\.html/,"");
+  var url = $("#layUI_routerView").attr("data-href").replace(/\/page\//,"/python/").replace(/\.html/,"");
   console.log(url);
   //当前定位
   var this_href = "#"+$("#layUI_routerView").attr("data-href").split(".html")[0];
@@ -154,14 +154,14 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
       //加载角色分类
       var roleClass = [];
       var modelList_reqData = 'action=findData&searchJson={}&prePageNum=100000&currPage=1';
-           dataDB.findData("/nodejs/roleClass",modelList_reqData,function (roleClassData) {
+           dataDB.findData("/python/roleClass",modelList_reqData,function (roleClassData) {
            roleClass = roleClassData.rows;
       });
 
       //加载模块列表
       var modelList = [];
       var modelList_reqData = 'action=findData&searchJson={"level":2}&sortJson={"id":1}&prePageNum=100000&currPage=1';
-           dataDB.findData("/nodejs/modelList",modelList_reqData,function (modelListData) {
+           dataDB.findData("/python/modelList",modelList_reqData,function (modelListData) {
            modelList = modelListData.rows;
       });
       
@@ -266,7 +266,7 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
                   function getModelListFn (thisModelId) {
 				      var roleClass = [];
 				      var modelListFn_reqData = 'action=findData&searchJson='+JSON.stringify({"id":thisModelId})+'&prePageNum=100000&currPage=1';
-				           dataDB.findData("/nodejs/modelListFn",modelListFn_reqData,function (modelListFnData) {
+				           dataDB.findData("/python/modelListFn",modelListFn_reqData,function (modelListFnData) {
 				           modelListFn = modelListFnData.rows;
 				           var html = '';
 				           modelListFn.forEach(function (item,index) {
@@ -297,7 +297,7 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
 	                  data.field.function_ch = $("form select[name=function_en] option:selected").text();
 	                  
                       var reqData_dateList = 'action=findData&searchJson='+JSON.stringify({"id":data.field.modelId})+'&prePageNum=1&currPage=1';
-                      dataDB.findData("/nodejs/dataList",reqData_dateList,function (dateListData) {
+                      dataDB.findData("/python/dataList",reqData_dateList,function (dateListData) {
                       	 data.field.dbName = dateListData.rows[0].name;
                          //console.log(data.field);
                       	 

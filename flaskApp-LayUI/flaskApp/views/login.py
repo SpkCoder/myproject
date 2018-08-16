@@ -56,7 +56,7 @@ def operation(req):
 
             res = make_response('登录成功')
             dict_json = {'username': dict_where['username'], 'hash': dict_where['password'], 'os': os, 'px': px, 'ip': ip }
-            res.set_cookie('logining', json.dumps(dict_json), max_age=8*3600)
+            res.set_cookie('logining', json.dumps(dict_json, ensure_ascii=False), max_age=8*3600)
             return res
         else:
             return make_response('用户名或密码错误')

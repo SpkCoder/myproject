@@ -18,7 +18,7 @@
 <div class="layui-layout layui-layout-admin">
   <div class="layui-header">
     <div class="layui-logo">
-      <a style="display: inline-block;height: 100%;" class="logo" href="/"><img class="img-pc" height="100%" src="/image/logo_pc.png"><img class="img-mobel" height="100%" src="/image/logo_mobel.png"></a>
+      <a style="display: inline-block;height: 100%;" class="logo" href="/"><img class="img-pc" height="100%" src="/static/image/logo_pc.png"><img class="img-mobel" height="100%" src="image/logo_mobel.png"></a>
     </div>
     <!-- 头部区域（可配合layui已有的水平导航） -->
     <script id="laytpl_topMenu" type="text/html">
@@ -117,7 +117,7 @@
 <script type="text/javascript" src="/static/js/router/routerUrl.js" charset="utf-8"></script>
 <script type="text/javascript">
 if(!window.location.hash){
-  window.location.href = "/#/page/modelList";
+  window.location.href = "/#/page/record_list";
 }
 var loginObj = {};
 var openArea = {};
@@ -155,7 +155,7 @@ layui.use(['element',"laytpl",'directorRouter','dataDB'], function(){
               url: url + "?action=findData&timeStamp=" +Date.now(),
               dataType:"text",
               success: function (data,status,xhr) {
-                try {data = JSON.parse(data) } catch(e) {console.log(e)}
+                try {data = JSON.parse(data) } catch(e) {console.log(e)};
                 console.log("请求菜单成功");
                 if(typeof data != "object"){
 				          alert(data);
@@ -192,14 +192,14 @@ layui.use(['element',"laytpl",'directorRouter','dataDB'], function(){
 								    return "";
 								  } 
 								  var loginingStr = getCookie("logining");
-								  //console.log(loginingStr);
 								     if(!loginingStr){
 								       alert("No login, please log in");
 								       window.location.href = "/login.html";
 								       return;
 								     }else{
 								        //获取登录信息
-											  loginObj = JSON.parse(decodeURIComponent(loginingStr).split("j:")[1]);
+                        loginingStr = loginingStr.replace(/\\054/g, ",").replace(/\\/g, "").replace(/\"\{/g, "{").replace(/\}\"/g, "}");
+											  loginObj = JSON.parse(decodeURIComponent(loginingStr));
 											  //console.log(loginObj);
 											  $("#username").html(loginObj.username +'<span class="layui-nav-more"></span>');
 								     }
@@ -211,7 +211,7 @@ layui.use(['element',"laytpl",'directorRouter','dataDB'], function(){
               }
       });
   }
-  var url = "/nodejs/menu";
+  var url = "/python/menu";
   _getMenu(url);
 
   
@@ -285,7 +285,7 @@ layui.use(['element',"laytpl",'directorRouter','dataDB'], function(){
 	              var searchJson={"username": data.field.username};
 	              var updateJson= {"password": data.field.password};
 	              var reqData2 = 'action=updateData&searchJson=' + JSON.stringify(searchJson) + '&updateJson=' + JSON.stringify(updateJson);
-	              dataDB.updateData("/nodejs/login",reqData2,function (data2) {
+	              dataDB.updateData("/python/login",reqData2,function (data2) {
 	                layer.msg(data2,{time: 1000});
 	                if(data2 != "操作成功"){return;}
 	                layer.close(index);
@@ -307,18 +307,18 @@ layui.use(['element',"laytpl",'directorRouter','dataDB'], function(){
   //退出登录
   $("#SignOut").on("click",function () {
   	 $.ajax({
-		      url: "/nodejs/login",
+		      url: "/python/login",
 		      type: "POST",
 		      dataType:"text",
 		      data:"action=SignOut",
 		      success: function (data,status,xhr) {
 		      	console.log("请求成功");
-		      	alert(data);
-		      	window.location.href = "/login.html";
+		      	// alert(data);
+		      	window.location.href = "/";
 		      },
 		      error: function (xhr,status,error) {
 		      	console.log("请求失败"); 
-		      	window.location.href = "/login.html";
+		      	window.location.href = "/";
 		      }
 		});
   });

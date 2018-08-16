@@ -96,3 +96,39 @@ insert into data_list (modelId, name, name_ch, field_en, field_ch, data_type, fi
 (100007, "record_list", "操作记录", "px", "屏幕像素", "text", 100, 8, "yuxian", "2018-02-10 14:45:58", "yuxian", "2018-02-22 18:23:23"),
 (100007, "record_list", "操作记录", "ip", "IP", "text", 100, 9, "yuxian", "2018-02-10 14:45:58", "yuxian", "2018-02-22 18:23:23"),
 (100007, "record_list", "操作记录", "time", "时间", "text", 100, 10, "yuxian", "2018-02-10 14:45:58", "yuxian", "2018-02-22 18:23:23");
+
+
+
+
+
+create table model_list (
+	id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
+	name VARCHAR(100) NOT NULL,
+	`level` INT(10) NOT NULL,
+	parentId INT(6) NOT NULL,
+	position VARCHAR(100) NOT NULL,
+	sort INT(10) NOT NULL,
+	href VARCHAR(100) NOT NULL,
+	iconfont VARCHAR(100) NOT NULL,
+	`show` VARCHAR(100) NOT NULL,
+	create_name VARCHAR(100) NOT NULL,
+	create_time VARCHAR(100) NOT NULL,
+	update_name VARCHAR(100) NOT NULL,
+	update_time VARCHAR(100) NOT NULL
+	);
+
+
+insert into model_list (`level`, parentId, id, name, position, sort, href, iconfont, `show`, create_name, create_time, update_name, update_time) values
+(1, 0, 100000, "系统设置", "left", 1, "", "", "true", "yuxian", "2018-02-04 13:02:21", "yuxian", "2018-02-21 19:39:58"),
+(2, 100000, 100001, "模块列表", "left", 1, "#/page/model_list", "", "true", "yuxian", "2018-02-04 13:02:21", "yuxian", "2018-02-21 19:39:58"),
+(2, 100000, 100002, "数据列表", "left", 2, "#/page/data_list", "", "true", "yuxian", "2018-02-04 13:02:21", "yuxian", "2018-02-21 19:39:58"),
+(2, 100000, 100003, "用户列表", "left", 3, "#/page/model_list_fn", "", "true", "yuxian", "2018-02-04 13:02:21", "yuxian", "2018-02-21 19:39:58"),
+(2, 100000, 100004, "用户列表", "left", 4, "#/page/user_list", "", "true", "yuxian", "2018-02-04 13:02:21", "yuxian", "2018-02-21 19:39:58"),
+(2, 100000, 100005, "角色权限", "left", 5, "#/page/power_list", "", "true", "yuxian", "2018-02-04 13:02:21", "yuxian", "2018-02-21 19:39:58"),
+(2, 100000, 100006, "文件列表", "left", 7, "#/page/file_list", "", "true", "yuxian", "2018-02-04 13:02:21", "yuxian", "2018-02-21 19:39:58"),
+(2, 100000, 100007, "操作记录", "left", 8, "#/page/record_list", "", "true", "yuxian", "2018-02-04 13:02:21", "yuxian", "2018-02-21 19:39:58"),
+(2, 100000, 100008, "角色分类", "left", 6, "#/page/role_class", "", "true", "yuxian", "2018-02-04 13:02:21", "yuxian", "2018-02-21 19:39:58");
+
+
+
+

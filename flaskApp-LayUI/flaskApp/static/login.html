@@ -87,7 +87,7 @@
             form.on('submit(login)', function (data) {  
 				        console.log(data.field);
 				        device.px = screen.width +"x" + screen.height;
-				        var reqData = 'action=SignIn&searchJson={"username":"'+data.field.username+'","password":"'+data.field.password+'"}' +'&osJson={"os":"'+device.os+'","px":"'+device.px+'"}';
+				        var reqData = 'action=SignIn&whereJson={"username":"'+data.field.username+'","password":"'+data.field.password+'"}' +'&osJson={"os":"'+device.os+'","px":"'+device.px+'"}';
                 $.ajax({
 				              url: "/python/login",
 				              type: "POST",

@@ -16,7 +16,7 @@
      <table class="layui-hide" id="layUiTableList" lay-filter="demo"></table>
  
       <script type="text/html" id="barDemo">
-        <!--<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="find">查看</a>-->
+        <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="find">查看字段</a>
         <!--<a class="layui-btn layui-btn-xs" lay-event="edit">修改</a>-->
         <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
       </script>
@@ -26,9 +26,9 @@
 
 
 <script type="text/javascript">
-layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'dataDB'], function(){
+layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'dataDB', 'formVerify'], function(){
   var $ = layui.$;
-  var url = $("#layUI_routerView").attr("data-href").replace(/\/page\//,"/nodejs/").replace(/\.html/,"");
+  var url = $("#layUI_routerView").attr("data-href").replace(/\/page\//,"/python/").replace(/\.html/,"");
   console.log(url);
   //当前定位
   var this_href = "#"+$("#layUI_routerView").attr("data-href").split(".html")[0];
@@ -38,18 +38,19 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
   var dataDB = layui.dataDB;
   //console.log(add);
 
+
   var laydate = layui.laydate //日期
   ,laypage = layui.laypage //分页
   layer = layui.layer //弹层
   ,table = layui.table //表格
   ,form = layui.form //表格
   ,upload = layui.upload; //上传
+  var formVerify = layui.formVerify(); //表单验证
   
   //加载colArr
   var colArrInt = function (data, headObj) {
        
-        //console.log(data);
-        // console.log(headObj);
+        //console.log(headObj);
         if(typeof data != "object"){
           alert(data);
           return;
@@ -67,8 +68,8 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
           // size: 'sm' //小尺寸的表格
           elem: '#layUiTableList',
           height: 400,
-          url: url, //数据接口 
-          where: {'action':'findData'}, //传递额外参数
+          url: url, //数据
+          where: {'action':'findDataAll'}, //传递额外参数
           method: 'get',
           request: {
             pageName: 'currPage' //页码的参数名称，默认：page
@@ -81,8 +82,9 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
             //countName: 'count' //数据总数的字段名称，默认：count
             dataName: 'rows', //数据列表的字段名称，默认：data
           }, 
-          page: true, //开启分页
-          limits: [10,20,50,100,200,500,1000],
+          page: false,//开启分页
+          limit:5000,
+          limits: [10,20,50,100,200,500,5000],
           cols: [headObj.colArr],  //表头
           done: function(res, curr, count){
             //如果是异步请求数据方式，res即为你接口返回的信息。
@@ -120,42 +122,6 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
 
 
 
-        //监听表格复选框
-        table.on('checkbox(demo)', function(obj){
-          if(obj.type == "all"){
-            var checkStatus = table.checkStatus('layUiTableList');
-            //console.log(checkStatus.isAll);
-            //console.log(checkStatus.data);
-          }else {
-            //console.log(obj);
-          }
-        });
-        //监听表格复选框 结束
-        
-
-        
-        table.on('sort(demo)', function(obj){
-        //console.log(obj.field); //obj.field当前排序的字段名 
-        //console.log(obj.type); //当前排序类型：desc（降序）、asc（升序）、null（空对象，默认排序）
-        //console.log(this); //当前排序的 th 对象
-
-        //尽管我们的 table 自带排序功能，但并没有请求服务端。
-        //有些时候，你可能需要根据当前排序的字段，重新向服务端发送请求，从而实现服务端排序，如：
-        var sortJson = {};
-        sortJson[obj.field] = (obj.type == "desc") ? -1 : 1;
-        sortJson = JSON.stringify(sortJson);
-        
-        table.reload('layUiTableList', {
-          initSort: obj, //记录初始排序，如果不设的话，将无法标记表头的排序状态。
-          where: { //请求参数（注意：这里面的参数可任意定义，并非下面固定的格式）
-            sortJson: sortJson, //排序方式
-          }
-        });
-
-      });
-         
-
-
 
         //监听工具条
         table.on('tool(demo)', function(obj){ //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
@@ -163,13 +129,13 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
           ,layEvent = obj.event; //获得 lay-event 对应的值
 
           //查看
-//        if(layEvent === 'find'){
-//          layer.msg('查看操作');
-//          console.log(data);
-//          window.location.hash = "/page/detail/" + data.id;
-//        }
+          if(layEvent === 'find'){
+            //layer.msg('查看操作',{time: 1000});
+            //console.log(data);
+            window.location.hash = "/page/data_list_detail/" + data.id;
+          }
 
-
+ 
 
 
           //删除
@@ -184,20 +150,35 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
               //obj.del(); //删除对应行（tr）的DOM结构
               //layer.close(index);  //关闭当前layerOut
               
-              var dataJson = {"id": data.id, "function_en":data.function_en};
+              headObj.field_en_Arr.forEach(function(item,index){
+                 var field_type_this = headObj.data_type_Arr[index];
+              	 if(field_type_this == "int" || field_type_this == "int(6)" || field_type_this == "decimal(2)" || field_type_this == "decimal(4)"){
+              	 	data[item] = Number(data[item]);
+              	 }
+              });
+              
+              var dataJson = {"id":data.id, "name":data.name};
               var reqData2 = 'action=delData&dataJson=' +JSON.stringify(dataJson);
               dataDB.delData(url,reqData2,function (data2) {
                 layer.msg(data2,{time: 1000});
                 if(data2 != "操作成功"){return;}
                 layer.close(index);
 
+                //系统重启
+                setTimeout(function () {
+					var load_index = layer.load(2,{area: ['100px', '100px'],content: '<p style="position:relative;top:40px;left:-30px;width:100px; text-align:center;background:#333; color:#fff">系统重启中</p>',time: 5000});
+				},1000);
+				setTimeout(function () {
+					window.location.href = "/";
+				},5000);
+				
                 table.reload('layUiTableList', {url: url});
               });
 
             });
           }
 
-         
+          
 
         });
         //监听工具条 结束
@@ -208,32 +189,38 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
         //新增
         $("#btn_add").on("click",function(){
         	var reqData = 'action=findData&searchJson={"level":2}&sortJson={"id":1}&prePageNum=100000&currPage=1';
-            dataDB.findData("/nodejs/modelList",reqData,function (modelListData) {
+            dataDB.findData("/python/modelList",reqData,function (modelListData) {
             	var modelList = modelListData.rows;
-	            var formStr = '<form class="layui-form" name="btn_add">';
-	            for(let i = 0; i < headObj.field_en_Arr.length; i++){
+            	var modelIdArr = [];
+            	data.rows.forEach(function (item, index) {
+            		modelIdArr.push(item.id);
+            	});
+            	var arr = [];
+            	modelList.forEach(function (item, index) {
+            		if(modelIdArr.indexOf(item.id) == -1){
+            			arr.push(item);
+            		}
+            	});
+            	modelList= arr;
+              	
+            	
+            	var formStr = '<form class="layui-form" name="btn_add">';
+	            var field_en_Arr = headObj.field_en_Arr.slice(0,3);
+	            for(let i = 0; i < field_en_Arr.length; i++){
 	               var data_type = headObj.data_type_Arr[i];
                    var field_en = headObj.field_en_Arr[i];
                    var field_ch = headObj.field_ch_Arr[i];
 	               if(field_en == "id"){
-	                //
-	           	   }else if(field_en == "modelName"){
-	                formStr+='<div class="layui-form-item"><label class="layui-form-label">'+field_ch+'：</label><div class="layui-input-block"><select name="id">';
+	                formStr+='<div class="layui-form-item"><label class="layui-form-label">'+field_ch+'：</label><div class="layui-input-block"><select name="id" lay-filter="id">';
 	                modelList.forEach(function (item,index) {
 	                	formStr+='<option value="'+item.id+'">'+item.name+'</option>';
 	                });
 	                formStr+='</select></div></div>';
-	           	   }else if(field_en == "dbName"){
-	           	   	//
-	           	   }else if(field_en == "function_ch"){
-                      formStr+='<div class="layui-form-item"><label class="layui-form-label">'+field_ch+'：</label><div class="layui-input-block"><select name="function_en"><option value="findData">查询</option><option value="insertData">增加</option><option value="updateData">修改</option><option value="delData">删除</option></select></div></div>';
-	           	   }else if(field_en == "function_en"){
-	           	   	//
 	           	   }else{
-	                 formStr+='<div class="layui-form-item"><label class="layui-form-label">'+field_ch+'：</label><div class="layui-input-block"><input class="layui-input" type="text" data_type="'+data_type+'" name="'+field_en+'" value="" placeholder=""></div></div>';
+	                 formStr+='<div class="layui-form-item"><label class="layui-form-label">'+field_ch+'：</label><div class="layui-input-block"><input class="layui-input" type="text" lay-verify="'+data_type+'" name="'+field_en+'" value="" placeholder=""></div></div>';
 	               }
 	            }
-	            formStr+='<div class="layui-form-item"><div class="layui-input-block"><button class="layui-btn layui-btn-sm" lay-submit lay-filter="formDemo">提交</button><button class="layui-btn layui-btn-sm btn_esc">取消</button></div></div>';
+                formStr+='<div class="layui-form-item"><div class="layui-input-block"><button class="layui-btn layui-btn-sm" lay-submit lay-filter="formDemo">提交</button><button class="layui-btn layui-btn-sm btn_esc">取消</button></div></div>';
 	            formStr+='</form>';
 	            layer.open({
 	              type: 1,  //type的值有：0（信息框，默认）1（页面层）2（iframe层）3（加载层）4（tips层）
@@ -250,44 +237,70 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
 	                  form.render(); //重新渲染form
 	                  $(".btn_esc").on("click",function () { layer.close(index); return false; });
 	                  
+	                  form.on('select(id)', function(data){
+						  //console.log(data);
+						  $("form input[name=name_ch]").val($("form select[name=id] option:selected").text());
+					  }); 
+	                  
 	                  //监听提交
 	                  form.on('submit(formDemo)', function(data){
-	                  	  data.field.id = Number(data.field.id);
-	                  	  data.field.modelName = $("form select[name=id] option:selected").text();
-	                  	  data.field.function_ch = $("form select[name=function_en] option:selected").text();
+	                      data.field.field_ch = "ID";
+	                      data.field.field_en = "id";
+	                      data.field.id = Number(data.field.id);
 	                      //console.log(data.field);
 	                      
-	                      var reqData_dateList = 'action=findData&searchJson='+JSON.stringify({"id":data.field.id})+'&prePageNum=1&currPage=1';
-                          dataDB.findData("/nodejs/dataList",reqData_dateList,function (dateListData) {
-                          	 data.field.dbName = dateListData.rows[0].name;
-                          	 //console.log(data.field);
-                          	 
-                          	 var dataArr=[];
-		                     dataArr.push(data.field);
-		                     var reqData2 = 'action=insertData&dataArr=' + JSON.stringify(dataArr);
-		                     dataDB.insertData(url,reqData2,function (data2) {
-		                        layer.msg(data2,{time: 1000});
-		                        if(data2 != "操作成功"){return;}
-		                        layer.close(index);
-		
-		                        table.reload('layUiTableList', {url: url});
-		                     });
-                          });
-  
+	                      if(!data.field.id || !data.field.name || !data.field.name_ch){layer.msg("模块ID和数据表名称不能为空",{time: 1000});return false;}
+	                      var searchJson_id = JSON.stringify({"id": data.field.id});
+	                      var reqData_id = 'action=findDataAll&searchJson='+searchJson_id+'&prePageNum=1000&currPage=1';
+	                      dataDB.findData(url,reqData_id,function (data_id) {
+	                      	  if(data_id.rows.length > 0){
+	                      		 layer.msg("模块ID已存在",{time: 1000});
+	                      		 return;
+	                      	  }
+	                      	  var searchJson_name = JSON.stringify({"name": data.field.name});
+		                      var reqData_name = 'action=findDataAll&searchJson='+searchJson_name+'&prePageNum=1000&currPage=1';
+		                      dataDB.findData(url,reqData_name,function (data_name) {
+		                      	if(data_name.rows.length > 0){
+		                      		layer.msg("数据表名称已存在",{time: 1000});
+		                      		return;
+		                      	}
+		                      	
+		                      	var dataArr=[];
+			                    dataArr.push(data.field);
+			                    var reqData2 = 'action=insertData&dataArr=' + JSON.stringify(dataArr);
+			                    dataDB.insertData(url,reqData2,function (data2) {
+			                        layer.msg(data2,{time: 1000});
+			                        if(data2 != "操作成功"){return;}
+			                        layer.close(index);
+			
+			                        //系统重启
+			                        setTimeout(function () {
+										var load_index = layer.load(2,{area: ['100px', '100px'],content: '<p style="position:relative;top:40px;left:-30px;width:100px; text-align:center;background:#333; color:#fff">系统重启中</p>',time: 5000});
+									},1000);
+									setTimeout(function () {
+										window.location.href = "/";
+									},5000);
+									
+			                        table.reload('layUiTableList', {url: url});
+			                    });
+			                    
+		                      });
+	                      });
+	                      
 	                      return false;
 	                });
 	              }
 	            });
-
             });
             
         });
         
-   
+      
+        
         //查询
         $("#btn_search").on("click",function(){
             var formStr = '<form class="layui-form" name="btn_search">';
-            for(let i = 0; i < headObj.field_en_Arr.length; i++){
+            for(let i = 0; i < 3; i++){
             	var data_type = headObj.data_type_Arr[i];
                 var field_en = headObj.field_en_Arr[i];
                 var field_ch = headObj.field_ch_Arr[i];
@@ -326,12 +339,6 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
                       	 	}else{
                       	 		delete data.field[item];
                       	 	}
-                      	 }else if(field_type_this == "date(YYYY-MM-DD HH:mm:ss)" || field_type_this == "date(YYYY)" || field_type_this == "date(YYYY-MM)" || field_type_this == "date(YYYY-MM-DD)" || field_type_this == "date(HH:mm:ss)"){
-                      	 	if(data.field[item]){
-                      	 		data.field[item] = {$gte:data.field[item]};
-                      	 	}else{
-                      	 		delete data.field[item];
-                      	 	}
                       	 }else{
                       	 	if(! data.field[item]){
                       	 		delete data.field[item];
@@ -350,7 +357,7 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
             });
 
         });
-   
+      
 
   }
   //加载colArr 结束
@@ -358,7 +365,7 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
 
 
   //初始化数据
-  var reqData = 'action=findData&searchJson=&prePageNum=1&currPage=1';
+  var reqData = 'action=findDataAll&searchJson=&prePageNum=1&currPage=1';
   dataDB.findData(url,reqData,colArrInt);
   //初始化数据 结束
   

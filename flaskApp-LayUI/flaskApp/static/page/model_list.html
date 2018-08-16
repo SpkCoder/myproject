@@ -9,7 +9,7 @@
      
     <div class="layui-btn-group">
         <button id="btn_add" class="layui-btn layui-btn-sm"><i class="layui-icon">&#xe654;</i>增加</button>
-        <button id="btn_delete" class="layui-btn layui-btn-sm"><i class="layui-icon">&#xe640;</i>删除</button>
+        <!--<button id="btn_delete" class="layui-btn layui-btn-sm"><i class="layui-icon">&#xe640;</i>删除</button>-->
         <button id="btn_search" class="layui-btn layui-btn-sm"><i class="layui-icon">&#xe615;</i>查询</button>
     </div>
 
@@ -28,15 +28,14 @@
 <script type="text/javascript">
 layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'dataDB', 'formVerify'], function(){
   var $ = layui.$;
-  var url = $("#layUI_routerView").attr("data-href").replace(/\/page\//,"/nodejs/").replace(/\.html/,"");
-  console.log(url);
+  var url = $("#layUI_routerView").attr("data-href").replace(/\/page\//,"/python/").replace(/\.html/,"");
+  //console.log(url);
   //当前定位
   var this_href = "#"+$("#layUI_routerView").attr("data-href").split(".html")[0];
   var this_a = $(".layui-nav a[href='"+this_href+"']");
   $(".list-page-point span").html(this_a.parents("li").find("a").eq(0).text()+"&gt;&gt;"+this_a.text());
 
   var dataDB = layui.dataDB;
-
 
   var laydate = layui.laydate //日期
   ,laypage = layui.laypage //分页
@@ -158,22 +157,45 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
           var data = obj.data //获得当前行数据
           ,layEvent = obj.event; //获得 lay-event 对应的值
 
+         
           //查看
 //        if(layEvent === 'find'){
 //          layer.msg('查看操作');
 //          console.log(data);
 //          window.location.hash = "/page/detail/" + data.id;
 //        }
-
+          
+          
           //修改
           if(layEvent === 'edit'){
             //console.log(data);
+          	if(data.id==100001 || data.id==100002 || data.id==100003 || data.id==100004 || data.id==100005 || data.id==100006 || data.id==100007 || data.id==100008){
+            	layer.msg("禁止操作系统模块！",{time: 1000});
+            	return;
+            }
+            
             var formStr = '<form class="layui-form" name="edit">';
             for(let i = 0; i < headObj.field_en_Arr.length; i++){
                var data_type = headObj.data_type_Arr[i];
                var field_en = headObj.field_en_Arr[i];
                var field_ch = headObj.field_ch_Arr[i];
-               formStr+='<div class="layui-form-item"><label class="layui-form-label">'+field_ch+'：</label><div class="layui-input-block"><input class="layui-input" type="text" lay-verify="'+data_type+'" name="'+field_en+'" value="'+data[field_en]+'" placeholder=""></div></div>';
+               if(field_en == "level"){
+               	    if(data[field_en] == 1){
+                       formStr+='<div class="layui-form-item"><label class="layui-form-label">'+field_ch+'：</label><div class="layui-input-block"><select name="level" lay-filter="level"><option value="1" selected>1</option><option value="2">2</option></select></div></div>';
+               	    }else{
+                       formStr+='<div class="layui-form-item"><label class="layui-form-label">'+field_ch+'：</label><div class="layui-input-block"><select name="level" lay-filter="level"><option value="1">1</option><option value="2" selected>2</option></select></div></div>';
+               	    }
+           	   }else if(field_en == "position"){
+                formStr+='<div class="layui-form-item"><label class="layui-form-label">'+field_ch+'：</label><div class="layui-input-block"><select name="position" lay-filter="position" value="'+data[field_en]+'"><option value="left">左侧</option><option value="top">顶部</option></select></div></div>';
+           	   }else if(field_en == "show"){
+	           	   	if(data[field_en] == "true"){
+	                  formStr+='<div class="layui-form-item"><label class="layui-form-label">'+field_ch+'：</label><div class="layui-input-block"><input type="radio"'+'name="'+field_en+'" value="true" title="是" checked><input type="radio"'+'name="'+field_en+'" value="false" title="否"></div></div>';
+	           	   	}else{
+	                  formStr+='<div class="layui-form-item"><label class="layui-form-label">'+field_ch+'：</label><div class="layui-input-block"><input type="radio"'+'name="'+field_en+'" value="true" title="是"><input type="radio"'+'name="'+field_en+'" value="false" title="否" checked></div></div>';
+	           	   	}
+           	   }else{
+                 formStr+='<div class="layui-form-item"><label class="layui-form-label">'+field_ch+'：</label><div class="layui-input-block"><input class="layui-input" type="text" lay-verify="'+data_type+'" name="'+field_en+'" value="'+data[field_en]+'" placeholder=""></div></div>';
+               }
 
             }
             formStr+='<div class="layui-form-item"><div class="layui-input-block"><button class="layui-btn layui-btn-sm" lay-submit lay-filter="formDemo">提交</button><button class="layui-btn layui-btn-sm btn_esc">取消</button></div></div>';
@@ -191,7 +213,25 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
                   //console.log(index);
                   
                   form.render(); //重新渲染form
+                  if($("form select[name=level]").val() == 1){
+                     $("form input[name=parentId]").val("");
+				  	 $("form input[name=parentId]").attr("disabled","disabled");
+				  	 $("form input[name=parentId]").removeAttr("lay-verify");
+                  }
+                  $("form input[name=id]").attr("disabled","disabled");
                   $(".btn_esc").on("click",function () { layer.close(index); return false; });
+                  
+                  form.on('select(level)', function(data){
+					  //console.log(data);
+					  if(data.value==1){
+					  	$("form input[name=parentId]").val("");
+					  	$("form input[name=parentId]").attr("disabled","disabled");
+					  	$("form input[name=parentId]").removeAttr("lay-verify");
+					  }else{
+					  	$("form input[name=parentId]").removeAttr("disabled");
+					  	$("form input[name=parentId]").attr("lay-verify","int(6)");
+					  }
+				  });  
                   
                   //监听提交
                   form.on('submit(formDemo)', function(data){
@@ -204,7 +244,6 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
                       	 }
                       });
                       //console.log(data.field);
-                      
                       var searchJson={"id":data.field.id};
                       var updateJson= data.field;
                       delete updateJson.id;
@@ -226,10 +265,22 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
 
           //删除
           if(layEvent === 'delete'){
+          	if(data.id==100001 || data.id==100002 || data.id==100003 || data.id==100004 || data.id==100005 || data.id==100006 || data.id==100007 || data.id==100008){
+            	layer.msg("禁止操作系统模块！",{time: 1000});
+            	return;
+            }
+          	
             layer.confirm('真的删除行么', function(index){
               //console.log(data);
               //obj.del(); //删除对应行（tr）的DOM结构
               //layer.close(index);  //关闭当前layerOut
+              
+              headObj.field_en_Arr.forEach(function(item,index){
+                 var field_type_this = headObj.data_type_Arr[index];
+              	 if(field_type_this == "int" || field_type_this == "int(6)" || field_type_this == "decimal(2)" || field_type_this == "decimal(4)"){
+              	 	data[item] = Number(data[item]);
+              	 }
+              });
               
               var dataJson = {"id":{"$in":[data.id]}};
               var reqData2 = 'action=delData&dataJson=' +JSON.stringify(dataJson);
@@ -267,8 +318,10 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
         });
         //监听工具条 结束
         
-         
-
+ 
+        
+      
+      
        
         //新增
         $("#btn_add").on("click",function(){
@@ -277,9 +330,18 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
                var data_type = headObj.data_type_Arr[i];
                var field_en = headObj.field_en_Arr[i];
                var field_ch = headObj.field_ch_Arr[i];
-               formStr+='<div class="layui-form-item"><label class="layui-form-label">'+field_ch+'：</label><div class="layui-input-block"><input class="layui-input" type="text" lay-verify="'+data_type+'" name="'+field_en+'" value="" placeholder=""></div></div>';
+               if(field_en == "level"){
+                formStr+='<div class="layui-form-item"><label class="layui-form-label">'+field_ch+'：</label><div class="layui-input-block"><select name="level" lay-filter="level"><option value="1">1</option><option value="2">2</option></select></div></div>';
+           	   }else if(field_en == "position"){
+                formStr+='<div class="layui-form-item"><label class="layui-form-label">'+field_ch+'：</label><div class="layui-input-block"><select name="position" lay-filter="position"><option value="left">左侧</option><option value="top">顶部</option></select></div></div>';
+           	   }else if(field_en == "show"){
+                formStr+='<div class="layui-form-item"><label class="layui-form-label">'+field_ch+'：</label><div class="layui-input-block"><input type="radio"'+'name="'+field_en+'" value="true" title="是" checked><input type="radio"'+'name="'+field_en+'" value="false" title="否"></div></div>';
+           	   }else{
+                formStr+='<div class="layui-form-item"><label class="layui-form-label">'+field_ch+'：</label><div class="layui-input-block"><input class="layui-input" type="text" lay-verify="'+data_type+'" name="'+field_en+'" value="" placeholder=""></div></div>';
+           	   }
+
             }
-            formStr+='<div class="layui-form-item"><div class="layui-input-block"><button class="layui-btn layui-btn-sm" lay-submit lay-filter="formDemo">提交</button><button class="layui-btn layui-btn-sm btn_esc"">取消</button></div></div>';
+            formStr+='<div class="layui-form-item"><div class="layui-input-block"><button class="layui-btn layui-btn-sm" lay-submit lay-filter="formDemo">提交</button><button class="layui-btn layui-btn-sm btn_esc">取消</button></div></div>';
             formStr+='</form>';
             layer.open({
               type: 1,  //type的值有：0（信息框，默认）1（页面层）2（iframe层）3（加载层）4（tips层）
@@ -294,12 +356,27 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
                   //console.log(index);
                   
                   form.render(); //重新渲染form
+                  $("form input[name=parentId]").attr("disabled","disabled");
+                  $("form input[name=parentId]").removeAttr("lay-verify");
                   $(".btn_esc").on("click",function () { layer.close(index); return false; });
+                  
+                  form.on('select(level)', function(data){
+					  //console.log(data);
+					  if(data.value==1){
+					  	$("form input[name=parentId]").val("");
+					  	$("form input[name=parentId]").attr("disabled","disabled");
+					  	$("form input[name=parentId]").removeAttr("lay-verify");
+					  }else{
+					  	$("form input[name=parentId]").removeAttr("disabled");
+					  	$("form input[name=parentId]").attr("lay-verify","int(6)");
+					  }
+				  });  
+                  
+                 
                   
                   //监听提交
                   form.on('submit(formDemo)', function(data){
                       //console.log(data.field);
-                      
                       headObj.field_en_Arr.forEach(function(item,index){
                          var field_type_this = headObj.data_type_Arr[index];
                       	 if(field_type_this == "int" || field_type_this == "int(6)" || field_type_this == "decimal(2)" || field_type_this == "decimal(4)"){
@@ -307,7 +384,6 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
                       	 }
                       });
                       //console.log(data.field);
-                      
                       var dataArr=[];
                       dataArr.push(data.field);
                       var reqData2 = 'action=insertData&dataArr=' + JSON.stringify(dataArr);
@@ -320,7 +396,9 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
                       });
                       
                       return false;
+                      
                 });
+                
               }
             });
 
@@ -330,28 +408,28 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
         
         
         //批量删除
-        $("#btn_delete").on("click",function(){
-        	var checkStatus = table.checkStatus('layUiTableList');
-        	//console.log(checkStatus.data);
-        	if(checkStatus.data.length == 0){
-        		layer.msg("请勾选要删除的行",{time: 1000});
-        		return;
-        	}
-            layer.confirm('真的删除行么', function(index){
-	            var idArr = [];
-	            for(var i=0; i<checkStatus.data.length; i++){
-	            	idArr.push(checkStatus.data[i].id);
-	            }
-	            var dataJson = {"id":{"$in":idArr}};
-		        var reqData2 = 'action=delData&dataJson=' +JSON.stringify(dataJson);
-		        dataDB.delData(url,reqData2,function (data2) {
-		            layer.msg(data2,{time: 1000});
-		            if(data2 != "操作成功"){return;}
-		            layer.close(index);
-		            table.reload('layUiTableList', {url: url});
-		        });
-	       });
-        });
+//      $("#btn_delete").on("click",function(){
+//          var checkStatus = table.checkStatus('layUiTableList');
+//      	//console.log(checkStatus.data);
+//      	if(checkStatus.data.length == 0){
+//      		layer.msg("请勾选要删除的行",{time: 1000});
+//      		return;
+//      	}
+//          layer.confirm('真的删除行么', function(index){
+//	            var idArr = [];
+//	            for(var i=0; i<checkStatus.data.length; i++){
+//	            	idArr.push(checkStatus.data[i].id);
+//	            }
+//	            var dataJson = {"id":{"$in":idArr}};
+//		        var reqData2 = 'action=delData&dataJson=' +JSON.stringify(dataJson);
+//		        dataDB.delData(url,reqData2,function (data2) {
+//		            layer.msg(data2,{time: 1000});
+//		            if(data2 != "操作成功"){return;}
+//		            layer.close(index);
+//		            table.reload('layUiTableList', {url: url});
+//		        });
+//	       });
+//      });
         
 
         //查询
@@ -420,6 +498,8 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
             });
 
         });
+
+
 
 
   }

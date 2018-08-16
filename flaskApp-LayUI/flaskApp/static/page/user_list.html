@@ -28,7 +28,7 @@
 <script type="text/javascript">
 layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'dataDB', 'formVerify'], function(){
   var $ = layui.$;
-  var url = $("#layUI_routerView").attr("data-href").replace(/\/page\//,"/nodejs/").replace(/\.html/,"");
+  var url = $("#layUI_routerView").attr("data-href").replace(/\/page\//,"/python/").replace(/\.html/,"");
   console.log(url);
   //当前定位
   var this_href = "#"+$("#layUI_routerView").attr("data-href").split(".html")[0];
@@ -169,7 +169,7 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
           if(layEvent === 'edit'){
             //console.log(data);
             var reqData = 'action=findData&searchJson={}&prePageNum=100000&currPage=1';
-            dataDB.findData("/nodejs/roleClass",reqData,function (roleClassData) {
+            dataDB.findData("/python/roleClass",reqData,function (roleClassData) {
 	            var roleClass = roleClassData.rows;
 	            var formStr = '<form class="layui-form" name="edit">';
 	            for(let i = 0; i < headObj.field_en_Arr.length; i++){
@@ -299,7 +299,7 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
         //新增
         $("#btn_add").on("click",function(){
         	var reqData = 'action=findData&searchJson={}&prePageNum=100000&currPage=1';
-            dataDB.findData("/nodejs/roleClass",reqData,function (roleClassData) {
+            dataDB.findData("/python/roleClass",reqData,function (roleClassData) {
             	var roleClass = roleClassData.rows;
 	            var formStr = '<form class="layui-form" name="btn_add">';
 	            for(let i = 0; i < headObj.field_en_Arr.length; i++){

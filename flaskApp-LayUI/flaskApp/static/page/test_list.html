@@ -28,7 +28,7 @@
 <script type="text/javascript">
 layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'dataDB', 'formVerify'], function(){
   var $ = layui.$;
-  var url = $("#layUI_routerView").attr("data-href").replace(/\/page\//,"/nodejs/").replace(/\.html/,"");
+  var url = $("#layUI_routerView").attr("data-href").replace(/\/page\//,"/python/").replace(/\.html/,"");
   console.log(url);
   //当前定位
   var this_href = "#"+$("#layUI_routerView").attr("data-href").split(".html")[0];
@@ -167,21 +167,13 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
 
           //修改
           if(layEvent === 'edit'){
-          	if(data.id==1 || data.id==2 ){
-            	layer.msg("禁止操作默认分类！",{time: 1000});
-            	return;
-            }
             //console.log(data);
             var formStr = '<form class="layui-form" name="edit">';
             for(let i = 0; i < headObj.field_en_Arr.length; i++){
                var data_type = headObj.data_type_Arr[i];
                var field_en = headObj.field_en_Arr[i];
                var field_ch = headObj.field_ch_Arr[i];
-               if(field_en == "id"){
-                 formStr+='<div class="layui-form-item"><label class="layui-form-label">'+field_ch+'：</label><div class="layui-input-block"><input class="layui-input" type="text" disabled lay-verify="'+data_type+'" name="'+field_en+'" value="'+data[field_en]+'" placeholder=""></div></div>';
-               }else{
-                 formStr+='<div class="layui-form-item"><label class="layui-form-label">'+field_ch+'：</label><div class="layui-input-block"><input class="layui-input" type="text" lay-verify="'+data_type+'" name="'+field_en+'" value="'+data[field_en]+'" placeholder=""></div></div>';
-               }
+               formStr+='<div class="layui-form-item"><label class="layui-form-label">'+field_ch+'：</label><div class="layui-input-block"><input class="layui-input" type="text" lay-verify="'+data_type+'" name="'+field_en+'" value="'+data[field_en]+'" placeholder=""></div></div>';
 
             }
             formStr+='<div class="layui-form-item"><div class="layui-input-block"><button class="layui-btn layui-btn-sm" lay-submit lay-filter="formDemo">提交</button><button class="layui-btn layui-btn-sm btn_esc">取消</button></div></div>';
@@ -234,11 +226,6 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
 
           //删除
           if(layEvent === 'delete'){
-          	if(data.id==1 || data.id==2 ){
-            	layer.msg("禁止操作默认分类！",{time: 1000});
-            	return;
-            }
-          	
             layer.confirm('真的删除行么', function(index){
               //console.log(data);
               //obj.del(); //删除对应行（tr）的DOM结构
@@ -344,20 +331,12 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
         
         //批量删除
         $("#btn_delete").on("click",function(){
-            var checkStatus = table.checkStatus('layUiTableList');
+        	var checkStatus = table.checkStatus('layUiTableList');
         	//console.log(checkStatus.data);
         	if(checkStatus.data.length == 0){
         		layer.msg("请勾选要删除的行",{time: 1000});
         		return;
         	}
-        	
-        	for(var i=0; i<checkStatus.data.length; i++){
-	            if(checkStatus.data[i].id==1 || checkStatus.data[i].id==2 ){
-	            	layer.msg("禁止操作默认分类！",{time: 1000});
-	            	return;
-	            }
-	        }
-        	
             layer.confirm('真的删除行么', function(index){
 	            var idArr = [];
 	            for(var i=0; i<checkStatus.data.length; i++){

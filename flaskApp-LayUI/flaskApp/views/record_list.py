@@ -48,11 +48,11 @@ def operation(req):
             list_head = mysqldb.get_head('name="' + table_name + '"')
 
             if list_head and len(list_head) > 0:
-                dict_json = {'code': 0, 'msg': '', 'count': result['count'], 'prePageNum': pre_page_num, 'currPage': curr_page, 'name': list_head[0]['name'], 'name_ch': list_head[0]['name_ch'], 'field_en': list_head[0]['field_en'], 'data_type': list_head[0]['data_type'], 'field_width': list_head[0]['field_width'], 'field_sort': list_head[0]['field_sort'], 'rows': result['rows']}
+                dict_json = {'code': 0, 'msg': '', 'count': result['count'], 'prePageNum': pre_page_num, 'currPage': curr_page, 'name': list_head[0]['name'], 'name_ch': list_head[0]['name_ch'], 'field_ch': list_head[0]['field_ch'], 'field_en': list_head[0]['field_en'], 'data_type': list_head[0]['data_type'], 'field_width': list_head[0]['field_width'], 'field_sort': list_head[0]['field_sort'], 'rows': result['rows']}
             else:
-                dict_json = {'code': 0, 'msg': '', 'count': result['count'], 'prePageNum': pre_page_num, 'currPage': curr_page, 'name': '', 'name_ch': '', 'field_en': '', 'data_type': '', 'field_width': '', 'field_sort': '', 'rows': result['rows']}
+                dict_json = {'code': 0, 'msg': '', 'count': result['count'], 'prePageNum': pre_page_num, 'currPage': curr_page, 'name': '', 'name_ch': '', 'field_ch': '', 'field_en': '', 'data_type': '', 'field_width': '', 'field_sort': '', 'rows': result['rows']}
 
-            return make_response(json.dumps(dict_json))
+            return make_response(json.dumps(dict_json, ensure_ascii=False))
         else:
             return make_response('操作失败')
 

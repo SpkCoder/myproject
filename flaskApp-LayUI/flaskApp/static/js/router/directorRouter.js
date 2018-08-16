@@ -12,7 +12,7 @@ layui.define(["jquery"],function(exports){
                   $("#layUI_routerView").attr("data-href",url);
                   $("#layUI_routerView").html(data);
                   //初始化当前页
-                  var this_href = "#"+url.split(".html")[0];
+                  var this_href = "#"+url.split(".html")[0].replace(/\/static/,"");
                   var this_a = $(".layui-nav a[href='"+this_href+"']");
                   if(this_a.length == 0){return;}
                   var this_dd = this_a.parents("dd");
@@ -42,10 +42,10 @@ layui.define(["jquery"],function(exports){
 
     var routerObj = {};
     routerUrl.forEach(function (item,index) {
-    	if(item == "/page/dataListDetail/:id"){
-    		routerObj[item] = function (id) { getHTML("/page/dataListDetail.html?"+id);}
+    	if(item == "/page/data_list_detail/:id"){
+    		routerObj[item] = function (id) { getHTML("/static" + "/page/data_list_detail.html?"+id);}
     	}else{
-    		routerObj[item] = function () { getHTML(item + ".html");}
+    		routerObj[item] = function () { getHTML("/static" + item + ".html");}
     	}
     });
 

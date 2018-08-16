@@ -50,7 +50,7 @@ def operation(req):
 
         if result:
             dict_json = {'code': 0, 'msg': '', 'count': result['count'], 'prePageNum': pre_page_num, 'currPage': curr_page, 'rows': result['rows']}
-            return make_response(json.dumps(dict_json))
+            return make_response(json.dumps(dict_json, ensure_ascii=False))
         else:
             return make_response('操作失败')
 

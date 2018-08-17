@@ -98,6 +98,24 @@ insert into data_list (modelId, name, name_ch, field_en, field_ch, data_type, fi
 (100007, "record_list", "操作记录", "time", "时间", "text", 100, 10, "yuxian", "2018-02-10 14:45:58", "yuxian", "2018-02-22 18:23:23");
 
 
+insert into data_list (modelId, name, name_ch, field_en, field_ch, data_type, field_width, field_sort, create_name, create_time, update_name, update_time) values
+(100004, "user_list", "用户列表", "username", "用户名", "text", 100, 1, "yuxian", "2018-02-10 14:45:58", "yuxian", "2018-02-22 18:23:23"),
+(100004, "user_list", "用户列表", "email", "电子邮箱", "text", 150, 2, "yuxian", "2018-02-10 14:45:58", "yuxian", "2018-02-22 18:23:23"),
+(100004, "user_list", "用户列表", "phone", "电话", "text", 100, 3, "yuxian", "2018-02-10 14:45:58", "yuxian", "2018-02-22 18:23:23"),
+(100004, "user_list", "用户列表", "sex", "性别", "text", 100, 7, "yuxian", "2018-02-10 14:45:58", "yuxian", "2018-02-22 18:23:23"),
+(100004, "user_list", "用户列表", "age", "年龄", "int", 100, 5, "yuxian", "2018-02-10 14:45:58", "yuxian", "2018-02-22 18:23:23"),
+(100004, "user_list", "用户列表", "roleId", "角色ID", "int", 100, 6, "yuxian", "2018-02-10 14:45:58", "yuxian", "2018-02-22 18:23:23"),
+(100004, "user_list", "用户列表", "roleName", "角色名称", "text", 100, 8, "yuxian", "2018-02-10 14:45:58", "yuxian", "2018-02-22 18:23:23"),
+(100004, "user_list", "用户列表", "name", "姓名", "text", 100, 4, "yuxian", "2018-02-10 14:45:58", "yuxian", "2018-02-22 18:23:23");
+
+
+
+insert into data_list (modelId, name, name_ch, field_en, field_ch, data_type, field_width, field_sort, create_name, create_time, update_name, update_time) values
+(100008, "role_class", "角色分类", "id", "ID", "int", 100, 1, "yuxian", "2018-02-10 14:45:58", "yuxian", "2018-02-22 18:23:23"),
+(100008, "role_class", "角色分类", "class_name", "分类名称", "text", 100, 2, "yuxian", "2018-02-10 14:45:58", "yuxian", "2018-02-22 18:23:23");
+
+
+
 
 
 
@@ -132,3 +150,20 @@ insert into model_list (`level`, parentId, id, name, position, sort, href, iconf
 
 
 
+
+
+create table role_class (
+	id INT(10) UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
+	class_name VARCHAR(100) NOT NULL,
+	create_name VARCHAR(100) NOT NULL,
+	create_time VARCHAR(100) NOT NULL,
+	update_name VARCHAR(100) NOT NULL,
+	update_time VARCHAR(100) NOT NULL
+	);
+
+
+insert into role_class (id, class_name, create_name, create_time, update_name, update_time) values
+(1, "超级用户", "yuxian", "2018-02-04 13:02:21", "yuxian", "2018-02-21 19:39:58"),
+(2, "普通用户", "yuxian", "2018-02-04 13:02:21", "yuxian", "2018-02-21 19:39:58"),
+(3, "经理", "yuxian", "2018-02-04 13:02:21", "yuxian", "2018-02-21 19:39:58"),
+(4, "员工", "yuxian", "2018-02-04 13:02:21", "yuxian", "2018-02-21 19:39:58");

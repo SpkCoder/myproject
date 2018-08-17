@@ -54,6 +54,11 @@ def operation(req):
             px = dict_os['px'] or ""
             ip = req.remote_addr
 
+            # 操作记录
+            content = 'action=SignIn'
+            dict_record = {'username': dict_where['username'], 'dbName': table_name, 'action': '登录', 'content': content, 'os': os, 'px': px, 'ip': ip, 'time': time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())}
+            mysqldb.set_record(dict_record)
+
             res = make_response('登录成功')
             dict_json = {'username': dict_where['username'], 'hash': dict_where['password'], 'os': os, 'px': px, 'ip': ip }
             res.set_cookie('logining', json.dumps(dict_json, ensure_ascii=False), max_age=8*3600)
@@ -66,6 +71,14 @@ def operation(req):
     def sign_out():
         dict_login = json.loads(req.cookies['logining'])
         print(dict_login)
+
+        # 操作记录
+        content = 'action=SignOut'
+        dict_record = {'username': dict_login['username'], 'dbName': table_name, 'action': '退出', 'content': content,
+                       'os': dict_login['os'], 'px': dict_login['px'], 'ip': req.remote_addr,
+                       'time': time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())}
+        mysqldb.set_record(dict_record)
+
         res = make_response('退出成功')
         res.delete_cookie("logining")
         print(dict_login['username'] + "退出成功")
@@ -98,6 +111,7 @@ def operation(req):
         else:
             pass
 
+        dict_login = json.loads(req.cookies['logining'])
         if dict_where['username'] != dict_login['username']:
             return make_response('没有权限')
         else:
@@ -112,7 +126,6 @@ def operation(req):
         else:
             return make_response('密码不能为空')
 
-        dict_login = json.loads(req.cookies['logining'])
         str_where = 'username="' + dict_where['username'] + '"'
         dict_update['update_name'] = dict_login['username']
         dict_update['update_time'] = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
@@ -121,6 +134,14 @@ def operation(req):
         # print(result)
 
         if result:
+
+            # 操作记录
+            content = '修改密码'
+            dict_record = {'username': dict_login['username'], 'dbName': table_name, 'action': '修改', 'content': content,
+                           'os': dict_login['os'], 'px': dict_login['px'], 'ip': req.remote_addr,
+                           'time': time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())}
+            mysqldb.set_record(dict_record)
+
             return make_response('操作成功')
         else:
             return make_response('操作失败')

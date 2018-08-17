@@ -52,7 +52,6 @@ def drop_table(table_name):
         return 1
 
 
-
 # 查询数据
 def find_data(table_name, str_where, str_field, args):
     db = connect_db()
@@ -230,7 +229,7 @@ def set_record(dict_record):
         db.close()
         return 0
     else:
-        sql = 'select id, name, name_ch from data_list where name ="' + dict_record['dbName'] + '"'
+        sql = 'select modelId, name, name_ch from data_list where name ="' + dict_record['dbName'] + '"'
         try:
             cursor = db.cursor(pymysql.cursors.DictCursor)
             cursor.execute(sql)
@@ -244,7 +243,7 @@ def set_record(dict_record):
         else:
             return 0
 
-        dict_record['modelId'] = result[0]['id']
+        dict_record['modelId'] = result[0]['modelId']
         dict_record['dbName_ch'] = result[0]['name_ch']
 
         sql = 'insert into record_list'

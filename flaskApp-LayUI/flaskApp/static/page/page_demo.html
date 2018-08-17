@@ -28,10 +28,10 @@
 <script type="text/javascript">
 layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'dataDB', 'formVerify'], function(){
   var $ = layui.$;
-  var url = $("#layUI_routerView").attr("data-href").replace(/\/page\//,"/python/").replace(/\.html/,"");
+  var url = $("#layUI_routerView").attr("data-href").replace(/\/static\/page\//,"/python/").replace(/\.html/,"");
   console.log(url);
   //当前定位
-  var this_href = "#"+$("#layUI_routerView").attr("data-href").split(".html")[0];
+  var this_href = "#"+$("#layUI_routerView").attr("data-href").split(".html")[0].replace(/\/static/,"");
   var this_a = $(".layui-nav a[href='"+this_href+"']");
   $(".list-page-point span").html(this_a.parents("li").find("a").eq(0).text()+"&gt;&gt;"+this_a.text());
 
@@ -205,10 +205,10 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
                       });
                       //console.log(data.field);
                       
-                      var searchJson={"id":data.field.id};
-                      var updateJson= data.field;
+                      var whereStr ='id=' + data.field.id;
+                      var updateJson = data.field;
                       delete updateJson.id;
-                      var reqData2 = 'action=updateData&searchJson=' + JSON.stringify(searchJson) + '&updateJson=' + JSON.stringify(updateJson);
+                      var reqData2 = 'action=updateData&whereStr=' + whereStr + '&updateJson=' + JSON.stringify(updateJson);
                       dataDB.updateData(url,reqData2,function (data2) {
                         layer.msg(data2,{time: 1000});
                         if(data2 != "操作成功"){return;}
@@ -308,6 +308,7 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
                       });
                       //console.log(data.field);
                       
+                      delete data.field.id;
                       var dataArr=[];
                       dataArr.push(data.field);
                       var reqData2 = 'action=insertData&dataArr=' + JSON.stringify(dataArr);

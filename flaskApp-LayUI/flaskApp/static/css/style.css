@@ -85,6 +85,9 @@
 
 .logo .img-mobel{display: none;}
 
+input:disabled{
+	cursor:not-allowed;
+}
 
 
 

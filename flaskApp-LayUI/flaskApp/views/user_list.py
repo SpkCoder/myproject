@@ -24,11 +24,6 @@ def operation(req):
         else:
             str_where = ''
 
-        if 'fieldStr' in req.args:
-            str_field = req.args['fieldStr']
-        else:
-            str_field = ''
-
         if 'sortStr' in req.args:
             str_sort = req.args['sortStr']
         else:
@@ -44,12 +39,27 @@ def operation(req):
         else:
             curr_page = 0
 
+        str_field = 'user_list.id, user_list.username, user_list.password, user_list.name, user_list.email, user_list.phone, user_list.sex, user_list.age, user_list.create_name, user_list.create_time, user_list.update_name, user_list.update_time, user_list.roleId, role_class.class_name as roleName'
         args = {'pre_page_num': pre_page_num, 'curr_page': curr_page, 'sort': str_sort}
-        result = mysqldb.find_data(table_name, str_where, str_field, args)
+        sql_lookup = 'user_list LEFT JOIN role_class ON user_list.roleId = role_class.id'
+        result = mysqldb.find_data(sql_lookup, str_where, str_field, args)
         # print(result)
 
         if result:
-            dict_json = {'code': 0, 'msg': '', 'count': result['count'], 'prePageNum': pre_page_num, 'currPage': curr_page, 'rows': result['rows']}
+            # 获取表头数据
+            list_head = mysqldb.get_head('name="' + table_name + '"')
+
+            if list_head and len(list_head) > 0:
+                dict_json = {'code': 0, 'msg': '', 'count': result['count'], 'prePageNum': pre_page_num,
+                             'currPage': curr_page, 'name': list_head[0]['name'], 'name_ch': list_head[0]['name_ch'],
+                             'field_ch': list_head[0]['field_ch'], 'field_en': list_head[0]['field_en'],
+                             'data_type': list_head[0]['data_type'], 'field_width': list_head[0]['field_width'],
+                             'field_sort': list_head[0]['field_sort'], 'rows': result['rows']}
+            else:
+                dict_json = {'code': 0, 'msg': '', 'count': result['count'], 'prePageNum': pre_page_num,
+                             'currPage': curr_page, 'name': '', 'name_ch': '', 'field_ch': '', 'field_en': '',
+                             'data_type': '', 'field_width': '', 'field_sort': '', 'rows': result['rows']}
+
             return make_response(json.dumps(dict_json, ensure_ascii=False))
         else:
             return make_response('操作失败')
@@ -76,9 +86,9 @@ def operation(req):
 
         if result:
             # 操作记录
-            # content = 'dataArr=' + re.sub(r'\"', "'", json.dumps(list_data))
-            # dict_record = {'username': dict_login['username'], 'dbName': table_name, 'action': '增加', 'content': content, 'os': dict_login['os'], 'px': dict_login['px'], 'ip': req.remote_addr, 'time': time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())}
-            # mysqldb.set_record(dict_record)
+            content = 'dataArr=' + re.sub(r'\"', "'", json.dumps(list_data, ensure_ascii=False))
+            dict_record = {'username': dict_login['username'], 'dbName': table_name, 'action': '增加', 'content': content, 'os': dict_login['os'], 'px': dict_login['px'], 'ip': req.remote_addr, 'time': time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())}
+            mysqldb.set_record(dict_record)
 
             return make_response('操作成功')
         else:
@@ -112,9 +122,9 @@ def operation(req):
 
         if result:
             # 操作记录
-            # content = 'whereStr=' + re.sub(r'\"', "'", str_where) + 'updateJson=' + re.sub(r'\"', "'", json.dumps(dict_update))
-            # dict_record = {'username': dict_login['username'], 'dbName': table_name, 'action': '修改', 'content': content, 'os': dict_login['os'], 'px': dict_login['px'], 'ip': req.remote_addr, 'time': time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())}
-            # mysqldb.set_record(dict_record)
+            content = 'whereStr=' + re.sub(r'\"', "'", str_where) + 'updateJson=' + re.sub(r'\"', "'", json.dumps(dict_update, ensure_ascii=False))
+            dict_record = {'username': dict_login['username'], 'dbName': table_name, 'action': '修改', 'content': content, 'os': dict_login['os'], 'px': dict_login['px'], 'ip': req.remote_addr, 'time': time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())}
+            mysqldb.set_record(dict_record)
 
             return make_response('操作成功')
         else:
@@ -138,9 +148,9 @@ def operation(req):
 
         if result:
             # 操作记录
-            # content = 'dataArr=' + re.sub(r'\"', "'", json.dumps(list_data))
-            # dict_record = {'username': dict_login['username'], 'dbName': table_name, 'action': '删除', 'content': content, 'os': dict_login['os'], 'px': dict_login['px'], 'ip': req.remote_addr, 'time': time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())}
-            # mysqldb.set_record(dict_record)
+            content = 'dataArr=' + re.sub(r'\"', "'", json.dumps(list_data, ensure_ascii=False))
+            dict_record = {'username': dict_login['username'], 'dbName': table_name, 'action': '删除', 'content': content, 'os': dict_login['os'], 'px': dict_login['px'], 'ip': req.remote_addr, 'time': time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())}
+            mysqldb.set_record(dict_record)
 
             return make_response('操作成功')
         else:

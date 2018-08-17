@@ -28,10 +28,10 @@
 <script type="text/javascript">
 layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'dataDB', 'formVerify'], function(){
   var $ = layui.$;
-  var url = $("#layUI_routerView").attr("data-href").replace(/\/page\//,"/python/").replace(/\.html/,"");
+  var url = $("#layUI_routerView").attr("data-href").replace(/\/static\/page\//,"/python/").replace(/\.html/,"");
   console.log(url);
   //当前定位
-  var this_href = "#"+$("#layUI_routerView").attr("data-href").split(".html")[0];
+  var this_href = "#"+$("#layUI_routerView").attr("data-href").split(".html")[0].replace(/\/static/,"");
   var this_a = $(".layui-nav a[href='"+this_href+"']");
   $(".list-page-point span").html(this_a.parents("li").find("a").eq(0).text()+"&gt;&gt;"+this_a.text());
 

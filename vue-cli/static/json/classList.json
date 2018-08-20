@@ -1,0 +1,273 @@
+﻿{
+    "model_name": "roleClass", 
+    "id": 1, 
+    "class_name": "System Administrator"
+} 
+{
+    "model_name": "roleClass", 
+    "id": 2, 
+    "class_name": "Order Processor"
+} 
+{
+    "model_name": "roleClass", 
+    "id": 3, 
+    "class_name": "Order Processor"
+}
+{
+    "model_name": "roleClass", 
+    "id": 4, 
+    "class_name": "Customer"
+}
+{
+    "model_name": "productClass", 
+    "id": 1, 
+    "class_name": "Custom Ligament Braces"
+}
+{
+    "model_name": "productClass", 
+    "id": 2, 
+    "class_name": "Custom OA Braces"
+}
+{
+    "model_name": "braceClass", 
+    "id": 1, 
+    "class_name": "Catalyst Elite"
+}
+{
+    "model_name": "braceClass", 
+    "id": 2, 
+    "class_name": "Catalyst Propel OA"
+} 
+{
+    "model_name": "braceClass", 
+    "id": 3, 
+    "class_name": "caCatalyst Propel"
+} 
+{
+    "model_name": "braceClass", 
+    "id": 4, 
+    "class_name": "OActive"
+} 
+{
+    "model_name": "colorClass", 
+    "id": 1, 
+    "class_name": "Active Blue",
+    "class_color_code": "#707c8d"
+}
+{
+    "model_name": "colorClass", 
+    "id": 2, 
+    "class_name": "Champagne",
+    "class_color_code": "#b3aa95"
+}
+{
+    "model_name": "colorClass", 
+    "id": 3, 
+    "class_name": "Charcoal",
+    "class_color_code": "#737370"
+}
+{
+    "model_name": "colorClass", 
+    "id": 4, 
+    "class_name": "Energy Green",
+    "class_color_code": "#b0b368"
+} 
+{
+    "model_name": "colorClass", 
+    "id": 5, 
+    "class_name": "Fuscia",
+    "class_color_code": "#f34186"
+}  
+{
+    "model_name": "colorClass", 
+    "id": 6, 
+    "class_name": "Fuscia",
+    "class_color_code": "#f34186"
+}   
+{
+    "model_name": "colorClass", 
+    "id": 7, 
+    "class_name": "Glossy Black",
+    "class_color_code": "#111211"
+}    
+{
+    "model_name": "colorClass", 
+    "id": 8, 
+    "class_name": "Lilac",
+    "class_color_code": "#796c83"
+}     
+{
+    "model_name": "colorClass", 
+    "id": 9, 
+    "class_name": "Matte Black",
+    "class_color_code": "#3c3533"
+}      
+{
+    "model_name": "colorClass", 
+    "id": 10, 
+    "class_name": "Midnight Blue",
+    "class_color_code": "#252f4b"
+}       
+{
+    "model_name": "colorClass", 
+    "id": 11, 
+    "class_name": "Midnight Blue",
+    "class_color_code": "#252f4b"
+}        
+{
+    "model_name": "colorClass", 
+    "id": 12, 
+    "class_name": "Mint",
+    "class_color_code": "#9dc6b9"
+}         
+{
+    "model_name": "colorClass", 
+    "id": 13, 
+    "class_name": "Pewter",
+    "class_color_code": "#d1d0c6"
+}          
+{
+    "model_name": "colorClass", 
+    "id": 14, 
+    "class_name": "Red",
+    "class_color_code": "#bb3133"
+}           
+{
+    "model_name": "colorClass", 
+    "id": 15, 
+    "class_name": "Royal Purple",
+    "class_color_code": "#593047"
+} 
+{
+    "model_name": "optionClass", 
+    "id": 1, 
+    "class_name": "Affected Compartment",
+    "class_system_name": "Affected Compartment"
+} 
+{
+    "model_name": "optionClass", 
+    "id": 2, 
+    "class_name": "Degree of Correction",
+    "class_system_name": "Degree of Correction"
+} 
+{
+    "model_name": "optionClass", 
+    "id": 3, 
+    "class_name": "Double Q-Hinge $",
+    "class_system_name": "Double Q-Hinge"
+} 
+{
+    "model_name": "optionClass", 
+    "id": 4, 
+    "class_name": "Extension Stop",
+    "class_system_name": "Extension Stop"
+} 
+{
+    "model_name": "optionClass", 
+    "id": 5, 
+    "class_name": "Flexion Stop",
+    "class_system_name": "Flexion Stop"
+} 
+{
+    "model_name": "optionClass", 
+    "id": 6, 
+    "class_name": "Heavy Duty Hinge $",
+    "class_system_name": "Heavy Duty Hinge"
+} 
+{
+    "model_name": "optionClass", 
+    "id": 7, 
+    "class_name": "PCL Configuration",
+    "class_system_name": "PCL Configuration"
+} 
+{
+    "model_name": "optionClass", 
+    "id": 8, 
+    "class_name": "Push Button Buckles",
+    "class_system_name": "Push Button Chafe"
+} 
+{
+    "model_name": "optionClass", 
+    "id": 9, 
+    "class_name": "ROM",
+    "class_system_name": "ROM"
+}
+{
+    "model_name": "optionClass", 
+    "id": 10, 
+    "class_name": "Ski Boot / Short Lower",
+    "class_system_name": "Ski Boot Distance"
+} 
+{
+    "model_name": "optionClass", 
+    "id": 11, 
+    "class_name": "this is new",
+    "class_system_name": "this is new"
+} 
+{
+    "model_name": "accessoriesClass", 
+    "id": 1, 
+    "class_name": "CI Strap $",
+    "class_system_name": "Combined Instability Strap"
+}  
+{
+    "model_name": "accessoriesClass", 
+    "id": 2, 
+    "class_name": "Extra Liner Set $",
+    "class_system_name": "Extra Liner Set"
+}   
+{
+    "model_name": "accessoriesClass", 
+    "id": 3, 
+    "class_name": "Extra Suspension Wrap $",
+    "class_system_name": "Extra Suspension Wrap"
+}    
+{
+    "model_name": "accessoriesClass", 
+    "id": 4, 
+    "class_name": "Oversleeve $",
+    "class_system_name": "Oversleeve"
+}     
+{
+    "model_name": "accessoriesClass", 
+    "id": 5, 
+    "class_name": "Oversleeve $",
+    "class_system_name": "Oversleeve"
+}      
+{
+    "model_name": "accessoriesClass", 
+    "id": 6, 
+    "class_name": "Silligrip liners/strap padding (substitution)",
+    "class_system_name": "Silligrip liners/strap padding (substitution)"
+}       
+{
+    "model_name": "accessoriesClass", 
+    "id": 7, 
+    "class_name": "Undersleeve $",
+    "class_system_name": "Undersleeve"
+} 
+{
+    "model_name": "modelClass", 
+    "id": 1, 
+    "class_name": "ATC"
+} 
+{
+    "model_name": "modelClass", 
+    "id": 2, 
+    "class_name": "Heavy Duty Hinge"
+} 
+{
+    "model_name": "modelClass", 
+    "id": 3, 
+    "class_name": "RT"
+} 
+{
+    "model_name": "modelClass", 
+    "id": 4, 
+    "class_name": "Standard"
+} 
+{
+    "model_name": "modelClass", 
+    "id": 5, 
+    "class_name": "Tall"
+}

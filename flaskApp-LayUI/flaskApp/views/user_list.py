@@ -122,7 +122,7 @@ def operation(req):
 
         if result:
             # 操作记录
-            content = 'whereStr=' + re.sub(r'\"', "'", str_where) + 'updateJson=' + re.sub(r'\"', "'", json.dumps(dict_update, ensure_ascii=False))
+            content = 'whereStr=' + re.sub(r'\"', "'", str_where) + '&updateJson=' + re.sub(r'\"', "'", json.dumps(dict_update, ensure_ascii=False))
             dict_record = {'username': dict_login['username'], 'dbName': table_name, 'action': '修改', 'content': content, 'os': dict_login['os'], 'px': dict_login['px'], 'ip': req.remote_addr, 'time': time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())}
             mysqldb.set_record(dict_record)
 

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost:3306
--- Generation Time: 2018-08-17 11:02:56
+-- Generation Time: 2018-08-20 11:51:54
 -- 服务器版本： 10.1.19-MariaDB
 -- PHP Version: 5.6.28
 
@@ -48,7 +48,7 @@ CREATE TABLE `data_list` (
 
 INSERT INTO `data_list` (`id`, `modelId`, `name`, `name_ch`, `field_en`, `field_ch`, `data_type`, `field_width`, `field_sort`, `create_name`, `create_time`, `update_name`, `update_time`) VALUES
 (1, 100007, 'record_list', '操作记录', 'username', '用户名', 'text', 100, 1, 'yuxian', '2018-02-10 14:45:58', 'yuxian', '2018-02-22 18:23:23'),
-(2, 100007, 'record_list', '操作记录', 'modelId', '模块ID', 'text', 100, 2, 'yuxian', '2018-02-10 14:45:58', 'yuxian', '2018-02-22 18:23:23'),
+(2, 100007, 'record_list', '操作记录', 'modelId', '模块ID', 'int(6)', 100, 2, 'yuxian', '2018-02-10 14:45:58', 'yuxian', '2018-02-22 18:23:23'),
 (3, 100007, 'record_list', '操作记录', 'dbName_ch', '数据表中文名', 'text', 100, 3, 'yuxian', '2018-02-10 14:45:58', 'yuxian', '2018-02-22 18:23:23'),
 (4, 100007, 'record_list', '操作记录', 'dbName', '数据表名称', 'text', 150, 4, 'yuxian', '2018-02-10 14:45:58', 'yuxian', '2018-02-22 18:23:23'),
 (5, 100007, 'record_list', '操作记录', 'action', '动作', 'text', 100, 5, 'yuxian', '2018-02-10 14:45:58', 'yuxian', '2018-02-22 18:23:23'),
@@ -56,7 +56,7 @@ INSERT INTO `data_list` (`id`, `modelId`, `name`, `name_ch`, `field_en`, `field_
 (7, 100007, 'record_list', '操作记录', 'os', '操作系统', 'text', 100, 7, 'yuxian', '2018-02-10 14:45:58', 'yuxian', '2018-02-22 18:23:23'),
 (8, 100007, 'record_list', '操作记录', 'px', '屏幕像素', 'text', 100, 8, 'yuxian', '2018-02-10 14:45:58', 'yuxian', '2018-02-22 18:23:23'),
 (9, 100007, 'record_list', '操作记录', 'ip', 'IP', 'text', 150, 9, 'yuxian', '2018-02-10 14:45:58', 'yuxian', '2018-02-22 18:23:23'),
-(10, 100007, 'record_list', '操作记录', 'time', '时间', 'text', 150, 10, 'yuxian', '2018-02-10 14:45:58', 'yuxian', '2018-02-22 18:23:23'),
+(10, 100007, 'record_list', '操作记录', 'time', '时间', 'date(YYYY-MM-DD HH:mm:ss)', 150, 10, 'yuxian', '2018-02-10 14:45:58', 'yuxian', '2018-02-22 18:23:23'),
 (11, 100001, 'model_list', '模块列表', 'level', '模块级别', 'int', 100, 1, 'yuxian', '2018-02-10 14:45:58', 'yuxian', '2018-02-22 18:23:23'),
 (12, 100001, 'model_list', '模块列表', 'id', '模块ID', 'int(6)', 100, 2, 'yuxian', '2018-02-10 14:45:58', 'yuxian', '2018-02-22 18:23:23'),
 (13, 100001, 'model_list', '模块列表', 'parentId', '父模块ID', 'int(6)', 100, 3, 'yuxian', '2018-02-10 14:45:58', 'yuxian', '2018-02-22 18:23:23'),
@@ -182,7 +182,15 @@ INSERT INTO `record_list` (`id`, `username`, `modelId`, `dbName`, `dbName_ch`, `
 (5, 'yuxian', 100004, 'user_list', '用户列表', '退出', 'action=SignOut', 'windows', '1920x1080', '127.0.0.1', '2018-08-17 13:58:32'),
 (6, 'yuxian', 100004, 'user_list', '用户列表', '登录', 'action=SignIn', 'windows', '1920x1080', '127.0.0.1', '2018-08-17 13:58:37'),
 (7, 'yuxian', 100008, 'role_class', '角色分类', '增加', 'dataArr=[{''class_name'': ''员工2'', ''create_name'': ''yuxian'', ''create_time'': ''2018-08-17 17:00:18''}]', 'windows', '1920x1080', '127.0.0.1', '2018-08-17 17:00:18'),
-(8, 'yuxian', 100008, 'role_class', '角色分类', '修改', 'whereStr=id=5updateJson={''class_name'': ''员工3'', ''update_name'': ''yuxian'', ''update_time'': ''2018-08-17 17', 'windows', '1920x1080', '127.0.0.1', '2018-08-17 17:00:39');
+(8, 'yuxian', 100008, 'role_class', '角色分类', '修改', 'whereStr=id=5updateJson={''class_name'': ''员工3'', ''update_name'': ''yuxian'', ''update_time'': ''2018-08-17 17', 'windows', '1920x1080', '127.0.0.1', '2018-08-17 17:00:39'),
+(9, 'yuxian', 100004, 'user_list', '用户列表', '登录', 'action=SignIn', 'windows', '1920x1080', '127.0.0.1', '2018-08-20 10:05:11'),
+(10, 'yuxian', 100008, 'role_class', '角色分类', '修改', 'whereStr=id=5&updateJson={''class_name'': ''员工4'', ''update_name'': ''yuxian'', ''update_time'': ''2018-08-20 1', 'windows', '1920x1080', '127.0.0.1', '2018-08-20 10:24:08'),
+(11, 'yuxian', 100008, 'role_class', '角色分类', '删除', 'dataArr=[5]', 'windows', '1920x1080', '127.0.0.1', '2018-08-20 10:31:11'),
+(12, 'yuxian', 100008, 'role_class', '角色分类', '增加', 'dataArr=[{''class_name'': ''员工3'', ''create_name'': ''yuxian'', ''create_time'': ''2018-08-20 10:35:17''}]', 'windows', '1920x1080', '127.0.0.1', '2018-08-20 10:35:17'),
+(13, 'yuxian', 100008, 'role_class', '角色分类', '增加', 'dataArr=[{''class_name'': ''员工4'', ''create_name'': ''yuxian'', ''create_time'': ''2018-08-20 10:35:21''}]', 'windows', '1920x1080', '127.0.0.1', '2018-08-20 10:35:21'),
+(14, 'yuxian', 100008, 'role_class', '角色分类', '删除', 'dataArr=[6, 7]', 'windows', '1920x1080', '127.0.0.1', '2018-08-20 10:35:43'),
+(15, 'yuxian', 100004, 'user_list', '用户列表', '退出', 'action=SignOut', 'windows', '1920x1080', '127.0.0.1', '2018-08-20 11:07:14'),
+(16, 'yuxian', 100004, 'user_list', '用户列表', '登录', 'action=SignIn', 'windows', '1920x1080', '127.0.0.1', '2018-08-20 11:07:18');
 
 -- --------------------------------------------------------
 
@@ -207,8 +215,7 @@ INSERT INTO `role_class` (`id`, `class_name`, `create_name`, `create_time`, `upd
 (1, '超级用户', 'yuxian', '2018-02-04 13:02:21', 'yuxian', '2018-02-21 19:39:58'),
 (2, '普通用户', 'yuxian', '2018-02-04 13:02:21', 'yuxian', '2018-02-21 19:39:58'),
 (3, '经理', 'yuxian', '2018-02-04 13:02:21', 'yuxian', '2018-02-21 19:39:58'),
-(4, '员工', 'yuxian', '2018-02-04 13:02:21', 'yuxian', '2018-02-21 19:39:58'),
-(5, '员工3', 'yuxian', '2018-08-17 17:00:18', 'yuxian', '2018-08-17 17:00:39');
+(4, '员工', 'yuxian', '2018-02-04 13:02:21', 'yuxian', '2018-02-21 19:39:58');
 
 -- --------------------------------------------------------
 
@@ -292,12 +299,12 @@ ALTER TABLE `model_list`
 -- 使用表AUTO_INCREMENT `record_list`
 --
 ALTER TABLE `record_list`
-  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 --
 -- 使用表AUTO_INCREMENT `role_class`
 --
 ALTER TABLE `role_class`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- 使用表AUTO_INCREMENT `user_list`
 --

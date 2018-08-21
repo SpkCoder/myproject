@@ -83,6 +83,8 @@ def operation(req):
         for item in list_data:
             item['create_name'] = dict_login['username']
             item['create_time'] = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+            item['update_name'] = ''
+            item['update_time'] = ''
 
         result = mysqldb.insert_data(table_name, list_data)
         # print(result)
@@ -111,6 +113,8 @@ def operation(req):
             try:
                 dict_update = json.loads(req.form['updateJson'])
                 if len(dict_update) == 0:
+                    return make_response('updateJson错误')
+                if 'id' in dict_update:
                     return make_response('updateJson错误')
             except:
                 return make_response('updateJson错误')

@@ -282,9 +282,9 @@ layui.use(['element',"laytpl",'directorRouter','dataDB'], function(){
 	              	return false;
 	              }
 	              
-	              var searchJson={"username": data.field.username};
+	              var whereJson={"username": data.field.username};
 	              var updateJson= {"password": data.field.password};
-	              var reqData2 = 'action=updateData&searchJson=' + JSON.stringify(searchJson) + '&updateJson=' + JSON.stringify(updateJson);
+	              var reqData2 = 'action=updateData&whereJson=' + JSON.stringify(whereJson) + '&updateJson=' + JSON.stringify(updateJson);
 	              dataDB.updateData("/python/login",reqData2,function (data2) {
 	                layer.msg(data2,{time: 1000});
 	                if(data2 != "操作成功"){return;}

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost:3306
--- Generation Time: 2018-08-20 11:51:54
+-- Generation Time: 2018-08-21 09:40:09
 -- 服务器版本： 10.1.19-MariaDB
 -- PHP Version: 5.6.28
 
@@ -74,16 +74,17 @@ INSERT INTO `data_list` (`id`, `modelId`, `name`, `name_ch`, `field_en`, `field_
 (25, 100002, 'data_list', '数据列表', 'data_type', '字段数据类型', 'text', 150, 6, 'yuxian', '2018-02-10 14:45:58', 'yuxian', '2018-02-22 18:23:23'),
 (26, 100002, 'data_list', '数据列表', 'field_width', '字段列宽', 'int', 100, 7, 'yuxian', '2018-02-10 14:45:58', 'yuxian', '2018-02-22 18:23:23'),
 (27, 100002, 'data_list', '数据列表', 'field_sort', '字段排序', 'int', 100, 8, 'yuxian', '2018-02-10 14:45:58', 'yuxian', '2018-02-22 18:23:23'),
-(28, 100004, 'user_list', '用户列表', 'username', '用户名', 'text', 100, 1, 'yuxian', '2018-02-10 14:45:58', 'yuxian', '2018-02-22 18:23:23'),
-(29, 100004, 'user_list', '用户列表', 'email', '电子邮箱', 'text', 150, 2, 'yuxian', '2018-02-10 14:45:58', 'yuxian', '2018-02-22 18:23:23'),
-(30, 100004, 'user_list', '用户列表', 'phone', '电话', 'text', 100, 3, 'yuxian', '2018-02-10 14:45:58', 'yuxian', '2018-02-22 18:23:23'),
-(31, 100004, 'user_list', '用户列表', 'sex', '性别', 'text', 100, 7, 'yuxian', '2018-02-10 14:45:58', 'yuxian', '2018-02-22 18:23:23'),
-(32, 100004, 'user_list', '用户列表', 'age', '年龄', 'int', 100, 5, 'yuxian', '2018-02-10 14:45:58', 'yuxian', '2018-02-22 18:23:23'),
-(33, 100004, 'user_list', '用户列表', 'roleId', '角色ID', 'int', 100, 6, 'yuxian', '2018-02-10 14:45:58', 'yuxian', '2018-02-22 18:23:23'),
-(34, 100004, 'user_list', '用户列表', 'roleName', '角色名称', 'text', 100, 8, 'yuxian', '2018-02-10 14:45:58', 'yuxian', '2018-02-22 18:23:23'),
-(35, 100004, 'user_list', '用户列表', 'name', '姓名', 'text', 100, 4, 'yuxian', '2018-02-10 14:45:58', 'yuxian', '2018-02-22 18:23:23'),
 (36, 100008, 'role_class', '角色分类', 'id', 'ID', 'int', 100, 1, 'yuxian', '2018-02-10 14:45:58', 'yuxian', '2018-02-22 18:23:23'),
-(37, 100008, 'role_class', '角色分类', 'class_name', '分类名称', 'text', 100, 2, 'yuxian', '2018-02-10 14:45:58', 'yuxian', '2018-02-22 18:23:23');
+(37, 100008, 'role_class', '角色分类', 'class_name', '分类名称', 'text', 100, 2, 'yuxian', '2018-02-10 14:45:58', 'yuxian', '2018-02-22 18:23:23'),
+(38, 100004, 'user_list', '用户列表', 'id', 'ID', 'int', 100, 1, 'yuxian', '2018-02-10 14:45:58', 'yuxian', '2018-02-22 18:23:23'),
+(39, 100004, 'user_list', '用户列表', 'username', '用户名', 'text', 100, 2, 'yuxian', '2018-02-10 14:45:58', 'yuxian', '2018-02-22 18:23:23'),
+(40, 100004, 'user_list', '用户列表', 'email', '电子邮箱', 'text', 150, 3, 'yuxian', '2018-02-10 14:45:58', 'yuxian', '2018-02-22 18:23:23'),
+(41, 100004, 'user_list', '用户列表', 'phone', '电话', 'text', 100, 5, 'yuxian', '2018-02-10 14:45:58', 'yuxian', '2018-02-22 18:23:23'),
+(42, 100004, 'user_list', '用户列表', 'sex', '性别', 'text', 100, 6, 'yuxian', '2018-02-10 14:45:58', 'yuxian', '2018-02-22 18:23:23'),
+(43, 100004, 'user_list', '用户列表', 'age', '年龄', 'int', 100, 7, 'yuxian', '2018-02-10 14:45:58', 'yuxian', '2018-02-22 18:23:23'),
+(44, 100004, 'user_list', '用户列表', 'roleId', '角色ID', 'int', 100, 8, 'yuxian', '2018-02-10 14:45:58', 'yuxian', '2018-02-22 18:23:23'),
+(45, 100004, 'user_list', '用户列表', 'roleName', '角色名称', 'text', 100, 9, 'yuxian', '2018-02-10 14:45:58', 'yuxian', '2018-02-22 18:23:23'),
+(46, 100004, 'user_list', '用户列表', 'name', '姓名', 'text', 100, 4, 'yuxian', '2018-02-10 14:45:58', 'yuxian', '2018-02-22 18:23:23');
 
 -- --------------------------------------------------------
 
@@ -165,7 +166,7 @@ CREATE TABLE `record_list` (
   `dbName` varchar(100) NOT NULL,
   `dbName_ch` varchar(100) NOT NULL,
   `action` varchar(100) NOT NULL,
-  `content` varchar(100) NOT NULL,
+  `content` varchar(1000) NOT NULL,
   `os` varchar(100) NOT NULL,
   `px` varchar(100) NOT NULL,
   `ip` varchar(100) NOT NULL,
@@ -190,7 +191,17 @@ INSERT INTO `record_list` (`id`, `username`, `modelId`, `dbName`, `dbName_ch`, `
 (13, 'yuxian', 100008, 'role_class', '角色分类', '增加', 'dataArr=[{''class_name'': ''员工4'', ''create_name'': ''yuxian'', ''create_time'': ''2018-08-20 10:35:21''}]', 'windows', '1920x1080', '127.0.0.1', '2018-08-20 10:35:21'),
 (14, 'yuxian', 100008, 'role_class', '角色分类', '删除', 'dataArr=[6, 7]', 'windows', '1920x1080', '127.0.0.1', '2018-08-20 10:35:43'),
 (15, 'yuxian', 100004, 'user_list', '用户列表', '退出', 'action=SignOut', 'windows', '1920x1080', '127.0.0.1', '2018-08-20 11:07:14'),
-(16, 'yuxian', 100004, 'user_list', '用户列表', '登录', 'action=SignIn', 'windows', '1920x1080', '127.0.0.1', '2018-08-20 11:07:18');
+(16, 'yuxian', 100004, 'user_list', '用户列表', '登录', 'action=SignIn', 'windows', '1920x1080', '127.0.0.1', '2018-08-20 11:07:18'),
+(17, 'yuxian', 100004, 'user_list', '用户列表', '登录', 'action=SignIn', 'windows', '1920x1080', '127.0.0.1', '2018-08-21 09:59:17'),
+(18, 'yuxian', 100004, 'user_list', '用户列表', '增加', 'dataArr=[{''username'': ''admin'', ''password'': ''123456'', ''email'': ''1533165000@qq.com'', ''phone'': '''', ''nam', 'windows', '1920x1080', '127.0.0.1', '2018-08-21 10:50:04'),
+(19, 'yuxian', 100004, 'user_list', '用户列表', '增加', 'dataArr=[{''username'': ''admin'', ''password'': ''370b95d483d1f5b61854c462decafca4'', ''email'': ''1533165000@', 'windows', '1920x1080', '127.0.0.1', '2018-08-21 11:36:45'),
+(20, 'yuxian', 100004, 'user_list', '用户列表', '增加', 'dataArr=[{''username'': ''admin'', ''password'': ''370b95d483d1f5b61854c462decafca4'', ''email'': ''1533165000@qq.com'', ''phone'': ''8667424618'', ''name'': ''匿名'', ''sex'': '''', ''age'': 25, ''roleId'': 1, ''create_name'': ''yuxian'', ''create_time'': ''2018-08-21 12:34:07'', ''update_name'': '''', ''update_time'': ''''}]', 'windows', '1920x1080', '127.0.0.1', '2018-08-21 12:34:07'),
+(21, 'yuxian', 100004, 'user_list', '用户列表', '修改', 'whereStr=id=5&updateJson={''email'': ''1533165000@qq.com'', ''name'': ''匿名'', ''phone'': ''8667424618'', ''sex'': ''男'', ''age'': 25, ''roleId'': 1, ''update_name'': ''yuxian'', ''update_time'': ''2018-08-21 14:14:07''}', 'windows', '1920x1080', '127.0.0.1', '2018-08-21 14:14:07'),
+(22, 'yuxian', 100004, 'user_list', '用户列表', '修改', 'whereStr=id=5&updateJson={''email'': ''1533165000@qq.com'', ''name'': ''匿名'', ''phone'': ''8667424618'', ''sex'': ''男'', ''age'': 26, ''roleId'': 1, ''update_name'': ''yuxian'', ''update_time'': ''2018-08-21 14:18:44''}', 'windows', '1920x1080', '127.0.0.1', '2018-08-21 14:18:44'),
+(23, 'yuxian', 100008, 'role_class', '角色分类', '修改', 'whereStr=id=4&updateJson={''class_name'': ''员工2'', ''update_name'': ''yuxian'', ''update_time'': ''2018-08-21 14:20:04''}', 'windows', '1920x1080', '127.0.0.1', '2018-08-21 14:20:04'),
+(24, 'yuxian', 100008, 'role_class', '角色分类', '修改', 'whereStr=id=4&updateJson={''class_name'': ''员工'', ''update_name'': ''yuxian'', ''update_time'': ''2018-08-21 14:20:10''}', 'windows', '1920x1080', '127.0.0.1', '2018-08-21 14:20:10'),
+(25, 'yuxian', 100004, 'user_list', '用户列表', '修改', 'whereStr=id=5&updateJson={''email'': ''1533165000@qq.com'', ''name'': ''匿名'', ''phone'': ''8667424618'', ''sex'': ''男'', ''age'': 25, ''roleId'': 1, ''update_name'': ''yuxian'', ''update_time'': ''2018-08-21 15:10:42''}', 'windows', '1920x1080', '127.0.0.1', '2018-08-21 15:10:42'),
+(26, 'yuxian', 100004, 'user_list', '用户列表', '修改', 'change password', 'windows', '1920x1080', '127.0.0.1', '2018-08-21 15:22:01');
 
 -- --------------------------------------------------------
 
@@ -215,7 +226,7 @@ INSERT INTO `role_class` (`id`, `class_name`, `create_name`, `create_time`, `upd
 (1, '超级用户', 'yuxian', '2018-02-04 13:02:21', 'yuxian', '2018-02-21 19:39:58'),
 (2, '普通用户', 'yuxian', '2018-02-04 13:02:21', 'yuxian', '2018-02-21 19:39:58'),
 (3, '经理', 'yuxian', '2018-02-04 13:02:21', 'yuxian', '2018-02-21 19:39:58'),
-(4, '员工', 'yuxian', '2018-02-04 13:02:21', 'yuxian', '2018-02-21 19:39:58');
+(4, '员工', 'yuxian', '2018-02-04 13:02:21', 'yuxian', '2018-08-21 14:20:10');
 
 -- --------------------------------------------------------
 
@@ -244,8 +255,9 @@ CREATE TABLE `user_list` (
 --
 
 INSERT INTO `user_list` (`id`, `username`, `password`, `name`, `email`, `phone`, `sex`, `age`, `create_name`, `create_time`, `roleId`, `update_name`, `update_time`) VALUES
-(1, 'yuxian', 'd8f76ca8a2939f1cf0f200ef840a955e', '匿名', '1533165085@qq.com', '13189768881', '男', 25, 'yuxian', '2018-02-04 15:23:05', 1, 'yuxian', '2018-07-23 14:12:07'),
-(2, 'Rose', '370b95d483d1f5b61854c462decafca4', '匿名', '1533167@qq.com', '13189768882', '女', 18, 'yuxian', '2018-02-04 15:23:05', 2, 'yuxian', '2018-02-23 16:24:35');
+(1, 'yuxian', 'd8f76ca8a2939f1cf0f200ef840a955e', '匿名', '1533165085@qq.com', '13189768881', '男', 25, 'yuxian', '2018-02-04 15:23:05', 1, 'yuxian', '2018-08-21 15:22:01'),
+(2, 'Rose', '370b95d483d1f5b61854c462decafca4', '匿名', '1533167@qq.com', '13189768882', '女', 18, 'yuxian', '2018-02-04 15:23:05', 2, 'yuxian', '2018-02-23 16:24:35'),
+(5, 'admin', '370b95d483d1f5b61854c462decafca4', '匿名', '1533165000@qq.com', '8667424618', '男', 25, 'yuxian', '2018-08-21 12:34:07', 1, 'yuxian', '2018-08-21 15:10:42');
 
 --
 -- Indexes for dumped tables
@@ -289,7 +301,7 @@ ALTER TABLE `user_list`
 -- 使用表AUTO_INCREMENT `data_list`
 --
 ALTER TABLE `data_list`
-  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 --
 -- 使用表AUTO_INCREMENT `model_list`
 --
@@ -299,17 +311,17 @@ ALTER TABLE `model_list`
 -- 使用表AUTO_INCREMENT `record_list`
 --
 ALTER TABLE `record_list`
-  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 --
 -- 使用表AUTO_INCREMENT `role_class`
 --
 ALTER TABLE `role_class`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- 使用表AUTO_INCREMENT `user_list`
 --
 ALTER TABLE `user_list`
-  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

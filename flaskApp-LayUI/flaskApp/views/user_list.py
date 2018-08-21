@@ -4,7 +4,7 @@ from flaskApp.my_modules import mysqldb
 import json
 import time
 import re
-
+import hashlib
 
 #http://localhost:3000/python/user_list?action=findData&whereStr=id=1 and name="xx"&fieldStr=field1,field2&prePageNum=10&currPage=1&sortStr=id ASC|DESC  //查询数据
 #http://localhost:3000/python/user_list?action=insertData&dataArr=[{"name":"mick","age":18},{"name":"tina","age":35}]  //插入数据
@@ -77,9 +77,31 @@ def operation(req):
         else:
             return make_response('dataArr错误')
 
+        list_username = []
         for item in list_data:
-            item['create_name'] = 'myname'
+            if not item['username'] and not item['password']:
+                return make_response('用户名和密码不能为空')
+            if len(item['password']) < 6:
+                return make_response('密码长度不能小于6')
+
+            password = "pw" + item['password'] + item['password'][0:3]
+            md5 = hashlib.md5()
+            md5.update(password.encode(encoding='utf-8'))
+            md5_password = md5.hexdigest()
+            item['password'] = md5_password
+
+            item['create_name'] = dict_login['username']
             item['create_time'] = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+            item['update_name'] = ''
+            item['update_time'] = ''
+            list_username.append(item['username'])
+
+        str_where = 'username in ' + re.sub(r'\,', '', str(tuple(list_username)))
+        str_field = 'id, username'
+        args = {'pre_page_num': 0, 'curr_page': 0, 'sort': ''}
+        find_result = mysqldb.find_data(table_name, str_where, str_field, args)
+        if find_result['count'] != 0:
+            return make_response('用户名已存在')
 
         result = mysqldb.insert_data(table_name, list_data)
         # print(result)
@@ -109,12 +131,26 @@ def operation(req):
                 dict_update = json.loads(req.form['updateJson'])
                 if len(dict_update) == 0:
                     return make_response('updateJson错误')
+                if 'id' in dict_update or 'username' in dict_update:
+                    return make_response('updateJson错误')
             except:
                 return make_response('updateJson错误')
         else:
             return make_response('updateJson错误')
 
-        dict_update['update_name'] = req.cookies["logining"].username
+        if 'password' in dict_update:
+            if len(dict_update['password']) < 6:
+                return make_response('密码长度不能小于6')
+            else:
+                password = "pw" + dict_update['password'] + dict_update['password'][0:3]
+                md5 = hashlib.md5()
+                md5.update(password.encode(encoding='utf-8'))
+                md5_password = md5.hexdigest()
+                dict_update['password'] = md5_password
+        else:
+            pass
+
+        dict_update['update_name'] = dict_login['username']
         dict_update['update_time'] = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
 
         result = mysqldb.update_data(table_name, str_where, dict_update)

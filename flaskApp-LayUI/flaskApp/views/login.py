@@ -107,7 +107,7 @@ def operation(req):
             return make_response('updateJson错误')
 
         if 'username' not in dict_where:
-            return make_response('updateJson错误')
+            return make_response('whereJson错误')
         else:
             pass
 
@@ -136,7 +136,7 @@ def operation(req):
         if result:
 
             # 操作记录
-            content = '修改密码'
+            content = 'change password'
             dict_record = {'username': dict_login['username'], 'dbName': table_name, 'action': '修改', 'content': content,
                            'os': dict_login['os'], 'px': dict_login['px'], 'ip': req.remote_addr,
                            'time': time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())}

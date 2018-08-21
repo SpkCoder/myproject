@@ -165,20 +165,22 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
 
           //修改
           if(layEvent === 'edit'){
-            //console.log(data);
+            // console.log(data);
             var reqData = 'action=findData&searchJson={}&prePageNum=100000&currPage=1';
-            dataDB.findData("/python/roleClass",reqData,function (roleClassData) {
+            dataDB.findData("/python/role_class",reqData,function (roleClassData) {
 	            var roleClass = roleClassData.rows;
 	            var formStr = '<form class="layui-form" name="edit">';
 	            for(let i = 0; i < headObj.field_en_Arr.length; i++){
 	               var data_type = headObj.data_type_Arr[i];
 	               var field_en = headObj.field_en_Arr[i];
 	               var field_ch = headObj.field_ch_Arr[i];
-	               if(field_en == "username"){
+	               if(field_en == "id"){
 	                  formStr+='<div class="layui-form-item"><label class="layui-form-label">'+field_ch+'：</label><div class="layui-input-block"><input class="layui-input" type="text" lay-verify="'+"required"+'" name="'+field_en+'" value="'+data[field_en]+'" placeholder=""></div></div>';
+	               }else if(field_en == "username"){
+	               	 formStr+='<div class="layui-form-item"><label class="layui-form-label">'+field_ch+'：</label><div class="layui-input-block"><input class="layui-input" type="text" lay-verify="'+"required"+'" name="'+field_en+'" value="'+data[field_en]+'" placeholder=""></div></div>';
 	               }else if(field_en == "roleId"){
-	               	 //
-	               }else if(field_en == "roleName"){
+                   //
+                 }else if(field_en == "roleName"){
 	                formStr+='<div class="layui-form-item"><label class="layui-form-label">'+field_ch+'：</label><div class="layui-input-block"><select name="roleId">';
 	                roleClass.forEach(function (item,index) {
 	                	if(data[field_en] == item.class_name){
@@ -208,13 +210,14 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
 	                  
 	                  form.render(); //重新渲染form
 	                  
+                    $("form input[name=id").attr("disabled","disabled");
 	                  $("form input[name=username").attr("disabled","disabled");
 	                  $(".btn_esc").on("click",function () { layer.close(index); return false; });
 	                  
 	                  //监听提交
 	                  form.on('submit(formDemo)', function(data){
 	                  	  data.field.roleId = Number(data.field.roleId);
-	                      //console.log(data.field);
+	                      // console.log(data.field);
 	                      
 	                      headObj.field_en_Arr.forEach(function(item,index){
 	                         var field_type_this = headObj.data_type_Arr[index];
@@ -222,11 +225,12 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
 	                      	 	data.field[item] = Number(data.field[item]);
 	                      	 }
 	                      });
-	                      //console.log(data.field);
+	                      // console.log(data.field);
 	                      
 	                    var whereStr ='id=' + data.field.id;
                       var updateJson = data.field;
                       delete updateJson.id;
+                      delete updateJson.username;
                       var reqData2 = 'action=updateData&whereStr=' + whereStr + '&updateJson=' + JSON.stringify(updateJson);
 	                      dataDB.updateData(url,reqData2,function (data2) {
 	                        layer.msg(data2,{time: 1000});
@@ -308,7 +312,9 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
 	               if(field_en == "username"){
 	               	  formStr+='<div class="layui-form-item"><label class="layui-form-label">'+field_ch+'：</label><div class="layui-input-block"><input class="layui-input" type="text" lay-verify="'+"required"+'" name="'+field_en+'" value="" placeholder=""></div></div>';
 	               	  formStr+='<div class="layui-form-item"><label class="layui-form-label">'+"密码"+'：</label><div class="layui-input-block"><input class="layui-input" type="password" lay-verify="'+"required"+'" name="'+"password"+'" value="" placeholder=""></div></div>';
-	               }else if(field_en == "roleId"){
+	               }else if(field_en == "id"){
+                   //
+                 }else if(field_en == "roleId"){
 	               	 //
 	               }else if(field_en == "roleName"){
 	                formStr+='<div class="layui-form-item"><label class="layui-form-label">'+field_ch+'：</label><div class="layui-input-block"><select name="roleId">';
@@ -341,6 +347,7 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
 	                  form.on('submit(formDemo)', function(data){
 	                      //console.log(data.field);
 	                      data.field.roleId = Number(data.field.roleId);
+                        delete data.field.id;
 	                  	  
 	                      headObj.field_en_Arr.forEach(function(item,index){
 	                         var field_type_this = headObj.data_type_Arr[index];
@@ -348,8 +355,8 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
 	                      	 	data.field[item] = Number(data.field[item]);
 	                      	 }
 	                      });
-	                      console.log(data.field);
-	                      
+
+	                      // console.log(data.field);
 	                      var dataArr=[];
 	                      dataArr.push(data.field);
 	                      var reqData2 = 'action=insertData&dataArr=' + JSON.stringify(dataArr);
@@ -409,9 +416,13 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
             var formStr = '<form class="layui-form" name="btn_search">';
             for(let i = 0; i < headObj.field_en_Arr.length; i++){
               var data_type = headObj.data_type_Arr[i];
-                var field_en = headObj.field_en_Arr[i];
-                var field_ch = headObj.field_ch_Arr[i];
+              var field_en = headObj.field_en_Arr[i];
+              var field_ch = headObj.field_ch_Arr[i];
+              if(field_en == "id"){
+                //
+              }else{
                 formStr+='<div class="layui-form-item"><label class="layui-form-label">'+field_ch+'：</label><div class="layui-input-block"><input class="layui-input" type="text" data-type="'+data_type+'" name="'+field_en+'" value="" placeholder=""></div></div>';
+              }
             }
             formStr+='<div class="layui-form-item"><div class="layui-input-block"><button class="layui-btn layui-btn-sm" lay-submit lay-filter="formDemo">查询</button><button class="layui-btn layui-btn-sm btn_esc">取消</button></div></div>';
             formStr+='</form>';

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost:3306
--- Generation Time: 2018-08-21 09:40:09
+-- Generation Time: 2018-08-21 12:10:26
 -- 服务器版本： 10.1.19-MariaDB
 -- PHP Version: 5.6.28
 
@@ -84,7 +84,15 @@ INSERT INTO `data_list` (`id`, `modelId`, `name`, `name_ch`, `field_en`, `field_
 (43, 100004, 'user_list', '用户列表', 'age', '年龄', 'int', 100, 7, 'yuxian', '2018-02-10 14:45:58', 'yuxian', '2018-02-22 18:23:23'),
 (44, 100004, 'user_list', '用户列表', 'roleId', '角色ID', 'int', 100, 8, 'yuxian', '2018-02-10 14:45:58', 'yuxian', '2018-02-22 18:23:23'),
 (45, 100004, 'user_list', '用户列表', 'roleName', '角色名称', 'text', 100, 9, 'yuxian', '2018-02-10 14:45:58', 'yuxian', '2018-02-22 18:23:23'),
-(46, 100004, 'user_list', '用户列表', 'name', '姓名', 'text', 100, 4, 'yuxian', '2018-02-10 14:45:58', 'yuxian', '2018-02-22 18:23:23');
+(46, 100004, 'user_list', '用户列表', 'name', '姓名', 'text', 100, 4, 'yuxian', '2018-02-10 14:45:58', 'yuxian', '2018-02-22 18:23:23'),
+(47, 100005, 'power_list', '角色权限', 'id', 'ID', 'int', 100, 1, 'yuxian', '2018-02-10 14:45:58', 'yuxian', '2018-02-22 18:23:23'),
+(48, 100005, 'power_list', '角色权限', 'power_id', '角色ID', 'int', 100, 2, 'yuxian', '2018-02-10 14:45:58', 'yuxian', '2018-02-22 18:23:23'),
+(49, 100005, 'power_list', '角色权限', 'power_name', '角色名称', 'text', 100, 3, 'yuxian', '2018-02-10 14:45:58', 'yuxian', '2018-02-22 18:23:23'),
+(50, 100005, 'power_list', '角色权限', 'model_id', '模块ID', 'int(6)', 100, 4, 'yuxian', '2018-02-10 14:45:58', 'yuxian', '2018-02-22 18:23:23'),
+(51, 100005, 'power_list', '角色权限', 'model_name', '模块名称', 'text', 100, 5, 'yuxian', '2018-02-10 14:45:58', 'yuxian', '2018-02-22 18:23:23'),
+(52, 100005, 'power_list', '角色权限', 'db_name', '数据表名称', 'text', 100, 6, 'yuxian', '2018-02-10 14:45:58', 'yuxian', '2018-02-22 18:23:23'),
+(53, 100005, 'power_list', '角色权限', 'function_ch', '功能中文名称', 'text', 150, 7, 'yuxian', '2018-02-10 14:45:58', 'yuxian', '2018-02-22 18:23:23'),
+(54, 100005, 'power_list', '角色权限', 'function_en', '功能英文名称', 'text', 150, 8, 'yuxian', '2018-02-10 14:45:58', 'yuxian', '2018-02-22 18:23:23');
 
 -- --------------------------------------------------------
 
@@ -156,6 +164,39 @@ INSERT INTO `model_list` (`id`, `name`, `level`, `parentId`, `position`, `sort`,
 -- --------------------------------------------------------
 
 --
+-- 表的结构 `power_list`
+--
+
+CREATE TABLE `power_list` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `power_id` int(10) NOT NULL,
+  `power_name` varchar(100) NOT NULL,
+  `model_id` int(6) NOT NULL,
+  `model_name` varchar(100) NOT NULL,
+  `db_name` varchar(100) NOT NULL,
+  `function_ch` varchar(100) NOT NULL,
+  `function_en` varchar(100) NOT NULL,
+  `create_name` varchar(100) NOT NULL,
+  `create_time` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- 转存表中的数据 `power_list`
+--
+
+INSERT INTO `power_list` (`id`, `power_id`, `power_name`, `model_id`, `model_name`, `db_name`, `function_ch`, `function_en`, `create_name`, `create_time`) VALUES
+(1, 1, '超级用户', 100001, '模块列表', 'model_list', '查询', 'findData', 'yuxian', '2018-02-11 00:50:55'),
+(2, 1, '超级用户', 100001, '模块列表', 'model_list', '增加', 'insertData', 'yuxian', '2018-02-11 00:50:55'),
+(3, 1, '超级用户', 100001, '模块列表', 'model_list', '修改', 'updateData', 'yuxian', '2018-02-11 00:50:55'),
+(4, 1, '超级用户', 100001, '模块列表', 'model_list', '删除', 'delData', 'yuxian', '2018-02-11 00:50:55'),
+(5, 1, '超级用户', 100002, '数据列表', 'data_list', '查询', 'findData', 'yuxian', '2018-02-11 00:50:55'),
+(6, 1, '超级用户', 100002, '模块列表', 'data_list', '增加', 'insertData', 'yuxian', '2018-02-11 00:50:55'),
+(7, 1, '超级用户', 100002, '模块列表', 'data_list', '修改', 'updateData', 'yuxian', '2018-02-11 00:50:55'),
+(8, 1, '超级用户', 100002, '模块列表', 'data_list', '删除', 'delData', 'yuxian', '2018-02-11 00:50:55');
+
+-- --------------------------------------------------------
+
+--
 -- 表的结构 `record_list`
 --
 
@@ -201,7 +242,11 @@ INSERT INTO `record_list` (`id`, `username`, `modelId`, `dbName`, `dbName_ch`, `
 (23, 'yuxian', 100008, 'role_class', '角色分类', '修改', 'whereStr=id=4&updateJson={''class_name'': ''员工2'', ''update_name'': ''yuxian'', ''update_time'': ''2018-08-21 14:20:04''}', 'windows', '1920x1080', '127.0.0.1', '2018-08-21 14:20:04'),
 (24, 'yuxian', 100008, 'role_class', '角色分类', '修改', 'whereStr=id=4&updateJson={''class_name'': ''员工'', ''update_name'': ''yuxian'', ''update_time'': ''2018-08-21 14:20:10''}', 'windows', '1920x1080', '127.0.0.1', '2018-08-21 14:20:10'),
 (25, 'yuxian', 100004, 'user_list', '用户列表', '修改', 'whereStr=id=5&updateJson={''email'': ''1533165000@qq.com'', ''name'': ''匿名'', ''phone'': ''8667424618'', ''sex'': ''男'', ''age'': 25, ''roleId'': 1, ''update_name'': ''yuxian'', ''update_time'': ''2018-08-21 15:10:42''}', 'windows', '1920x1080', '127.0.0.1', '2018-08-21 15:10:42'),
-(26, 'yuxian', 100004, 'user_list', '用户列表', '修改', 'change password', 'windows', '1920x1080', '127.0.0.1', '2018-08-21 15:22:01');
+(26, 'yuxian', 100004, 'user_list', '用户列表', '修改', 'change password', 'windows', '1920x1080', '127.0.0.1', '2018-08-21 15:22:01'),
+(27, 'yuxian', 100001, 'model_list', '模块列表', '增加', 'dataArr=[{''level'': 1, ''id'': 200000, ''parentId'': 0, ''name'': ''测试'', ''position'': ''left'', ''sort'': 2, ''href'': ''#/page/testList'', ''iconfont'': '''', ''show'': ''true'', ''create_name'': ''yuxian'', ''create_time'': ''2018-08-21 17:53:51'', ''update_name'': '''', ''update_time'': ''''}]', 'windows', '1920x1080', '127.0.0.1', '2018-08-21 17:53:51'),
+(28, 'yuxian', 100004, 'user_list', '用户列表', '登录', 'action=SignIn', 'windows', '1920x1080', '127.0.0.1', '2018-08-21 18:00:08'),
+(29, 'yuxian', 100001, 'model_list', '模块列表', '修改', 'whereStr=id=200000&updateJson={''level'': 1, ''parentId'': 0, ''name'': ''测试'', ''position'': ''left'', ''sort'': 3, ''href'': ''#/page/testList3'', ''iconfont'': '''', ''show'': ''true'', ''update_name'': ''yuxian'', ''update_time'': ''2018-08-21 18:04:39''}', 'windows', '1920x1080', '127.0.0.1', '2018-08-21 18:04:39'),
+(30, 'yuxian', 100001, 'model_list', '模块列表', '删除', 'dataArr=[200000]', 'windows', '1920x1080', '127.0.0.1', '2018-08-21 18:06:08');
 
 -- --------------------------------------------------------
 
@@ -276,6 +321,12 @@ ALTER TABLE `model_list`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `power_list`
+--
+ALTER TABLE `power_list`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `record_list`
 --
 ALTER TABLE `record_list`
@@ -301,17 +352,22 @@ ALTER TABLE `user_list`
 -- 使用表AUTO_INCREMENT `data_list`
 --
 ALTER TABLE `data_list`
-  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 --
 -- 使用表AUTO_INCREMENT `model_list`
 --
 ALTER TABLE `model_list`
-  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=110001;
+  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=200001;
+--
+-- 使用表AUTO_INCREMENT `power_list`
+--
+ALTER TABLE `power_list`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- 使用表AUTO_INCREMENT `record_list`
 --
 ALTER TABLE `record_list`
-  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 --
 -- 使用表AUTO_INCREMENT `role_class`
 --

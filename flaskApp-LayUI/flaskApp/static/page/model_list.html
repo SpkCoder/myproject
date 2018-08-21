@@ -215,23 +215,23 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
                   form.render(); //重新渲染form
                   if($("form select[name=level]").val() == 1){
                      $("form input[name=parentId]").val("");
-				  	 $("form input[name=parentId]").attr("disabled","disabled");
-				  	 $("form input[name=parentId]").removeAttr("lay-verify");
-                  }
-                  $("form input[name=id]").attr("disabled","disabled");
-                  $(".btn_esc").on("click",function () { layer.close(index); return false; });
-                  
-                  form.on('select(level)', function(data){
-					  //console.log(data);
-					  if(data.value==1){
-					  	$("form input[name=parentId]").val("");
-					  	$("form input[name=parentId]").attr("disabled","disabled");
-					  	$("form input[name=parentId]").removeAttr("lay-verify");
-					  }else{
-					  	$("form input[name=parentId]").removeAttr("disabled");
-					  	$("form input[name=parentId]").attr("lay-verify","int(6)");
-					  }
-				  });  
+        				  	 $("form input[name=parentId]").attr("disabled","disabled");
+        				  	 $("form input[name=parentId]").removeAttr("lay-verify");
+                          }
+                          $("form input[name=id]").attr("disabled","disabled");
+                          $(".btn_esc").on("click",function () { layer.close(index); return false; });
+                          
+                          form.on('select(level)', function(data){
+        					  //console.log(data);
+        					  if(data.value==1){
+        					  	$("form input[name=parentId]").val("");
+        					  	$("form input[name=parentId]").attr("disabled","disabled");
+        					  	$("form input[name=parentId]").removeAttr("lay-verify");
+        					  }else{
+        					  	$("form input[name=parentId]").removeAttr("disabled");
+        					  	$("form input[name=parentId]").attr("lay-verify","int(6)");
+        					  }
+        				  });  
                   
                   //监听提交
                   form.on('submit(formDemo)', function(data){
@@ -244,10 +244,10 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
                       	 }
                       });
                       //console.log(data.field);
-                      var searchJson={"id":data.field.id};
-                      var updateJson= data.field;
+                      var whereStr ='id=' + data.field.id;
+                      var updateJson = data.field;
                       delete updateJson.id;
-                      var reqData2 = 'action=updateData&searchJson=' + JSON.stringify(searchJson) + '&updateJson=' + JSON.stringify(updateJson);
+                      var reqData2 = 'action=updateData&whereStr=' + whereStr + '&updateJson=' + JSON.stringify(updateJson);
                       dataDB.updateData(url,reqData2,function (data2) {
                         layer.msg(data2,{time: 1000});
                         if(data2 != "操作成功"){return;}
@@ -282,8 +282,8 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
               	 }
               });
               
-              var dataJson = {"id":{"$in":[data.id]}};
-              var reqData2 = 'action=delData&dataJson=' +JSON.stringify(dataJson);
+              var dataArr = [data.id];
+              var reqData2 = 'action=delData&dataArr=' +JSON.stringify(dataArr);
               dataDB.delData(url,reqData2,function (data2) {
                 layer.msg(data2,{time: 1000});
                 if(data2 != "操作成功"){return;}
@@ -361,16 +361,16 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
                   $(".btn_esc").on("click",function () { layer.close(index); return false; });
                   
                   form.on('select(level)', function(data){
-					  //console.log(data);
-					  if(data.value==1){
-					  	$("form input[name=parentId]").val("");
-					  	$("form input[name=parentId]").attr("disabled","disabled");
-					  	$("form input[name=parentId]").removeAttr("lay-verify");
-					  }else{
-					  	$("form input[name=parentId]").removeAttr("disabled");
-					  	$("form input[name=parentId]").attr("lay-verify","int(6)");
-					  }
-				  });  
+        					  //console.log(data);
+        					  if(data.value==1){
+        					  	$("form input[name=parentId]").val("");
+        					  	$("form input[name=parentId]").attr("disabled","disabled");
+        					  	$("form input[name=parentId]").removeAttr("lay-verify");
+        					  }else{
+        					  	$("form input[name=parentId]").removeAttr("disabled");
+        					  	$("form input[name=parentId]").attr("lay-verify","int(6)");
+        					  }
+        				  });  
                   
                  
                   
@@ -383,7 +383,7 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
                       	 	data.field[item] = Number(data.field[item]);
                       	 }
                       });
-                      //console.log(data.field);
+                      // console.log(data.field);
                       var dataArr=[];
                       dataArr.push(data.field);
                       var reqData2 = 'action=insertData&dataArr=' + JSON.stringify(dataArr);
@@ -407,36 +407,35 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
         });
         
         
-        //批量删除
-//      $("#btn_delete").on("click",function(){
-//          var checkStatus = table.checkStatus('layUiTableList');
-//      	//console.log(checkStatus.data);
-//      	if(checkStatus.data.length == 0){
-//      		layer.msg("请勾选要删除的行",{time: 1000});
-//      		return;
-//      	}
-//          layer.confirm('真的删除行么', function(index){
-//	            var idArr = [];
-//	            for(var i=0; i<checkStatus.data.length; i++){
-//	            	idArr.push(checkStatus.data[i].id);
-//	            }
-//	            var dataJson = {"id":{"$in":idArr}};
-//		        var reqData2 = 'action=delData&dataJson=' +JSON.stringify(dataJson);
-//		        dataDB.delData(url,reqData2,function (data2) {
-//		            layer.msg(data2,{time: 1000});
-//		            if(data2 != "操作成功"){return;}
-//		            layer.close(index);
-//		            table.reload('layUiTableList', {url: url});
-//		        });
-//	       });
-//      });
+        // //批量删除
+        // $("#btn_delete").on("click",function(){
+        //   var checkStatus = table.checkStatus('layUiTableList');
+        //   //console.log(checkStatus.data);
+        //   if(checkStatus.data.length == 0){
+        //     layer.msg("请勾选要删除的行",{time: 1000});
+        //     return;
+        //   }
+        //     layer.confirm('真的删除行么', function(index){
+        //       var idArr = [];
+        //       for(var i=0; i<checkStatus.data.length; i++){
+        //         idArr.push(checkStatus.data[i].id);
+        //       }
+        //       var reqData2 = 'action=delData&dataArr=' +JSON.stringify(idArr);
+        //       dataDB.delData(url,reqData2,function (data2) {
+        //           layer.msg(data2,{time: 1000});
+        //           if(data2 != "操作成功"){return;}
+        //           layer.close(index);
+        //           table.reload('layUiTableList', {url: url});
+        //       });
+        //  });
+        // });
         
 
         //查询
         $("#btn_search").on("click",function(){
             var formStr = '<form class="layui-form" name="btn_search">';
             for(let i = 0; i < headObj.field_en_Arr.length; i++){
-            	var data_type = headObj.data_type_Arr[i];
+              var data_type = headObj.data_type_Arr[i];
                 var field_en = headObj.field_en_Arr[i];
                 var field_ch = headObj.field_ch_Arr[i];
                 formStr+='<div class="layui-form-item"><label class="layui-form-label">'+field_ch+'：</label><div class="layui-input-block"><input class="layui-input" type="text" data-type="'+data_type+'" name="'+field_en+'" value="" placeholder=""></div></div>';
@@ -457,40 +456,54 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
                   
                   form.render(); //重新渲染form
                   $(".btn_esc").on("click",function () { 
-                  	table.reload('layUiTableList', {url: url, where: { searchJson: {} }}); 
-                  	layer.close(index); 
-                  	return false;
+                    table.reload('layUiTableList', {url: url, where: { whereStr: '' }}); 
+                    layer.close(index); 
+                    return false;
                   });
                   
                  
                   //监听提交
                   form.on('submit(formDemo)', function(data){
                       //console.log(data.field);
+                      var whereStr = '';
+                      var num = 0; 
                       headObj.field_en_Arr.forEach(function(item,index){
                          var field_type_this = headObj.data_type_Arr[index];
-                      	 if(field_type_this == "int" || field_type_this == "int(6)" || field_type_this == "decimal(2)" || field_type_this == "decimal(4)"){
-                      	 	if(data.field[item]){
-                      	 		data.field[item] = Number(data.field[item]);
-                      	 	}else{
-                      	 		delete data.field[item];
-                      	 	}
-                      	 }else if(field_type_this == "date(YYYY-MM-DD HH:mm:ss)" || field_type_this == "date(YYYY)" || field_type_this == "date(YYYY-MM)" || field_type_this == "date(YYYY-MM-DD)" || field_type_this == "date(HH:mm:ss)"){
-                      	 	if(data.field[item]){
-                      	 		data.field[item] = {$gte:data.field[item]};
-                      	 	}else{
-                      	 		delete data.field[item];
-                      	 	}
-                      	 }else{
-                      	 	if(! data.field[item]){
-                      	 		delete data.field[item];
-                      	 	}
-                      	 }
+                         if(field_type_this == "int" || field_type_this == "int(6)" || field_type_this == "decimal(2)" || field_type_this == "decimal(4)"){
+                          if(data.field[item]){
+                            data.field[item] = Number(data.field[item]);
+                            if(num == 0){
+                                whereStr += item + '=' + data.field[item];
+                            }else{
+                                whereStr += ' and ' + item + '=' + data.field[item];
+                            }
+                            num++;
+                          }
+                         }else if(field_type_this == "date(YYYY-MM-DD HH:mm:ss)" || field_type_this == "date(YYYY)" || field_type_this == "date(YYYY-MM)" || field_type_this == "date(YYYY-MM-DD)" || field_type_this == "date(HH:mm:ss)"){
+                          if(data.field[item]){
+                            if(num == 0){
+                                whereStr += item + '>="' + data.field[item] + '"';
+                            }else{
+                                whereStr += ' and ' + item + '>="' + data.field[item] + '"';
+                            }
+                            num++;
+                          }
+                         }else{
+                          if(data.field[item]){
+                            if(num == 0){
+                                whereStr += item + '="' + data.field[item] + '"';
+                            }else{
+                                whereStr += ' and ' + item + '="' + data.field[item] + '"';
+                            }
+                            num++;
+                          }
+                         }
                       });
                       
-                      //console.log(data.field);
-                      var reqSearchJson = JSON.stringify(data.field);
-				      table.reload('layUiTableList', {url: url, where: { searchJson: reqSearchJson }}); 
-				      
+                      
+                      // console.log(whereStr);
+                      
+                      table.reload('layUiTableList', {url: url, where: { whereStr: whereStr }}); 
                       return false;
                 });
                 
@@ -498,8 +511,6 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
             });
 
         });
-
-
 
 
   }

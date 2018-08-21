@@ -153,15 +153,15 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
 
       //加载角色分类
       var roleClass = [];
-      var modelList_reqData = 'action=findData&searchJson={}&prePageNum=100000&currPage=1';
-           dataDB.findData("/python/roleClass",modelList_reqData,function (roleClassData) {
+      var modelList_reqData = 'action=findData&searchStr=&prePageNum=100000&currPage=1';
+           dataDB.findData("/python/role_class",modelList_reqData,function (roleClassData) {
            roleClass = roleClassData.rows;
       });
 
       //加载模块列表
       var modelList = [];
-      var modelList_reqData = 'action=findData&searchJson={"level":2}&sortJson={"id":1}&prePageNum=100000&currPage=1';
-           dataDB.findData("/python/modelList",modelList_reqData,function (modelListData) {
+      var modelList_reqData = 'action=findData&searchStr=level=2&sortStr=id asc&prePageNum=100000&currPage=1';
+           dataDB.findData("/python/model_list",modelList_reqData,function (modelListData) {
            modelList = modelListData.rows;
       });
       
@@ -264,17 +264,17 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
                   var thisModelId = Number($("form select[name=modelId] option:selected").val());
                   getModelListFn(thisModelId);
                   function getModelListFn (thisModelId) {
-				      var roleClass = [];
-				      var modelListFn_reqData = 'action=findData&searchJson='+JSON.stringify({"id":thisModelId})+'&prePageNum=100000&currPage=1';
-				           dataDB.findData("/python/modelListFn",modelListFn_reqData,function (modelListFnData) {
-				           modelListFn = modelListFnData.rows;
-				           var html = '';
-				           modelListFn.forEach(function (item,index) {
-			                	html+='<option value="'+item.function_en+'">'+item.function_ch+'</option>';
-			               });
-			               $("form select[name=function_en]").html(html);
-			               form.render(); //重新渲染form
-				      });
+    				      var roleClass = [];
+    				      var modelListFn_reqData = 'action=findData&searchJson='+JSON.stringify({"id":thisModelId})+'&prePageNum=100000&currPage=1';
+    				           dataDB.findData("/python/model_list_fn",modelListFn_reqData,function (modelListFnData) {
+    				           modelListFn = modelListFnData.rows;
+    				           var html = '';
+    				           modelListFn.forEach(function (item,index) {
+    			                	html+='<option value="'+item.function_en+'">'+item.function_ch+'</option>';
+    			               });
+    			               $("form select[name=function_en]").html(html);
+    			               form.render(); //重新渲染form
+    				      });
                   }
                   
                   
@@ -297,7 +297,7 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
 	                  data.field.function_ch = $("form select[name=function_en] option:selected").text();
 	                  
                       var reqData_dateList = 'action=findData&searchJson='+JSON.stringify({"id":data.field.modelId})+'&prePageNum=1&currPage=1';
-                      dataDB.findData("/python/dataList",reqData_dateList,function (dateListData) {
+                      dataDB.findData("/python/data_list",reqData_dateList,function (dateListData) {
                       	 data.field.dbName = dateListData.rows[0].name;
                          //console.log(data.field);
                       	 
@@ -326,7 +326,7 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
         $("#btn_search").on("click",function(){
             var formStr = '<form class="layui-form" name="btn_search">';
             for(let i = 0; i < headObj.field_en_Arr.length; i++){
-            	var data_type = headObj.data_type_Arr[i];
+              var data_type = headObj.data_type_Arr[i];
                 var field_en = headObj.field_en_Arr[i];
                 var field_ch = headObj.field_ch_Arr[i];
                 formStr+='<div class="layui-form-item"><label class="layui-form-label">'+field_ch+'：</label><div class="layui-input-block"><input class="layui-input" type="text" data-type="'+data_type+'" name="'+field_en+'" value="" placeholder=""></div></div>';
@@ -347,40 +347,54 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
                   
                   form.render(); //重新渲染form
                   $(".btn_esc").on("click",function () { 
-                  	table.reload('layUiTableList', {url: url, where: { searchJson: {} }}); 
-                  	layer.close(index); 
-                  	return false;
+                    table.reload('layUiTableList', {url: url, where: { whereStr: '' }}); 
+                    layer.close(index); 
+                    return false;
                   });
                   
-                  
+                 
                   //监听提交
                   form.on('submit(formDemo)', function(data){
                       //console.log(data.field);
+                      var whereStr = '';
+                      var num = 0; 
                       headObj.field_en_Arr.forEach(function(item,index){
                          var field_type_this = headObj.data_type_Arr[index];
-                      	 if(field_type_this == "int" || field_type_this == "int(6)" || field_type_this == "decimal(2)" || field_type_this == "decimal(4)"){
-                      	 	if(data.field[item]){
-                      	 		data.field[item] = Number(data.field[item]);
-                      	 	}else{
-                      	 		delete data.field[item];
-                      	 	}
-                      	 }else if(field_type_this == "date(YYYY-MM-DD HH:mm:ss)" || field_type_this == "date(YYYY)" || field_type_this == "date(YYYY-MM)" || field_type_this == "date(YYYY-MM-DD)" || field_type_this == "date(HH:mm:ss)"){
-                      	 	if(data.field[item]){
-                      	 		data.field[item] = {$gte:data.field[item]};
-                      	 	}else{
-                      	 		delete data.field[item];
-                      	 	}
-                      	 }else{
-                      	 	if(! data.field[item]){
-                      	 		delete data.field[item];
-                      	 	}
-                      	 }
+                         if(field_type_this == "int" || field_type_this == "int(6)" || field_type_this == "decimal(2)" || field_type_this == "decimal(4)"){
+                          if(data.field[item]){
+                            data.field[item] = Number(data.field[item]);
+                            if(num == 0){
+                                whereStr += item + '=' + data.field[item];
+                            }else{
+                                whereStr += ' and ' + item + '=' + data.field[item];
+                            }
+                            num++;
+                          }
+                         }else if(field_type_this == "date(YYYY-MM-DD HH:mm:ss)" || field_type_this == "date(YYYY)" || field_type_this == "date(YYYY-MM)" || field_type_this == "date(YYYY-MM-DD)" || field_type_this == "date(HH:mm:ss)"){
+                          if(data.field[item]){
+                            if(num == 0){
+                                whereStr += item + '>="' + data.field[item] + '"';
+                            }else{
+                                whereStr += ' and ' + item + '>="' + data.field[item] + '"';
+                            }
+                            num++;
+                          }
+                         }else{
+                          if(data.field[item]){
+                            if(num == 0){
+                                whereStr += item + '="' + data.field[item] + '"';
+                            }else{
+                                whereStr += ' and ' + item + '="' + data.field[item] + '"';
+                            }
+                            num++;
+                          }
+                         }
                       });
                       
-                      //console.log(data.field);
-                      var reqSearchJson = JSON.stringify(data.field);
-				      table.reload('layUiTableList', {url: url, where: { searchJson: reqSearchJson }}); 
-				      
+                      
+                      // console.log(whereStr);
+                      
+                      table.reload('layUiTableList', {url: url, where: { whereStr: whereStr }}); 
                       return false;
                 });
                 
@@ -388,7 +402,7 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
             });
 
         });
-      
+
 
   }
   //加载colArr 结束
@@ -399,6 +413,7 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
   var reqData = 'action=findData&searchJson=&prePageNum=1&currPage=1';
   dataDB.findData(url,reqData,colArrInt);
   //初始化数据 结束
+  
   
 
 

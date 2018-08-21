@@ -110,7 +110,7 @@ def insert_data(db_name, list_data):
     else:
         sql = 'insert into ' + db_name
         tuple_title = tuple(list_data[0].keys())
-        str_title = re.sub(r'\'', '', str(tuple_title))
+        str_title = re.sub(r'\'', '`', str(tuple_title))
         sql += str_title
         sql += ' values '
         int_num = 1
@@ -149,9 +149,9 @@ def update_data(db_name, str_where, dict_update):
         updateStr = ''
         for key in dict_update.keys():
             if type(dict_update[key]) == int or type(dict_update[key]) == float:
-                updateStr += key + '=' + str(dict_update[key])
+                updateStr += '`' + key + '`' + '=' + str(dict_update[key])
             else:
-                updateStr += key + '=\'' + dict_update[key] + '\''
+                updateStr += '`' + key + '`' + '=\'' + dict_update[key] + '\''
             if int_num < len(dict_update):
                 updateStr += ','
             int_num += 1
@@ -208,7 +208,7 @@ def update_col(db_name, str_data):
         db.close()
         return 0
     else:
-        sql = 'alter table ' + db_name + ' ' + str_data
+        sql = 'alter table `' + db_name + '` ' + str_data
         print(sql)
         try:
             cursor = db.cursor()
@@ -248,7 +248,7 @@ def set_record(dict_record):
 
         sql = 'insert into record_list'
         tuple_title = tuple(dict_record.keys())
-        str_title = re.sub(r'\'', '', str(tuple_title))
+        str_title = re.sub(r'\'', '`', str(tuple_title))
         sql += str_title
         sql += ' values '
         tuple_data = tuple(dict_record.values())

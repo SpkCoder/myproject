@@ -16,7 +16,7 @@
       <p><code>action=findDataLookup&whereStr=table1.id=1 and table1.name="xx"&fieldStr=table1.id,table1.firstname,table1.email,table2.age&prePageNum=10&currPage=1&sortStr=id DESC  //查询关联数据   get请求</code></p>
       <p><code>action=insertData&dataArr=[{"name":"mick","age":18},{"name":"tina","age":35}]  //插入数据   post请求</code></p>
       <p><code>action=updateData&whereStr=id=1&updateJson={"name":"xx"}  //修改数据   post请求</code></p>
-      <p><code>action=delData&dataArr=[1,3,5]  //删除数据   post请求</code></p>
+      <p><code>action=delData&whereJson={"id":[1,3,5]}  //删除数据  //删除数据   post请求</code></p>
       <p><code>action=addCol&dataJson={"fieldName":"num","dataType":"INT"}  //插入列   post请求</code></p>
       <p><code>action=updateCol&dataJson={"fieldName":"num","fieldNewName":"meg","dataNewType":"TEXT"}  //修改列   post请求</code></p>
       <p><code>action=delCol&dataJson={"fieldName":"num"}  //删除列   post请求</code></p>

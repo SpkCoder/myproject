@@ -172,21 +172,24 @@ def update_data(db_name, str_where, dict_update):
 
 
 # 删除数据
-def del_data(db_name, list_data):
+def del_data(db_name, dict_where):
     db = connect_db()
     if db == 'Error':
         db.close()
         return 0
     else:
+        field = ''
+        for key in dict_where:
+            field = key
         str_data = '('
         int_num = 1
-        for item in list_data:
+        for item in dict_where[field]:
             str_data += str(item)
-            if int_num < len(list_data):
+            if int_num < len(dict_where[field]):
                 str_data += ','
             int_num += 1
         str_data += ')'
-        sql = 'delete from ' + db_name + ' where id in ' + str_data
+        sql = 'delete from ' + db_name + ' where ' + field + ' in ' + str_data
         print(sql)
         try:
             cursor = db.cursor()

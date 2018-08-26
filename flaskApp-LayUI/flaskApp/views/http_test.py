@@ -8,7 +8,7 @@ import time
 #http://localhost:3000/python/http_test?action=findData&whereStr=id=1 and name="xx"&fieldStr=field1,field2&prePageNum=10&currPage=1&sortStr=id ASC|DESC  //查询数据
 #http://localhost:3000/python/http_test?action=insertData&dataArr=[{"name":"mick","age":18},{"name":"tina","age":35}]  //插入数据
 #http://localhost:3000/python/http_test?action=updateData&whereStr=id=1&updateJson={"name":"xx"}  //修改数据
-#http://localhost:3000/python/http_test?action=delData&dataArr=[1,3,5]  //删除数据
+#http://localhost:3000/python/http_test?action=delData&whereJson={"id":[1,3,5]}  //删除数据
 #http://localhost:3000/python/http_test?action=addCol&dataJson={"fieldName":"num","dataType":"INT"}  //插入列
 #http://localhost:3000/python/http_test?action=updateCol&dataJson={"fieldName":"num","fieldNewName":"meg","dataNewType":"TEXT"}  //修改列
 #http://localhost:3000/python/http_test?action=delCol&dataJson={"fieldName":"num"}  //删除列
@@ -115,18 +115,18 @@ def operation(req):
 
     # 删除数据
     def del_data():
-        if 'dataArr' in req.form:
+        if 'whereJson' in req.form:
             try:
-                list_data = json.loads(req.form['dataArr'])
-                if len(list_data) == 0:
-                    return make_response('dataArr错误')
+                dict_where = json.loads(req.form['whereJson'])
+                if len(dict_where) != 1:
+                    return make_response('whereJson错误')
             except:
-                return make_response('dataArr错误')
+                return make_response('whereJson错误')
         else:
-            return make_response('dataArr错误')
+            return make_response('whereJson错误')
 
 
-        result = mysqldb.del_data(table_name, list_data)
+        result = mysqldb.del_data(table_name, dict_where)
         # print(result)
 
         if result:

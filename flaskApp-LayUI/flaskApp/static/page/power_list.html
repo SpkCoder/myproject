@@ -192,8 +192,8 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
               //obj.del(); //删除对应行（tr）的DOM结构
               //layer.close(index);  //关闭当前layerOut
               
-              var dataJson = {"id":data.id, "dbName":data.dbName, "function_en":data.function_en};
-              var reqData2 = 'action=delData&dataJson=' +JSON.stringify(dataJson);
+              var whereJson = {"id": [data.id]};
+              var reqData2 = 'action=delData&whereJson=' +JSON.stringify(whereJson);
               dataDB.delData(url,reqData2,function (data2) {
                 layer.msg(data2,{time: 1000});
                 if(data2 != "操作成功"){return;}

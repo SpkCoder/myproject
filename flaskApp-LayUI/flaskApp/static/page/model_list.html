@@ -282,8 +282,8 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
               	 }
               });
               
-              var dataArr = [data.id];
-              var reqData2 = 'action=delData&dataArr=' +JSON.stringify(dataArr);
+              var whereJson = {"id": [data.id]};
+              var reqData2 = 'action=delData&whereJson=' +JSON.stringify(whereJson);
               dataDB.delData(url,reqData2,function (data2) {
                 layer.msg(data2,{time: 1000});
                 if(data2 != "操作成功"){return;}
@@ -407,7 +407,7 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
         });
         
         
-        // //批量删除
+        //批量删除
         // $("#btn_delete").on("click",function(){
         //   var checkStatus = table.checkStatus('layUiTableList');
         //   //console.log(checkStatus.data);
@@ -420,7 +420,8 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
         //       for(var i=0; i<checkStatus.data.length; i++){
         //         idArr.push(checkStatus.data[i].id);
         //       }
-        //       var reqData2 = 'action=delData&dataArr=' +JSON.stringify(idArr);
+        //       var whereJson = {"id": idArr};
+        //       var reqData2 = 'action=delData&whereJson=' +JSON.stringify(whereJson);
         //       dataDB.delData(url,reqData2,function (data2) {
         //           layer.msg(data2,{time: 1000});
         //           if(data2 != "操作成功"){return;}

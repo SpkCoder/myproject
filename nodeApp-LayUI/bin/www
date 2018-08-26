@@ -5,6 +5,7 @@
  */
 
 process.env.NODE_ENV = 'development';  // 'production'
+process.env.PORT = '3000'
 
 
 const app = require('../app');

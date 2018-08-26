@@ -6,7 +6,7 @@
 
 
 <div class="list-page-box">
-  <div class="container2">
+  <div class="container">
     <div class="list-page">
     
 		<div id="btnApp">
@@ -68,7 +68,7 @@
 	           {"title":"ID","field":"id","width":"100","data_type":"int"},
 	           {"title":"CustomerNumber","field":"CustomerNumber","width":"150","data_type":"text"},
 	           {"title":"CompanyName","field":"CompanyName","width":"150","data_type":"text"},
-	           {"title":"product_id","field":"product_id","width":"150","data_type":"int"},
+	           // {"title":"product_id","field":"product_id","width":"150","data_type":"int"},
 	           {"title":"product_name","field":"product_name","width":"200","data_type":"text"},
 	           {"title":"PlacedBy","field":"User_FirstName","width":"150","data_type":"text"},
 	           {"title":"create_name","field":"create_name","width":"150","data_type":"text"},
@@ -88,7 +88,7 @@
 	        	tableHtml+='<el-table-column show-overflow-tooltip sortable="custom" prop="'+item.field+'" label="'+item.title+'" width="'+item.width+'"> </el-table-column>';
 	        });
 	        tableHtml+='<el-table-column fixed="right" label="Operation" width="130"> <template slot-scope="scope"> <el-button @click="details(scope.row)" type="text" size="small">Details</el-button> <el-button @click="edit(scope.row)" type="text" size="small">Edit</el-button> </template> </el-table-column>';
-//	        tableHtml+='<el-table-column fixed="right" label="Operation" width="130"> <template slot-scope="scope"> <el-button @click="edit(scope.row)" type="text" size="small">Edit</el-button> <el-button @click="del(scope.row)" type="text" size="small">Delete</el-button> </template> </el-table-column>';
+			//	        tableHtml+='<el-table-column fixed="right" label="Operation" width="130"> <template slot-scope="scope"> <el-button @click="edit(scope.row)" type="text" size="small">Edit</el-button> <el-button @click="del(scope.row)" type="text" size="small">Delete</el-button> </template> </el-table-column>';
 	        tableHtml+=' </el-table>';
 	        $("#tableApp").html(tableHtml);
 	       

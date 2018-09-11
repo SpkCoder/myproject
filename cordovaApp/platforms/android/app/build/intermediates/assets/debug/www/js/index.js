@@ -40,7 +40,12 @@ var app = {
         receivedElement.setAttribute('style', 'display:block;');
 
         console.log('Received Event: ' + id);
-    }
+    },
+
+    
+
 };
 
 app.initialize();
+
+

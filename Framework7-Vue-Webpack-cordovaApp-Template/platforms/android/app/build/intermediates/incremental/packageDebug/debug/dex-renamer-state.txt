@@ -1,0 +1,4 @@
+#Wed Sep 12 18:13:38 CST 2018
+base.0=E\:\\mywork\\myproject\\Framework7-Vue-Webpack-cordovaApp-Template\\platforms\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0
+renamed.0=classes.dex
+file.0=E\:\\mywork\\myproject\\Framework7-Vue-Webpack-cordovaApp-Template\\platforms\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0\\classes.dex

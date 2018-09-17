@@ -28,10 +28,10 @@
 <script type="text/javascript">
 layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'dataDB'], function(){
   var $ = layui.$;
-  var url = $("#layUI_routerView").attr("data-href").replace(/\/page\//,"/python/").replace(/\.html/,"");
+  var url = $("#layUI_routerView").attr("data-href").replace(/\/static\/page\//,"/python/").replace(/\.html/,"");
   console.log(url);
   //当前定位
-  var this_href = "#"+$("#layUI_routerView").attr("data-href").split(".html")[0];
+  var this_href = "#"+$("#layUI_routerView").attr("data-href").split(".html")[0].replace(/\/static/,"");
   var this_a = $(".layui-nav a[href='"+this_href+"']");
   $(".list-page-point span").html(this_a.parents("li").find("a").eq(0).text()+"&gt;&gt;"+this_a.text());
 
@@ -207,8 +207,8 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
        
         //新增
         $("#btn_add").on("click",function(){
-        	var reqData = 'action=findData&searchJson={"level":2}&sortJson={"id":1}&prePageNum=100000&currPage=1';
-            dataDB.findData("/python/modelList",reqData,function (modelListData) {
+        	var reqData = 'action=findData&whereStr=level=2&sortStr=id ASC&prePageNum=100000&currPage=1';
+            dataDB.findData("/python/model_list",reqData,function (modelListData) {
             	var modelList = modelListData.rows;
 	            var formStr = '<form class="layui-form" name="btn_add">';
 	            for(let i = 0; i < headObj.field_en_Arr.length; i++){
@@ -255,7 +255,8 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
 	                  	  data.field.id = Number(data.field.id);
 	                  	  data.field.modelName = $("form select[name=id] option:selected").text();
 	                  	  data.field.function_ch = $("form select[name=function_en] option:selected").text();
-	                      //console.log(data.field);
+	                      console.log(data.field);
+                        return false;
 	                      
 	                      var reqData_dateList = 'action=findData&searchJson='+JSON.stringify({"id":data.field.id})+'&prePageNum=1&currPage=1';
                           dataDB.findData("/python/dataList",reqData_dateList,function (dateListData) {
@@ -358,7 +359,7 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
 
 
   //初始化数据
-  var reqData = 'action=findData&searchJson=&prePageNum=1&currPage=1';
+  var reqData = 'action=findData&whereStr=&prePageNum=1&currPage=1';
   dataDB.findData(url,reqData,colArrInt);
   //初始化数据 结束
   

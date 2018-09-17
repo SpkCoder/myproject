@@ -128,6 +128,17 @@ insert into data_list (modelId, name, name_ch, field_en, field_ch, data_type, fi
 
 
 
+insert into data_list (modelId, name, name_ch, field_en, field_ch, data_type, field_width, field_sort, create_name, create_time, update_name, update_time) values
+(100003, "model_list_fn", "模块功能", "id", "ID", "int", 100, 1, "yuxian", "2018-02-10 14:45:58", "yuxian", "2018-02-22 18:23:23"),
+(100003, "model_list_fn", "模块功能", "model_id", "模块ID", "int(6)", 100, 4, "yuxian", "2018-02-10 14:45:58", "yuxian", "2018-02-22 18:23:23"),
+(100003, "model_list_fn", "模块功能", "model_name", "模块名称", "text", 100, 5, "yuxian", "2018-02-10 14:45:58", "yuxian", "2018-02-22 18:23:23"),
+(100003, "model_list_fn", "模块功能", "db_name", "数据表名称", "text", 100, 6, "yuxian", "2018-02-10 14:45:58", "yuxian", "2018-02-22 18:23:23"),
+(100003, "model_list_fn", "模块功能", "function_ch", "功能中文名称", "text", 150, 7, "yuxian", "2018-02-10 14:45:58", "yuxian", "2018-02-22 18:23:23"),
+(100003, "model_list_fn", "模块功能", "function_en", "功能英文名称", "text", 150, 8, "yuxian", "2018-02-10 14:45:58", "yuxian", "2018-02-22 18:23:23");
+
+
+
+
 
 
 create table model_list (
@@ -208,3 +219,53 @@ insert into power_list (power_id, power_name, model_id, model_name, db_name, fun
 (1, "超级用户", 100002, "模块列表", "data_list", "增加", "insertData", "yuxian", "2018-02-11 00:50:55"),
 (1, "超级用户", 100002, "模块列表", "data_list", "修改", "updateData", "yuxian", "2018-02-11 00:50:55"),
 (1, "超级用户", 100002, "模块列表", "data_list", "删除", "delData", "yuxian", "2018-02-11 00:50:55");
+
+
+
+
+
+
+create table model_list_fn (
+	id INT(10) UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
+	model_id int(6) NOT NULL,
+	model_name VARCHAR(100) NOT NULL,
+	db_name VARCHAR(100) NOT NULL,
+	function_ch VARCHAR(100) NOT NULL,
+	function_en VARCHAR(100) NOT NULL,
+	create_name VARCHAR(100) NOT NULL,
+	create_time VARCHAR(100) NOT NULL
+	);
+
+
+insert into model_list_fn (model_id, model_name, db_name, function_ch, function_en, create_name, create_time) values
+(100001, "模块列表", "model_list", "查询", "findData", "yuxian", "2018-02-11 00:50:55"),
+(100001, "模块列表", "model_list", "增加", "insertData", "yuxian", "2018-02-11 00:50:55"),
+(100001, "模块列表", "model_list", "修改", "updateData", "yuxian", "2018-02-11 00:50:55"),
+(100001, "模块列表", "model_list", "删除", "delData", "yuxian", "2018-02-11 00:50:55"),
+(100002, "数据列表", "data_list", "查询", "findData", "yuxian", "2018-02-11 00:50:55"),
+(100002, "数据列表", "data_list", "增加", "insertData", "yuxian", "2018-02-11 00:50:55"),
+(100002, "数据列表", "data_list", "修改", "updateData", "yuxian", "2018-02-11 00:50:55"),
+(100002, "数据列表", "data_list", "删除", "delData", "yuxian", "2018-02-11 00:50:55"),
+(100003, "模块功能", "data_list_fn", "查询", "findData", "yuxian", "2018-02-11 00:50:55"),
+(100003, "模块功能", "data_list_fn", "增加", "insertData", "yuxian", "2018-02-11 00:50:55"),
+(100003, "模块功能", "data_list_fn", "删除", "delData", "yuxian", "2018-02-11 00:50:55"),
+(100004, "用户列表", "user_list", "查询", "findData", "yuxian", "2018-02-11 00:50:55"),
+(100004, "用户列表", "user_list", "增加", "insertData", "yuxian", "2018-02-11 00:50:55"),
+(100004, "用户列表", "user_list", "修改", "updateData", "yuxian", "2018-02-11 00:50:55"),
+(100004, "用户列表", "user_list", "删除", "delData", "yuxian", "2018-02-11 00:50:55"),
+(100005, "角色权限", "power_list", "查询", "findData", "yuxian", "2018-02-11 00:50:55"),
+(100005, "角色权限", "power_list", "增加", "insertData", "yuxian", "2018-02-11 00:50:55"),
+(100005, "角色权限", "power_list", "删除", "delData", "yuxian", "2018-02-11 00:50:55"),
+(100008, "角色分类", "role_class", "查询", "findData", "yuxian", "2018-02-11 00:50:55"),
+(100008, "角色分类", "role_class", "增加", "insertData", "yuxian", "2018-02-11 00:50:55"),
+(100008, "角色分类", "role_class", "修改", "updateData", "yuxian", "2018-02-11 00:50:55"),
+(100008, "角色分类", "role_class", "删除", "delData", "yuxian", "2018-02-11 00:50:55"),
+(100006, "文件列表", "file_list", "查询", "findData", "yuxian", "2018-02-11 00:50:55"),
+(100006, "文件列表", "file_list", "增加", "insertData", "yuxian", "2018-02-11 00:50:55"),
+(100006, "文件列表", "file_list", "删除", "delData", "yuxian", "2018-02-11 00:50:55"),
+(100007, "操作记录", "record_list", "查询", "findData", "yuxian", "2018-02-11 00:50:55");
+
+
+
+
+

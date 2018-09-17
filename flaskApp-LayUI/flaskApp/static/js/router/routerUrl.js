@@ -6,6 +6,7 @@ var routerUrl = [
 "/page/model_list_fn",
 "/page/user_list",
 "/page/power_list",
+"/page/model_list_fn",
 "/page/file_list",
 "/page/record_list",
 "/page/role_class",

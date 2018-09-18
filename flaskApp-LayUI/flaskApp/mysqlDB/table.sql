@@ -138,6 +138,15 @@ insert into data_list (modelId, name, name_ch, field_en, field_ch, data_type, fi
 
 
 
+insert into data_list (modelId, name, name_ch, field_en, field_ch, data_type, field_width, field_sort, create_name, create_time, update_name, update_time) values
+(100006, "file_list", "文件列表", "id", "ID", "int", 100, 1, "yuxian", "2018-02-10 14:45:58", "yuxian", "2018-02-22 18:23:23"),
+(100006, "file_list", "文件列表", "class_name", "文件分类", "text", 100, 2, "yuxian", "2018-02-10 14:45:58", "yuxian", "2018-02-22 18:23:23"),
+(100006, "file_list", "文件列表", "name", "文件名称", "text", 100, 3, "yuxian", "2018-02-10 14:45:58", "yuxian", "2018-02-22 18:23:23"),
+(100006, "file_list", "文件列表", "url", "URL", "text", 150, 4, "yuxian", "2018-02-10 14:45:58", "yuxian", "2018-02-22 18:23:23"),
+(100006, "file_list", "文件列表", "size", "文件大小", "int", 100, 5, "yuxian", "2018-02-10 14:45:58", "yuxian", "2018-02-22 18:23:23");
+
+
+
 
 
 
@@ -268,4 +277,16 @@ insert into model_list_fn (model_id, model_name, db_name, function_ch, function_
 
 
 
+create table file_list (
+	id INT(10) UNSIGNED AUTO_INCREMENT PRIMARY KEY, 
+	class_name VARCHAR(100) NOT NULL,
+	name VARCHAR(100) NOT NULL,
+	size VARCHAR(100) NOT NULL,
+	url VARCHAR(100) NOT NULL,
+	create_name VARCHAR(100) NOT NULL,
+	create_time VARCHAR(100) NOT NULL
+	);
 
+
+insert into file_list (class_name, name, size, url, create_name, create_time) values
+("图片", "截图2.jpg", 34681, "/public/uploadFile/2018-02-11-16-04-21-77___截图2.jpg", "yuxian", "2018-02-11 00:50:55");

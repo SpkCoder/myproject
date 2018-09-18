@@ -296,11 +296,13 @@ def get_head(str_where):
             for key, item in enumerate(result):
                 item['field_width'] = str(item['field_width'])
                 item['field_sort'] = str(item['field_sort'])
+                item['id'] = item['modelId']
+                del item['modelId']
                 if key == 0:
                     list_rows.append(item)
                     int_index = 0
                 else:
-                    if item['modelId'] == result[key - 1]['modelId']:
+                    if item['id'] == result[key - 1]['id']:
                         list_rows[int_index]['field_ch'] += (';'+item['field_ch'])
                         list_rows[int_index]['field_en'] += (';' + item['field_en'])
                         list_rows[int_index]['data_type'] += (';' + item['data_type'])

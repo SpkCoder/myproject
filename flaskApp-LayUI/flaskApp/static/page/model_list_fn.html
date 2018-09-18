@@ -57,8 +57,8 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
 
         //去掉排序
         headObj.colArr.forEach(function(item,index){
-		  item.sort = false;
-		});
+    		  item.sort = false;
+    		});
 
         //table 配置
         var _options = {
@@ -141,14 +141,12 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
 
         //尽管我们的 table 自带排序功能，但并没有请求服务端。
         //有些时候，你可能需要根据当前排序的字段，重新向服务端发送请求，从而实现服务端排序，如：
-        var sortJson = {};
-        sortJson[obj.field] = (obj.type == "desc") ? -1 : 1;
-        sortJson = JSON.stringify(sortJson);
-        
+        var sortStr = obj.field + " " + obj.type;
+
         table.reload('layUiTableList', {
           initSort: obj, //记录初始排序，如果不设的话，将无法标记表头的排序状态。
           where: { //请求参数（注意：这里面的参数可任意定义，并非下面固定的格式）
-            sortJson: sortJson, //排序方式
+            sortStr: sortStr, //排序方式
           }
         });
 
@@ -184,7 +182,7 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
               //obj.del(); //删除对应行（tr）的DOM结构
               //layer.close(index);  //关闭当前layerOut
               
-              var dataJson = {"id": data.id, "function_en":data.function_en};
+              var whereJson = {"id": [data.id]};
               var reqData2 = 'action=delData&dataJson=' +JSON.stringify(dataJson);
               dataDB.delData(url,reqData2,function (data2) {
                 layer.msg(data2,{time: 1000});
@@ -255,8 +253,6 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
 	                  	  data.field.id = Number(data.field.id);
 	                  	  data.field.modelName = $("form select[name=id] option:selected").text();
 	                  	  data.field.function_ch = $("form select[name=function_en] option:selected").text();
-	                      console.log(data.field);
-                        return false;
 	                      
 	                      var reqData_dateList = 'action=findData&searchJson='+JSON.stringify({"id":data.field.id})+'&prePageNum=1&currPage=1';
                           dataDB.findData("/python/dataList",reqData_dateList,function (dateListData) {
@@ -310,7 +306,7 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
                   
                   form.render(); //重新渲染form
                   $(".btn_esc").on("click",function () { 
-                  	table.reload('layUiTableList', {url: url, where: { searchJson: {} }}); 
+                  	table.reload('layUiTableList', {url: url, where: { whereStr: '' }}); 
                   	layer.close(index); 
                   	return false;
                   });
@@ -319,31 +315,45 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
                   //监听提交
                   form.on('submit(formDemo)', function(data){
                       //console.log(data.field);
+                      var whereStr = '';
+                      var num = 0; 
                       headObj.field_en_Arr.forEach(function(item,index){
                          var field_type_this = headObj.data_type_Arr[index];
-                      	 if(field_type_this == "int" || field_type_this == "int(6)" || field_type_this == "decimal(2)" || field_type_this == "decimal(4)"){
-                      	 	if(data.field[item]){
-                      	 		data.field[item] = Number(data.field[item]);
-                      	 	}else{
-                      	 		delete data.field[item];
-                      	 	}
-                      	 }else if(field_type_this == "date(YYYY-MM-DD HH:mm:ss)" || field_type_this == "date(YYYY)" || field_type_this == "date(YYYY-MM)" || field_type_this == "date(YYYY-MM-DD)" || field_type_this == "date(HH:mm:ss)"){
-                      	 	if(data.field[item]){
-                      	 		data.field[item] = {$gte:data.field[item]};
-                      	 	}else{
-                      	 		delete data.field[item];
-                      	 	}
-                      	 }else{
-                      	 	if(! data.field[item]){
-                      	 		delete data.field[item];
-                      	 	}
-                      	 }
+                         if(field_type_this == "int" || field_type_this == "int(6)" || field_type_this == "decimal(2)" || field_type_this == "decimal(4)"){
+                          if(data.field[item]){
+                            data.field[item] = Number(data.field[item]);
+                            if(num == 0){
+                                whereStr += item + '=' + data.field[item];
+                            }else{
+                                whereStr += ' and ' + item + '=' + data.field[item];
+                            }
+                            num++;
+                          }
+                         }else if(field_type_this == "date(YYYY-MM-DD HH:mm:ss)" || field_type_this == "date(YYYY)" || field_type_this == "date(YYYY-MM)" || field_type_this == "date(YYYY-MM-DD)" || field_type_this == "date(HH:mm:ss)"){
+                          if(data.field[item]){
+                            if(num == 0){
+                                whereStr += item + '>="' + data.field[item] + '"';
+                            }else{
+                                whereStr += ' and ' + item + '>="' + data.field[item] + '"';
+                            }
+                            num++;
+                          }
+                         }else{
+                          if(data.field[item]){
+                            if(num == 0){
+                                whereStr += item + '="' + data.field[item] + '"';
+                            }else{
+                                whereStr += ' and ' + item + '="' + data.field[item] + '"';
+                            }
+                            num++;
+                          }
+                         }
                       });
                       
-                      //console.log(data.field);
-                      var reqSearchJson = JSON.stringify(data.field);
-				      table.reload('layUiTableList', {url: url, where: { searchJson: reqSearchJson }}); 
-				      
+                      
+                      // console.log(whereStr);
+                      
+                      table.reload('layUiTableList', {url: url, where: { whereStr: whereStr }}); 
                       return false;
                 });
                 

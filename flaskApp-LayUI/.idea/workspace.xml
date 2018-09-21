@@ -10,20 +10,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="file_list.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/flaskApp/views/file_list.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-725">
-              <caret line="10" column="92" lean-forward="true" selection-start-line="10" selection-start-column="92" selection-end-line="10" selection-end-column="92" />
-              <folding>
-                <element signature="e#24#55#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -63,7 +50,6 @@
         <option value="$USER_HOME$/Desktop/old_ecast/test.sql" />
         <option value="$PROJECT_DIR$/flaskApp/static/httpRequest.html" />
         <option value="$PROJECT_DIR$/flaskApp/views/menu.py" />
-        <option value="$PROJECT_DIR$/flaskApp/config.py" />
         <option value="$PROJECT_DIR$/flaskApp/views/record_list.py" />
         <option value="$PROJECT_DIR$/flaskApp/views/login.py" />
         <option value="$PROJECT_DIR$/runserver.py" />
@@ -77,11 +63,12 @@
         <option value="$PROJECT_DIR$/flaskApp/my_modules/mysqldb.py" />
         <option value="$PROJECT_DIR$/flaskApp/views/data_list.py" />
         <option value="$PROJECT_DIR$/flaskApp/urls.py" />
+        <option value="$PROJECT_DIR$/flaskApp/config.py" />
         <option value="$PROJECT_DIR$/flaskApp/views/file_list.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="322" />
     <option name="y" value="30" />
     <option name="width" value="1401" />
@@ -108,7 +95,14 @@
               <item name="flaskApp-LayUI" type="b2602c69:ProjectViewProjectNode" />
               <item name="flaskApp-LayUI" type="462c0819:PsiDirectoryNode" />
               <item name="flaskApp" type="462c0819:PsiDirectoryNode" />
-              <item name="my_modules" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="flaskApp-LayUI" type="b2602c69:ProjectViewProjectNode" />
+              <item name="flaskApp-LayUI" type="462c0819:PsiDirectoryNode" />
+              <item name="flaskApp" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="uploadFile" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="flaskApp-LayUI" type="b2602c69:ProjectViewProjectNode" />
@@ -128,14 +122,14 @@
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="E:\mywork\flaskApp-LayUI\flaskApp\views" />
-      <recent name="E:\mywork\flaskApp-LayUI\flaskApp\static\css" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="E:\mywork\myproject\flaskApp-LayUI\flaskApp\views" />
       <recent name="E:\mywork\flaskApp-LayUI\flaskApp\views" />
       <recent name="E:\mywork\flaskApp-LayUI\flaskApp" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\mywork\flaskApp-LayUI\flaskApp\views" />
+      <recent name="E:\mywork\flaskApp-LayUI\flaskApp\static\css" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -212,15 +206,14 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16227607" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16227607" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Python Console" order="7" weight="0.208061" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.18954249" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.18954249" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.32897604" />
       <window_info id="Favorites" order="2" side_tool="true" />
@@ -470,24 +463,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/flaskApp/config.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
-          <caret line="6" column="39" selection-start-line="6" selection-start-column="39" selection-end-line="6" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/flaskApp/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="100">
           <caret line="4" column="20" lean-forward="true" selection-start-line="4" selection-start-column="20" selection-end-line="4" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/runserver.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="24" lean-forward="true" selection-end-column="24" />
         </state>
       </provider>
     </entry>
@@ -558,16 +537,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-500">
           <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
-          <folding>
-            <element signature="e#24#55#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/flaskApp/my_modules/mysqldb.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="293">
-          <caret line="301" column="42" lean-forward="true" selection-start-line="301" selection-start-column="42" selection-end-line="301" selection-end-column="42" />
         </state>
       </provider>
     </entry>
@@ -582,9 +551,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="350">
           <caret line="14" column="19" lean-forward="true" selection-start-line="14" selection-start-column="19" selection-end-line="14" selection-end-column="19" />
-          <folding>
-            <element signature="e#24#55#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -595,13 +561,31 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/runserver.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="24" lean-forward="true" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flaskApp/my_modules/mysqldb.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="4" selection-start-line="4" selection-end-line="4" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/flaskApp/config.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="9" column="42" selection-start-line="9" selection-start-column="42" selection-end-line="9" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/flaskApp/views/file_list.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-725">
-          <caret line="10" column="92" lean-forward="true" selection-start-line="10" selection-start-column="92" selection-end-line="10" selection-end-column="92" />
-          <folding>
-            <element signature="e#24#55#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="500">
+          <caret line="92" column="35" lean-forward="true" selection-start-line="92" selection-start-column="35" selection-end-line="92" selection-end-column="35" />
         </state>
       </provider>
     </entry>

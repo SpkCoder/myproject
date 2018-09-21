@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
-from flask import make_response
+from flask import make_response, app
 from flaskApp.my_modules import mysqldb
 import json
 import time
 import re
+import os
 
 
 #http://localhost:3000/python/http_test?action=findData&whereStr=id=1 and name="xx"&fieldStr=field1,field2&prePageNum=10&currPage=1&sortStr=id ASC|DESC  //查询数据
@@ -79,24 +80,39 @@ def operation(req):
         else:
             return make_response('dataArr错误')
 
-        for item in list_data:
-            item['create_name'] = dict_login['username']
-            item['create_time'] = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
-            item['update_name'] = ''
-            item['update_time'] = ''
+        upload_files = req.files.getlist("file")
+        for file in upload_files:
+            now_time = time.strftime("%Y-%m-%d-%H-%M-%S", time.localtime()) + "-" + str(time.time())[-7:-5]
+            url = os.path.join(app.config['UPLOAD_FOLDER'], now_time, file.filename)
+            list_data['name'] = file.filename
+            list_data['size'] = len(file.read())
+            list_data['url'] = url
+            list_data['create_name'] = dict_login['username']
+            list_data['create_time'] = time.strftime("%Y-%m-%d-%H-%M-%S", time.localtime())
 
-        result = mysqldb.insert_data(table_name, list_data)
-        # print(result)
-
-        if result:
-            # 操作记录
-            content = 'dataArr=' + re.sub(r'\"', "'", json.dumps(list_data, ensure_ascii=False))
-            dict_record = {'username': dict_login['username'], 'dbName': table_name, 'action': '增加', 'content': content, 'os': dict_login['os'], 'px': dict_login['px'], 'ip': req.remote_addr, 'time': time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())}
-            mysqldb.set_record(dict_record)
-
-            return make_response('操作成功')
-        else:
-            return make_response('操作失败')
+        # size = len(fnames.read())
+        fname.save(new_fname)  # 保存文件到指定路径
+        print(files)
+        print(len(files))
+        return make_response('操作成功')
+        # for item in list_data:
+        #     item['create_name'] = dict_login['username']
+        #     item['create_time'] = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+        #     item['update_name'] = ''
+        #     item['update_time'] = ''
+        #
+        # result = mysqldb.insert_data(table_name, list_data)
+        # # print(result)
+        #
+        # if result:
+        #     # 操作记录
+        #     content = 'dataArr=' + re.sub(r'\"', "'", json.dumps(list_data, ensure_ascii=False))
+        #     dict_record = {'username': dict_login['username'], 'dbName': table_name, 'action': '增加', 'content': content, 'os': dict_login['os'], 'px': dict_login['px'], 'ip': req.remote_addr, 'time': time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())}
+        #     mysqldb.set_record(dict_record)
+        #
+        #     return make_response('操作成功')
+        # else:
+        #     return make_response('操作失败')
 
 
     # 修改数据

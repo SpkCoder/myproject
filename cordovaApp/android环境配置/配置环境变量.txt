@@ -1,4 +1,4 @@
-ANDROID_HOME£ºC:\Users\px\AppData\Local\Android\android-sdk
+ANDROID_HOME£ºC:\Users\dell\AppData\Local\Android\Sdk
 JAVA_HOME£ºD:\anzhuang\jdk-8u181
 CLASSPATH£º.;%JAVA_HOME%\lib\dt.jar;%JAVA_HOME%\lib\tools.jar;
 

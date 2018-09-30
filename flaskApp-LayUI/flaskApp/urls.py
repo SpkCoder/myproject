@@ -7,5 +7,7 @@ dict_url = {
     '/python/record_list': 'flaskApp.views.record_list',
     '/python/data_list': 'flaskApp.views.data_list',
     '/python/model_list': 'flaskApp.views.model_list',
-    '/python/power_list': 'flaskApp.views.power_list'
+    '/python/power_list': 'flaskApp.views.power_list',
+    '/python/model_list_fn': 'flaskApp.views.model_list_fn',
+    '/python/file_list': 'flaskApp.views.file_list'
 }

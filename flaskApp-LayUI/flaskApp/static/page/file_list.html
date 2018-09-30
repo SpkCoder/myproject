@@ -181,8 +181,8 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
               //obj.del(); //删除对应行（tr）的DOM结构
               //layer.close(index);  //关闭当前layerOut
               
-              var dataJson = {"url":{"$in":[data.url]}};
-              var reqData2 = 'action=delData&dataJson=' +JSON.stringify(dataJson);
+              var whereJson = {"url":[data.url]};
+              var reqData2 = 'action=delData&whereJson=' +JSON.stringify(whereJson);
               dataDB.delData(url,reqData2,function (data2) {
                 layer.msg(data2,{time: 1000});
                 if(data2 != "操作成功"){return;}
@@ -237,37 +237,40 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
                     console.log(data.field);
                     if(!data.field.class_name){
                     	layer.msg("文件分类不能为空",{time: 1000});
-			    	    return false;
+			    	          return false;
                     }
-                    var dataJsonStr = JSON.stringify({"class_name": data.field.class_name});
-			    	var files = document.getElementById("file").files;
-			    	for(var i=0; i<files.length; i++){
-			    		if(files[i].size > 100*1024*1024){
-			    			layer.msg("文件必须小于100M",{time: 1000});
-			    			return false;
-			    		}
-			    	}
-			    	var formData = new FormData(document.forms['btn_add']);
-			    	formData.append("dataJson",dataJsonStr);
-			    	formData.append("fileArr",files);
-			    	formData.append("action","insertData");
-			    	$.ajax({
-			              url: url,
-			              type: "POST",
-			              data:formData,
-			              contentType: false,  
-			              processData: false,  
-			              success: function (data2,status,xhr) {
-			              	layer.msg(data2,{time: 1000});
-	                        if(data2 != "上传成功"){return;}
-	                        layer.close(index);
-	
-	                        table.reload('layUiTableList', {url: url});
-			              },
-			              error: function (xhr,status,error) {
-			              	console.log("请求失败"); 
-			              }
-			    	});
+                  var dataArr = [];
+                  var fileArr = [];
+      			    	var files = document.getElementById("file").files;
+      			    	for(var i=0; i<files.length; i++){
+      			    		if(files[i].size > 100*1024*1024){
+      			    			layer.msg("文件必须小于100M",{time: 1000});
+      			    			return false;
+      			    		}
+                    fileArr.push(files[i]);
+                    dataArr.push({"class_name": data.field.class_name});
+      			    	}
+      			    	var formData = new FormData(document.forms['btn_add']);
+      			    	formData.append("dataArr",JSON.stringify(dataArr));
+      			    	formData.append("fileArr",fileArr);
+      			    	formData.append("action","insertData");
+      			    	$.ajax({
+      			              url: url,
+      			              type: "POST",
+      			              data:formData,
+      			              contentType: false,  
+      			              processData: false,  
+      			              success: function (data2,status,xhr) {
+      			              	layer.msg(data2,{time: 1000});
+      	                        if(data2 != "上传成功"){return;}
+      	                        layer.close(index);
+      	
+      	                        table.reload('layUiTableList', {url: url});
+      			              },
+      			              error: function (xhr,status,error) {
+      			              	console.log("请求失败"); 
+      			              }
+      			    	});
                       
                     return false;
 
@@ -293,8 +296,8 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
 	            for(var i=0; i<checkStatus.data.length; i++){
 	            	urlArr.push(checkStatus.data[i].url);
 	            }
-	            var dataJson = {"url":{"$in":urlArr}};
-		        var reqData2 = 'action=delData&dataJson=' +JSON.stringify(dataJson);
+	            var whereJson = {"url":urlArr};  
+		        var reqData2 = 'action=delData&whereJson=' +JSON.stringify(whereJson);
 		        dataDB.delData(url,reqData2,function (data2) {
 		            layer.msg(data2,{time: 1000});
 		            if(data2 != "操作成功"){return;}
@@ -331,40 +334,54 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
                   
                   form.render(); //重新渲染form
                   $(".btn_esc").on("click",function () { 
-                  	table.reload('layUiTableList', {url: url, where: { searchJson: {} }}); 
-                  	layer.close(index); 
-                  	return false;
+                    table.reload('layUiTableList', {url: url, where: { whereStr: '' }}); 
+                    layer.close(index); 
+                    return false;
                   });
                   
                  
                   //监听提交
                   form.on('submit(formDemo)', function(data){
                       //console.log(data.field);
+                      var whereStr = '';
+                      var num = 0; 
                       headObj.field_en_Arr.forEach(function(item,index){
                          var field_type_this = headObj.data_type_Arr[index];
-                      	 if(field_type_this == "int" || field_type_this == "int(6)" || field_type_this == "decimal(2)" || field_type_this == "decimal(4)"){
-                      	 	if(data.field[item]){
-                      	 		data.field[item] = Number(data.field[item]);
-                      	 	}else{
-                      	 		delete data.field[item];
-                      	 	}
-                      	 }else if(field_type_this == "date(YYYY-MM-DD HH:mm:ss)" || field_type_this == "date(YYYY)" || field_type_this == "date(YYYY-MM)" || field_type_this == "date(YYYY-MM-DD)" || field_type_this == "date(HH:mm:ss)"){
-                      	 	if(data.field[item]){
-                      	 		data.field[item] = {$gte:data.field[item]};
-                      	 	}else{
-                      	 		delete data.field[item];
-                      	 	}
-                      	 }else{
-                      	 	if(! data.field[item]){
-                      	 		delete data.field[item];
-                      	 	}
-                      	 }
+                         if(field_type_this == "int" || field_type_this == "int(6)" || field_type_this == "decimal(2)" || field_type_this == "decimal(4)"){
+                          if(data.field[item]){
+                            data.field[item] = Number(data.field[item]);
+                            if(num == 0){
+                                whereStr += item + '=' + data.field[item];
+                            }else{
+                                whereStr += ' and ' + item + '=' + data.field[item];
+                            }
+                            num++;
+                          }
+                         }else if(field_type_this == "date(YYYY-MM-DD HH:mm:ss)" || field_type_this == "date(YYYY)" || field_type_this == "date(YYYY-MM)" || field_type_this == "date(YYYY-MM-DD)" || field_type_this == "date(HH:mm:ss)"){
+                          if(data.field[item]){
+                            if(num == 0){
+                                whereStr += item + '>="' + data.field[item] + '"';
+                            }else{
+                                whereStr += ' and ' + item + '>="' + data.field[item] + '"';
+                            }
+                            num++;
+                          }
+                         }else{
+                          if(data.field[item]){
+                            if(num == 0){
+                                whereStr += item + '="' + data.field[item] + '"';
+                            }else{
+                                whereStr += ' and ' + item + '="' + data.field[item] + '"';
+                            }
+                            num++;
+                          }
+                         }
                       });
                       
-                      //console.log(data.field);
-                      var reqSearchJson = JSON.stringify(data.field);
-				      table.reload('layUiTableList', {url: url, where: { searchJson: reqSearchJson }}); 
-				      
+                      
+                      // console.log(whereStr);
+                      
+                      table.reload('layUiTableList', {url: url, where: { whereStr: whereStr }}); 
                       return false;
                 });
                 
@@ -380,7 +397,7 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
 
 
   //初始化数据
-  var reqData = 'action=findData&searchJson=&prePageNum=1&currPage=1';
+  var reqData = 'action=findData&whereStr=&prePageNum=1&currPage=1';
   dataDB.findData(url,reqData,colArrInt);
   //初始化数据 结束
   

@@ -68,6 +68,34 @@ def operation(req):
             return make_response('操作失败')
 
 
+    # 查询处理过的数据
+    def find_data_all():
+        if 'whereStr' in req.args:
+            str_where = req.args['whereStr']
+        else:
+            str_where = ''
+
+        # 获取表头数据
+        list_head = mysqldb.get_head(str_where)
+
+        if list_head and len(list_head) >= 0:
+            name = 'dataList'
+            name_ch = '数据列表'
+            field_ch = '模块ID;数据表名称;数据表中文名;中文字段集合;英文字段集合;字段数据类型集合;字段列宽集合;字段排序集合'
+            field_en = 'id;name;name_ch;field_ch;field_en;data_type;field_width;field_sort'
+            data_type = 'int(6);text;text;text;text;int;int'
+            field_width = '100;100;150;200;200;200;200;200'
+            field_sort = '1;2;3;4;5;6;7;8'
+            dict_json = {'code': 0, 'msg': '', 'count': len(list_head), 'prePageNum': 100000,
+                             'currPage': 1, 'name': name, 'name_ch': name_ch,
+                             'field_ch': field_ch, 'field_en': field_en,
+                             'data_type': data_type, 'field_width': field_width,
+                             'field_sort': field_sort, 'rows': list_head}
+            return make_response(json.dumps(dict_json, ensure_ascii=False))
+        else:
+            return make_response('操作失败')
+
+
     # 插入数据
     def insert_data():
         if 'dataArr' in req.form:
@@ -168,6 +196,8 @@ def operation(req):
         print(req.args)
         if req.args['action'] == 'findData':
             return find_data()
+        elif req.args['action'] == 'findDataAll':
+            return find_data_all()
         else:
             return make_response('action错误')
 

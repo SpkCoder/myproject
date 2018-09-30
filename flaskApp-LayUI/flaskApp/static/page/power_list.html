@@ -137,14 +137,12 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
 
         //尽管我们的 table 自带排序功能，但并没有请求服务端。
         //有些时候，你可能需要根据当前排序的字段，重新向服务端发送请求，从而实现服务端排序，如：
-        var sortJson = {};
-        sortJson[obj.field] = (obj.type == "desc") ? -1 : 1;
-        sortJson = JSON.stringify(sortJson);
-        
+        var sortStr = obj.field + " " + obj.type;
+
         table.reload('layUiTableList', {
           initSort: obj, //记录初始排序，如果不设的话，将无法标记表头的排序状态。
           where: { //请求参数（注意：这里面的参数可任意定义，并非下面固定的格式）
-            sortJson: sortJson, //排序方式
+            sortStr: sortStr, //排序方式
           }
         });
 
@@ -153,14 +151,14 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
 
       //加载角色分类
       var roleClass = [];
-      var modelList_reqData = 'action=findData&searchStr=&prePageNum=100000&currPage=1';
+      var modelList_reqData = 'action=findData&whereStr=&prePageNum=100000&currPage=1';
            dataDB.findData("/python/role_class",modelList_reqData,function (roleClassData) {
            roleClass = roleClassData.rows;
       });
 
       //加载模块列表
       var modelList = [];
-      var modelList_reqData = 'action=findData&searchStr=level=2&sortStr=id asc&prePageNum=100000&currPage=1';
+      var modelList_reqData = 'action=findData&whereStr=level=2&sortStr=id asc&prePageNum=100000&currPage=1';
            dataDB.findData("/python/model_list",modelList_reqData,function (modelListData) {
            modelList = modelListData.rows;
       });
@@ -205,8 +203,6 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
             });
           }
 
-          
-
 
         });
         //监听工具条 结束
@@ -221,23 +217,25 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
                 var data_type = headObj.data_type_Arr[i];
 	            var field_en = headObj.field_en_Arr[i];
 	            var field_ch = headObj.field_ch_Arr[i];
-                if(field_en == "id"){
+              if(field_en == "id"){
 	               	 //
-	            }else if(field_en == "name"){
-	                formStr+='<div class="layui-form-item"><label class="layui-form-label">'+field_ch+'：</label><div class="layui-input-block"><select name="id">';
+	            }else if(field_en == "power_id"){
+                  //
+              }else if(field_en == "power_name"){
+	                formStr+='<div class="layui-form-item"><label class="layui-form-label">'+field_ch+'：</label><div class="layui-input-block"><select name="power_id">';
 	                roleClass.forEach(function (item,index) {
 	                	formStr+='<option value="'+item.id+'">'+item.class_name+'</option>';
 	                });
 	                formStr+='</select></div></div>';
-	           	}else if(field_en == "modelId"){
+	           	}else if(field_en == "model_id"){
 	                //
-	           	}else if(field_en == "modelName"){
-	                formStr+='<div class="layui-form-item"><label class="layui-form-label">'+field_ch+'：</label><div class="layui-input-block"><select name="modelId" lay-filter="modelId">';
+	           	}else if(field_en == "model_name"){
+	                formStr+='<div class="layui-form-item"><label class="layui-form-label">'+field_ch+'：</label><div class="layui-input-block"><select name="model_id" lay-filter="model_id">';
 	                modelList.forEach(function (item,index) {
 	                	formStr+='<option value="'+item.id+'">'+item.name+'</option>';
 	                });
 	                formStr+='</select></div></div>';
-	           	}else if(field_en == "dbName"){
+	           	}else if(field_en == "db_name"){
 	           	   	//
 	           	}else if(field_en == "function_en"){
 	           	   	//
@@ -261,60 +259,59 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
                   //console.log(index);
                   
                   //加载模块功能
-                  var thisModelId = Number($("form select[name=modelId] option:selected").val());
+                  var thisModelId = Number($("form select[name=model_id] option:selected").val());
                   getModelListFn(thisModelId);
                   function getModelListFn (thisModelId) {
-    				      var roleClass = [];
-    				      var modelListFn_reqData = 'action=findData&searchJson='+JSON.stringify({"id":thisModelId})+'&prePageNum=100000&currPage=1';
+    				           var roleClass = [];
+    				           var modelListFn_reqData = 'action=findData&whereStr=model_id='+thisModelId+'&prePageNum=100000&currPage=1';
     				           dataDB.findData("/python/model_list_fn",modelListFn_reqData,function (modelListFnData) {
-    				           modelListFn = modelListFnData.rows;
-    				           var html = '';
-    				           modelListFn.forEach(function (item,index) {
-    			                	html+='<option value="'+item.function_en+'">'+item.function_ch+'</option>';
-    			               });
-    			               $("form select[name=function_en]").html(html);
-    			               form.render(); //重新渲染form
-    				      });
+      				           modelListFn = modelListFnData.rows;
+      				           var html = '';
+      				           modelListFn.forEach(function (item,index) {
+      			                	html+='<option value="'+item.function_en+'">'+item.function_ch+'</option>';
+      			               });
+      			               $("form select[name=function_en]").html(html);
+      			               form.render(); //重新渲染form
+    				          });
                   }
                   
                   
-	              form.on('select(modelId)', function(data){
-					 //console.log(data.value);
-					 //加载模块功能
+  	              form.on('select(model_id)', function(data){
+        					   //console.log(data.value);
+        					   //加载模块功能
                      var thisModelId = Number(data.value);
                      getModelListFn(thisModelId);
-				  });
+        				  });
 				  
-				  $(".btn_esc").on("click",function () { layer.close(index); return false; });
+				          $(".btn_esc").on("click",function () { layer.close(index); return false; });
 				  
                   //监听提交
                   form.on('submit(formDemo)', function(data){
                       //console.log(data.field);
-                      data.field.id = Number(data.field.id);
-	                  data.field.name = $("form select[name=id] option:selected").text();
-	                  data.field.modelId = Number(data.field.modelId);
-	                  data.field.modelName = $("form select[name=modelId] option:selected").text();
-	                  data.field.function_ch = $("form select[name=function_en] option:selected").text();
-	                  
-                      var reqData_dateList = 'action=findData&searchJson='+JSON.stringify({"id":data.field.modelId})+'&prePageNum=1&currPage=1';
+  	                  data.field.power_name = $("form select[name=power_id] option:selected").text();
+  	                  data.field.model_name = $("form select[name=model_id] option:selected").text();
+  	                  data.field.function_ch = $("form select[name=function_en] option:selected").text();
+                      data.field.power_id = Number(data.field.power_id);
+                      data.field.model_id = Number(data.field.model_id);
+                      var reqData_dateList = 'action=findData&whereStr=modelId='+data.field.model_id+'&prePageNum=1&currPage=1';
                       dataDB.findData("/python/data_list",reqData_dateList,function (dateListData) {
-                      	 data.field.dbName = dateListData.rows[0].name;
+                         data.field.db_name = dateListData.rows[0].name;
                          //console.log(data.field);
                       	 
                       	 var dataArr=[];
-	                     dataArr.push(data.field);
-	                     var reqData2 = 'action=insertData&dataArr=' + JSON.stringify(dataArr);
-	                     dataDB.insertData(url,reqData2,function (data2) {
-	                        layer.msg(data2,{time: 1000});
-	                        if(data2 != "操作成功"){return;}
-	                        layer.close(index);
-	
-	                        table.reload('layUiTableList', {url: url});
-		                 });
+  	                     dataArr.push(data.field);
+  	                     var reqData2 = 'action=insertData&dataArr=' + JSON.stringify(dataArr);
+  	                     dataDB.insertData(url,reqData2,function (data2) {
+  	                        layer.msg(data2,{time: 1000});
+  	                        if(data2 != "操作成功"){return;}
+  	                        layer.close(index);
+  	
+  	                        table.reload('layUiTableList', {url: url});
+  		                    });
                        });
   
 	                   return false;
-                });
+                  });
               }
             });
 
@@ -392,7 +389,7 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
                       });
                       
                       
-                      // console.log(whereStr);
+                      //console.log(whereStr);
                       
                       table.reload('layUiTableList', {url: url, where: { whereStr: whereStr }}); 
                       return false;
@@ -410,7 +407,7 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
 
 
   //初始化数据
-  var reqData = 'action=findData&searchJson=&prePageNum=1&currPage=1';
+  var reqData = 'action=findData&whereStr=&prePageNum=1&currPage=1';
   dataDB.findData(url,reqData,colArrInt);
   //初始化数据 结束
   

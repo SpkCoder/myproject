@@ -157,8 +157,8 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
               	 }
               });
               
-              var dataJson = {"id":data.id, "name":data.name};
-              var reqData2 = 'action=delData&dataJson=' +JSON.stringify(dataJson);
+              var whereJson = {"modelId": [data.id]};
+              var reqData2 = 'action=delData&whereJson=' +JSON.stringify(whereJson);
               dataDB.delData(url,reqData2,function (data2) {
                 layer.msg(data2,{time: 1000});
                 if(data2 != "操作成功"){return;}
@@ -169,7 +169,7 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
         					var load_index = layer.load(2,{area: ['100px', '100px'],content: '<p style="position:relative;top:40px;left:-30px;width:100px; text-align:center;background:#333; color:#fff">系统重启中</p>',time: 5000});
         				},1000);
         				setTimeout(function () {
-        					window.location.href = "/";
+        					window.location.reload();
         				},5000);
 				
                 table.reload('layUiTableList', {url: url});
@@ -188,8 +188,8 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
        
         //新增
         $("#btn_add").on("click",function(){
-        	var reqData = 'action=findData&searchJson={"level":2}&sortJson={"id":1}&prePageNum=100000&currPage=1';
-            dataDB.findData("/python/modelList",reqData,function (modelListData) {
+        	var reqData = 'action=findData&whereStr=level=2&sortStr=id ASC&prePageNum=100000&currPage=1';
+            dataDB.findData("/python/model_list",reqData,function (modelListData) {
             	var modelList = modelListData.rows;
             	var modelIdArr = [];
             	data.rows.forEach(function (item, index) {
@@ -213,7 +213,7 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
 	               if(field_en == "id"){
 	                formStr+='<div class="layui-form-item"><label class="layui-form-label">'+field_ch+'：</label><div class="layui-input-block"><select name="id" lay-filter="id">';
 	                modelList.forEach(function (item,index) {
-	                	formStr+='<option value="'+item.id+'">'+item.name+'</option>';
+	                	formStr+='<option data-url="'+item.href+'" value="'+item.id+'">'+item.name+'</option>';
 	                });
 	                formStr+='</select></div></div>';
 	           	   }else{
@@ -239,7 +239,8 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
 	                  
 	                  form.on('select(id)', function(data){
         						  //console.log(data);
-        						  $("form input[name=name_ch]").val($("form select[name=id] option:selected").text());
+                      $("form input[name=name_ch]").val($("form select[name=id] option:selected").text());
+        						  $("form input[name=name]").val($("form select[name=id] option:selected").attr("data-url").split("/")[2]);
         					  }); 
 	                  
 	                  //监听提交
@@ -250,42 +251,34 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
 	                      //console.log(data.field);
 	                      
 	                      if(!data.field.id || !data.field.name || !data.field.name_ch){layer.msg("模块ID和数据表名称不能为空",{time: 1000});return false;}
-	                      var searchJson_id = JSON.stringify({"id": data.field.id});
-	                      var reqData_id = 'action=findDataAll&searchJson='+searchJson_id+'&prePageNum=1000&currPage=1';
-	                      dataDB.findData(url,reqData_id,function (data_id) {
-	                      	  if(data_id.rows.length > 0){
-	                      		 layer.msg("模块ID已存在",{time: 1000});
-	                      		 return;
-	                      	  }
-	                      	  var searchJson_name = JSON.stringify({"name": data.field.name});
-		                      var reqData_name = 'action=findDataAll&searchJson='+searchJson_name+'&prePageNum=1000&currPage=1';
-		                      dataDB.findData(url,reqData_name,function (data_name) {
-		                      	if(data_name.rows.length > 0){
-		                      		layer.msg("数据表名称已存在",{time: 1000});
-		                      		return;
-		                      	}
-		                      	
-		                      	var dataArr=[];
-			                    dataArr.push(data.field);
-			                    var reqData2 = 'action=insertData&dataArr=' + JSON.stringify(dataArr);
-			                    dataDB.insertData(url,reqData2,function (data2) {
-			                        layer.msg(data2,{time: 1000});
-			                        if(data2 != "操作成功"){return;}
-			                        layer.close(index);
-			
-			                        //系统重启
-			                        setTimeout(function () {
-            										var load_index = layer.load(2,{area: ['100px', '100px'],content: '<p style="position:relative;top:40px;left:-30px;width:100px; text-align:center;background:#333; color:#fff">系统重启中</p>',time: 5000});
-            									},1000);
-            									setTimeout(function () {
-            										window.location.href = "/";
-            									},5000);
-									
-			                        table.reload('layUiTableList', {url: url});
-			                    });
-			                    
-		                      });
-	                      });
+	                      var whereStr_name = 'name="' + data.field.name + '"';
+                          var reqData_name = 'action=findData&whereStr='+whereStr_name+'&prePageNum=1&currPage=1';
+                          dataDB.findData(url,reqData_name,function (data_name) {
+                            if(data_name.rows.length > 0){
+                              layer.msg("数据表名称已存在",{time: 1000});
+                              return;
+                            }
+                            
+                            var dataArr=[];
+                          dataArr.push(data.field);
+                          var reqData2 = 'action=insertData&dataArr=' + JSON.stringify(dataArr);
+                          dataDB.insertData(url,reqData2,function (data2) {
+                              layer.msg(data2,{time: 1000});
+                              if(data2 != "操作成功"){return;}
+                              layer.close(index);
+      
+                              //系统重启
+                              setTimeout(function () {
+                                var load_index = layer.load(2,{area: ['100px', '100px'],content: '<p style="position:relative;top:40px;left:-30px;width:100px; text-align:center;background:#333; color:#fff">系统重启中</p>',time: 5000});
+                              },1000);
+                              setTimeout(function () {
+                                window.location.reload();
+                              },5000);
+                  
+                              table.reload('layUiTableList', {url: url});
+                          });
+                          
+                          });
 	                      
 	                      return false;
 	                });
@@ -339,9 +332,9 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
                           if(data.field[item]){
                             data.field[item] = Number(data.field[item]);
                             if(num == 0){
-                                whereStr += item + '=' + data.field[item];
+                                whereStr += 'modelId' + '=' + data.field[item];
                             }else{
-                                whereStr += ' and ' + item + '=' + data.field[item];
+                                whereStr += ' and ' + 'modelId' + '=' + data.field[item];
                             }
                             num++;
                           }
@@ -367,7 +360,7 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
                       });
                       
                       
-                      // console.log(whereStr);
+                      //console.log(whereStr);
                       
                       table.reload('layUiTableList', {url: url, where: { whereStr: whereStr }}); 
                       return false;

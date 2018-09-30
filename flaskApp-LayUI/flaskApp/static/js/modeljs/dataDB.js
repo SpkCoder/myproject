@@ -19,7 +19,7 @@ layui.define(["jquery"],function(exports){
           for(let i = 0; i < field_en_Arr.length; i++){
              colArr.push({field: field_en_Arr[i], title: field_ch_Arr[i], width:field_width_Arr[i], sort: true});
           }
-          colArr.push({fixed: 'right', width: 150, align:'center', toolbar: '#barDemo'});
+          colArr.push({fixed: 'right', width: 180, align:'center', toolbar: '#barDemo'});
         }
         headObj.field_en_Arr = field_en_Arr;
         headObj.field_ch_Arr = field_ch_Arr;

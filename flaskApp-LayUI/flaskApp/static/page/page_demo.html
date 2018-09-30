@@ -171,7 +171,11 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
                var data_type = headObj.data_type_Arr[i];
                var field_en = headObj.field_en_Arr[i];
                var field_ch = headObj.field_ch_Arr[i];
-               formStr+='<div class="layui-form-item"><label class="layui-form-label">'+field_ch+'：</label><div class="layui-input-block"><input class="layui-input" type="text" lay-verify="'+data_type+'" name="'+field_en+'" value="'+data[field_en]+'" placeholder=""></div></div>';
+               if(field_en == "id"){
+                  //
+               }else{
+                 formStr+='<div class="layui-form-item"><label class="layui-form-label">'+field_ch+'：</label><div class="layui-input-block"><input class="layui-input" type="text" lay-verify="'+data_type+'" name="'+field_en+'" value="'+data[field_en]+'" placeholder=""></div></div>';
+               }
 
             }
             formStr+='<div class="layui-form-item"><div class="layui-input-block"><button class="layui-btn layui-btn-sm" lay-submit lay-filter="formDemo">提交</button><button class="layui-btn layui-btn-sm btn_esc">取消</button></div></div>';
@@ -192,20 +196,20 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
                   $(".btn_esc").on("click",function () { layer.close(index); return false; });
                   
                   //监听提交
-                  form.on('submit(formDemo)', function(data){
-                      //console.log(data.field);
+                  form.on('submit(formDemo)', function(data2){
+                      //console.log(data2.field);
                       
                       headObj.field_en_Arr.forEach(function(item,index){
                          var field_type_this = headObj.data_type_Arr[index];
-                      	 if(field_type_this == "int" || field_type_this == "int(6)" || field_type_this == "decimal(2)" || field_type_this == "decimal(4)"){
-                      	 	data.field[item] = Number(data.field[item]);
-                      	 }
+                         if(field_type_this == "int" || field_type_this == "int(6)" || field_type_this == "decimal(2)" || field_type_this == "decimal(4)"){
+                          data2.field[item] = Number(data2.field[item]);
+                         }
                       });
-                      //console.log(data.field);
+                      delete data2.field.id;
+                      //console.log(data2.field);
                       
-                      var whereStr ='id=' + data.field.id;
-                      var updateJson = data.field;
-                      delete updateJson.id;
+                      var whereStr ='id=' + data.id;
+                      var updateJson = data2.field;
                       var reqData2 = 'action=updateData&whereStr=' + whereStr + '&updateJson=' + JSON.stringify(updateJson);
                       dataDB.updateData(url,reqData2,function (data2) {
                         layer.msg(data2,{time: 1000});
@@ -275,7 +279,11 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
                var data_type = headObj.data_type_Arr[i];
                var field_en = headObj.field_en_Arr[i];
                var field_ch = headObj.field_ch_Arr[i];
-               formStr+='<div class="layui-form-item"><label class="layui-form-label">'+field_ch+'：</label><div class="layui-input-block"><input class="layui-input" type="text" lay-verify="'+data_type+'" name="'+field_en+'" value="" placeholder=""></div></div>';
+               if(field_en == "id"){
+                //
+               }else{
+                 formStr+='<div class="layui-form-item"><label class="layui-form-label">'+field_ch+'：</label><div class="layui-input-block"><input class="layui-input" type="text" lay-verify="'+data_type+'" name="'+field_en+'" value="" placeholder=""></div></div>';
+               }
             }
             formStr+='<div class="layui-form-item"><div class="layui-input-block"><button class="layui-btn layui-btn-sm" lay-submit lay-filter="formDemo">提交</button><button class="layui-btn layui-btn-sm btn_esc"">取消</button></div></div>';
             formStr+='</form>';
@@ -300,13 +308,13 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
                       
                       headObj.field_en_Arr.forEach(function(item,index){
                          var field_type_this = headObj.data_type_Arr[index];
-                      	 if(field_type_this == "int" || field_type_this == "int(6)" || field_type_this == "decimal(2)" || field_type_this == "decimal(4)"){
-                      	 	data.field[item] = Number(data.field[item]);
-                      	 }
+                         if(field_type_this == "int" || field_type_this == "int(6)" || field_type_this == "decimal(2)" || field_type_this == "decimal(4)"){
+                          data.field[item] = Number(data.field[item]);
+                         }
                       });
+                      delete data.field.id;
                       //console.log(data.field);
                       
-                      delete data.field.id;
                       var dataArr=[];
                       dataArr.push(data.field);
                       var reqData2 = 'action=insertData&dataArr=' + JSON.stringify(dataArr);
@@ -330,26 +338,26 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
         
         //批量删除
         $("#btn_delete").on("click",function(){
-        	var checkStatus = table.checkStatus('layUiTableList');
-        	//console.log(checkStatus.data);
-        	if(checkStatus.data.length == 0){
-        		layer.msg("请勾选要删除的行",{time: 1000});
-        		return;
-        	}
+          var checkStatus = table.checkStatus('layUiTableList');
+          //console.log(checkStatus.data);
+          if(checkStatus.data.length == 0){
+            layer.msg("请勾选要删除的行",{time: 1000});
+            return;
+          }
             layer.confirm('真的删除行么', function(index){
-	            var idArr = [];
-	            for(var i=0; i<checkStatus.data.length; i++){
-	            	idArr.push(checkStatus.data[i].id);
-	            }
-  		        var whereJson = {"id": idArr};
+              var idArr = [];
+              for(var i=0; i<checkStatus.data.length; i++){
+                idArr.push(checkStatus.data[i].id);
+              }
+              var whereJson = {"id": idArr};
               var reqData2 = 'action=delData&whereJson=' +JSON.stringify(whereJson);
-  		        dataDB.delData(url,reqData2,function (data2) {
-  		            layer.msg(data2,{time: 1000});
-  		            if(data2 != "操作成功"){return;}
-  		            layer.close(index);
-  		            table.reload('layUiTableList', {url: url});
-  		        });
-	       });
+              dataDB.delData(url,reqData2,function (data2) {
+                  layer.msg(data2,{time: 1000});
+                  if(data2 != "操作成功"){return;}
+                  layer.close(index);
+                  table.reload('layUiTableList', {url: url});
+              });
+         });
         });
         
 

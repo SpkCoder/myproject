@@ -1,6 +1,7 @@
 document.addEventListener("deviceready", init, false);
 function init() {
-
+    
+    //相机
 	function onSuccess(imageData) {
 		console.log('success');
 		var image = document.getElementById('myImage');
@@ -45,4 +46,25 @@ function init() {
 
 	});
 
+
+    //二维码
+	document.querySelector("#startScan").addEventListener("touchend", startScan, false);
+	var resultDiv = document.querySelector("#results");
+
+	function startScan() {
+		cordova.plugins.barcodeScanner.scan(
+			function (result) {
+				var s = "Result: " + result.text + "<br/>" +
+				"Format: " + result.format + "<br/>" +
+				"Cancelled: " + result.cancelled;
+				resultDiv.innerHTML = s;
+			}, 
+			function (error) {
+				alert("Scanning failed: " + error);
+			}
+		);
+	}
+
 }
+
+

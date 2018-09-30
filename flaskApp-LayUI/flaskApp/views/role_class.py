@@ -155,7 +155,7 @@ def operation(req):
 
         if result:
             # 操作记录
-            content = 'dataArr=' + re.sub(r'\"', "'", json.dumps(dict_where, ensure_ascii=False))
+            content = 'whereJson=' + re.sub(r'\"', "'", json.dumps(dict_where, ensure_ascii=False))
             dict_record = {'username': dict_login['username'], 'dbName': table_name, 'action': '删除', 'content': content, 'os': dict_login['os'], 'px': dict_login['px'], 'ip': req.remote_addr, 'time': time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())}
             mysqldb.set_record(dict_record)
 
@@ -166,6 +166,11 @@ def operation(req):
     # GET请求
     if req.method == 'GET':
         print(req.args)
+
+        # 判断权限
+        if not mysqldb.get_power(dict_login['username'], dict_login['hash'], table_name, req.args['action']):
+            return make_response('没有权限')
+
         if req.args['action'] == 'findData':
             return find_data()
         else:
@@ -174,6 +179,11 @@ def operation(req):
     # POST请求
     if req.method == 'POST':
         print(req.form)
+
+        # 判断权限
+        if not mysqldb.get_power(dict_login['username'], dict_login['hash'], table_name, req.form['action']):
+            return make_response('没有权限')
+
         if req.form['action'] == 'insertData':
             return insert_data()
         elif req.form['action'] == 'updateData':

@@ -16,7 +16,7 @@
      <table class="layui-hide" id="layUiTableList" lay-filter="demo"></table>
  
       <script type="text/html" id="barDemo">
-        <!--<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="find">查看</a>-->
+        <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="find">查看</a>
         <!--<a class="layui-btn layui-btn-xs" lay-event="edit">修改</a>-->
         <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
       </script>
@@ -166,11 +166,11 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
           ,layEvent = obj.event; //获得 lay-event 对应的值
 
           //查看
-//        if(layEvent === 'find'){
-//          layer.msg('查看操作');
-//          console.log(data);
-//          window.location.hash = "/page/detail/" + data.id;
-//        }
+         if(layEvent === 'find'){
+           //layer.msg('查看操作');
+           //console.log(data);
+           window.open(data.url);
+         }
 
           
 
@@ -262,7 +262,7 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
       			              processData: false,  
       			              success: function (data2,status,xhr) {
       			              	layer.msg(data2,{time: 1000});
-      	                        if(data2 != "上传成功"){return;}
+      	                        if(data2 != "操作成功"){return;}
       	                        layer.close(index);
       	
       	                        table.reload('layUiTableList', {url: url});

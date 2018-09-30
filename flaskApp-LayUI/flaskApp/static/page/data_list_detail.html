@@ -28,15 +28,15 @@
 <script type="text/javascript">
 layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'dataDB', 'formVerify'], function(){
   var $ = layui.$;
-  var url = $("#layUI_routerView").attr("data-href").replace(/\/page\//,"/python/").replace(/\_detail.html/,"");
+  var url = $("#layUI_routerView").attr("data-href").replace(/\/static\/page\//,"/python/").replace(/\_detail.html/,"");
   var this_id = Number(url.split("?")[1]);
   var this_name = "";
   var this_name_ch = "";
-  var this_searchJson = JSON.stringify({"id": this_id});
+  var this_whereStr = "modelId=" + this_id;
   url = url.split("?")[0];
   console.log(url);
   //当前定位
-  var this_href = "#"+$("#layUI_routerView").attr("data-href").split("Detail.html")[0];
+  var this_href = "#"+$("#layUI_routerView").attr("data-href").split("_detail.html")[0].replace(/\/static/,"");
   var this_a = $(".layui-nav a[href='"+this_href+"']");
   $(".list-page-point span").html(this_a.parents("li").find("a").eq(0).text()+"&gt;&gt;"+this_a.text());
 
@@ -79,7 +79,7 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
           elem: '#layUiTableList',
           height: 400,
           url: url, //数据接口 
-          where: {'action':'findData','searchJson':this_searchJson}, //传递额外参数
+          where: {'action':'findData','whereStr':this_whereStr}, //传递额外参数
           method: 'get',
           request: {
             pageName: 'currPage' //页码的参数名称，默认：page
@@ -154,14 +154,12 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
 
         //尽管我们的 table 自带排序功能，但并没有请求服务端。
         //有些时候，你可能需要根据当前排序的字段，重新向服务端发送请求，从而实现服务端排序，如：
-        var sortJson = {};
-        sortJson[obj.field] = (obj.type == "desc") ? -1 : 1;
-        sortJson = JSON.stringify(sortJson);
-        
+        var sortStr = obj.field + " " + obj.type;
+
         table.reload('layUiTableList', {
           initSort: obj, //记录初始排序，如果不设的话，将无法标记表头的排序状态。
           where: { //请求参数（注意：这里面的参数可任意定义，并非下面固定的格式）
-            sortJson: sortJson, //排序方式
+            sortStr: sortStr, //排序方式
           }
         });
 
@@ -185,7 +183,7 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
           //修改
           if(layEvent === 'edit'){
             //console.log(data);
-          	if(data.id==100001 || data.id==100002 || data.id==100003 || data.id==100004 || data.id==100005 || data.id==100006 || data.id==100007 || data.id==100008){
+          	if(data.modelId==100001 || data.modelId==100002 || data.modelId==100003 || data.modelId==100004 || data.modelId==100005 || data.modelId==100006 || data.modelId==100007 || data.modelId==100008){
             	layer.msg("禁止操作系统模块！",{time: 1000});
             	return;
             }
@@ -256,13 +254,13 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
                       	}
                       });
                       
-                      //console.log(data2.field);
-                      var searchJson={"id": data.id, "name":data.name, "field_en": data.field_en};
-                      var updateJson= data2.field;
-                      var reqData3 = 'action=updateData&searchJson=' + JSON.stringify(searchJson) + '&updateJson=' + JSON.stringify(updateJson);
-                      dataDB.updateData(url,reqData3,function (data3) {
-                        layer.msg(data3,{time: 1000});
-                        if(data3 != "操作成功"){return;}
+                      var whereStr ='id=' + data.id;
+                      var updateJson = data2.field;
+                      delete updateJson.id;
+                      var reqData2 = 'action=updateData&whereStr=' + whereStr + '&updateJson=' + JSON.stringify(updateJson);
+                      dataDB.updateData(url,reqData2,function (data2) {
+                        layer.msg(data2,{time: 1000});
+                        if(data2 != "操作成功"){return;}
                         layer.close(index);
 
                         table.reload('layUiTableList', {url: url});
@@ -277,7 +275,7 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
 
           //删除
           if(layEvent === 'delete'){
-          	if(data.id==100001 || data.id==100002 || data.id==100003 || data.id==100004 || data.id==100005 || data.id==100006 || data.id==100007 || data.id==100008){
+          	if(data.modelId==100001 || data.modelId==100002 || data.modelId==100003 || data.modelId==100004 || data.modelId==100005 || data.modelId==100006 || data.modelId==100007 || data.modelId==100008){
             	layer.msg("禁止操作系统模块！",{time: 1000});
             	return;
             }
@@ -286,8 +284,8 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
               //console.log(data);
               //obj.del(); //删除对应行（tr）的DOM结构
               //layer.close(index);  //关闭当前layerOut
-              var dataJson = {"id": data.id, "name":data.name, "field_en":data.field_en};
-              var reqData2 = 'action=delData&dataJson=' +JSON.stringify(dataJson);
+              var whereJson = {"id": [data.id]};
+              var reqData2 = 'action=delData&whereJson=' +JSON.stringify(whereJson);
               dataDB.delData(url,reqData2,function (data2) {
                 layer.msg(data2,{time: 1000});
                 if(data2 != "操作成功"){return;}
@@ -309,7 +307,7 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
        
         //新增
         $("#btn_add").on("click",function(){
-        	if(this_id==100001 || this_id==100002 || this_id==100003 || this_id==100004 || this_id==100005 || this_id==100006 || this_id==100007 || this_id==100008){
+        	if(data.modelId==100001 || data.modelId==100002 || data.modelId==100003 || data.modelId==100004 || data.modelId==100005 || data.modelId==100006 || data.modelId==100007 || data.modelId==100008){
             	layer.msg("禁止操作系统模块！",{time: 1000});
             	return;
             }
@@ -358,8 +356,7 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
                       	 	data.field[item] = Number(data.field[item]);
                       	 }
                       });
-                      
-                      //console.log(data.field);
+
                       var dataArr=[];
                       dataArr.push(data.field);
                       var reqData2 = 'action=insertData&dataArr=' + JSON.stringify(dataArr);
@@ -389,7 +386,7 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
 
 
   //初始化数据
-  var reqData = 'action=findData&searchJson='+this_searchJson+'&prePageNum=1&currPage=1';
+  var reqData = 'action=findData&whereStr='+this_whereStr+'&prePageNum=1&currPage=1';
   dataDB.findData(url,reqData,colArrInt);
   //初始化数据 结束
   

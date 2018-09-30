@@ -21,11 +21,19 @@
         </style>
 	</head>
 	<body>
+    <div class="cordova-plugin-camera-box">
+        <h4>相机</h4>
+        <img id="myImage">
 
-	<img id="myImage">
-
-	<button id="takePicture">Take Picture</button>
-	<button id="usePicture">Use Picture</button>
+		<p><button id="takePicture">Take Picture</button></p>
+		<p><button id="usePicture">Use Picture</button></p>
+    </div>
+	
+	<div class="phonegap-plugin-barcodescanner-box"> 
+	   <h4>二维码</h4>
+	   <p> <button id="startScan">Start Scan</button> </p> 
+	   <div id="results"></div>
+	</div>
 
 	<script src="js/vintage.min.js"></script>
 	<script src="cordova.js"></script>	

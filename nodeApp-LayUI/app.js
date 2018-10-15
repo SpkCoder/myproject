@@ -24,10 +24,18 @@ app.use(express.static(path.join(__dirname, 'public')));
 //longintest
 app.all('*',function(req,res,next){
 	    
-	    //允许跨域
-//	    res.header('Access-Control-Allow-Origin', '*');
+//	    //允许跨域
+//	    if(req.headers.origin == "http://192.168.218.202:8443"){
+//	    	res.header('Access-Control-Allow-Origin', "http://192.168.218.202:8443");
+//	    }else{
+//	    	res.header('Access-Control-Allow-Origin', "http://18.223.242.20:8050");
+//	    }
+//	
 //	    res.header('Access-Control-Allow-Headers', 'Content-Type, Content-Length, Authorization, Accept, X-Requested-With , yourHeaderFeild');
 //	    res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
+//	    
+//	    //允许cookie
+//	    res.header('Access-Control-Allow-Credentials', 'true');
 	
         //console.log(req.path);
         //console.log(req.cookies);
@@ -45,6 +53,8 @@ app.all('*',function(req,res,next){
 		
 });
 
+
+    
 
 
 

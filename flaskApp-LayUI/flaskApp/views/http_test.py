@@ -4,7 +4,6 @@ from flaskApp.my_modules import mysqldb
 import json
 import time
 
-
 #http://localhost:3000/python/http_test?action=findData&whereStr=id=1 and name="xx"&fieldStr=field1,field2&prePageNum=10&currPage=1&sortStr=id ASC|DESC  //查询数据
 #http://localhost:3000/python/http_test?action=insertData&dataArr=[{"name":"mick","age":18},{"name":"tina","age":35}]  //插入数据
 #http://localhost:3000/python/http_test?action=updateData&whereStr=id=1&updateJson={"name":"xx"}  //修改数据
@@ -12,6 +11,7 @@ import time
 #http://localhost:3000/python/http_test?action=addCol&dataJson={"fieldName":"num","dataType":"INT"}  //插入列
 #http://localhost:3000/python/http_test?action=updateCol&dataJson={"fieldName":"num","fieldNewName":"meg","dataNewType":"TEXT"}  //修改列
 #http://localhost:3000/python/http_test?action=delCol&dataJson={"fieldName":"num"}  //删除列
+#http://localhost:3000/python/http_test?action=delCol&dataJson={"to":"1533165085@qq.com","subject":"nodemailer测试","html":"<h2>hello</h2>"}  //发送邮件
 
 
 def operation(req):

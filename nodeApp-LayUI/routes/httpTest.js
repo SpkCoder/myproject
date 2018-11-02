@@ -5,7 +5,7 @@ const moment = require('moment');
 const sendMail = require("../my_modules/sendMail.js");
 const httpRequest = require("../my_modules/httpRequest.js");
 const myGM = require("../my_modules/myGM.js");
-
+const jwt = require("../my_modules/jwt.js");
 
 // http://localhost:3000/nodejs/httpTest?action=findData&searchJson={"name":"mick"}&fieldJson={"name":1}&prePageNum=10&currPage=1&sortJson={"key":1}  //查询数据
 // http://localhost:3000/nodejs/httpTest?action=findDataLookup&fromJson={"dbName":"roleClass","pk":"roleId","fk":"id","as":"lookup"}&searchJson={"name":"mick"}&fieldJson={"name":1}&prePageNum=10&currPage=1&sortJson={"key":1}  //查询关联数据
@@ -16,6 +16,18 @@ const myGM = require("../my_modules/myGM.js");
 // http://localhost:3000/nodejs/httpTest?action=updateCol&dataJson={"oldname":"newname"}  //修改列
 // http://localhost:3000/nodejs/httpTest?action=delCol&dataJson={"name":""}  //删除列
 // http://localhost:3000/nodejs/httpTest?action=sendMail&dataJson={"to":"1533165085@qq.com","subject":"nodemailer测试","html":"<h2>hello</h2>"}  //发送邮件
+
+
+//jwt加密
+//var token = jwt.incoded({"username": "admin", "password": "123456"});
+//console.log(token);
+//jwt.decoded(token,function(err,result){
+//	if(err){
+//		console.log("jwt.decode" + err);
+//	}
+//	console.log(result);
+//});
+//return;
 
 
 

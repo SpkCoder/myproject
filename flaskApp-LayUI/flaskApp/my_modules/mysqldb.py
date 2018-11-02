@@ -23,7 +23,7 @@ def create_table(table_name):
     else:
         try:
             cursor = db.cursor()
-            sql = 'create table ' + table_name + '(id int(6) unsigned auto_increment primary key)'
+            sql = 'create table if not exists ' + table_name + '(id int(10) unsigned auto_increment primary key, create_name varchar(100) not null, create_time varchar(100) not null, update_name varchar(100) not null, update_time varchar(100) not null)'
             cursor.execute(sql)
         except:
             db.close()
@@ -51,6 +51,34 @@ def drop_table(table_name):
         db.close()
         return 1
 
+# 获取权限
+def get_power(username, password, table_name, action):
+    db = connect_db()
+    if db == 'Error':
+        db.close()
+        return 0
+    else:
+        try:
+            str_where = 'username="' + username + '" and password="' + password + '"'
+            sql = 'select username,roleId from user_list where ' + str_where
+            cursor = db.cursor(pymysql.cursors.DictCursor)
+            cursor.execute(sql)
+            result = cursor.fetchall()
+            if len(result) > 0:
+                power_id = result[0]['roleId']
+                str_where = 'power_id=' + str(power_id) + ' and db_name="' + table_name + '"' + ' and function_en="' + action + '"'
+                sql = 'select power_id,db_name,function_en from power_list where ' + str_where
+                cursor.execute(sql)
+                result2 = cursor.fetchall()
+            else:
+                return 0
+        except:
+            db.close()
+            return 0
+
+        db.close()
+        # return 1
+        return len(result2)
 
 # 查询数据
 def find_data(table_name, str_where, str_field, args):
@@ -184,7 +212,10 @@ def del_data(db_name, dict_where):
         str_data = '('
         int_num = 1
         for item in dict_where[field]:
-            str_data += str(item)
+            if type(item) == int:
+                str_data += str(item)
+            else:
+                str_data += ('"' + item + '"')
             if int_num < len(dict_where[field]):
                 str_data += ','
             int_num += 1

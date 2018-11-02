@@ -60,6 +60,11 @@ def operation(req):
     # GET请求
     if req.method == 'GET':
         print(req.args)
+
+        # 判断权限
+        if not mysqldb.get_power(dict_login['username'], dict_login['hash'], table_name, req.args['action']):
+            return make_response('没有权限')
+
         if req.args['action'] == 'findData':
             return find_data()
         else:

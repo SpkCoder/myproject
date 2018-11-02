@@ -8,7 +8,6 @@ import re
 
 #http://localhost:3000/python/http_test?action=findData&whereStr=id=1 and name="xx"&fieldStr=field1,field2&prePageNum=10&currPage=1&sortStr=id ASC|DESC  //查询数据
 #http://localhost:3000/python/http_test?action=insertData&dataArr=[{"name":"mick","age":18},{"name":"tina","age":35}]  //插入数据
-#http://localhost:3000/python/http_test?action=updateData&whereStr=id=1&updateJson={"name":"xx"}  //修改数据
 #http://localhost:3000/python/http_test?action=delData&whereJson={"id":[1,3,5]}  //删除数据
 
 
@@ -80,11 +79,20 @@ def operation(req):
         else:
             return make_response('dataArr错误')
 
+        if len(list_data) > 1:
+            return make_response('不支持批量插入')
+
         for item in list_data:
             item['create_name'] = dict_login['username']
             item['create_time'] = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
-            item['update_name'] = ''
-            item['update_time'] = ''
+
+        # 查询功能是否存在
+        str_where = 'model_id=' + str(list_data[0]['model_id']) + ' and function_en="' + list_data[0]['function_en'] + '"'
+        str_field = 'model_id, function_en'
+        args = {'pre_page_num': 1, 'curr_page': 1, 'sort': ''}
+        result = mysqldb.find_data(table_name, str_where, str_field, args)
+        if result['count'] > 0:
+            return make_response('功能已存在')
 
         result = mysqldb.insert_data(table_name, list_data)
         # print(result)
@@ -93,44 +101,6 @@ def operation(req):
             # 操作记录
             content = 'dataArr=' + re.sub(r'\"', "'", json.dumps(list_data, ensure_ascii=False))
             dict_record = {'username': dict_login['username'], 'dbName': table_name, 'action': '增加', 'content': content, 'os': dict_login['os'], 'px': dict_login['px'], 'ip': req.remote_addr, 'time': time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())}
-            mysqldb.set_record(dict_record)
-
-            return make_response('操作成功')
-        else:
-            return make_response('操作失败')
-
-
-    # 修改数据
-    def update_data():
-        if 'whereStr' in req.form:
-            str_where = req.form['whereStr']
-            if not str_where:
-                return make_response('whereStr错误')
-        else:
-            return make_response('whereStr错误')
-
-        if 'updateJson' in req.form:
-            try:
-                dict_update = json.loads(req.form['updateJson'])
-                if len(dict_update) == 0:
-                    return make_response('updateJson错误')
-                if 'id' in dict_update:
-                    return make_response('updateJson错误')
-            except:
-                return make_response('updateJson错误')
-        else:
-            return make_response('updateJson错误')
-
-        dict_update['update_name'] = dict_login['username']
-        dict_update['update_time'] = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
-
-        result = mysqldb.update_data(table_name, str_where, dict_update)
-        # print(result)
-
-        if result:
-            # 操作记录
-            content = 'whereStr=' + re.sub(r'\"', "'", str_where) + '&updateJson=' + re.sub(r'\"', "'", json.dumps(dict_update, ensure_ascii=False))
-            dict_record = {'username': dict_login['username'], 'dbName': table_name, 'action': '修改', 'content': content, 'os': dict_login['os'], 'px': dict_login['px'], 'ip': req.remote_addr, 'time': time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())}
             mysqldb.set_record(dict_record)
 
             return make_response('操作成功')
@@ -155,7 +125,7 @@ def operation(req):
 
         if result:
             # 操作记录
-            content = 'dataArr=' + re.sub(r'\"', "'", json.dumps(dict_where, ensure_ascii=False))
+            content = 'whereJson=' + re.sub(r'\"', "'", json.dumps(dict_where, ensure_ascii=False))
             dict_record = {'username': dict_login['username'], 'dbName': table_name, 'action': '删除', 'content': content, 'os': dict_login['os'], 'px': dict_login['px'], 'ip': req.remote_addr, 'time': time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())}
             mysqldb.set_record(dict_record)
 
@@ -166,6 +136,11 @@ def operation(req):
     # GET请求
     if req.method == 'GET':
         print(req.args)
+
+        # 判断权限
+        if not mysqldb.get_power(dict_login['username'], dict_login['hash'], table_name, req.args['action']):
+            return make_response('没有权限')
+
         if req.args['action'] == 'findData':
             return find_data()
         else:
@@ -174,10 +149,13 @@ def operation(req):
     # POST请求
     if req.method == 'POST':
         print(req.form)
+
+        # 判断权限
+        if not mysqldb.get_power(dict_login['username'], dict_login['hash'], table_name, req.form['action']):
+            return make_response('没有权限')
+
         if req.form['action'] == 'insertData':
             return insert_data()
-        elif req.form['action'] == 'updateData':
-            return update_data()
         elif req.form['action'] == 'delData':
             return del_data()
         else:

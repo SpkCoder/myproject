@@ -11,22 +11,9 @@
 			    <h1>{{ msg }}</h1>
 			    <h2>index.html</h2>
 			    <ul>
-			      <li>
-			        <a
-			          href="#/"
-			          target="_self"
-			        >
-			          index.html
-			        </a>
-			      </li>
-			      <li>
-			        <a
-			          href="#/page/testList"
-			          target="_self"
-			        >
-			          testList.html
-			        </a>
-			      </li>
+			      <li> <a href="#/"target="_self"> index.html </a> </li> 
+			      <li> <a href="#/page/testList"target="_self"> testList.html </a> </li> 
+			      <li> <a href="/static/mytestList.html"target="_self"> mytestList.html </a> </li> 
 			    </ul>
 			    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 			  </div>

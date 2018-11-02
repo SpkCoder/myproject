@@ -1,14 +1,1 @@
-var routerUrl = [
-"/page/my_use_help",
-"/page/model_list",
-"/page/data_list",
-"/page/data_list_detail/:id",
-"/page/model_list_fn",
-"/page/user_list",
-"/page/power_list",
-"/page/model_list_fn",
-"/page/file_list",
-"/page/record_list",
-"/page/role_class",
-"/page/test_list"
-]
+var routerUrl = ["/page/my_use_help", "/page/model_list", "/page/data_list", "/page/data_list_detail/:id", "/page/model_list_fn", "/page/user_list", "/page/power_list", "/page/model_list_fn", "/page/file_list", "/page/record_list", "/page/role_class", "/page/sale_list", "/page/sale_list_detail/:id"]

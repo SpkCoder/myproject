@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
-from flask import make_response, app
+from flask import make_response
 from flaskApp.my_modules import mysqldb
+from flaskApp import app
 import json
 import time
 import re
@@ -8,7 +9,7 @@ import os
 
 
 #http://localhost:3000/python/http_test?action=findData&whereStr=id=1 and name="xx"&fieldStr=field1,field2&prePageNum=10&currPage=1&sortStr=id ASC|DESC  //查询数据
-#http://localhost:3000/python/http_test?action=insertData&dataArr=[{"class_name":"图库"}]&fileArr=[file,file]  //上传文件
+#http://localhost:3000/python/http_test?action=insertData&dataArr=[{"class_name":"图库"},{"class_name":"图库"}]&fileArr=[file,file]  //上传文件
 #http://localhost:3000/python/http_test?action=delData&whereJson={"url":[url1,url2]}  //删除文件
 
 
@@ -68,7 +69,7 @@ def operation(req):
             return make_response('操作失败')
 
 
-    # 插入数据
+    # 上传文件
     def insert_data():
         if 'dataArr' in req.form:
             try:
@@ -81,83 +82,41 @@ def operation(req):
             return make_response('dataArr错误')
 
         upload_files = req.files.getlist("file")
-        for file in upload_files:
-            now_time = time.strftime("%Y-%m-%d-%H-%M-%S", time.localtime()) + "-" + str(time.time())[-7:-5]
-            url = os.path.join(app.config['UPLOAD_FOLDER'], now_time, file.filename)
-            list_data['name'] = file.filename
-            list_data['size'] = len(file.read())
-            list_data['url'] = url
-            list_data['create_name'] = dict_login['username']
-            list_data['create_time'] = time.strftime("%Y-%m-%d-%H-%M-%S", time.localtime())
+        for i, file in enumerate(upload_files):
+            now_time = time.strftime("%Y-%m-%d-%H-%M-%S", time.localtime()) + "-" + str(time.time())[11:15]
+            now_path = os.path.dirname(os.path.dirname(__file__)) + "\\static\\uploadFile\\" + now_time + "___" + file.filename
+            if not os.path.exists(now_path):
+                file.save(now_path)
+            else:
+                pass
+            url = "/static/uploadFile/" + now_time + "___" + file.filename
+            list_data[i]['name'] = file.filename
+            list_data[i]['size'] = os.path.getsize(now_path)
+            list_data[i]['url'] = url
+            list_data[i]['create_name'] = dict_login['username']
+            list_data[i]['create_time'] = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
 
-        # size = len(fnames.read())
-        fname.save(new_fname)  # 保存文件到指定路径
-        print(files)
-        print(len(files))
-        return make_response('操作成功')
-        # for item in list_data:
-        #     item['create_name'] = dict_login['username']
-        #     item['create_time'] = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
-        #     item['update_name'] = ''
-        #     item['update_time'] = ''
-        #
-        # result = mysqldb.insert_data(table_name, list_data)
-        # # print(result)
-        #
-        # if result:
-        #     # 操作记录
-        #     content = 'dataArr=' + re.sub(r'\"', "'", json.dumps(list_data, ensure_ascii=False))
-        #     dict_record = {'username': dict_login['username'], 'dbName': table_name, 'action': '增加', 'content': content, 'os': dict_login['os'], 'px': dict_login['px'], 'ip': req.remote_addr, 'time': time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())}
-        #     mysqldb.set_record(dict_record)
-        #
-        #     return make_response('操作成功')
-        # else:
-        #     return make_response('操作失败')
-
-
-    # 修改数据
-    def update_data():
-        if 'whereStr' in req.form:
-            str_where = req.form['whereStr']
-            if not str_where:
-                return make_response('whereStr错误')
-        else:
-            return make_response('whereStr错误')
-
-        if 'updateJson' in req.form:
-            try:
-                dict_update = json.loads(req.form['updateJson'])
-                if len(dict_update) == 0:
-                    return make_response('updateJson错误')
-                if 'id' in dict_update:
-                    return make_response('updateJson错误')
-            except:
-                return make_response('updateJson错误')
-        else:
-            return make_response('updateJson错误')
-
-        dict_update['update_name'] = dict_login['username']
-        dict_update['update_time'] = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
-
-        result = mysqldb.update_data(table_name, str_where, dict_update)
+        # print(list_data)
+        result = mysqldb.insert_data(table_name, list_data)
         # print(result)
 
         if result:
             # 操作记录
-            content = 'whereStr=' + re.sub(r'\"', "'", str_where) + '&updateJson=' + re.sub(r'\"', "'", json.dumps(dict_update, ensure_ascii=False))
-            dict_record = {'username': dict_login['username'], 'dbName': table_name, 'action': '修改', 'content': content, 'os': dict_login['os'], 'px': dict_login['px'], 'ip': req.remote_addr, 'time': time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())}
+            content = 'dataArr=' + re.sub(r'\"', "'", json.dumps(list_data, ensure_ascii=False))
+            dict_record = {'username': dict_login['username'], 'dbName': table_name, 'action': '上传文件', 'content': content, 'os': dict_login['os'], 'px': dict_login['px'], 'ip': req.remote_addr, 'time': time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())}
             mysqldb.set_record(dict_record)
 
             return make_response('操作成功')
         else:
             return make_response('操作失败')
 
-    # 删除数据
+
+    # 删除文件
     def del_data():
         if 'whereJson' in req.form:
             try:
                 dict_where = json.loads(req.form['whereJson'])
-                if len(dict_where) != 1:
+                if not dict_where['url']:
                     return make_response('whereJson错误')
             except:
                 return make_response('whereJson错误')
@@ -168,9 +127,16 @@ def operation(req):
         # print(result)
 
         if result:
+            for url in dict_where['url']:
+                file_path = os.path.normpath(os.path.dirname(os.path.dirname(__file__)) + url)
+                if os.path.exists(file_path):
+                    os.remove(file_path)
+                else:
+                    pass
+
             # 操作记录
-            content = 'dataArr=' + re.sub(r'\"', "'", json.dumps(dict_where, ensure_ascii=False))
-            dict_record = {'username': dict_login['username'], 'dbName': table_name, 'action': '删除', 'content': content, 'os': dict_login['os'], 'px': dict_login['px'], 'ip': req.remote_addr, 'time': time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())}
+            content = 'whereJson=' + re.sub(r'\"', "'", json.dumps(dict_where, ensure_ascii=False))
+            dict_record = {'username': dict_login['username'], 'dbName': table_name, 'action': '删除文件', 'content': content, 'os': dict_login['os'], 'px': dict_login['px'], 'ip': req.remote_addr, 'time': time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())}
             mysqldb.set_record(dict_record)
 
             return make_response('操作成功')
@@ -180,6 +146,11 @@ def operation(req):
     # GET请求
     if req.method == 'GET':
         print(req.args)
+
+        # 判断权限
+        if not mysqldb.get_power(dict_login['username'], dict_login['hash'], table_name, req.args['action']):
+            return make_response('没有权限')
+
         if req.args['action'] == 'findData':
             return find_data()
         else:
@@ -188,10 +159,13 @@ def operation(req):
     # POST请求
     if req.method == 'POST':
         print(req.form)
+
+        # 判断权限
+        if not mysqldb.get_power(dict_login['username'], dict_login['hash'], table_name, req.form['action']):
+            return make_response('没有权限')
+
         if req.form['action'] == 'insertData':
             return insert_data()
-        elif req.form['action'] == 'updateData':
-            return update_data()
         elif req.form['action'] == 'delData':
             return del_data()
         else:

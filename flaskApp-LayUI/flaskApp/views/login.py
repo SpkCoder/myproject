@@ -48,7 +48,7 @@ def operation(req):
         args = {}
         result = mysqldb.find_data(table_name, str_where, str_field, args)
         # print(result)
-        if result:
+        if result and result['count'] > 0:
             print(dict_where['username'] + "登录成功")
             os = dict_os['os'] or ""
             px = dict_os['px'] or ""

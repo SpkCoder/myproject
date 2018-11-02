@@ -172,18 +172,17 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
 
           //删除
           if(layEvent === 'delete'){
-          	if(data.id==100001 || data.id==100002 || data.id==100003 || data.id==100004 || data.id==100005 || data.id==100006 || data.id==100007 || data.id==100008){
+          	if(data.model_id==100001 || data.model_id==100002 || data.model_id==100003 || data.model_id==100004 || data.model_id==100005 || data.model_id==100006 || data.model_id==100007 || data.model_id==100008){
             	layer.msg("禁止操作系统模块！",{time: 1000});
             	return;
             }
-          	
             layer.confirm('真的删除行么', function(index){
               //console.log(data);
               //obj.del(); //删除对应行（tr）的DOM结构
               //layer.close(index);  //关闭当前layerOut
               
               var whereJson = {"id": [data.id]};
-              var reqData2 = 'action=delData&dataJson=' +JSON.stringify(dataJson);
+              var reqData2 = 'action=delData&whereJson=' +JSON.stringify(whereJson);
               dataDB.delData(url,reqData2,function (data2) {
                 layer.msg(data2,{time: 1000});
                 if(data2 != "操作成功"){return;}
@@ -213,20 +212,16 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
 	               var data_type = headObj.data_type_Arr[i];
                    var field_en = headObj.field_en_Arr[i];
                    var field_ch = headObj.field_ch_Arr[i];
-	               if(field_en == "id"){
+	               if(field_en == "id" || field_en == "model_id" || field_en == "db_name" || field_en == "function_en"){
 	                //
-	           	   }else if(field_en == "modelName"){
+	           	   }else if(field_en == "model_name"){
 	                formStr+='<div class="layui-form-item"><label class="layui-form-label">'+field_ch+'：</label><div class="layui-input-block"><select name="id">';
 	                modelList.forEach(function (item,index) {
 	                	formStr+='<option value="'+item.id+'">'+item.name+'</option>';
 	                });
 	                formStr+='</select></div></div>';
-	           	   }else if(field_en == "dbName"){
-	           	   	//
 	           	   }else if(field_en == "function_ch"){
                       formStr+='<div class="layui-form-item"><label class="layui-form-label">'+field_ch+'：</label><div class="layui-input-block"><select name="function_en"><option value="findData">查询</option><option value="insertData">增加</option><option value="updateData">修改</option><option value="delData">删除</option></select></div></div>';
-	           	   }else if(field_en == "function_en"){
-	           	   	//
 	           	   }else{
 	                 formStr+='<div class="layui-form-item"><label class="layui-form-label">'+field_ch+'：</label><div class="layui-input-block"><input class="layui-input" type="text" data_type="'+data_type+'" name="'+field_en+'" value="" placeholder=""></div></div>';
 	               }
@@ -254,22 +249,26 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
 	                  	  data.field.modelName = $("form select[name=id] option:selected").text();
 	                  	  data.field.function_ch = $("form select[name=function_en] option:selected").text();
 	                      
-	                      var reqData_dateList = 'action=findData&searchJson='+JSON.stringify({"id":data.field.id})+'&prePageNum=1&currPage=1';
-                          dataDB.findData("/python/dataList",reqData_dateList,function (dateListData) {
-                          	 data.field.dbName = dateListData.rows[0].name;
+	                      var reqData_dateList = 'action=findData&whereStr=modelId='+data.field.id+'&prePageNum=1&currPage=1';
+                        dataDB.findData("/python/data_list",reqData_dateList,function (dateListData) {
+                             data.field.db_name = dateListData.rows[0].name;
+                             data.field.model_id = data.field.id;
+                          	 data.field.model_name = data.field.modelName;
+                             delete data.field.id;
+                             delete data.field.modelName;
                           	 //console.log(data.field);
                           	 
                           	 var dataArr=[];
-		                     dataArr.push(data.field);
-		                     var reqData2 = 'action=insertData&dataArr=' + JSON.stringify(dataArr);
-		                     dataDB.insertData(url,reqData2,function (data2) {
-		                        layer.msg(data2,{time: 1000});
-		                        if(data2 != "操作成功"){return;}
-		                        layer.close(index);
-		
-		                        table.reload('layUiTableList', {url: url});
-		                     });
-                          });
+    		                     dataArr.push(data.field);
+    		                     var reqData2 = 'action=insertData&dataArr=' + JSON.stringify(dataArr);
+    		                     dataDB.insertData(url,reqData2,function (data2) {
+    		                        layer.msg(data2,{time: 1000});
+    		                        if(data2 != "操作成功"){return;}
+    		                        layer.close(index);
+    		
+    		                        table.reload('layUiTableList', {url: url});
+    		                     });
+                        });
   
 	                      return false;
 	                });

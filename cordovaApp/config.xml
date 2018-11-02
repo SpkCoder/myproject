@@ -23,6 +23,10 @@
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
     </platform>
+    <plugin name="cordova-plugin-camera" spec="^4.0.3" />
+    <plugin name="phonegap-plugin-barcodescanner" spec="^8.0.0">
+        <variable name="ANDROID_SUPPORT_V4_VERSION" value="27.+" />
+    </plugin>
     <engine name="browser" spec="^5.0.4" />
     <engine name="android" spec="^7.0.0" />
     <engine name="ios" spec="^4.5.5" />

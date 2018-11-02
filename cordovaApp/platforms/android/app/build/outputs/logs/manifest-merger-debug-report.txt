@@ -1,5 +1,17 @@
 -- Merging decision tree log ---
+provider#org.apache.cordova.camera.FileProvider
+INJECTED from E:\mywork\myproject\cordovaApp\platforms\android\app\src\main\AndroidManifest.xml:12:9-14:20
+	android:grantUriPermissions
+		ADDED from E:\mywork\myproject\cordovaApp\platforms\android\app\src\main\AndroidManifest.xml:12:92-126
+	android:authorities
+		INJECTED from E:\mywork\myproject\cordovaApp\platforms\android\app\src\main\AndroidManifest.xml
+		ADDED from E:\mywork\myproject\cordovaApp\platforms\android\app\src\main\AndroidManifest.xml:12:19-66
+	android:exported
+		ADDED from E:\mywork\myproject\cordovaApp\platforms\android\app\src\main\AndroidManifest.xml:12:67-91
+	android:name
+		ADDED from E:\mywork\myproject\cordovaApp\platforms\android\app\src\main\AndroidManifest.xml:12:127-180
 manifest
+<<<<<<< HEAD
 ADDED from C:\Users\dell\mywork\myproject\cordovaApp\platforms\android\app\src\main\AndroidManifest.xml:2:1-14:12
 INJECTED from C:\Users\dell\mywork\myproject\cordovaApp\platforms\android\app\src\main\AndroidManifest.xml:2:1-14:12
 INJECTED from C:\Users\dell\mywork\myproject\cordovaApp\platforms\android\app\src\main\AndroidManifest.xml:2:1-14:12
@@ -8,6 +20,27 @@ MERGED from [:CordovaLib] C:\Users\dell\mywork\myproject\cordovaApp\platforms\an
 INJECTED from C:\Users\dell\mywork\myproject\cordovaApp\platforms\android\app\src\main\AndroidManifest.xml:2:1-14:12
 INJECTED from C:\Users\dell\mywork\myproject\cordovaApp\platforms\android\app\src\main\AndroidManifest.xml:2:1-14:12
 INJECTED from C:\Users\dell\mywork\myproject\cordovaApp\platforms\android\app\src\main\AndroidManifest.xml:2:1-14:12
+=======
+ADDED from E:\mywork\myproject\cordovaApp\platforms\android\app\src\main\AndroidManifest.xml:2:1-23:12
+INJECTED from E:\mywork\myproject\cordovaApp\platforms\android\app\src\main\AndroidManifest.xml:2:1-23:12
+INJECTED from E:\mywork\myproject\cordovaApp\platforms\android\app\src\main\AndroidManifest.xml:2:1-23:12
+INJECTED from E:\mywork\myproject\cordovaApp\platforms\android\app\src\main\AndroidManifest.xml:2:1-23:12
+MERGED from [:barcodescanner-release-2.1.5:] C:\Users\px\.gradle\caches\transforms-1\files-1.1\barcodescanner-release-2.1.5.aar\c017b1402c01e115d77c28c842280924\AndroidManifest.xml:2:1-14:12
+MERGED from [com.android.support:support-v4:27.1.1] C:\Users\px\.gradle\caches\transforms-1\files-1.1\support-v4-27.1.1.aar\bdfb093cc2fe3f55fa19d21d3c5522f1\AndroidManifest.xml:17:1-22:12
+MERGED from [:CordovaLib] E:\mywork\myproject\cordovaApp\platforms\android\CordovaLib\build\intermediates\manifests\full\debug\AndroidManifest.xml:20:1-27:12
+MERGED from [com.android.support:support-media-compat:27.1.1] C:\Users\px\.gradle\caches\transforms-1\files-1.1\support-media-compat-27.1.1.aar\844b465b066feb265c39856914fae301\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-fragment:27.1.1] C:\Users\px\.gradle\caches\transforms-1\files-1.1\support-fragment-27.1.1.aar\ffac15f2312f2b4da8642ba8ad9be9f7\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-ui:27.1.1] C:\Users\px\.gradle\caches\transforms-1\files-1.1\support-core-ui-27.1.1.aar\94f21430beb4efe63ba606c92094a49c\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-core-utils:27.1.1] C:\Users\px\.gradle\caches\transforms-1\files-1.1\support-core-utils-27.1.1.aar\4ac0e4b561c07843197fce03e3f98390\AndroidManifest.xml:17:1-22:12
+MERGED from [com.android.support:support-compat:27.1.1] C:\Users\px\.gradle\caches\transforms-1\files-1.1\support-compat-27.1.1.aar\b03057db977d76233056e6abccdd1219\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:runtime:1.1.0] C:\Users\px\.gradle\caches\transforms-1\files-1.1\runtime-1.1.0.aar\e6e5945440334c63cf3e912ef7073ed0\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:livedata-core:1.1.0] C:\Users\px\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.0.aar\486a9f502c2a1f5388b9598a8532fd94\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.lifecycle:viewmodel:1.1.0] C:\Users\px\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.0.aar\563886b3095deee7241ffb30391c12d9\AndroidManifest.xml:17:1-22:12
+MERGED from [android.arch.core:runtime:1.1.0] C:\Users\px\.gradle\caches\transforms-1\files-1.1\runtime-1.1.0.aar\8906a8fd2a138bef2bdff526aa9d092f\AndroidManifest.xml:17:1-22:12
+INJECTED from E:\mywork\myproject\cordovaApp\platforms\android\app\src\main\AndroidManifest.xml:2:1-23:12
+INJECTED from E:\mywork\myproject\cordovaApp\platforms\android\app\src\main\AndroidManifest.xml:2:1-23:12
+INJECTED from E:\mywork\myproject\cordovaApp\platforms\android\app\src\main\AndroidManifest.xml:2:1-23:12
+>>>>>>> 4c855617d62871d6d01ac44a4e8a98e05da99242
 	package
 		ADDED from C:\Users\dell\mywork\myproject\cordovaApp\platforms\android\app\src\main\AndroidManifest.xml:2:102-135
 		INJECTED from C:\Users\dell\mywork\myproject\cordovaApp\platforms\android\app\src\main\AndroidManifest.xml
@@ -43,7 +76,13 @@ ADDED from C:\Users\dell\mywork\myproject\cordovaApp\platforms\android\app\src\m
 	android:name
 		ADDED from C:\Users\dell\mywork\myproject\cordovaApp\platforms\android\app\src\main\AndroidManifest.xml:4:22-64
 application
+<<<<<<< HEAD
 ADDED from C:\Users\dell\mywork\myproject\cordovaApp\platforms\android\app\src\main\AndroidManifest.xml:5:5-12:19
+=======
+ADDED from E:\mywork\myproject\cordovaApp\platforms\android\app\src\main\AndroidManifest.xml:5:5-17:19
+MERGED from [:barcodescanner-release-2.1.5:] C:\Users\px\.gradle\caches\transforms-1\files-1.1\barcodescanner-release-2.1.5.aar\c017b1402c01e115d77c28c842280924\AndroidManifest.xml:11:5-12:19
+MERGED from [:barcodescanner-release-2.1.5:] C:\Users\px\.gradle\caches\transforms-1\files-1.1\barcodescanner-release-2.1.5.aar\c017b1402c01e115d77c28c842280924\AndroidManifest.xml:11:5-12:19
+>>>>>>> 4c855617d62871d6d01ac44a4e8a98e05da99242
 	android:supportsRtl
 		ADDED from C:\Users\dell\mywork\myproject\cordovaApp\platforms\android\app\src\main\AndroidManifest.xml:5:114-140
 	android:label
@@ -77,6 +116,7 @@ ADDED from C:\Users\dell\mywork\myproject\cordovaApp\platforms\android\app\src\m
 category#android.intent.category.LAUNCHER
 ADDED from C:\Users\dell\mywork\myproject\cordovaApp\platforms\android\app\src\main\AndroidManifest.xml:9:17-77
 	android:name
+<<<<<<< HEAD
 		ADDED from C:\Users\dell\mywork\myproject\cordovaApp\platforms\android\app\src\main\AndroidManifest.xml:9:27-74
 uses-sdk
 ADDED from C:\Users\dell\mywork\myproject\cordovaApp\platforms\android\app\src\main\AndroidManifest.xml:13:5-74
@@ -86,3 +126,80 @@ MERGED from [:CordovaLib] C:\Users\dell\mywork\myproject\cordovaApp\platforms\an
 		ADDED from C:\Users\dell\mywork\myproject\cordovaApp\platforms\android\app\src\main\AndroidManifest.xml:13:42-71
 	android:minSdkVersion
 		ADDED from C:\Users\dell\mywork\myproject\cordovaApp\platforms\android\app\src\main\AndroidManifest.xml:13:15-41
+=======
+		ADDED from E:\mywork\myproject\cordovaApp\platforms\android\app\src\main\AndroidManifest.xml:9:27-74
+activity#com.google.zxing.client.android.CaptureActivity
+ADDED from E:\mywork\myproject\cordovaApp\platforms\android\app\src\main\AndroidManifest.xml:15:9-311
+	android:clearTaskOnLaunch
+		ADDED from E:\mywork\myproject\cordovaApp\platforms\android\app\src\main\AndroidManifest.xml:15:19-51
+	android:windowSoftInputMode
+		ADDED from E:\mywork\myproject\cordovaApp\platforms\android\app\src\main\AndroidManifest.xml:15:261-308
+	android:exported
+		ADDED from E:\mywork\myproject\cordovaApp\platforms\android\app\src\main\AndroidManifest.xml:15:114-138
+	android:configChanges
+		ADDED from E:\mywork\myproject\cordovaApp\platforms\android\app\src\main\AndroidManifest.xml:15:52-113
+	android:theme
+		ADDED from E:\mywork\myproject\cordovaApp\platforms\android\app\src\main\AndroidManifest.xml:15:202-260
+	android:name
+		ADDED from E:\mywork\myproject\cordovaApp\platforms\android\app\src\main\AndroidManifest.xml:15:139-201
+activity#com.google.zxing.client.android.encode.EncodeActivity
+ADDED from E:\mywork\myproject\cordovaApp\platforms\android\app\src\main\AndroidManifest.xml:16:9-112
+	android:label
+		ADDED from E:\mywork\myproject\cordovaApp\platforms\android\app\src\main\AndroidManifest.xml:16:19-40
+	android:name
+		ADDED from E:\mywork\myproject\cordovaApp\platforms\android\app\src\main\AndroidManifest.xml:16:41-109
+uses-sdk
+ADDED from E:\mywork\myproject\cordovaApp\platforms\android\app\src\main\AndroidManifest.xml:18:5-74
+MERGED from [:barcodescanner-release-2.1.5:] C:\Users\px\.gradle\caches\transforms-1\files-1.1\barcodescanner-release-2.1.5.aar\c017b1402c01e115d77c28c842280924\AndroidManifest.xml:7:5-9:41
+MERGED from [:barcodescanner-release-2.1.5:] C:\Users\px\.gradle\caches\transforms-1\files-1.1\barcodescanner-release-2.1.5.aar\c017b1402c01e115d77c28c842280924\AndroidManifest.xml:7:5-9:41
+MERGED from [com.android.support:support-v4:27.1.1] C:\Users\px\.gradle\caches\transforms-1\files-1.1\support-v4-27.1.1.aar\bdfb093cc2fe3f55fa19d21d3c5522f1\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-v4:27.1.1] C:\Users\px\.gradle\caches\transforms-1\files-1.1\support-v4-27.1.1.aar\bdfb093cc2fe3f55fa19d21d3c5522f1\AndroidManifest.xml:20:5-44
+MERGED from [:CordovaLib] E:\mywork\myproject\cordovaApp\platforms\android\CordovaLib\build\intermediates\manifests\full\debug\AndroidManifest.xml:25:5-44
+MERGED from [:CordovaLib] E:\mywork\myproject\cordovaApp\platforms\android\CordovaLib\build\intermediates\manifests\full\debug\AndroidManifest.xml:25:5-44
+MERGED from [com.android.support:support-media-compat:27.1.1] C:\Users\px\.gradle\caches\transforms-1\files-1.1\support-media-compat-27.1.1.aar\844b465b066feb265c39856914fae301\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-media-compat:27.1.1] C:\Users\px\.gradle\caches\transforms-1\files-1.1\support-media-compat-27.1.1.aar\844b465b066feb265c39856914fae301\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:27.1.1] C:\Users\px\.gradle\caches\transforms-1\files-1.1\support-fragment-27.1.1.aar\ffac15f2312f2b4da8642ba8ad9be9f7\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-fragment:27.1.1] C:\Users\px\.gradle\caches\transforms-1\files-1.1\support-fragment-27.1.1.aar\ffac15f2312f2b4da8642ba8ad9be9f7\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:27.1.1] C:\Users\px\.gradle\caches\transforms-1\files-1.1\support-core-ui-27.1.1.aar\94f21430beb4efe63ba606c92094a49c\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-ui:27.1.1] C:\Users\px\.gradle\caches\transforms-1\files-1.1\support-core-ui-27.1.1.aar\94f21430beb4efe63ba606c92094a49c\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:27.1.1] C:\Users\px\.gradle\caches\transforms-1\files-1.1\support-core-utils-27.1.1.aar\4ac0e4b561c07843197fce03e3f98390\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-core-utils:27.1.1] C:\Users\px\.gradle\caches\transforms-1\files-1.1\support-core-utils-27.1.1.aar\4ac0e4b561c07843197fce03e3f98390\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:27.1.1] C:\Users\px\.gradle\caches\transforms-1\files-1.1\support-compat-27.1.1.aar\b03057db977d76233056e6abccdd1219\AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-compat:27.1.1] C:\Users\px\.gradle\caches\transforms-1\files-1.1\support-compat-27.1.1.aar\b03057db977d76233056e6abccdd1219\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.0] C:\Users\px\.gradle\caches\transforms-1\files-1.1\runtime-1.1.0.aar\e6e5945440334c63cf3e912ef7073ed0\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:runtime:1.1.0] C:\Users\px\.gradle\caches\transforms-1\files-1.1\runtime-1.1.0.aar\e6e5945440334c63cf3e912ef7073ed0\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.0] C:\Users\px\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.0.aar\486a9f502c2a1f5388b9598a8532fd94\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:livedata-core:1.1.0] C:\Users\px\.gradle\caches\transforms-1\files-1.1\livedata-core-1.1.0.aar\486a9f502c2a1f5388b9598a8532fd94\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.0] C:\Users\px\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.0.aar\563886b3095deee7241ffb30391c12d9\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.lifecycle:viewmodel:1.1.0] C:\Users\px\.gradle\caches\transforms-1\files-1.1\viewmodel-1.1.0.aar\563886b3095deee7241ffb30391c12d9\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.0] C:\Users\px\.gradle\caches\transforms-1\files-1.1\runtime-1.1.0.aar\8906a8fd2a138bef2bdff526aa9d092f\AndroidManifest.xml:20:5-44
+MERGED from [android.arch.core:runtime:1.1.0] C:\Users\px\.gradle\caches\transforms-1\files-1.1\runtime-1.1.0.aar\8906a8fd2a138bef2bdff526aa9d092f\AndroidManifest.xml:20:5-44
+	android:targetSdkVersion
+		ADDED from E:\mywork\myproject\cordovaApp\platforms\android\app\src\main\AndroidManifest.xml:18:42-71
+	android:minSdkVersion
+		ADDED from E:\mywork\myproject\cordovaApp\platforms\android\app\src\main\AndroidManifest.xml:18:15-41
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from E:\mywork\myproject\cordovaApp\platforms\android\app\src\main\AndroidManifest.xml:19:5-81
+	android:name
+		ADDED from E:\mywork\myproject\cordovaApp\platforms\android\app\src\main\AndroidManifest.xml:19:22-78
+uses-permission#android.permission.CAMERA
+ADDED from E:\mywork\myproject\cordovaApp\platforms\android\app\src\main\AndroidManifest.xml:20:5-65
+	android:name
+		ADDED from E:\mywork\myproject\cordovaApp\platforms\android\app\src\main\AndroidManifest.xml:20:22-62
+uses-permission#android.permission.FLASHLIGHT
+ADDED from E:\mywork\myproject\cordovaApp\platforms\android\app\src\main\AndroidManifest.xml:21:5-69
+	android:name
+		ADDED from E:\mywork\myproject\cordovaApp\platforms\android\app\src\main\AndroidManifest.xml:21:22-66
+uses-feature#android.hardware.camera
+ADDED from E:\mywork\myproject\cordovaApp\platforms\android\app\src\main\AndroidManifest.xml:22:5-84
+	android:required
+		ADDED from E:\mywork\myproject\cordovaApp\platforms\android\app\src\main\AndroidManifest.xml:22:58-81
+	android:name
+		ADDED from E:\mywork\myproject\cordovaApp\platforms\android\app\src\main\AndroidManifest.xml:22:19-57
+meta-data#android.support.FILE_PROVIDER_PATHS
+ADDED from E:\mywork\myproject\cordovaApp\platforms\android\app\src\main\AndroidManifest.xml:13:13-123
+	android:resource
+		ADDED from E:\mywork\myproject\cordovaApp\platforms\android\app\src\main\AndroidManifest.xml:13:75-120
+	android:name
+		ADDED from E:\mywork\myproject\cordovaApp\platforms\android\app\src\main\AndroidManifest.xml:13:24-74
+>>>>>>> 4c855617d62871d6d01ac44a4e8a98e05da99242

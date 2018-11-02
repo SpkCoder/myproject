@@ -12,13 +12,7 @@
 			    <h2>userList.html</h2>
 			    <ul>
 			      <li>
-			        <a
-			          href="#/"
-			          target="_self"
-			        >
-			          index.html
-			        </a>
-			      </li>
+			        <a href="#/"target="_self"> index.html </a> </li>
 			      <li>
 			        <a
 			          href="#/page/testList"

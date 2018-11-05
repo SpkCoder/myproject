@@ -148,6 +148,10 @@
         "source": "E:\\mywork\\myproject\\cordovaApp\\platforms\\android\\app\\src\\main\\res\\mipmap-xxxhdpi\\icon.png"
     },
     {
+        "merged": "C:\\Users\\dell\\mywork\\myproject\\cordovaApp\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-land-xhdpi_screen.png.flat",
+        "source": "C:\\Users\\dell\\mywork\\myproject\\cordovaApp\\platforms\\android\\app\\src\\main\\res\\drawable-land-xhdpi\\screen.png"
+    },
+    {
         "merged": "E:\\mywork\\myproject\\cordovaApp\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-port-ldpi_screen.png.flat",
         "source": "E:\\mywork\\myproject\\cordovaApp\\platforms\\android\\app\\src\\main\\res\\drawable-port-ldpi\\screen.png"
     },
@@ -156,16 +160,82 @@
         "source": "C:\\Users\\px\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-27.1.1.aar\\b03057db977d76233056e6abccdd1219\\res\\drawable-mdpi-v4\\notification_bg_normal_pressed.9.png"
     },
     {
+<<<<<<< HEAD
+        "merged": "C:\\Users\\dell\\mywork\\myproject\\cordovaApp\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-port-ldpi_screen.png.flat",
+        "source": "C:\\Users\\dell\\mywork\\myproject\\cordovaApp\\platforms\\android\\app\\src\\main\\res\\drawable-port-ldpi\\screen.png"
+    },
+    {
+        "merged": "C:\\Users\\dell\\mywork\\myproject\\cordovaApp\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi_icon.png.flat",
+        "source": "C:\\Users\\dell\\mywork\\myproject\\cordovaApp\\platforms\\android\\app\\src\\main\\res\\mipmap-hdpi\\icon.png"
+    },
+    {
+        "merged": "E:\\mywork\\myproject\\cordovaApp\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-land-xxhdpi_screen.png.flat",
+        "source": "E:\\mywork\\myproject\\cordovaApp\\platforms\\android\\app\\src\\main\\res\\drawable-land-xxhdpi\\screen.png"
+=======
         "merged": "E:\\mywork\\myproject\\cordovaApp\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-hdpi-v4_notification_bg_low_pressed.9.png.flat",
         "source": "C:\\Users\\px\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-27.1.1.aar\\b03057db977d76233056e6abccdd1219\\res\\drawable-hdpi-v4\\notification_bg_low_pressed.9.png"
+>>>>>>> 4c855617d62871d6d01ac44a4e8a98e05da99242
     },
     {
         "merged": "E:\\mywork\\myproject\\cordovaApp\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-land-mdpi_screen.png.flat",
         "source": "E:\\mywork\\myproject\\cordovaApp\\platforms\\android\\app\\src\\main\\res\\drawable-land-mdpi\\screen.png"
     },
     {
+<<<<<<< HEAD
+        "merged": "E:\\mywork\\myproject\\cordovaApp\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-ldpi_icon.png.flat",
+        "source": "E:\\mywork\\myproject\\cordovaApp\\platforms\\android\\app\\src\\main\\res\\mipmap-ldpi\\icon.png"
+    },
+    {
+        "merged": "C:\\Users\\dell\\mywork\\myproject\\cordovaApp\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-land-xxxhdpi_screen.png.flat",
+        "source": "C:\\Users\\dell\\mywork\\myproject\\cordovaApp\\platforms\\android\\app\\src\\main\\res\\drawable-land-xxxhdpi\\screen.png"
+    },
+    {
+        "merged": "C:\\Users\\dell\\mywork\\myproject\\cordovaApp\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-ldpi_icon.png.flat",
+        "source": "C:\\Users\\dell\\mywork\\myproject\\cordovaApp\\platforms\\android\\app\\src\\main\\res\\mipmap-ldpi\\icon.png"
+    },
+    {
+        "merged": "E:\\mywork\\myproject\\cordovaApp\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi_icon.png.flat",
+        "source": "E:\\mywork\\myproject\\cordovaApp\\platforms\\android\\app\\src\\main\\res\\mipmap-xhdpi\\icon.png"
+    },
+    {
+        "merged": "E:\\mywork\\myproject\\cordovaApp\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-port-xhdpi_screen.png.flat",
+        "source": "E:\\mywork\\myproject\\cordovaApp\\platforms\\android\\app\\src\\main\\res\\drawable-port-xhdpi\\screen.png"
+    },
+    {
+        "merged": "C:\\Users\\dell\\mywork\\myproject\\cordovaApp\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-land-ldpi_screen.png.flat",
+        "source": "C:\\Users\\dell\\mywork\\myproject\\cordovaApp\\platforms\\android\\app\\src\\main\\res\\drawable-land-ldpi\\screen.png"
+    },
+    {
+        "merged": "E:\\mywork\\myproject\\cordovaApp\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi_icon.png.flat",
+        "source": "E:\\mywork\\myproject\\cordovaApp\\platforms\\android\\app\\src\\main\\res\\mipmap-mdpi\\icon.png"
+    },
+    {
+        "merged": "C:\\Users\\dell\\mywork\\myproject\\cordovaApp\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi_icon.png.flat",
+        "source": "C:\\Users\\dell\\mywork\\myproject\\cordovaApp\\platforms\\android\\app\\src\\main\\res\\mipmap-xhdpi\\icon.png"
+    },
+    {
+        "merged": "E:\\mywork\\myproject\\cordovaApp\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi_icon.png.flat",
+        "source": "E:\\mywork\\myproject\\cordovaApp\\platforms\\android\\app\\src\\main\\res\\mipmap-xxhdpi\\icon.png"
+    },
+    {
+        "merged": "C:\\Users\\dell\\mywork\\myproject\\cordovaApp\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi_icon.png.flat",
+        "source": "C:\\Users\\dell\\mywork\\myproject\\cordovaApp\\platforms\\android\\app\\src\\main\\res\\mipmap-xxxhdpi\\icon.png"
+    },
+    {
+        "merged": "C:\\Users\\dell\\mywork\\myproject\\cordovaApp\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-port-xhdpi_screen.png.flat",
+        "source": "C:\\Users\\dell\\mywork\\myproject\\cordovaApp\\platforms\\android\\app\\src\\main\\res\\drawable-port-xhdpi\\screen.png"
+    },
+    {
+        "merged": "E:\\mywork\\myproject\\cordovaApp\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-port-xxxhdpi_screen.png.flat",
+        "source": "E:\\mywork\\myproject\\cordovaApp\\platforms\\android\\app\\src\\main\\res\\drawable-port-xxxhdpi\\screen.png"
+    },
+    {
+        "merged": "E:\\mywork\\myproject\\cordovaApp\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-port-mdpi_screen.png.flat",
+        "source": "E:\\mywork\\myproject\\cordovaApp\\platforms\\android\\app\\src\\main\\res\\drawable-port-mdpi\\screen.png"
+=======
         "merged": "E:\\mywork\\myproject\\cordovaApp\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\layout_capture.xml.flat",
         "source": "C:\\Users\\px\\.gradle\\caches\\transforms-1\\files-1.1\\barcodescanner-release-2.1.5.aar\\c017b1402c01e115d77c28c842280924\\res\\layout\\capture.xml"
+>>>>>>> 4c855617d62871d6d01ac44a4e8a98e05da99242
     },
     {
         "merged": "E:\\mywork\\myproject\\cordovaApp\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable_notification_tile_bg.xml.flat",
@@ -176,6 +246,22 @@
         "source": "C:\\Users\\px\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-27.1.1.aar\\b03057db977d76233056e6abccdd1219\\res\\layout-v21\\notification_template_custom_big.xml"
     },
     {
+<<<<<<< HEAD
+        "merged": "E:\\mywork\\myproject\\cordovaApp\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-land-hdpi_screen.png.flat",
+        "source": "E:\\mywork\\myproject\\cordovaApp\\platforms\\android\\app\\src\\main\\res\\drawable-land-hdpi\\screen.png"
+    },
+    {
+        "merged": "C:\\Users\\dell\\mywork\\myproject\\cordovaApp\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-port-xxhdpi_screen.png.flat",
+        "source": "C:\\Users\\dell\\mywork\\myproject\\cordovaApp\\platforms\\android\\app\\src\\main\\res\\drawable-port-xxhdpi\\screen.png"
+    },
+    {
+        "merged": "C:\\Users\\dell\\mywork\\myproject\\cordovaApp\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi_icon.png.flat",
+        "source": "C:\\Users\\dell\\mywork\\myproject\\cordovaApp\\platforms\\android\\app\\src\\main\\res\\mipmap-xxhdpi\\icon.png"
+    },
+    {
+        "merged": "E:\\mywork\\myproject\\cordovaApp\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\xml_config.xml.flat",
+        "source": "E:\\mywork\\myproject\\cordovaApp\\platforms\\android\\app\\src\\main\\res\\xml\\config.xml"
+=======
         "merged": "E:\\mywork\\myproject\\cordovaApp\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-ldpi_icon.png.flat",
         "source": "E:\\mywork\\myproject\\cordovaApp\\platforms\\android\\app\\src\\main\\res\\mipmap-ldpi\\icon.png"
     },
@@ -194,6 +280,7 @@
     {
         "merged": "E:\\mywork\\myproject\\cordovaApp\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\layout_history_list_item.xml.flat",
         "source": "C:\\Users\\px\\.gradle\\caches\\transforms-1\\files-1.1\\barcodescanner-release-2.1.5.aar\\c017b1402c01e115d77c28c842280924\\res\\layout\\history_list_item.xml"
+>>>>>>> 4c855617d62871d6d01ac44a4e8a98e05da99242
     },
     {
         "merged": "E:\\mywork\\myproject\\cordovaApp\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\layout_notification_template_big_media_custom.xml.flat",
@@ -220,6 +307,42 @@
         "source": "C:\\Users\\px\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-27.1.1.aar\\b03057db977d76233056e6abccdd1219\\res\\drawable-xhdpi-v4\\notification_bg_normal.9.png"
     },
     {
+<<<<<<< HEAD
+        "merged": "E:\\mywork\\myproject\\cordovaApp\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi_icon.png.flat",
+        "source": "E:\\mywork\\myproject\\cordovaApp\\platforms\\android\\app\\src\\main\\res\\mipmap-hdpi\\icon.png"
+    },
+    {
+        "merged": "C:\\Users\\dell\\mywork\\myproject\\cordovaApp\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\xml_config.xml.flat",
+        "source": "C:\\Users\\dell\\mywork\\myproject\\cordovaApp\\platforms\\android\\app\\src\\main\\res\\xml\\config.xml"
+    },
+    {
+        "merged": "C:\\Users\\dell\\mywork\\myproject\\cordovaApp\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-port-xxxhdpi_screen.png.flat",
+        "source": "C:\\Users\\dell\\mywork\\myproject\\cordovaApp\\platforms\\android\\app\\src\\main\\res\\drawable-port-xxxhdpi\\screen.png"
+    },
+    {
+        "merged": "C:\\Users\\dell\\mywork\\myproject\\cordovaApp\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-land-mdpi_screen.png.flat",
+        "source": "C:\\Users\\dell\\mywork\\myproject\\cordovaApp\\platforms\\android\\app\\src\\main\\res\\drawable-land-mdpi\\screen.png"
+    },
+    {
+        "merged": "C:\\Users\\dell\\mywork\\myproject\\cordovaApp\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi_icon.png.flat",
+        "source": "C:\\Users\\dell\\mywork\\myproject\\cordovaApp\\platforms\\android\\app\\src\\main\\res\\mipmap-mdpi\\icon.png"
+    },
+    {
+        "merged": "C:\\Users\\dell\\mywork\\myproject\\cordovaApp\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-port-mdpi_screen.png.flat",
+        "source": "C:\\Users\\dell\\mywork\\myproject\\cordovaApp\\platforms\\android\\app\\src\\main\\res\\drawable-port-mdpi\\screen.png"
+    },
+    {
+        "merged": "C:\\Users\\dell\\mywork\\myproject\\cordovaApp\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-port-hdpi_screen.png.flat",
+        "source": "C:\\Users\\dell\\mywork\\myproject\\cordovaApp\\platforms\\android\\app\\src\\main\\res\\drawable-port-hdpi\\screen.png"
+    },
+    {
+        "merged": "C:\\Users\\dell\\mywork\\myproject\\cordovaApp\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-land-hdpi_screen.png.flat",
+        "source": "C:\\Users\\dell\\mywork\\myproject\\cordovaApp\\platforms\\android\\app\\src\\main\\res\\drawable-land-hdpi\\screen.png"
+    },
+    {
+        "merged": "C:\\Users\\dell\\mywork\\myproject\\cordovaApp\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\drawable-land-xxhdpi_screen.png.flat",
+        "source": "C:\\Users\\dell\\mywork\\myproject\\cordovaApp\\platforms\\android\\app\\src\\main\\res\\drawable-land-xxhdpi\\screen.png"
+=======
         "merged": "E:\\mywork\\myproject\\cordovaApp\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi_icon.png.flat",
         "source": "E:\\mywork\\myproject\\cordovaApp\\platforms\\android\\app\\src\\main\\res\\mipmap-mdpi\\icon.png"
     },
@@ -334,5 +457,6 @@
     {
         "merged": "E:\\mywork\\myproject\\cordovaApp\\platforms\\android\\app\\build\\intermediates\\res\\merged\\debug\\layout-land_encode.xml.flat",
         "source": "C:\\Users\\px\\.gradle\\caches\\transforms-1\\files-1.1\\barcodescanner-release-2.1.5.aar\\c017b1402c01e115d77c28c842280924\\res\\layout-land\\encode.xml"
+>>>>>>> 4c855617d62871d6d01ac44a4e8a98e05da99242
     }
 ]

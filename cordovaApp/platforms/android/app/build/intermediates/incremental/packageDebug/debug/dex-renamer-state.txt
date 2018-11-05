@@ -1,4 +1,9 @@
+<<<<<<< HEAD
+#Sun Sep 23 00:49:59 CST 2018
+base.0=C\:\\Users\\dell\\mywork\\myproject\\cordovaApp\\platforms\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0
+=======
 #Wed Sep 26 16:48:09 CST 2018
 base.0=E\:\\mywork\\myproject\\cordovaApp\\platforms\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0
+>>>>>>> 4c855617d62871d6d01ac44a4e8a98e05da99242
 renamed.0=classes.dex
-file.0=E\:\\mywork\\myproject\\cordovaApp\\platforms\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0\\classes.dex
+file.0=C\:\\Users\\dell\\mywork\\myproject\\cordovaApp\\platforms\\android\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0\\classes.dex

@@ -1,0 +1,420 @@
+﻿<div class="list-page-point">
+   <div class="container">
+     <p><i class="layui-icon" style="font-size: 14px;">&#xe715;</i><span></span></p>
+   </div>
+</div>
+
+
+<div class="list-page-box">
+  <div class="container2">
+    <div class="list-page">
+    
+		<div id="searchApp"></div>
+	    <div id="formApp" class="formBox"> </div>
+	    
+	    <div id="braceDateApp" class="braceDatebox" v-show="braceDatebox_show" style="display: none;"> 
+	    	<el-form :model="formData" ref="formData" label-width="150px" size="small" name="edit" class="demo-ruleForm">
+	    		
+	    		<div class="parameterClass">
+	    			<el-form-item label="Parameter Class">
+			    		<el-select @change="selectChange()" placeholder="--select--" v-model="formData.parameterClass_id" name="parameterClass_id">
+			    			<el-option label="Catalyst-Elite / Catalyst-Propel" value="1"></el-option>
+			    			<el-option label="Oactive" value="2"></el-option>
+			    		</el-select>
+		    		</el-form-item>
+		    	</div>
+		    	<table cellspacing="0" cellpadding="0" border="0" v-show="parameter_table_1_show">
+		    		<tbody>
+		    			<tr>
+		    				<td><div>&nbsp;&nbsp;</div></td>
+		    				<td><div>Top</div></td><td><div>Above Knee</div></td>
+		    				<td><div>Below Knee</div></td>
+		    				<td><div>Bottom</div></td>
+		    			</tr>
+	                    <tr>
+	                    	<td><div>Flange/Cuff Midline to Chafe Slot (cm)</div></td>
+	                    	<td><div><el-input v-model="formData.slot_top" placeholder=""></el-input></div></td>
+	                    	<td><div><el-input v-model="formData.slot_above_knee" placeholder=""></el-input></div></td>
+	                    	<td><div><el-input v-model="formData.slot_below_knee" placeholder=""></el-input></div></td>
+	                    	<td><div><el-input v-model="formData.slot_bottom" placeholder=""></el-input></div></td>
+	                    </tr>	    		
+	                    <tr>
+	                    	<td><div>Foldover (each end) (cm)</div></td>
+	                    	<td><div><el-input v-model="formData.foldover_top" placeholder=""></el-input></div></td>
+	                    	<td><div><el-input v-model="formData.foldover_above_knee" placeholder=""></el-input></div></td>
+	                    	<td><div><el-input v-model="formData.foldover_below_knee" placeholder=""></el-input></div></td>
+	                    	<td><div><el-input v-model="formData.foldover_bottom" placeholder=""></el-input></div></td>
+	                    </tr>	
+	                    <tr>
+	                    	<td><div>Overlap - Strap-Tip End (cm)</div></td>
+	                    	<td><div><el-input v-model="formData.overlap_strap_tip_top" placeholder=""></el-input></div></td>
+	                    	<td><div><el-input v-model="formData.overlap_strap_tip_above_knee" placeholder=""></el-input></div></td>
+	                    	<td><div><el-input v-model="formData.overlap_strap_tip_below_knee" placeholder=""></el-input></div></td>
+	                    	<td><div><el-input v-model="formData.overlap_strap_tip_bottom" placeholder=""></el-input></div></td>
+	                    </tr>
+	                    <tr>
+	                    	<td><div>Overlap - Back2Back End (cm)</div></td>
+	                    	<td><div><el-input v-model="formData.overlap_back2back_top" placeholder=""></el-input></div></td>
+	                    	<td><div><el-input v-model="formData.overlap_back2back_above_knee" placeholder=""></el-input></div></td>
+	                    	<td><div><el-input v-model="formData.overlap_back2back_below_knee" placeholder=""></el-input></div></td>
+	                    	<td><div><el-input v-model="formData.overlap_back2back_bottom" placeholder=""></el-input></div></td>
+	                    </tr>
+	                    <tr>
+	                    	<td><div>Strap Padding Gap (EACH END) (cm)</div></td>
+	                    	<td><div><el-input v-model="formData.strap_padding_gap_top" placeholder=""></el-input></div></td>
+	                    	<td><div><el-input v-model="formData.strap_padding_gap_above_knee" placeholder=""></el-input></div></td>
+	                    	<td><div><el-input v-model="formData.strap_padding_gap_below_knee" placeholder=""></el-input></div></td>
+	                    	<td><div><el-input v-model="formData.strap_padding_gap_bottom" placeholder=""></el-input></div></td>
+	                    </tr>
+                        <tr>
+	                    	<td><div>Final "per size" strap adj. factor (cm)</div></td>
+	                    	<td><div><el-input v-model="formData.final_strap_top" placeholder=""></el-input></div></td>
+	                    	<td><div><el-input v-model="formData.final_strap_above_knee" placeholder=""></el-input></div></td>
+	                    	<td><div><el-input v-model="formData.final_strap_below_knee" placeholder=""></el-input></div></td>
+	                    	<td><div><el-input v-model="formData.final_strap_bottom" placeholder=""></el-input></div></td>
+	                    </tr>	                    
+		    		</tbody>
+		    	</table>
+		    	
+		    	<table cellspacing="0" cellpadding="0" border="0" v-show="parameter_table_2_show">
+		    		<tbody>
+		    			<tr>
+		    				<td><div>&nbsp;&nbsp;</div></td>
+		    				<td><div>Top</div></td><td><div>Above Knee</div></td>
+		    				<td><div>Below Knee</div></td>
+		    				<td><div>Bottom</div></td>
+		    			</tr>
+	                    <tr>
+	                    	<td><div>Flange/Cuff Midline to Chafe Slot (cm)</div></td>
+	                    	<td><div><el-input v-model="formData.scuff_slot_top" placeholder=""></el-input></div></td>
+	                    	<td><div><el-input v-model="formData.scuff_slot_above_knee" placeholder=""></el-input></div></td>
+	                    	<td><div><el-input v-model="formData.scuff_slot_below_knee" placeholder=""></el-input></div></td>
+	                    	<td><div><el-input v-model="formData.scuff_slot_bottom" placeholder=""></el-input></div></td>
+	                    </tr>	    		
+	                    <tr>
+	                    	<td><div>Foldover (each end) (cm)</div></td>
+	                    	<td><div><el-input v-model="formData.foldover_top" placeholder=""></el-input></div></td>
+	                    	<td><div><el-input v-model="formData.foldover_above_knee" placeholder=""></el-input></div></td>
+	                    	<td><div><el-input v-model="formData.foldover_below_knee" placeholder=""></el-input></div></td>
+	                    	<td><div><el-input v-model="formData.foldover_bottom" placeholder=""></el-input></div></td>
+	                    </tr>	
+	                    <tr>
+	                    	<td><div>Overlap - Strap-Tip End (cm)</div></td>
+	                    	<td><div><el-input v-model="formData.overlap_strap_tip_top" placeholder=""></el-input></div></td>
+	                    	<td><div><el-input v-model="formData.overlap_strap_tip_above_knee" placeholder=""></el-input></div></td>
+	                    	<td><div><el-input v-model="formData.overlap_strap_tip_below_knee" placeholder=""></el-input></div></td>
+	                    	<td><div><el-input v-model="formData.overlap_strap_tip_bottom" placeholder=""></el-input></div></td>
+	                    </tr>
+	                    <tr>
+	                    	<td><div>Overlap - Back2Back End (cm)</div></td>
+	                    	<td><div><el-input v-model="formData.overlap_back2back_top" placeholder=""></el-input></div></td>
+	                    	<td><div><el-input v-model="formData.overlap_back2back_above_knee" placeholder=""></el-input></div></td>
+	                    	<td><div><el-input v-model="formData.overlap_back2back_below_knee" placeholder=""></el-input></div></td>
+	                    	<td><div><el-input v-model="formData.overlap_back2back_bottom" placeholder=""></el-input></div></td>
+	                    </tr>
+	                    <tr>
+	                    	<td><div>Strap Padding Gap (EACH END) (cm)</div></td>
+	                    	<td><div><el-input v-model="formData.strap_padding_gap_top" placeholder=""></el-input></div></td>
+	                    	<td><div><el-input v-model="formData.strap_padding_gap_above_knee" placeholder=""></el-input></div></td>
+	                    	<td><div><el-input v-model="formData.strap_padding_gap_below_knee" placeholder=""></el-input></div></td>
+	                    	<td><div><el-input v-model="formData.strap_padding_gap_bottom" placeholder=""></el-input></div></td>
+	                    </tr>
+		    		</tbody>
+		    	</table>
+		    	
+	    		<div><el-button type="primary" size="small" @click="submitForm()">Save</el-button></div>
+			            
+	        </el-form>
+	    </div>
+	    
+
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+	require(['jquery','Vue','dataDB','ELEMENT','formVerify'], function ($,Vue,dataDB,ELEMENT,formVerify) {
+	    //请求数据的url
+	    var url = $("#Vue_routerView").attr("data-href").replace(/\/page\//,"/nodejs/").replace(/\.html/,"");
+		//console.log(url);
+		//当前定位
+		$(".list-page-point span").html("Brace Data"+">>"+"Brace Data");
+	
+	    var dataDBInt = dataDB.int;
+	    Vue.use(ELEMENT); 
+        
+        var colObj_1 = { 
+						"parameterClass_id" : "1", 
+						"parameterClass_name" : "Catalyst-Elite / Catalyst-Propel",
+						"slot_top" : "", 
+						"slot_above_knee" : "",
+						"slot_below_knee" : "",
+						"slot_bottom" : "",
+						"foldover_top" : "",
+						"foldover_above_knee" : "",
+						"foldover_below_knee" : "",
+						"foldover_bottom" : "",
+						"overlap_strap_tip_top" : "",
+						"overlap_strap_tip_above_knee" : "",
+						"overlap_strap_tip_below_knee" : "",
+						"overlap_strap_tip_bottom" : "",
+						"overlap_back2back_top" : "",
+						"overlap_back2back_above_knee" : "",
+						"overlap_back2back_below_knee" : "",
+						"overlap_back2back_bottom" : "",
+						"strap_padding_gap_top" : "",
+						"strap_padding_gap_above_knee" : "",
+						"strap_padding_gap_below_knee" : "",
+						"strap_padding_gap_bottom" : "",
+						"final_strap_top" : "",
+						"final_strap_above_knee" : "",
+						"final_strap_below_knee" : "",
+						"final_strap_bottom" : ""
+					};
+	    var colObj_2 = { 
+					"parameterClass_id" : "2", 
+					"parameterClass_name" : "Oactive", 
+					"scuff_slot_top" : "", 
+					"scuff_slot_above_knee" : "", 
+					"scuff_slot_below_knee" : "", 
+					"scuff_slot_bottom" : "", 
+					"foldover_top" : "", 
+					"foldover_above_knee" : "", 
+					"foldover_below_knee" : "", 
+					"foldover_bottom" : "", 
+					"overlap_strap_tip_top" : "", 
+					"overlap_strap_tip_above_knee" : "", 
+					"overlap_strap_tip_below_knee" : "", 
+					"overlap_strap_tip_bottom" : "", 
+					"overlap_back2back_top" : "", 
+					"overlap_back2back_above_knee" : "", 
+					"overlap_back2back_below_knee" : "", 
+					"overlap_back2back_bottom" : "", 
+					"strap_padding_gap_top" : "", 
+					"strap_padding_gap_above_knee" : "", 
+					"strap_padding_gap_below_knee" : "", 
+					"strap_padding_gap_bottom" : "",
+				};
+		
+        var old_product_id;
+        var old_parameterClass_id;
+        
+        var braceDateApp = new Vue({
+		        el: '#braceDateApp',
+		        data: {
+		         	braceDatebox_show: false,
+				    parameter_table_1_show: false,
+				    parameter_table_2_show: false,
+				    formData: {}
+		        },
+			    methods: {
+			      submitForm() {
+			      	var _this = this;
+			        this.$refs["formData"].validate (function (valid) {
+						if(valid) {
+							//console.log(braceDateApp.formData);
+							var dataJson = {};
+							if(braceDateApp.formData.parameterClass_id == 1){
+								for(item in colObj_1){
+					        		if(item == "parameterClass_id"){
+					        			dataJson[item] = Number(braceDateApp.formData[item]);
+					        		}else{
+					        			dataJson[item] = braceDateApp.formData[item];
+					        		}
+					        	}
+							}else{
+								for(item in colObj_2){
+					        		if(item == "parameterClass_id"){
+					        			dataJson[item] = Number(braceDateApp.formData[item]);
+					        		}else{
+					        			dataJson[item] = braceDateApp.formData[item];
+					        		}
+					        	}
+							}
+							
+		                    var searchJson={"product_id":old_product_id};
+		                    var reqData2 = 'action=updateData&searchJson=' + JSON.stringify(searchJson) + '&updateJson=' + JSON.stringify(dataJson);
+		                    dataDBInt.updateData(url,reqData2,function (data2) {
+		                        _this.$message({duration: 1000, message: data2 });
+                                if(data2 != "Success"){return;}
+        
+                                var reqData3 = 'action=findData&searchJson='+JSON.stringify(searchJson)+'&prePageNum=10&currPage=1';
+                                dataDBInt.findData(url,reqData3,dataInt);
+		                    });
+						}else {
+							//console.log('error submit');
+							return false;
+						}
+					});
+			      },
+			      selectChange() {
+				      //console.log(this.formData.parameterClass_id )
+				      if(this.formData.parameterClass_id != old_parameterClass_id){
+				      	if(this.formData.parameterClass_id == 1){
+					      	this.parameter_table_1_show = true;
+			                this.parameter_table_2_show = false;
+			                for(item in colObj_1){
+				        		if(item == "parameterClass_id"){
+				        			colObj_1["parameterClass_id"] = "1";
+				        		}else if(item == "parameterClass_name"){
+				        			colObj_1["parameterClass_name"] = "Catalyst-Elite / Catalyst-Propel";
+				        		}else{
+				        			colObj_1[item] = "";
+				        		}
+				        	}
+			                this.formData = colObj_1;
+					    }
+				      	if(this.formData.parameterClass_id == 2){
+					      	this.parameter_table_1_show = false;
+				            this.parameter_table_2_show = true;
+				            for(item in colObj_2){
+				        		if(item == "parameterClass_id"){
+				        			colObj_2["parameterClass_id"] = "2";
+				        		}else if(item == "parameterClass_name"){
+				        			colObj_2["parameterClass_name"] = "Oactive";
+				        		}else{
+				        			colObj_2[item] = "";
+				        		}
+				        	}
+				            this.formData = colObj_2;
+					    }
+				      	
+				      }else{
+				      	var reqData3 = 'action=findData&searchJson='+JSON.stringify({"product_id":old_product_id})+'&prePageNum=10&currPage=1';
+                        dataDBInt.findData(url,reqData3,dataInt);
+				      }
+				      
+				  }
+			    }
+	         
+        });
+       
+       
+       
+       
+        //加载data
+		var dataInt = function (data) {
+	        //console.log(data.rows[0]);
+	        
+	        if(typeof data != "object"){
+	          alert(data);
+	          return;
+	        }
+
+	        
+	        braceDateApp.braceDatebox_show = true;
+	        if(data.rows.length > 0){
+	        	var row = data.rows[0];
+	        	row.parameterClass_id = ""+row.parameterClass_id;
+	        }else{
+	        	for(item in colObj_1){
+	        		if(item == "parameterClass_id"){
+	        			colObj_1["parameterClass_id"] = "1";
+	        		}else if(item == "parameterClass_name"){
+	        			colObj_1["parameterClass_name"] = "Catalyst-Elite / Catalyst-Propel";
+	        		}else{
+	        			colObj_1[item] = "";
+	        		}
+	        	}
+	        	var row = colObj_1;
+	        }
+	        old_parameterClass_id = row.parameterClass_id;
+	        braceDateApp.formData = row;
+	        if(row.parameterClass_id == 1){
+	          braceDateApp.parameter_table_1_show = true;
+	          braceDateApp.parameter_table_2_show = false;
+	        }
+	        if(row.parameterClass_id == 2){
+	          braceDateApp.parameter_table_1_show = false;
+	          braceDateApp.parameter_table_2_show = true;
+	        }
+	        
+       }
+
+
+
+
+
+        //搜索
+        var seaColArr = [
+	           {"title":"Brace Name","field":"product_id","width":"150","data_type":"int"},
+	           {"title":"Parameter Class","field":"parameterClass_id","width":"150","data_type":"int"},
+//	           {"title":"parameterClass_class_name","field":"parameterClass_class_name","width":"190","data_type":"text"}
+	        ];
+        function search(){
+	      	var row = {}; 
+	      	var formHtml = '<el-form :model="formData" ref="formData" :rules="rules" :inline="true" label-width="120px" size="small" name="search" class="demo-ruleForm clearfix">';
+            for(var i = 0; i < seaColArr.length; i++){
+               var data_type = seaColArr[i].data_type;
+               var field = seaColArr[i].field;
+               var title = seaColArr[i].title;
+               row[field]="";
+               if(field == "product_id"){
+               	  formHtml+='<el-form-item label="'+title+'" prop="'+field+'"> <el-select @change="selectChange()" placeholder="--select--" v-model="formData.'+field+'" data-type="'+data_type+'" name="'+field+'">';
+               	  formHtml+='<el-option v-for="item in productList" :key="item.product_id" :label="item.product_name" :value="item.product_id"> </el-option>';
+               	  formHtml+='</el-select> </el-form-item>';
+               }
+            }
+            formHtml+='</el-form>';
+	      	$("#searchApp").html(formHtml); 
+
+	      	var searchApp = new Vue({
+		            el: '#searchApp',
+		            data: {
+		            	formData: row,
+					    productList: productList,
+					    rules:{}
+		            },
+				    methods: {
+				      selectChange() {
+				        this.$refs["formData"].validate (function (valid) {
+							if(valid) {
+								//console.log(searchApp.formData);
+								if(!searchApp.formData["product_id"]){
+									searchApp.$message({duration: 1000, message: "Please select Brace Class" });
+									return false;
+								}
+								old_product_id = searchApp.formData["product_id"];
+								var dataJson = {"product_id" : Number(searchApp.formData["product_id"])};
+			                    //console.log(dataJson);
+                                var reqData = 'action=findData&searchJson='+JSON.stringify(dataJson)+'&prePageNum=10&currPage=1';
+								dataDBInt.findData(url,reqData,dataInt);
+							}else {
+								//console.log('error submit');
+								return false;
+							}
+						});
+				      },
+				      resetForm() {
+				        this.$refs["formData"].resetFields();
+				        braceDateApp.braceDatebox_show = false;
+				      }
+				    }
+		         
+	        });
+        }
+        
+
+
+        //加载braceClass
+        var productList = [];
+        var url_product = '/nodejs/productList';
+        var reqData_product = 'action=findData&searchJson=&prePageNum=100000&currPage=1&sortJson={"id":1}';
+		dataDBInt.findData(url_product,reqData_product,function (data) {
+			data.rows.forEach(function(item, index) {
+				    var obj = {"product_id": item.id, "product_name": item.name};
+		       	    if(index == 0){
+		       	       productList.push(obj);
+		       	    }else{
+		       	    	if(item.id != data.rows[index - 1].id){
+				    	  productList.push(obj);
+				        }
+		       	    }
+			});
+			//console.log(productList);
+			search();
+		});
+
+
+		
+	});
+</script>

@@ -1,0 +1,196 @@
+{
+    "name_ch" :"菜单",
+    "name_en" :"menu",
+    "rows": [
+        {
+            "id": 100000, 
+        	"name": "Orders", 
+            "href": "",
+            "show": "true", 
+            "children": [
+                {   
+                	"id": 100001, 
+                    "name": "Place Order", 
+                    "href": "#/page/orderPlaceList",
+                    "show": "true", 
+                    "children": []
+                },
+                {   
+                	"id": 100002, 
+                    "name": "Received Order", 
+                    "href": "#/page/orderReceivedList",
+                    "show": "true", 
+                    "children": []
+                },
+                {   
+                	"id": 100003, 
+                    "name": "Cancelled Order", 
+                    "href": "#/page/orderCancelledList",
+                    "show": "true", 
+                    "children": []
+                },
+                {   
+                	"id": 100004, 
+                    "name": "OnHold Order", 
+                    "href": "#/page/orderOnHoldList",
+                    "show": "true", 
+                    "children": []
+                },
+                {   
+                	"id": 100005, 
+                    "name": "Processed Order", 
+                    "href": "#/page/orderProcessedList",
+                    "show": "true", 
+                    "children": []
+                },
+                {   
+                	"id": 100006, 
+                    "name": "Shipped Order", 
+                    "href": "#/page/orderShippedList",
+                    "show": "true", 
+                    "children": []
+                }
+            ]
+        }, 
+        {
+        	"id": 200000, 
+            "name": "Setting", 
+            "href": "",
+            "show": "true", 
+            "children": [
+                {   
+                	"id": 200002, 
+                    "name": "Billing information", 
+                    "href": "#/page/billingList",
+                    "show": "true", 
+                    "children": []
+                },
+                {   
+                	"id": 200003, 
+                    "name": "Shipping information", 
+                    "href": "#/page/shippingList",
+                    "show": "true", 
+                    "children": []
+                }
+            ]
+        }, 
+        {
+        	"id": 300000, 
+            "name": "Products", 
+            "href": "",
+            "show": "true", 
+            "children": [
+                {   
+                	"id": 300001,
+                    "name": "Product List", 
+                    "href": "#/page/productList",
+                    "show": "true", 
+                    "children": []
+                },
+                {   
+                	"id": 300002,
+                    "name": "Product Class", 
+                    "href": "#/page/productClass",
+                    "show": "true", 
+                    "children": []
+                },
+                {   
+                	"id": 300003,
+                    "name": "Color Class", 
+                    "href": "#/page/colorClass",
+                    "show": "true", 
+                    "children": []
+                },
+                {   
+                	"id": 300004,
+                    "name": "Option Class", 
+                    "href": "#/page/optionClass",
+                    "show": "true", 
+                    "children": []
+                },
+                {   
+                    "id": 300005,
+                    "name": "Accessories Class", 
+                    "href": "#/page/accessoriesClass",
+                    "show": "true", 
+                    "children": []
+                },
+                {   
+                    "id": 300006,
+                    "name": "Model Class", 
+                    "href": "#/page/modelClass",
+                    "show": "true", 
+                    "children": []
+                },
+                {   
+                	"id": 300007,
+                    "name": "Options Value", 
+                    "href": "#/page/optionsValueClass",
+                    "show": "true", 
+                    "children": []
+                }
+                
+            ]
+        }, 
+        {
+            "id": 400000, 
+            "name": "Brace Data", 
+            "href": "",
+            "show": "true", 
+            "children": [
+                
+                {   
+                    "id": 400002,
+                    "name": "Brace Data", 
+                    "href": "#/page/braceDataList",
+                    "show": "true", 
+                    "children": []
+                }
+            ]
+        }, 
+        {
+        	"id": 500000, 
+            "name": "User", 
+            "href": "",
+            "show": "true", 
+            "children": [
+                {   
+                	"id": 500001,
+                    "name": "User List", 
+                    "href": "#/page/userList",
+                    "show": "true", 
+                    "children": []
+                },
+                {   
+                	"id": 500002,
+                    "name": "Role Class", 
+                    "href": "#/page/roleClass",
+                    "show": "true", 
+                    "children": []
+                },
+                {   
+                	"id": 500003,
+                    "name": "Role Permission", 
+                    "href": "#/page/rolePermissionList",
+                    "show": "true", 
+                    "children": []
+                }
+            ]
+        }, 
+        {
+        	"id": 600000, 
+            "name": "Operation record", 
+            "href": "",
+            "show": "true", 
+            "children": [
+                {   
+                	"id": 600001,
+                    "name": "Record List", 
+                    "href": "#/page/recordList",
+                    "show": "true", 
+                    "children": []
+                }
+            ]
+        }
+    ]
+}

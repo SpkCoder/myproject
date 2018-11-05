@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>eCast</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel='stylesheet' href='/css/iconfont.css'/>
+  <link rel='stylesheet' href='/js/element-ui/lib/theme-chalk/index.css'/>
+  <link rel='stylesheet' href='/css/style.css'/>
+  <link rel='stylesheet' href='/css/pagelist.css'/>
+</head>
+<body>
+	
+		  <div class="header-logo clearfix">
+		       <div class="container clearfix">
+		        <div class="logo-left"><img src="image/ecast.png"></div>
+			      <div class="logo-right">
+			        <img src="image/vqlogo.png">
+			        <span>Version 18-03-08</span> 
+			      </div>
+		    </div>
+		  </div>	
+	
+	    <!--header-->
+  	  <div class="header">
+  	  	<div class="container clearfix">
+	  		  
+	  		  <div class="nav-box">
+	  	                <ul id="topNav" class="nav clearfix">
+						  <li v-for='(item, index) in rows' v-if='item.show == "true"'>
+						  	  <a href="javascript:;"><i class="layui-icon topmenu-layui-icon">{{ item.iconfont }}</i>{{ item.name }}<span class="nav-more"></span></a>
+						  	  <dl>
+								    <dd v-for='(item2, index2) in item.children' v-if='item2.show == "true"'>
+								    	<a v-bind:href="item2.href"><i class="layui-icon">{{ item2.iconfont }}</i>{{ item2.name }}</a>
+								    </dd>
+								  </dl>
+						  </li>
+						</ul>
+				      
+				      <ul class="nav nav-right">
+				        <li class="adminLi">
+				          <a id="UserName" href="javascript:;"><i class="layui-icon"></i>admin<span class="nav-more"></span></a>
+				          <dl>
+				          	<dd><a href="#/page/userListSet"><i class="layui-icon"></i>User Information</a></dd>
+				            <dd><a id="changePassword" href="javascript:;"><i class="layui-icon"></i>Change Password</a></dd>
+				            <dd><a id="loginOut" href="javascript:;"><i class="layui-icon"></i>Sign Out</a></dd>
+				          </dl>
+				        </li>
+				       
+				      </ul>
+  		    </div>
+  		  
+	  		  <div class="moblebar">
+	  		  	  <span id="nav-menu-moble" class="nav-close"><i class="icon-font" style="font-size: 22px;">&#xe600;</i></span>
+	  		  </div>
+  		  </div>
+  	</div>
+	
+	
+	  <!-- pageList -->
+	  <div id="Vue_routerView" class="vue-body"></div>
+	    
+
+<script type="text/javascript" src="/js/jquery/jquery.js"></script>
+<script type="text/javascript" src="/js/router/routerUrl.js" charset="utf-8"></script>
+<script type="text/javascript" src="/js/requirejs/js/require.js" data-main="/js/app.js"></script>
+</body>
+</html>

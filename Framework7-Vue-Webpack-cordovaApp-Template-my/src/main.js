@@ -17,14 +17,18 @@ import AppStyles from './css/app.css';
 // Import App Component
 import App from './app';
 
+
 // Init F7 Vue Plugin
 Framework7.use(Framework7Vue)
+
+//global
+Vue.prototype.global_islogin = false;
+
 
 // Init App
 new Vue({
   el: '#app',
   template: '<app/>',
-
   // Register App Component
   components: {
     app: App

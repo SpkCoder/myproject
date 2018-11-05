@@ -10,7 +10,7 @@
       </f7-nav-right>
     </f7-navbar>
     <f7-toolbar>
-      <f7-link>Left Link</f7-link>
+      <f7-link @click="leftclick">Left Link</f7-link>
       <f7-link>Right Link</f7-link>
     </f7-toolbar>
     <f7-block strong>
@@ -50,5 +50,28 @@
   </f7-page>
 </template>
 <script>
-export default {}
+export default {
+  data(){
+     var _this = this;
+     return {
+        show_a: _this.global_islogin
+     }
+  },
+  watch: {
+     global_islogin: function (val, oldVal) {
+      console.log('new: %s, old: %s', val, oldVal)
+    }
+  },
+  methods: {
+      leftclick: function(){
+         console.log("leftclick");
+         this.show_a = true;
+         console.log(this);
+         //var mainView = this.$f7.view.main;
+         //mainView.router.navigate("/panel-left/");
+         //this.$f7.panel.open("left");
+      }
+  }
+ 
+}
 </script>

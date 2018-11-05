@@ -1,0 +1,36 @@
+﻿/* 0 */
+{
+  "_id" : ObjectId("5ac19c18c664fc27747555f1"),
+  "id" : 1,
+  "class_name" : "ATC"
+}
+
+/* 1 */
+{
+  "_id" : ObjectId("5ac19c18c664fc27747555f2"),
+  "id" : 2,
+  "class_name" : "Heavy Duty Hinge"
+}
+
+/* 2 */
+{
+  "_id" : ObjectId("5ac19c18c664fc27747555f3"),
+  "id" : 3,
+  "class_name" : "RT"
+}
+
+/* 3 */
+{
+  "_id" : ObjectId("5ac19c18c664fc27747555f4"),
+  "id" : 4,
+  "class_name" : "Standard"
+}
+
+/* 4 */
+{
+  "_id" : ObjectId("5ac19c18c664fc27747555f5"),
+  "id" : 5,
+  "class_name" : "Tall"
+}
+
+

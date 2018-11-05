@@ -1,0 +1,435 @@
+﻿<div class="list-page-point">
+   <div class="container">
+     <p><i class="layui-icon" style="font-size: 14px;">&#xe715;</i><span></span></p>
+   </div>
+</div>
+
+
+<div class="list-page-box">
+  <div class="container2">
+    <div class="list-page">
+    
+		<div id="btnApp">
+			<el-button-group>
+			  <el-button id="btn_add" size="small"><i class="layui-icon">&#xe654;</i>Add</el-button>
+			  <el-button id="btn_delete" size="small"><i class="layui-icon">&#xe640;</i>Delete</el-button>
+			  <!--<el-button id="btn_search" size="medium"><i class="layui-icon">&#xe615;</i>Search</el-button>-->
+			</el-button-group>
+		</div>
+	    
+		<div id="searchApp"></div>
+	    <div id="tableApp"></div>
+	    <div id="pageApp"></div>
+	    <div id="formApp" class="formBox"> </div>
+	    
+
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+	require(['jquery','Vue','dataDB','ELEMENT','drag','formVerify'], function ($,Vue,dataDB,ELEMENT,drag,formVerify) {
+	    //请求数据的url
+	    var url = "/nodejs/accessoriesValueRelationship";
+	    var productId_modelClassId_optionId = window.location.hash.split("/")[3];
+		//console.log(url);
+		//当前定位
+		$(".list-page-point span").html("Products"+">>"+"Product List");
+	
+	    var dataDBInt = dataDB.int;
+	    Vue.use(ELEMENT); 
+        
+        var dragInt = drag.int;
+        
+        var searchStatus = { 
+        	searchJson : {"productId_modelClassId_optionId": productId_modelClassId_optionId},
+        	prePageNum : 10,
+        	currPage : 1,
+        	sortJson : {"sort":1}
+        };
+       
+        
+       
+        //按钮组
+	    var btnApp = new Vue({
+	    	el: '#btnApp'
+	    });
+       
+       
+        //加载data
+		var dataInt = function (data) {
+	        //console.log(data);
+	        
+	        if(typeof data != "object"){
+	          alert(data);
+	          return;
+	        }
+	        
+	        var isDefaultId;
+	        data.rows.forEach(function (item,index) {
+	        	if(item.isDefault == "true"){
+                   isDefaultId = item.value_id;	        	
+	        	}
+	        });
+	        
+	        data.colArr = [
+	           {"title":"ID","field":"value_id","width":"100","data_type":"int"},
+	           {"title":"Name","field":"name","width":"200","data_type":"text"},
+	           {"title":"Value","field":"value","width":"200","data_type":"text"},
+	           {"title":"Sort","field":"sort","width":"100","data_type":"int"},
+	           {"title":"Default","field":"isDefault","width":"80","data_type":"text"}
+	        ];
+	        
+	        var tableWidth = 40 + 130 + 5;
+	        data.colArr.forEach(function (item,index) {
+	        	tableWidth += Number(item.width);
+	        });
+	        tableWidth += "px";
+	        
+	        var tableHtml ='<el-table :data="tableData" border ref="multipleTable" tooltip-effect="dark" size="small" style="width:'+tableWidth+'" max-height="400" @selection-change="selectionChange" @sort-change="sortChange">';
+	        tableHtml +='<el-table-column fixed="left" type="selection" width="40"> </el-table-column>';
+	        data.colArr.forEach(function (item,index) {
+			    if(item.field == "isDefault"){
+	        	  tableHtml+='<el-table-column prop="" label="'+item.title+'" width="'+item.width+'"> <template slot-scope="scope"> <el-radio v-model="radio" :label="scope.row.value_id" @change="setDefault(scope.row)">&nbsp;</el-radio></template> </el-table-column>';
+	        	}else{
+	        	  tableHtml+='<el-table-column show-overflow-tooltip prop="'+item.field+'" label="'+item.title+'" width="'+item.width+'"> </el-table-column>';
+	        	}
+	        });
+//	        tableHtml+='<el-table-column fixed="right" label="Operation" width="130"> <template slot-scope="scope"> <el-button @click="details(scope.row)" type="text" size="small">Details</el-button> <el-button @click="edit(scope.row)" type="text" size="small">Edit</el-button> <el-button @click="del(scope.row)" type="text" size="small">Delete</el-button> </template> </el-table-column>';
+	        tableHtml+='<el-table-column fixed="right" label="Operation" width="130"> <template slot-scope="scope"> <el-button @click="edit(scope.row)" type="text" size="small">Edit</el-button> <el-button @click="del(scope.row)" type="text" size="small">Delete</el-button> </template> </el-table-column>';
+	        tableHtml+=' </el-table>';
+	        $("#tableApp").html(tableHtml);
+	       
+	        
+	        var tableApp = new Vue({
+		        el: '#tableApp',
+		        data: {
+		        	tableData: data.rows,
+				    radio: isDefaultId,
+				    multipleSelection: []
+		        },
+		        methods: {
+				      toggleSelection(rows) {
+				        if(rows) {
+				          rows.forEach(function (row) {
+							this.$refs.multipleTable.toggleRowSelection(row);
+						  });
+				        }else {
+				          this.$refs.multipleTable.clearSelection();
+				        }
+			      },
+			      selectionChange(dataArr) {
+				        this.multipleSelection = dataArr;
+				        //选中的dataArr
+				        //console.log(dataArr);
+			      },
+			      sortChange(obj) {
+				        //排序
+				        //console.log(obj.prop +":"+obj.order);
+				        var sortJson = {};
+				        sortJson[obj.prop] = (obj.order == "descending") ? -1 : 1;
+			      	    searchStatus.sortJson = sortJson;
+			            var reqData2 = 'action=findData&searchJson='+JSON.stringify(searchStatus.searchJson)+'&prePageNum='+searchStatus.prePageNum+'&currPage='+searchStatus.currPage+'&sortJson='+JSON.stringify(searchStatus.sortJson);
+				        dataDBInt.findData(url,reqData2,dataInt);
+			      },
+			      details(row){
+			      	    //查看
+				      	//console.log(row);
+				      	//window.location.hash = "/page/detail/" +row.id;
+				      	//layer.msg("查看",{time: 1000});
+			      },
+			      add(){
+			      	    //增加
+			      	    var _this = this;
+				      	var row = {}; 
+				      	var formHtml = '<h4 id="dragbur"><span>Add</span><i class="el-icon-close closeBtn"></i><i class="el-icon-plus plusBtn"></i><i class="el-icon-minus minusBtn"></i></h4>'
+				      	formHtml += '<el-form :model="formData" :rules="rules" ref="formData" label-width="150px" size="small" name="add" class="demo-ruleForm">';
+			            for(var i = 0; i < data.colArr.length; i++){
+			               var data_type = data.colArr[i].data_type;
+			               var field = data.colArr[i].field;
+			               var title = data.colArr[i].title;
+			               row[field]="";
+			               if(field == "value_id"){
+			               	  formHtml+='<el-form-item label="Value" prop="'+field+'"> <el-select placeholder="" v-model="formData.'+field+'" data-type="'+data_type+'" name="'+field+'">';
+			               	  formHtml+='<el-option v-for="item in OptionsValueClassList" :key="item.id" :label="item.nameValue" :value="item.id"> </el-option>';
+			               	  formHtml+='</el-select> </el-form-item>';
+			               }else if(field == "name" || field == "value" || field == "isDefault"){
+			               	  //
+			               }else{
+			                  formHtml+='<el-form-item label="'+title+'" prop="'+field+'"> <el-input v-model="formData.'+field+'" auto-complete="off" data-type="'+data_type+'" name="'+field+'"></el-input> </el-form-item>';
+				           }
+			            }
+			            formHtml+='<el-form-item> <el-button size="small" type="primary" @click="submitForm()">SUBMIT</el-button> <el-button size="small" class="closeBtn">CANCEL</el-button> </el-form-item>';
+			            formHtml+='</el-form>';
+				      	$("#formApp").html(formHtml);
+				      	
+				      	setTimeout(function () {
+				      		dragInt.resizeFn("formApp",formApp);
+				      		dragInt.dragFn("formApp","window");
+				      	},0);
+				      	
+                        var rules = formVerify.rules(row,data.colArr);
+				      	var formApp = new Vue({
+						        el: '#formApp',
+						        data: {
+						         	formData: row,
+								    OptionsValueClassList: OptionsValueClassList,
+								    rules: rules
+						        },
+							    methods: {
+							      submitForm() {
+							        this.$refs["formData"].validate (function (valid) {
+										if(valid) {
+											//console.log(formApp.formData);
+											var dataJson = {};
+											dataJson["productId_modelClassId_optionId"] = productId_modelClassId_optionId;
+											dataJson["value_id"] = Number(formApp.formData["value_id"]);
+											dataJson["sort"] = Number(formApp.formData["sort"]);
+											dataJson["isDefault"] = "false";
+						                    //console.log(dataJson);
+						                    
+						                    var dataArr=[];
+                                            dataArr.push(dataJson);
+                                            var reqData2 = 'action=insertData&dataArr=' + JSON.stringify(dataArr);
+						                    dataDBInt.insertData(url,reqData2,function (data2) {
+						                        _this.$message({duration: 1000, message: data2 });
+		                                        if(data2 != "Success"){return;}
+		                
+			                                    var reqData3 = 'action=findData&searchJson='+JSON.stringify(searchStatus.searchJson)+'&prePageNum='+searchStatus.prePageNum+'&currPage='+searchStatus.currPage+'&sortJson='+JSON.stringify(searchStatus.sortJson);
+		                                        dataDBInt.findData(url,reqData3,dataInt);
+		                                        $("#formApp").hide(); 
+						                    });
+										}else {
+											//console.log('error submit');
+											return false;
+										}
+									});
+							      },
+							      resetForm() {
+							        this.$refs["formData"].resetFields();
+							      }
+							    }
+					         
+				        });
+			      	
+			      },
+			      edit(row){
+			      	    //修改
+			      	    var _this = this;
+				      	//console.log(row); 
+				      	var formHtml = '<h4 id="dragbur"><span>Edit</span><i class="el-icon-close closeBtn"></i><i class="el-icon-plus plusBtn"></i><i class="el-icon-minus minusBtn"></i></h4>'
+				      	formHtml += '<el-form :model="formData" :rules="rules" ref="formData" label-width="150px" size="small" name="edit" class="demo-ruleForm">';
+			            for(var i = 0; i < data.colArr.length; i++){
+			               var data_type = data.colArr[i].data_type;
+			               var field = data.colArr[i].field;
+			               var title = data.colArr[i].title;
+			               if(field == "value_id"){
+			               	  formHtml+='<el-form-item label="Value" prop="'+field+'"> <el-select :disabled="true" placeholder="" v-model="formData.'+field+'" data-type="'+data_type+'" name="'+field+'">';
+			               	  formHtml+='<el-option v-for="item in OptionsValueClassList" :key="item.id" :label="item.nameValue" :value="item.id"> </el-option>';
+			               	  formHtml+='</el-select> </el-form-item>';
+			               }else if(field == "name" || field == "value" || field == "isDefault"){
+			               	  //
+			               }else{
+			               	 formHtml+='<el-form-item label="'+title+'" prop="'+field+'"> <el-input v-model="formData.'+field+'" auto-complete="off" data-type="'+data_type+'" name="'+field+'"></el-input> </el-form-item>';
+			               }
+			
+			            }
+			            formHtml+='<el-form-item> <el-button type="primary" size="small" @click="submitForm()">SUBMIT</el-button> <el-button size="small" class="closeBtn">CANCEL</el-button> </el-form-item>';
+			            formHtml+='</el-form>';
+				      	$("#formApp").html(formHtml);
+				      	
+				      	setTimeout(function () {
+				      		dragInt.resizeFn("formApp",formApp);
+				      		dragInt.dragFn("formApp","window");
+				      	},0);
+				      	
+                        var rules = formVerify.rules(row,data.colArr);
+				      	var formApp = new Vue({
+						        el: '#formApp',
+						        data: {
+						         	formData: row,
+								    OptionsValueClassList: OptionsValueClassList,
+								    rules: rules
+						        },
+							    methods: {
+							      submitForm() {
+							        this.$refs["formData"].validate (function (valid) {
+										if(valid) {
+											//console.log(formApp.formData);
+											if(!formApp.formData.name){
+												_this.$message({duration: 1000, message: "Please input Name" });
+												return;
+											}
+											var dataJson = {};
+											dataJson["sort"] = Number(formApp.formData["sort"]);
+						                    //console.log(dataJson);
+						                      
+						                    var searchJson={"productId_modelClassId_optionId":productId_modelClassId_optionId, "value_id":formApp.formData.value_id};
+						                    var reqData2 = 'action=updateData&searchJson=' + JSON.stringify(searchJson) + '&updateJson=' + JSON.stringify(dataJson);
+						                    dataDBInt.updateData(url,reqData2,function (data2) {
+						                        _this.$message({duration: 1000, message: data2 });
+		                                        if(data2 != "Success"){return;}
+		                
+		                                        var reqData3 = 'action=findData&searchJson='+JSON.stringify(searchStatus.searchJson)+'&prePageNum='+searchStatus.prePageNum+'&currPage='+searchStatus.currPage+'&sortJson='+JSON.stringify(searchStatus.sortJson);
+		                                        dataDBInt.findData(url,reqData3,dataInt);
+		                                        $("#formApp").hide(); 
+						                    });
+										}else {
+											//console.log('error submit');
+											return false;
+										}
+									});
+							      },
+							      resetForm() {
+							        this.$refs["formData"].resetFields();
+							      }
+							    }
+					         
+				        });
+			      	
+			      },
+			      setDefault(row){
+			      	    //修改默认
+			      	    //console.log(row);
+			      	    var _this = this;
+				      	var searchJson={"productId_modelClassId_optionId":productId_modelClassId_optionId, "value_id":row.value_id};
+				      	var dataJson = {"isDefault": "true"};
+	                    var reqData2 = 'action=updateData&searchJson=' + JSON.stringify(searchJson) + '&updateJson=' + JSON.stringify(dataJson);
+	                    dataDBInt.updateData(url,reqData2,function (data2) {
+	                        _this.$message({duration: 1000, message: data2 });
+    
+                            dataDBInt.findData(url,reqData,dataInt);
+                            $("#formApp").hide(); 
+	                    });
+			      	
+			      },
+			      del(row){
+			      	//删除
+			      	//console.log(row);
+			      	var _this = this;
+			      	this.$confirm('delete?', 'Delete', {
+			          confirmButtonText: 'CONFIRM',
+			          cancelButtonText: 'CANCEL',
+			          type: 'warning'
+			        }).then(function () {
+			          var dataJson = {"productId_modelClassId_optionId":productId_modelClassId_optionId, "value_id":{"$in":[row.value_id]}};
+		              var reqData2 = 'action=delData&dataJson=' +JSON.stringify(dataJson);
+		              dataDBInt.delData(url,reqData2,function (data2) {
+		                _this.$message({duration: 1000, message: data2 });
+		                if(data2 != "Success"){return;}
+		                
+		                var reqData3 = 'action=findData&searchJson='+JSON.stringify(searchStatus.searchJson)+'&prePageNum='+searchStatus.prePageNum+'&currPage='+searchStatus.currPage+'&sortJson='+JSON.stringify(searchStatus.sortJson);
+		                dataDBInt.findData(url,reqData3,dataInt);
+		              });
+			        }).catch(function () {
+			        	//
+			        });
+			      }
+			    }
+		    });
+	        
+	        //设置勾选状态
+	        //tableApp.toggleSelection([tableApp.tableData[1], tableApp.tableData[2]]);
+	        
+	        
+	        //新增
+            $("#btn_add").on("click",function(){
+           	   tableApp.add();
+            });
+            
+	        //查询
+            $("#btn_search").on("click",function(){
+           	   tableApp.search();
+            });
+	       
+	       
+	        //批量删除
+	        $("#btn_delete").on("click",function(){
+	        	var SelectedArr = tableApp.multipleSelection;
+	        	//console.log(SelectedArr);
+	        	if(SelectedArr.length == 0){
+	        		tableApp.$message({duration: 1000, message: "Please check the lines to be deleted" });
+	        		return;
+	        	}
+
+		       tableApp.$confirm('delete?', 'Delete', {
+		          confirmButtonText: 'CONFIRM',
+		          cancelButtonText: 'CANCEL',
+		          type: 'warning'
+		        }).then(function () {
+		            var value_idArr = [];
+		            for(var i=0; i<SelectedArr.length; i++){
+		            	value_idArr.push(SelectedArr[i].value_id);
+		            }
+		            //console.log(value_idArr);
+		            var dataJson = {"productId_modelClassId_optionId":productId_modelClassId_optionId, "value_id":{"$in":value_idArr}};
+			        var reqData2 = 'action=delData&dataJson=' +JSON.stringify(dataJson);
+		            dataDBInt.delData(url,reqData2,function (data2) {
+		                tableApp.$message({duration: 1000, message: data2 });
+		                if(data2 != "Success"){return;}
+		                
+		                var reqData3 = 'action=findData&searchJson='+JSON.stringify(searchStatus.searchJson)+'&prePageNum='+searchStatus.prePageNum+'&currPage='+searchStatus.currPage+'&sortJson='+JSON.stringify(searchStatus.sortJson);
+		                dataDBInt.findData(url,reqData3,dataInt);
+		            });
+		        }).catch(function () {
+		        	//
+		        });
+	        });
+	        
+	       
+	       
+	        //分页
+	        if($("html,body").width()>768){
+	        	var pageHtml ='<el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currPage" :page-sizes="[10,20,50,100,200,500,1000]" :page-size="prePageNum" layout="prev, pager, next, jumper, total, sizes" :total="count"> </el-pagination>';
+	        }else{
+	        	var pageHtml ='<el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currPage" :page-sizes="[10,20,50,100,200,500,1000]" :page-size="prePageNum" layout="prev, pager, next, total" :total="count"> </el-pagination>';
+	        }
+	        $("#pageApp").html(pageHtml);
+	        
+	        var pageApp = new Vue({
+		         el: '#pageApp',
+		         data: {
+		         	currPage: data.currPage,
+			        prePageNum: data.prePageNum,
+			        count: data.count
+		         },
+                 methods: {
+			      handleSizeChange(num) {
+			      	searchStatus.prePageNum = num;
+			        var reqData2 = 'action=findData&searchJson='+JSON.stringify(searchStatus.searchJson)+'&prePageNum='+searchStatus.prePageNum+'&currPage='+searchStatus.currPage+'&sortJson='+JSON.stringify(searchStatus.sortJson);
+			        dataDBInt.findData(url,reqData2,dataInt);
+			      },
+			      handleCurrentChange(num) {
+			      	searchStatus.currPage = num;
+			        var reqData2 = 'action=findData&searchJson='+JSON.stringify(searchStatus.searchJson)+'&prePageNum='+searchStatus.prePageNum+'&currPage='+searchStatus.currPage+'&sortJson='+JSON.stringify(searchStatus.sortJson);
+			        dataDBInt.findData(url,reqData2,dataInt);
+			      }
+			    }
+	        });
+	        
+	        
+	        
+	        
+       }
+
+
+        //初始化数据
+		var reqData = 'action=findData&searchJson='+JSON.stringify(searchStatus.searchJson)+'&prePageNum=10&currPage=1'+'&sortJson='+JSON.stringify(searchStatus.sortJson);
+		dataDBInt.findData(url,reqData,dataInt);
+		//初始化数据 结束
+
+
+        //加载accessoriesClass
+        var OptionsValueClassList = [];
+        var url_OptionsValueClass = '/nodejs/optionsValueClass';
+        var reqData_OptionsValueClass = 'action=findData&searchJson=&prePageNum=100000&currPage=1';
+		dataDBInt.findData(url_OptionsValueClass,reqData_OptionsValueClass,function (data) {
+			OptionsValueClassList = data.rows;
+			OptionsValueClassList.forEach(function (item,index) {
+	        	item.nameValue = item.name +"-"+item.value;
+	        });
+		});
+
+
+		
+	});
+</script>

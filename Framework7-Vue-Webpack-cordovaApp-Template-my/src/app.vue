@@ -63,7 +63,7 @@
 <script>
 // Import Routes
 import routes from './routes.js'
-
+//import Global from './Global'
 export default {
   data() {
     return {
@@ -74,8 +74,12 @@ export default {
         theme: 'auto', // Automatic theme detection
         // App routes
         routes: routes,
-      },
+      }
     }
+  },
+  created(){
+      console.log("app.vue");
+      console.log(this);
   }
 }
 </script>

@@ -5,18 +5,30 @@ const smtpTransport = require('nodemailer-smtp-transport');
 
 //调用方法:sendMail({"to":"1533165086@qq.com","subject":"nodemailer测试","html":"<h2>hello</h2>"},function(err, info){ });
 
+//var email = {
+//  service: 'qq',
+//  host: "smtp.qq.com",
+//  user: '1533165085@qq.com',
+//  pass: 'kfcqwrxtqktabafh'  //授权码,通过QQ获取  
+//}
+
 var email = {
-    service: 'qq',
-    user: '1533165085@qq.com',
-    pass: 'kfcqwrxtqktabafh'  //授权码,通过QQ获取  
+    service: 'gmail',
+    host: "pop.gmail.com",
+    port: 465,
+    user: 'touchhk11@gmail.com',
+    pass: 'Welc@me123'  
 }
+//https://myaccount.google.com/lesssecureapps 开启非安全
 
 var transporter = nodemailer.createTransport({  
-  service: email.service,  
+  service: email.service, 
+  host: email.host, 
+  port: email.port, 
   auth: {  
     user: email.user,  
     pass: email.pass 
-  }  
+  }
 }); 
 
 
@@ -34,6 +46,15 @@ var sendMail = function (mailOptions, callback) {
   }); 
 }
 
-
+//var dataJson = {"to":"1533165085@qq.com","subject":"nodemailer测试","html":"<h2>hello</h2>"};
+//sendMail(dataJson,function(err, info){ 
+//		  if(err){
+//		  	console.log('sendMail Error:'+ err);
+//			return;
+//		  }
+//		  console.log("发送邮件成功");
+//		  res.send("发送邮件成功");
+//});
+		
 module.exports = sendMail;
 

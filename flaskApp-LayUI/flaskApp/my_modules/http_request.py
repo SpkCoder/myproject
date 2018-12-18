@@ -3,9 +3,9 @@ from bs4 import BeautifulSoup
 import requests
 import sys
 
-# req = requests.get(url='https://www.biqukan.com/1_1094/5403177.html')
-# str_html = req.text
-#
+req = requests.get(url='https://www.baidu.com/s?ie=utf-8&wd=docker')
+str_html = req.text
+print(str_html)
 # soup = BeautifulSoup(str_html, 'html.parser', from_encoding='utf-8')
 # soup = soup.prettify()
 # soup = BeautifulSoup(soup, 'html.parser', from_encoding='utf-8')
@@ -52,16 +52,16 @@ class downloader(object):
             f.write('\n')
 
 
-if __name__ == "__main__":
-    dl = downloader()
-    dl.get_download_url()
-    print('《一年永恒》开始下载：')
-    for i in range(len(dl.urls)):
-        dl.writer(dl.names[i], '一念永恒.txt', dl.get_contents(dl.urls[i]))
-        num = (i + 1) / len(dl.urls) * 100
-        sys.stdout.write(format(num, '.2f') + '%' + '\n')
-        sys.stdout.flush()
-    print('《一年永恒》下载完成')
+# if __name__ == "__main__":
+#     dl = downloader()
+#     dl.get_download_url()
+#     print('《一年永恒》开始下载：')
+#     for i in range(len(dl.urls)):
+#         dl.writer(dl.names[i], '一念永恒.txt', dl.get_contents(dl.urls[i]))
+#         num = (i + 1) / len(dl.urls) * 100
+#         sys.stdout.write(format(num, '.2f') + '%' + '\n')
+#         sys.stdout.flush()
+#     print('《一年永恒》下载完成')
 
 
 

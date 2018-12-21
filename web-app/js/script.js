@@ -106,11 +106,65 @@
 	}
 	
 	//Revolution Slider
+	// data-transition：
+	// 幻灯片的切换效果。其值有：
+	// boxslide
+	// boxfade
+	// slotzoom-horizontal
+	// slotslide-horizontal
+	// slotfade-horizontal
+	// slotzoom-vertical
+	// slotslide-vertical
+	// slotfade-vertical
+	// curtain-1
+	// curtain-2
+	// curtain-3
+	// slideleft
+	// slideright
+	// slideup
+	// slidedown
+	// fade
+	
+	//data-easing：
+	// 幻灯片的文字效果。其值有：
+	// easeOutBack
+	// easeInQuad
+	// easeOutQuad
+	// easeInOutQuad
+	// easeInCubic
+	// easeOutCubic
+	// easeInOutCubic
+	// easeInQuart
+	// easeOutQuart
+	// easeInOutQuart
+	// easeInQuint
+	// easeOutQuint
+	// easeInOutQuint
+	// easeInSine
+	// easeOutSine
+	// easeInOutSine
+	// easeInExpo
+	// easeOutExpo
+	// easeInOutExpo
+	// easeInCirc
+	// easeOutCirc
+	// easeInOutCirc
+	// easeInElastic
+	// easeOutElastic
+	// easeInOutElastic
+	// easeInBack
+	// easeOutBack
+	// easeInOutBack
+	// easeInBounce
+	// easeOutBounce
+	// easeInOutBounce
+
+
 	if($('.main-slider .tp-banner').length){
 
 		jQuery('.main-slider .tp-banner').show().revolution({
 			dottedOverlay:"yes",
-			delay:1000000000000000000000000,
+			delay:300000000,
 			startwidth:1200,
 			startheight:680,
 			hideThumbs:600,
@@ -291,8 +345,12 @@
 	if($('.scroll-nav').length) {
 		$('.scroll-nav ul').onePageNav();
 		$('.popup-navigation ul.navigation').onePageNav();
+
+		$("#leanMore").on("click", function () {
+			$("#nav li a[href='#about-us']").click();
+		});
 	}
-	
+
 	// Scroll to a Specific Div
 	if($('.scroll-to-target').length){
 		$(".scroll-to-target").on('click', function() {

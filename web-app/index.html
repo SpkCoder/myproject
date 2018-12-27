@@ -1,1361 +1,318 @@
-﻿<!DOCTYPE html>
+<!doctype html>
 <html>
 <head>
 <meta charset="utf-8">
-<title>Home</title>
-<!-- Stylesheets -->
-<link href="css/bootstrap.css" rel="stylesheet">
-<link href="css/revolution-slider.css" rel="stylesheet">
-<link href="css/style.css" rel="stylesheet">
-<!--Favicon-->
-<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
-<link rel="icon" href="images/favicon.ico" type="image/x-icon">
-<!-- Responsive -->
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-<link href="css/responsive.css" rel="stylesheet">
-<!--[if lt IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script><![endif]-->
-<!--[if lt IE 9]><script src="js/respond.js"></script><![endif]-->
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>XIANYU</title>
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+<link href="css/swiper.min.css" rel="stylesheet" type="text/css">
+<link href="css/animate.css" rel="stylesheet" type="text/css">
+<link href="css/style.css" rel="stylesheet" type="text/css">
+<!--[if lte IE9]> 
+<script src="js/html5shiv.js"></script>
+<link href="css/html5shiv.css" rel="stylesheet" type="text/css"> 
+<![endif]-->
 
 </head>
 
-<body>
+<body class="clearfix">
 
-<div class="page-wrapper">
- 	
-    <!-- Preloader -->
-    <div class="preloader"></div>
- 	
-    <!-- Main Header-->
-    <header class="main-header">
-    	<!-- Main Box -->
-    	<div class="main-box">
-        	<div class="auto-container">
-            	<div class="outer-container clearfix">
-                    <!--Logo Box-->
-                    <div class="logo-box">
-                        <div class="logo"><a href="index.html"><img src="images/logo.png" alt=""></a></div>
-                    </div>
-                    
-                    <!--Nav Outer-->
-                    <div class="nav-outer clearfix">
-                        <!-- Main Menu -->
-                        <nav class="main-menu">
-                            <div class="navbar-header">
-                                <!-- Toggle Button -->    	
-                                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                </button>
-                            </div>
-                            
-                            <div class="navbar-collapse collapse scroll-nav clearfix">
-                                <ul class="navigation clearfix">
-                                    <li class="current"><a href="#home">首页</a></li>
-                                    <li><a href="#about-us">关于我们</a></li>
-                                    <li><a href="#services">服务</a></li>
-                                    <li><a href="#works">案例</a></li>
-									<li><a href="#team">团队</a></li>
-                                    <li><a href="#pricing">价格</a></li>
-                                    <li><a href="#blog">博客</a></li>
-                                    <li><a href="#contact-us">联系我们</a></li>
-                                 </ul>
-                            </div>
-                        </nav><!-- Main Menu End-->
-                        
-                    </div><!--Nav Outer End-->
-                    
-                    <!-- Hidden Nav Toggler -->
-                    <div class="nav-toggler">
-                    <button class="hidden-bar-opener"><span class="icon fa fa-bars"></span></button>
-                    </div><!-- / Hidden Nav Toggler -->
-                    
-            	</div>    
+
+<!--======header-pc========--> 
+<div class="header-pc clearfix">
+  <div class="container clearfix"> 
+      <div class="logo"><a href="/" target="_self"><img class="w100" alt="" src="images/logo.png" ></a></div>
+      <ul class="nav">
+		    <li class="current"><a href="#home">首页</a></li>
+	        <li><a href="#about-us">关于我们</a></li>
+	        <li><a href="#services-us">服务</a></li>
+	        <li><a href="#work-us">项目</a></li>
+			<li><a href="#team-us">团队</a></li>
+	        <li><a href="#contact-us">联系我们</a></li>
+      </ul>
+  </div>
+</div>
+
+
+
+<!--======header-mobile========--> 
+<div class="header-mobile clearfix">
+  <div class="container clearfix"> 
+      <div class="logo"><a href="/" target="_self"><img class="w100" alt="" src="images/logo.png" ></a></div>
+      <div class="btn_open"><svg class="icon" style="width: 2em; height: 2em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2948"><path d="M896 128H128c-17.7 0-32 14.3-32 32s14.3 32 32 32h768c17.7 0 32-14.3 32-32s-14.3-32-32-32zM896 480H128c-17.7 0-32 14.3-32 32s14.3 32 32 32h768c17.7 0 32-14.3 32-32s-14.3-32-32-32zM896 832H128c-17.7 0-32 14.3-32 32s14.3 32 32 32h768c17.7 0 32-14.3 32-32s-14.3-32-32-32z" p-id="2949"></path></svg></div>
+  </div>
+  <div class="navbox">
+  		<div class="btn_close"><svg class="icon" style="width: 2em; height: 2em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4223"><path d="M794.8 865.6L512 582.7 229.2 865.6l-70.7-70.7L441.3 512 158.4 229.2l70.7-70.7L512 441.3l282.8-282.8 70.7 70.7L582.7 512l282.8 282.8-70.7 70.8z" fill="" p-id="4224"></path></svg></div>
+  		<ul class="nav">
+		    <li class="current"><a href="#home">首页</a></li>
+	        <li><a href="#about-us">关于我们</a></li>
+	        <li><a href="#services-us">服务</a></li>
+	        <li><a href="#work-us">项目</a></li>
+			<li><a href="#team-us">团队</a></li>
+	        <li><a href="#contact-us">联系我们</a></li>
+      </ul>
+  </div>
+</div>
+
+
+
+<!--======banner轮播========-->
+<div data-target="#home" id="swiperloop1">
+    <!-- Swiper -->
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide" style="background:url(images/banner1.jpg) no-repeat center;">
+                <div class="bj">
+					<div class="text-box">
+					    <h4 data-animate="fadeInUp">PC程序开发 / 混合APP开发 / 微信小程序开发</h4>
+					    <h2 data-animate="fadeInUp2">欢迎来到仙鱼设计团队！</h2>
+		                <p data-animate="fadeInUp3" ><a href="javascript:;">了解更多</a></p>
+					</div>
+                </div>
+            </div>
+            <div class="swiper-slide" style="background:url(images/banner2.jpg) no-repeat center;">
+            	<div class="bj">
+            	    <div class="text-box">
+					    <h4 data-animate="fadeInUp">没有诚信，何来回头客，何来商业！</h4>
+					    <h2 data-animate="fadeInUp2">我们的宗旨是诚信为本！</h2>
+		                <p data-animate="fadeInUp3">诚信是一切商业的源泉！</p>
+					</div>
+                </div>
+            </div>
+            <div class="swiper-slide" style="background:url(images/banner3.jpg) no-repeat center;">
+            	<div class="bj">
+            	    <div class="text-box">
+					    <h4 data-animate="fadeInUp">我们拥有一流的技术团队。多年来我们开发了多套高难度程序，并且一直和多家客户合作，携手并进！</h4>
+					    <h2 data-animate="fadeInUp2">我们的目标是成为设计界的参天大树！</h2>
+		                <p data-animate="fadeInUp3">坚持高起点，做行业最好的产品！</p>
+					</div>
+                </div>
             </div>
         </div>
-    
-    </header>
-    <!--End Main Header -->
-    
-    <!-- Hidden Navigation Bar -->
-    <section class="hidden-bar right-align">
-        
-        <div class="hidden-bar-closer">
-            <button class="btn"><i class="fa fa-close"></i></button>
-        </div>
-        
-        <!-- Hidden Bar Wrapper -->
-        <div class="hidden-bar-wrapper">
-        
-            <!-- logo -->
-            <div class="logo text-center">
-                <a href="index.html"><img src="images/logo-2.png" alt=""></a>			
-            </div><!-- /logo -->
-            
-            <!-- Side-menu -->
-            <div class="side-menu scroll-nav">
-            <!--navigation -->
-                <ul class="navigation clearfix" id="nav">
-                    <li class="current"><a href="#home">首页</a></li>
-                    <li><a href="#about-us">关于我们</a></li>
-                    <li><a href="#services">服务</a></li>
-                    <li><a href="#works">案例</a></li>
-                    <li><a href="#team">团队</a></li>
-                    <li><a href="#pricing">价格</a></li>
-                    <li><a href="#blog">博客</a></li>
-                    <li><a href="#contact-us">联系我们</a></li>
-                 </ul>
-            </div>
-            <!-- /Side-menu -->
-        
-            <div class="social-icons">
-                <ul>
-                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                    <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                    <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                </ul>
-            </div>
-        
-        </div><!-- / Hidden Bar Wrapper -->
-    </section>
-    <!-- / Hidden Bar -->
-    
-    <!--Main Slider-->
-    <section class="main-slider" id="home">
-    	
-        <div class="tp-banner-container">
-            <div class="tp-banner">
-                <ul>
-                	
-                    <li data-transition="slideleft" data-slotamount="1" data-masterspeed="1000" data-thumb="images/main-slider/banner1.jpg"  data-saveperformance="off"  data-title="Awesome Title Here">
-                    <img src="images/main-slider/banner1.jpg"  alt=""  data-bgposition="center top" data-bgfit="cover" data-bgrepeat="no-repeat"> 
-                    
-                    <div class="tp-caption sfl sfb tp-resizeme"
-                    data-x="center" data-hoffset="0"
-                    data-y="center" data-voffset="0"
-                    data-speed="1500"
-                    data-start="500"
-                    data-easing="easeInExpo"
-                    data-splitin="none"
-                    data-splitout="none"
-                    data-elementdelay="0.3"
-                    data-endelementdelay="0.3"
-                    data-endspeed="1200"
-                    data-endeasing="easeOutExpo"><h2>欢迎来到仙鱼设计团队</h2></div>
-                    
-                    <div class="tp-caption sfr sfb tp-resizeme"
-                    data-x="center" data-hoffset="0"
-                    data-y="center" data-voffset="-80"
-                    data-speed="1500"
-                    data-start="500"
-                    data-easing="easeInExpo"
-                    data-splitin="none"
-                    data-splitout="none"
-                    data-elementdelay="0"
-                    data-endelementdelay="0.3"
-                    data-endspeed="1200"
-                    data-endeasing="easeOutExpo"><div class="text">PC程序开发 / 混合APP开发 / 微信小程序开发</div></div>
-                    
-                    <div class="tp-caption sfl sfb tp-resizeme"
-                    data-x="center" data-hoffset="15"
-                    data-y="center" data-voffset="100"
-                    data-speed="1500"
-                    data-start="500"
-                    data-easing="easeInExpo"
-                    data-splitin="none"
-                    data-splitout="none"
-                    data-elementdelay="0.6"
-                    data-endelementdelay="0.3"
-                    data-endspeed="1200"
-                    data-endeasing="easeOutExpo"><a id="leanMore" href="javascript:;" class="template-btn btn-style-one">了解更多</a></div>
-                    
-                    </li>
-                    
-                    <li data-transition="slideleft" data-slotamount="1" data-masterspeed="1000" data-thumb="images/main-slider/banner2.jpg"  data-saveperformance="off"  data-title="Awesome Title Here">
-                    <img src="images/main-slider/banner2.jpg"  alt=""  data-bgposition="center top" data-bgfit="cover" data-bgrepeat="no-repeat"> 
-                    
-                    <div class="tp-caption sfl sfb tp-resizeme"
-                    data-x="center" data-hoffset="0"
-                    data-y="center" data-voffset="-80"
-                    data-speed="1500"
-                    data-start="500"
-                    data-easing="easeInExpo"
-                    data-splitin="none"
-                    data-splitout="none"
-                    data-elementdelay="0"
-                    data-endelementdelay="0.3"
-                    data-endspeed="1200"
-                    data-endeasing="easeOutExpo"><h2>我们的宗旨是诚信为本</h2></div>
-                    
-                    <div class="tp-caption sfr sfb tp-resizeme"
-                    data-x="center" data-hoffset="0"
-                    data-y="center" data-voffset="20"
-                    data-speed="1500"
-                    data-start="500"
-                    data-easing="easeInExpo"
-                    data-splitin="none"
-                    data-splitout="none"
-                    data-elementdelay="0.3"
-                    data-endelementdelay="0.3"
-                    data-endspeed="1200"
-                    data-endeasing="easeOutExpo"><div class="text">没有诚信，何来回头客，何来商业！</div></div>
-                    
-                    <div class="tp-caption sfl sfb tp-resizeme"
-                    data-x="center" data-hoffset="15"
-                    data-y="center" data-voffset="100"
-                    data-speed="1500"
-                    data-start="500"
-                    data-easing="easeInExpo"
-                    data-splitin="none"
-                    data-splitout="none"
-                    data-elementdelay="0.6"
-                    data-endelementdelay="0.3"
-                    data-endspeed="1200"
-                    data-endeasing="easeOutExpo"><p class="banner-p">诚信是一切商业的源泉！</p></div>
-                    
-                    </li>
-                    
-                    <li data-transition="slideleft" data-slotamount="1" data-masterspeed="1000" data-thumb="images/main-slider/banner3.jpg"  data-saveperformance="off"  data-title="Awesome Title Here">
-                    <img src="images/main-slider/banner3.jpg"  alt=""  data-bgposition="center top" data-bgfit="cover" data-bgrepeat="no-repeat"> 
-                    
-                    <div class="tp-caption sfl sfb tp-resizeme"
-                    data-x="center" data-hoffset="0"
-                    data-y="center" data-voffset="0"
-                    data-speed="1500"
-                    data-start="500"
-                    data-easing="easeInExpo"
-                    data-splitin="none"
-                    data-splitout="none"
-                    data-elementdelay="0.01"
-                    data-endelementdelay="0.3"
-                    data-endspeed="1200"
-                    data-endeasing="easeOutExpo"><h2>我们的目标是成为设计界的参天大树！ </h2></div>
-                    
-                    <div class="tp-caption sfr sfb tp-resizeme"
-                    data-x="center" data-hoffset="0"
-                    data-y="center" data-voffset="-80"
-                    data-speed="1500"
-                    data-start="500"
-                    data-easing="easeInExpo"
-                    data-splitin="none"
-                    data-splitout="none"
-                    data-elementdelay="0.01"
-                    data-endelementdelay="0.3"
-                    data-endspeed="1200"
-                    data-endeasing="easeOutExpo"><div class="text">我们拥有一流的技术团队。多年来我们开发了多套高难度程序，并且一直和多家客户合作，携手并进！</div></div>
-                    
-                    <div class="tp-caption sfl sfb tp-resizeme"
-                    data-x="center" data-hoffset="15"
-                    data-y="center" data-voffset="100"
-                    data-speed="1500"
-                    data-start="500"
-                    data-easing="easeInExpo"
-                    data-splitin="none"
-                    data-splitout="none"
-                    data-elementdelay="0.01"
-                    data-endelementdelay="0.3"
-                    data-endspeed="1200"
-                    data-endeasing="easeOutExpo"><p class="banner-p">诚信是一切商业的源泉！</p></div>
-                    
-                    </li>
-                    
-                </ul>
-                
-            	<div class="tp-bannertimer"></div>
-            </div>
-        </div>
-    </section>
-    <!--End Main Slider-->
-    
-    <!--About Section-->
-    <section class="about-section" id="about-us">
-    	<div class="auto-container">
-    		<!--Sec Title-->
-    		<div class="sec-title">
-    			<h2>about</h2>
-    			<div class="separator"></div>
-    			<div class="text">Lorem ipsum dolor sit amet, tempus lorem nascetur donec libero vel, pellen- <br> tesque vulputate etest volutpat vivamus.</div>
-    		</div>
-    		
-    		<div class="row clearfix">
-    			<!--About Block-->
-    			<div class="about-block col-md-4 col-sm-6 col-xs-12">
-    				<div class="inner-box">
-    					<div class="icon-box">
-    						<span class="icon flaticon-graduation-cap"></span>
-    					</div>
-    					<h3><a href="#">we are Vivian <br><span>best company</span> </a></h3>
-    					<div class="text">Lorem ipsum dolor sit amet, tempus lorem nascetur donec libero vel, pellentesque vulputate et, ac sed, est volutpat vivamus tortor ac maecenas, neque eu massa. Perferendis pharetra leo justo, sed pede, dolor pede eu arcu.</div>
-    				</div>
-    			</div>
-    			
-    			<!--About Block-->
-    			<div class="about-block col-md-4 col-sm-6 col-xs-12">
-    				<div class="inner-box">
-    					<div class="icon-box">
-    						<span class="icon flaticon-edit-1"></span>
-    					</div>
-    					<h3><a href="#">awesome design <br><span>greate usability </span> </a></h3>
-    					<div class="text">Lorem ipsum dolor sit amet, tempus lorem nascetur donec libero vel, pellentesque vulputate et, ac sed, est volutpat vivamus tortor ac maecenas, neque eu massa. Perferendis pharetra leo justo, sed pede, dolor pede eu arcu.</div>
-    				</div>
-    			</div>
-    			
-    			<!--About Block-->
-    			<div class="about-block col-md-4 col-sm-6 col-xs-12">
-    				<div class="inner-box">
-    					<div class="icon-box">
-    						<span class="icon flaticon-power-1"></span>
-    					</div>
-    					<h3><a href="#">Great ideas <br><span>quick & powerful </span> </a></h3>
-    					<div class="text">Lorem ipsum dolor sit amet, tempus lorem nascetur donec libero vel, pellentesque vulputate et, ac sed, est volutpat vivamus tortor ac maecenas, neque eu massa. Perferendis pharetra leo justo, sed pede, dolor pede eu arcu.</div>
-    				</div>
-    			</div>
-    			
-    		</div>
-    		
-    	</div>
-    </section>
-    <!--About Section-->
-    
-    <!--Video Section-->
-    <section class="video-section" style="background-image: url(images/background/1.jpg)">
-    	<a class="lightbox-image play-link" href="">
-            <div class="icon-box"><span class="flaticon-arrows-2"></span></div>
-            <h3>press play to <span>learn more</span></h3>
-        </a>
-    </section>
-    <!--End Video Section-->
-
-    <!--Services Section-->
-    <section class="services-section" id="services">
-    	<div class="auto-container">
-    		<!--Sec Title-->
-    		<div class="sec-title">
-    			<h2>services</h2>
-    			<div class="separator"></div>
-    			<div class="text">Lorem ipsum dolor sit amet, tempus lorem nascetur donec libero vel, pellen- <br> tesque vulputate etest volutpat vivamus.</div>
-    		</div>
-    		
-    		<div class="row clearfix">
-				<!--Content Column / Left Column-->
-				<div class="content-column left-column col-md-4 col-sm-12 col-xs-12">
-					<div class="inner-box">
-						<!--Service Block-->
-						<div class="service-block wow zoomInStable" data-wow-delay="0ms" data-wow-duration="1500ms">
-							<div class="inner">
-								<div class="icon-box flaticon-paint-brush"></div>
-								<h3>web design</h3>
-								<div class="text">Lorem ipsum dolor sit amet, tempus lorem nascetur donec libero vel, pellentesque vulputate et, ac sed, est volutpat vivamus tortor ac maecenas, neque eu massa perferendis.</div>
-							</div>
-						</div>
-						
-						<!--Service Block-->
-						<div class="service-block wow zoomInStable" data-wow-delay="300ms" data-wow-duration="1500ms">
-							<div class="inner">
-								<div class="icon-box flaticon-settings"></div>
-								<h3>development </h3>
-								<div class="text">Lorem ipsum dolor sit amet, tempus lorem nascetur donec libero vel, pellentesque vulputate et, ac sed, est volutpat vivamus tortor ac maecenas, neque eu massa perferendis.</div>
-							</div>
-						</div>
-						
-						<!--Service Block-->
-						<div class="service-block wow zoomInStable" data-wow-delay="600ms" data-wow-duration="1500ms">
-							<div class="inner">
-								<div class="icon-box flaticon-magnifying-glass"></div>
-								<h3>seo optimization</h3>
-								<div class="text">Lorem ipsum dolor sit amet, tempus lorem nascetur donec libero vel, pellentesque vulputate et, ac sed, est volutpat vivamus tortor ac maecenas, neque eu massa perferendis.</div>
-							</div>
-						</div>
-						
-					</div>
-				</div>
-
-				<!--Image Column-->
-				<div class="image-column col-md-4 col-sm-12 col-xs-12">
-					<div class="image-box">
-						<img src="images/resource/mobile.png" alt="" />
-					</div>
-				</div>
-
-				<!--Content Column / Right Column-->
-				<div class="content-column right-column col-md-4 col-sm-12 col-xs-12">
-					<div class="inner-box">
-						<!--Service Block-->
-						<div class="service-block wow zoomInStable" data-wow-delay="0ms" data-wow-duration="1500ms">
-							<div class="inner">
-								<div class="icon-box flaticon-graphic"></div>
-								<h3> analytics</h3>
-								<div class="text">Lorem ipsum dolor sit amet, tempus lorem nascetur donec libero vel, pellentesque vulputate et, ac sed, est volutpat vivamus tortor ac maecenas, neque eu massa perferendis.</div>
-							</div>
-						</div>
-						
-						<!--Service Block-->
-						<div class="service-block wow zoomInStable" data-wow-delay="300ms" data-wow-duration="1500ms">
-							<div class="inner">
-								<div class="icon-box flaticon-travel"></div>
-								<h3> advertising </h3>
-								<div class="text">Lorem ipsum dolor sit amet, tempus lorem nascetur donec libero vel, pellentesque vulputate et, ac sed, est volutpat vivamus tortor ac maecenas, neque eu massa perferendis.</div>
-							</div>
-						</div>
-						
-						<!--Service Block-->
-						<div class="service-block wow zoomInStable" data-wow-delay="600ms" data-wow-duration="1500ms">
-							<div class="inner">
-								<div class="icon-box flaticon-lifebuoy"></div>
-								<h3> amazing support </h3>
-								<div class="text">Lorem ipsum dolor sit amet, tempus lorem nascetur donec libero vel, pellentesque vulputate et, ac sed, est volutpat vivamus tortor ac maecenas, neque eu massa perferendis.</div>
-							</div>
-						</div>
-						
-					</div>
-				</div>
-    		</div>
-    		
-    	</div>
-    </section>
-    <!--Services Section-->
-    
-    <!--Solutions Section-->
-    <section class="solution-section">
-    	<div class="auto-container">
-        	<div class="sec-title">
-            	<h2>solutions</h2>
-                <div class="separator"></div>
-                <div class="text">Lorem ipsum dolor sit amet, tempus lorem nascetur donec libero vel, pellen <br> tesque vulputate etest volutpat vivamus.</div>
-            </div>
-            
-            <div class="row clearfix">
-            	<!--Pie Box-->
-            	<div class="pie-box col-md-3 col-sm-6 col-xs-12">
-                	<div class="inner-box">
-                    	<figure class="image-box">
-                        	<img src="images/resource/pie-1.jpg" alt="" />
-                        </figure>
-                        <h3><span class="icon flaticon-user-shape"></span> management</h3>
-                    </div>
-                </div>
-                
-                <!--Pie Box-->
-            	<div class="pie-box col-md-3 col-sm-6 col-xs-12">
-                	<div class="inner-box">
-                    	<figure class="image-box">
-                        	<img src="images/resource/pie-2.jpg" alt="" />
-                        </figure>
-                        <h3><span class="icon flaticon-user-shape"></span> monitoring</h3>
-                    </div>
-                </div>
-                
-                <!--Pie Box-->
-            	<div class="pie-box col-md-3 col-sm-6 col-xs-12">
-                	<div class="inner-box">
-                    	<figure class="image-box">
-                        	<img src="images/resource/pie-3.jpg" alt="" />
-                        </figure>
-                        <h3><span class="icon flaticon-user-shape"></span> Infrastructure</h3>
-                    </div>
-                </div>
-                
-                <!--Pie Box-->
-            	<div class="pie-box col-md-3 col-sm-6 col-xs-12">
-                	<div class="inner-box">
-                    	<figure class="image-box">
-                        	<img src="images/resource/pie-4.jpg" alt="" />
-                        </figure>
-                        <h3><span class="icon flaticon-user-shape"></span> ecommerce</h3>
-                    </div>
-                </div>
-                
-            </div>
-            
-        </div>
-    </section>
-    <!--Solutions Section-->
-    
-   	<!--Gallery Section-->
-    <section class="gallery-section" id="works">
-    	<div class="auto-container">
-    		<div class="sec-title">
-    			<h2>works</h2>
-    			<div class="separator"></div>
-    			<div class="text">Lorem ipsum dolor sit amet, tempus lorem nascetur donec libero vel, pellen- <br> tesque vulputate etest volutpat vivamus.</div>
-    		</div>
-    	</div>
-	    <!--Sortable Masonry-->
-		<div class="sortable-masonry">
-
-			<!--Filter-->
-			<div class="filters clearfix">
-
-				<ul class="filter-tabs filter-btns clearfix">
-					<li class="active filter" data-role="button" data-filter="all"><span class="txt">All</span></li>          
-					<li class="filter" data-role="button" data-filter=".art"><span class="txt">Art</span></li>
-					<li class="filter" data-role="button" data-filter=".graphic"><span class="txt">Graphic</span></li>
-					<li class="filter" data-role="button" data-filter=".idendity"><span class="txt">Idendity</span></li>
-					<li class="filter" data-role="button" data-filter=".web"><span class="txt">Web Design</span></li>
-				</ul>
-
-			</div>
-
-			<div class="filter-list">
-				<div class="row clearfix">
-					<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 gallery-item mix mix_all">
-						<div class="inner-box">
-							<figure class="image-box">
-								<img src="images/gallery/1.jpg" alt="">
-								<!--Overlay Box-->
-								<div class="overlay-box">
-                                	<div class="inner">
-                                        <div class="content">
-                                            <h3>one page template</h3>
-                                            <h4>web design</h4>
-                                            <div class="text">Lorem ipsum dolor sit amet, tempus lorem nascetur donec libero vel, pellentesque vulputate et</div>
-                                            <div class="links">
-                                                <a href="images/gallery/1.jpg" data-fancybox-group="portfolio-gallery" class="icon fa fa-search-plus lightbox-image"></a>
-                                                <a href="#" class="icon fa fa-link lightbox-image"></a>
-                                            </div>
-                                        </div>
-                                    </div>
-								</div>
-							</figure>
-
-						</div>
-					</div>
-
-					<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 gallery-item mix mix_all idendity">
-						<div class="inner-box">
-							<figure class="image-box">
-								<img src="images/gallery/2.jpg" alt="">
-								<!--Overlay Box-->
-								<div class="overlay-box">
-                                	<div class="inner">
-                                        <div class="content">
-                                            <h3>one page template</h3>
-                                            <h4>web design</h4>
-                                            <div class="text">Lorem ipsum dolor sit amet, tempus lorem nascetur donec libero vel, pellentesque vulputate et</div>
-                                            <div class="links">
-                                                <a href="images/gallery/1.jpg" data-fancybox-group="portfolio-gallery" class="icon fa fa-search-plus lightbox-image"></a>
-                                                <a href="#" class="icon fa fa-link lightbox-image"></a>
-                                            </div>
-                                        </div>
-                                    </div>
-								</div>
-							</figure>
-
-						</div>
-					</div>
-
-					<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 gallery-item mix mix_all graphic">
-						<div class="inner-box">
-							<figure class="image-box">
-								<img src="images/gallery/3.jpg" alt="">
-								<!--Overlay Box-->
-								<div class="overlay-box">
-                                	<div class="inner">
-                                        <div class="content">
-                                            <h3>one page template</h3>
-                                            <h4>web design</h4>
-                                            <div class="text">Lorem ipsum dolor sit amet, tempus lorem nascetur donec libero vel, pellentesque vulputate et</div>
-                                            <div class="links">
-                                                <a href="images/gallery/1.jpg" data-fancybox-group="portfolio-gallery" class="icon fa fa-search-plus lightbox-image"></a>
-                                                <a href="#" class="icon fa fa-link lightbox-image"></a>
-                                            </div>
-                                        </div>
-                                    </div>
-								</div>
-							</figure>
-
-						</div>
-					</div>
-
-					<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 gallery-item mix mix_all web">
-						<div class="inner-box">
-							<figure class="image-box">
-								<img src="images/gallery/4.jpg" alt="">
-								<!--Overlay Box-->
-								<div class="overlay-box">
-                                	<div class="inner">
-                                        <div class="content">
-                                            <h3>one page template</h3>
-                                            <h4>web design</h4>
-                                            <div class="text">Lorem ipsum dolor sit amet, tempus lorem nascetur donec libero vel, pellentesque vulputate et</div>
-                                            <div class="links">
-                                                <a href="images/gallery/1.jpg" data-fancybox-group="portfolio-gallery" class="icon fa fa-search-plus lightbox-image"></a>
-                                                <a href="#" class="icon fa fa-link lightbox-image"></a>
-                                            </div>
-                                        </div>
-                                    </div>
-								</div>
-							</figure>
-
-						</div>
-					</div>
-
-					<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 gallery-item mix mix_all idendity web">
-						<div class="inner-box">
-							<figure class="image-box">
-								<img src="images/gallery/5.jpg" alt="">
-								<!--Overlay Box-->
-								<div class="overlay-box">
-                                	<div class="inner">
-                                        <div class="content">
-                                            <h3>one page template</h3>
-                                            <h4>web design</h4>
-                                            <div class="text">Lorem ipsum dolor sit amet, tempus lorem nascetur donec libero vel, pellentesque vulputate et</div>
-                                            <div class="links">
-                                                <a href="images/gallery/1.jpg" data-fancybox-group="portfolio-gallery" class="icon fa fa-search-plus lightbox-image"></a>
-                                                <a href="#" class="icon fa fa-link lightbox-image"></a>
-                                            </div>
-                                        </div>
-                                    </div>
-								</div>
-							</figure>
-
-						</div>
-					</div>
-
-					<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 gallery-item mix mix_all art graphic">
-						<div class="inner-box">
-							<figure class="image-box">
-								<img src="images/gallery/6.jpg" alt="">
-								<!--Overlay Box-->
-								<div class="overlay-box">
-                                	<div class="inner">
-                                        <div class="content">
-                                            <h3>one page template</h3>
-                                            <h4>web design</h4>
-                                            <div class="text">Lorem ipsum dolor sit amet, tempus lorem nascetur donec libero vel, pellentesque vulputate et</div>
-                                            <div class="links">
-                                                <a href="images/gallery/1.jpg" data-fancybox-group="portfolio-gallery" class="icon fa fa-search-plus lightbox-image"></a>
-                                                <a href="#" class="icon fa fa-link lightbox-image"></a>
-                                            </div>
-                                        </div>
-                                    </div>
-								</div>
-							</figure>
-
-						</div>
-					</div>
-
-					<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 gallery-item mix mix_all ">
-						<div class="inner-box">
-							<figure class="image-box">
-								<img src="images/gallery/7.jpg" alt="">
-								<!--Overlay Box-->
-								<div class="overlay-box">
-                                	<div class="inner">
-                                        <div class="content">
-                                            <h3>one page template</h3>
-                                            <h4>web design</h4>
-                                            <div class="text">Lorem ipsum dolor sit amet, tempus lorem nascetur donec libero vel, pellentesque vulputate et</div>
-                                            <div class="links">
-                                                <a href="images/gallery/1.jpg" data-fancybox-group="portfolio-gallery" class="icon fa fa-search-plus lightbox-image"></a>
-                                                <a href="#" class="icon fa fa-link lightbox-image"></a>
-                                            </div>
-                                        </div>
-                                    </div>
-								</div>
-							</figure>
-
-						</div>
-					</div>
-
-					<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 gallery-item mix mix_all web art">
-						<div class="inner-box">
-							<figure class="image-box">
-								<img src="images/gallery/8.jpg" alt="">
-								<!--Overlay Box-->
-								<div class="overlay-box">
-                                	<div class="inner">
-                                        <div class="content">
-                                            <h3>one page template</h3>
-                                            <h4>web design</h4>
-                                            <div class="text">Lorem ipsum dolor sit amet, tempus lorem nascetur donec libero vel, pellentesque vulputate et</div>
-                                            <div class="links">
-                                                <a href="images/gallery/1.jpg" data-fancybox-group="portfolio-gallery" class="icon fa fa-search-plus lightbox-image"></a>
-                                                <a href="#" class="icon fa fa-link lightbox-image"></a>
-                                            </div>
-                                        </div>
-                                    </div>
-								</div>
-							</figure>
-
-						</div>
-					</div>
+        <!-- Add dian -->
+        <div class="swiper-pagination"></div>
+        <!-- Add Arrows -->
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+    </div>
+</div>
 
 
-				</div>
-			</div>
-		<!--End Sortable Masonry-->
+
+
+<!--======about-us========-->
+<div data-target="#about-us" class="about-us">
+	<div class="container">
+		<div class="title">
+			<h2 data-animate="fadeInUp">关于我们</h2>
+			<div data-animate="fadeInUp" class="separator"></div>
+			<p data-animate="fadeInUp2">我们是一支年轻的、优秀的的技术团队，专注于高端程序设计。</p>
 		</div>
-    </section>
-    <div class="tlinks">Collect from <a href="http://www.cssmoban.com/" >网页模板</a></div>
-    
-    <!--Testimonial Section-->
-    <section class="testimonial-section">
-    	<div class="auto-container">
-    		<div class="sec-title">
-    			<h2>testimonials</h2>
-    			<div class="separator"></div>
-    			<div class="text">Lorem ipsum dolor sit amet, tempus lorem nascetur donec libero vel, pellen- <br> tesque vulputate etest volutpat vivamus.</div>
-    		</div>
-    		
-    		<div class="single-item-carousel">
-    			<!--Testimonial Block-->
-				<div class="testimonial-block">
-					<div class="inner-box">
-						<figure class="image-box">
-							<img src="images/resource/author-1.jpg" alt="" />
-						</figure>
-						<h4>Jonathan Doe</h4>
-						<div class="designation">Customer</div>
-						<div class="text">Lorem ipsum dolor sit amet, ultricies a dolor mattis et tristique, magnis tempus volutpat vivamus donec quis egestas, vulputate viverra maecenas ut nam metus ut, pellentesque morbi eu ultricies ligula massa.</div>
-					</div>
-				</div>
-   		
-   				<!--Testimonial Block-->
-				<div class="testimonial-block">
-					<div class="inner-box">
-						<figure class="image-box">
-							<img src="images/resource/author-1.jpg" alt="" />
-						</figure>
-						<h4>Jonathan Doe</h4>
-						<div class="designation">Customer</div>
-						<div class="text">Lorem ipsum dolor sit amet, ultricies a dolor mattis et tristique, magnis tempus volutpat vivamus donec quis egestas, vulputate viverra maecenas ut nam metus ut, pellentesque morbi eu ultricies ligula massa.</div>
-					</div>
-				</div>
-   				
-    			<!--Testimonial Block-->
-				<div class="testimonial-block">
-					<div class="inner-box">
-						<figure class="image-box">
-							<img src="images/resource/author-1.jpg" alt="" />
-						</figure>
-						<h4>Jonathan Doe</h4>
-						<div class="designation">Customer</div>
-						<div class="text">Lorem ipsum dolor sit amet, ultricies a dolor mattis et tristique, magnis tempus volutpat vivamus donec quis egestas, vulputate viverra maecenas ut nam metus ut, pellentesque morbi eu ultricies ligula massa.</div>
-					</div>
-				</div>
-    		
-    		</div>
-    	</div>
-    </section>
-    <!--End Testimonial Section-->
-    
-    <!--Fun Facts Section-->
-    <section class="fact-counter-column" style="background-image: url(images/background/2.jpg);">
-    	<div class="auto-container">
-            <div class="fact-counter">
-                <div class="row clearfix">
-                
-                    <!--Column-->
-                    <div class="column counter-column wow fadeIn col-md-3 col-sm-6 col-xs-12">
-                        <div class="inner">
-                           	<span class="icon flaticon-social"></span>
-                            <div class="count-outer">
-                                <span class="count-text" data-speed="2000" data-stop="1503">0</span>
-                            </div>
-                            <h4 class="counter-title">happy clinets</h4>
-                        </div>
-                    </div>
-            
-                    <!--Column-->
-                    <div class="column counter-column wow fadeIn col-md-3 col-sm-6 col-xs-12">
-                        <div class="inner">
-                           	<span class="icon flaticon-travel"></span>
-                            <div class="count-outer">
-                                <span class="count-text" data-speed="2000" data-stop="748">0</span>
-                            </div>
-                            <h4 class="counter-title">projects</h4>
-                        </div>
-                    </div>
-            
-                    <!--Column-->
-                    <div class="column counter-column wow fadeIn col-md-3 col-sm-6 col-xs-12">
-                        <div class="inner">
-                           	<span class="icon flaticon-transport-1"></span>
-                            <div class="count-outer">
-                                <span class="count-text" data-speed="1500" data-stop="359">0</span>
-                            </div>
-                            <h4 class="counter-title">branding</h4>
-                        </div>
-                    </div>
-            
-                    <!--Column-->
-                    <div class="column counter-column wow fadeIn col-md-3 col-sm-6 col-xs-12">
-                        <div class="inner">
-                           	<span class="icon flaticon-food"></span>
-                            <div class="count-outer">
-                                <span class="count-text" data-speed="3000" data-stop="2341">0</span>
-                            </div>
-                            <h4 class="counter-title">cups of coffee</h4>
-                        </div>
-                    </div>
-                    
-                </div>
-            </div>
-        </div>
-    </section>
-	<!--End Fun Facts Section-->
-    
-    <!--Team Section-->
-    <section class="team-section" id="team">
-    	<div class="auto-container">
-    		<!--Sec Title-->
-    		<div class="sec-title">
-    			<h2>team</h2>
-    			<div class="separator"></div>
-    			<div class="text">Lorem ipsum dolor sit amet, tempus lorem nascetur donec libero vel, pellen- <br> tesque vulputate etest volutpat vivamus.</div>
-    		</div>
-    		
-    		<div class="row">
-    	
-				<!--Team Member-->
-				<div class="team-member col-md-4 col-sm-6 col-xs-12 wow fadeInLeft" data-wow-delay="0ms" data-wow-duration="1500ms">
-					<div class="inner-box">
-						<figure class="image-box">
-							<img src="images/resource/team-1.jpg" alt="" />
-							<!--Overlay Box-->
-							<div class="overlay-box">
-								<h4>Jonathan Doe</h4>
-								<div class="designation">Manager</div>
-								<div class="text">Lorem ipsum dolor sit amet, blandit libero ut libero dictumst aliquam sodales, etiam vel pellentesque, tempor aliquam mi eget pellentesque, tristique volutpat. Nostra sapien semper tristique mi. Sed commodo occaecat phasellus aenean. </div>
-								<!--Social Nav-->
-								<div class="social-nav">
-									<a class="fa fa-facebook-f" href="#"></a>
-									<a class="fa fa-twitter" href="#"></a>
-									<a class="fa fa-google-plus" href="#"></a>
-									<a class="fa fa-behance" href="#"></a>
-								</div>
-							</div>
-						</figure>
-					</div>
-				</div>
-				
-				<!--Team Member-->
-				<div class="team-member col-md-4 col-sm-6 col-xs-12 wow fadeInDown" data-wow-delay="0ms" data-wow-duration="1500ms">
-					<div class="inner-box">
-						<figure class="image-box">
-							<img src="images/resource/team-2.jpg" alt="" />
-							<!--Overlay Box-->
-							<div class="overlay-box">
-								<h4>Jonathan Doe</h4>
-								<div class="designation">Manager</div>
-								<div class="text">Lorem ipsum dolor sit amet, blandit libero ut libero dictumst aliquam sodales, etiam vel pellentesque, tempor aliquam mi eget pellentesque, tristique volutpat. Nostra sapien semper tristique mi. Sed commodo occaecat phasellus aenean. </div>
-								<!--Social Nav-->
-								<div class="social-nav">
-									<a class="fa fa-facebook-f" href="#"></a>
-									<a class="fa fa-twitter" href="#"></a>
-									<a class="fa fa-google-plus" href="#"></a>
-									<a class="fa fa-behance" href="#"></a>
-								</div>
-							</div>
-						</figure>
-					</div>
-				</div>
-				
-				<!--Team Member-->
-				<div class="team-member col-md-4 col-sm-6 col-xs-12 wow fadeInRight" data-wow-delay="0ms" data-wow-duration="1500ms">
-					<div class="inner-box">
-						<figure class="image-box">
-							<img src="images/resource/team-3.jpg" alt="" />
-							<!--Overlay Box-->
-							<div class="overlay-box">
-								<h4>Jonathan Doe</h4>
-								<div class="designation">Manager</div>
-								<div class="text">Lorem ipsum dolor sit amet, blandit libero ut libero dictumst aliquam sodales, etiam vel pellentesque, tempor aliquam mi eget pellentesque, tristique volutpat. Nostra sapien semper tristique mi. Sed commodo occaecat phasellus aenean. </div>
-								<!--Social Nav-->
-								<div class="social-nav">
-									<a class="fa fa-facebook-f" href="#"></a>
-									<a class="fa fa-twitter" href="#"></a>
-									<a class="fa fa-google-plus" href="#"></a>
-									<a class="fa fa-behance" href="#"></a>
-								</div>
-							</div>
-						</figure>
-					</div>
-				</div>
-
-			</div>
-    		
-    	</div>
-    	
-    </section>
-    <!--End Team Section-->
-    
-    <!--Progress Section-->
-    <section class="progress-section">
-    	<div class="auto-container">
-        	<!--Sec Title-->
-        	<div class="sec-title">
-            	<h2>Skills</h2>
-                <div class="separator"></div>
-                <div class="text">Lorem ipsum dolor sit amet, tempus lorem nascetur donec libero vel, pellen <br> tesque vulputate etest volutpat vivamus.</div>
-            </div>
-            <!--End Sec Title-->
-            <div class="row clearfix">
-            	
-                <!--Progress Levels-->
-                <div class="fact-counter style-two">
-                <div class="row clearfix">
-                
-                    <!--Column-->
-                    <div class="column counter-column wow fadeIn col-md-3 col-sm-6 col-xs-12">
-                        <div class="inner">
-                        	<div class="count-outer">
-                                <span class="count-text" data-speed="2000" data-stop="92">0</span>
-                                <span class="percentage">%</span>
-                            </div>
-                        </div>
-                        <!--Skill Box-->
-                        <div class="progress-box wow fadeIn" data-wow-delay="100ms" data-wow-duration="1500ms">
-                            <div class="inner">
-                                <div class="bar">
-                                    <div class="bar-innner"><div class="bar-fill" data-percent="8"></div></div>
-                                </div>
-                            </div>
-                        </div>
-                        <!--cartegory-->
-                        <div class="cartegory">Design</div>
-                    </div>
-            
-                    <!--Column-->
-                    <div class="column counter-column wow fadeIn col-md-3 col-sm-6 col-xs-12">
-                        <div class="inner">
-                        	<div class="count-outer">
-                                <span class="count-text" data-speed="2000" data-stop="85">0</span>
-                                <span class="percentage">%</span>
-                            </div>
-                        </div>
-                        <!--Skill Box-->
-                        <div class="progress-box wow fadeIn" data-wow-delay="200ms" data-wow-duration="1500ms">
-                            <div class="inner">
-                                <div class="bar">
-                                    <div class="bar-innner"><div class="bar-fill" data-percent="15"></div></div>
-                                </div>  
-                            </div>
-                        </div>
-                        <!--cartegory-->
-                        <div class="cartegory">Development</div>
-                    </div>
-            
-                    <!--Column-->
-                    <div class="column counter-column wow fadeIn col-md-3 col-sm-6 col-xs-12">
-                        <div class="inner">
-                        	<div class="count-outer">
-                                <span class="count-text" data-speed="2000" data-stop="78">0</span>
-                                <span class="percentage">%</span>
-                            </div>
-                        </div>
-                        <!--Skill Box-->
-                        <div class="progress-box wow fadeIn" data-wow-delay="300ms" data-wow-duration="1500ms">
-                            <div class="inner">
-                                <div class="bar">
-                                    <div class="bar-innner"><div class="bar-fill" data-percent="22"></div></div>
-                                </div>
-                            </div>
-                        </div>
-                        <!--cartegory-->
-                        <div class="cartegory">marketing</div>
-                    </div>
-            
-                    <!--Column-->
-                    <div class="column counter-column wow fadeIn col-md-3 col-sm-6 col-xs-12">
-                        <div class="inner">
-                        	<div class="count-outer">
-                                <span class="count-text" data-speed="2000" data-stop="71">0</span>
-                                <span class="percentage">%</span>
-                            </div>
-                        </div>
-                        <!--Skill Box-->
-                        <div class="progress-box wow fadeIn" data-wow-delay="400ms" data-wow-duration="1500ms">
-                            <div class="inner">
-                                <div class="bar">
-                                    <div class="bar-innner"><div class="bar-fill" data-percent="31"></div></div>
-                                </div>
-                            </div>
-                        </div>
-                        <!--cartegory-->
-                        <div class="cartegory">javascript</div>
-                    </div>
-                    
-                </div>
-            </div>
-                
-                
-                
-                
-                    
-                                
-                <!--Skill Box
-                <div class="progress-box wow fadeIn" data-wow-delay="0ms" data-wow-duration="0ms">
-                    <div class="inner">
-                        <div class="bar">
-                            <div class="bar-innner"><div class="bar-fill" data-percent="50"></div></div>
-                        </div>
-                    </div>
-                </div>-->
-                
-            </div>
-        </div>
-    </section>
-    <!--Progress Section-->
-    
-    <!--Subscribe Section-->
-    <section class="subscribe-form" style="background-image: url(images/background/1.jpg);">
-    	<div class="auto-container">
-    		<!--Subscribe Inner-->
-    		<div class="subscribe-inner">
-    			<div class="row clearfix">
-    				<div class="column col-md-4 col-sm-4 col-xs-12">
-    					<div class="icon-box">
-    						<div class="icon flaticon-empty-email"></div>
-    					</div>
-    				</div>
-    				<div class="column col-md-8 col-sm-8 col-xs-12">
-    					<div class="inner-box">
-    						<h3>Subscribe For Updates</h3>
-    						<div class="text">Join our <strong>541,753</strong> subscribers and get accec to latest tools,<br>freebies, product announcements and much more!</div>
-    						
-    						<!--Subscribe Form-->
-    						<div class="subscribe-box">
-								<form method="post" action="index.html">
-									<div class="form-group">
-										<input type="email" required="" placeholder="Enter Email Address">
-										<button type="submit" class="template-btn">subscribe</button>
-									</div>
-								</form>
-							</div>
-    						<!--End Subscribe Form-->
-    						
-    					</div>
-    				</div>
-    			</div>
-    		</div>
-    	</div>
-    </section>
-    <!--End Subscribe Section-->
-    
-    <!--Price Section-->
-    <section class="price-section" id="pricing">
-    	<div class="auto-container">
-    		<!--Sec Title-->
-    		<div class="sec-title">
-    			<h2>skills</h2>
-    			<div class="separator"></div>
-    			<div class="text">Lorem ipsum dolor sit amet, tempus lorem nascetur donec libero vel, pellen- <br> tesque vulputate etest volutpat vivamus.</div>
-    		</div>
-    		
-    		<div class="row clearfix">
-    			<!--Price Box-->
-    			<div class="price-box col-md-4 col-sm-6 col-xs-12">
-    				<div class="inner-box">
-    					<div class="icon-box">
-    						<div class="icon flaticon-like"></div>
-    					</div>
-    					<div class="price">25<sub>$</sub></div>
-    					<h4>basic</h4>
-    					<ul>
-    						<li>Free Access</li>
-    						<li>1GB Storage</li>
-    						<li>5 Domains</li>
-    						<li>2 Products</li>
-    						<li>24/7 Support</li>
-    					</ul>
-    					
-    					<a href="#" class="in-touch">Get In Touch</a>
-    					
-    				</div>
-    			</div>
-    			
-    			<!--Price Box-->
-    			<div class="price-box col-md-4 col-sm-6 col-xs-12">
-    				<div class="inner-box">
-    					<div class="icon-box">
-    						<div class="icon flaticon-diamond"></div>
-    					</div>
-    					<div class="price">75<sub>$</sub></div>
-    					<h4>premium</h4>
-    					<ul>
-    						<li>Free Access</li>
-    						<li>1GB Storage</li>
-    						<li>5 Domains</li>
-    						<li>2 Products</li>
-    						<li>24/7 Support</li>
-    					</ul>
-    					
-    					<a href="#" class="in-touch">Get In Touch</a>
-    					
-    				</div>
-    			</div>
-    			
-    			<!--Price Box-->
-    			<div class="price-box col-md-4 col-sm-6 col-xs-12">
-    				<div class="inner-box">
-    					<div class="icon-box">
-    						<div class="icon flaticon-star-1"></div>
-    					</div>
-    					<div class="price">95<sub>$</sub></div>
-    					<h4> unlimited</h4>
-    					<ul>
-    						<li>Free Access</li>
-    						<li>1GB Storage</li>
-    						<li>5 Domains</li>
-    						<li>2 Products</li>
-    						<li>24/7 Support</li>
-    					</ul>
-    					
-    					<a href="#" class="in-touch">Get In Touch</a>
-    					
-    				</div>
-    			</div>
-    			
-    		</div>
-    		
-    	</div>
-    </section>
-    <!--End Price Section-->
-    
-    <!--Blog Section-->
-    <section class="blog-section" id="blog">
-    	<div class="auto-container">
-    		<!--Sec Title-->
-    		<div class="sec-title">
-    			<h2>Blog</h2>
-    			<div class="separator"></div>
-    			<div class="text">Lorem ipsum dolor sit amet, tempus lorem nascetur donec libero vel, pellen- <br> tesque vulputate etest volutpat vivamus.</div>
-    		</div>
-    		
-    		<div class="row clearfix">
-    		
-    			<!--News Block-->
-    			<div class="news-block col-md-4 col-sm-6 col-xs-12 wow fadeInLeft" data-wow-delay="0ms" data-wow-duration="1500ms">
-    				<div class="inner-box">
-    					<!--Image Box-->
-    					<figure class="image-box">
-    						<a href="#"><img src="images/resource/news-1.jpg" alt="" /></a>
-    					</figure>
-    					<!--Lower Box-->
-    					<div class="lower-box">
-    						<h3><a href="#">top 10 secrets of web design</a></h3>
-    						<div class="date"> Web Design | Oct 06. 2016 </div>
-    						<div class="text">Lorem ipsum dolor sit amet, iaculis lectus amet purus. Interdum cursus nullam varius sit metus lorem, luctus eius sagittis nam sed integer, phasellus enim, sapien sociosqu vitae tempus tincidunt vitae, ac risus justo praesentmorbi at......</div>
-    						<a href="#" class="read-more">Read More</a>
-    					</div>
-    				</div>
-    			</div>
-    			
-    			<!--News Block-->
-    			<div class="news-block col-md-4 col-sm-6 col-xs-12 wow fadeInDown" data-wow-delay="0ms" data-wow-duration="1500ms">
-    				<div class="inner-box">
-    					<!--Image Box-->
-    					<figure class="image-box">
-    						<a href="#"><img src="images/resource/news-2.jpg" alt="" /></a>
-    					</figure>
-    					<!--Lower Box-->
-    					<div class="lower-box">
-    						<h3><a href="#"> the evolution of political logos</a></h3>
-    						<div class="date"> Web Design | Oct 06. 2016 </div>
-    						<div class="text">Lorem ipsum dolor sit amet, iaculis lectus amet purus. Interdum cursus nullam varius sit metus lorem, luctus eius sagittis nam sed integer, phasellus enim, sapien sociosqu vitae tempus tincidunt vitae, ac risus justo praesentmorbi at......</div>
-    						<a href="#" class="read-more">Read More</a>
-    					</div>
-    				</div>
-    			</div>
-    			
-    			<!--News Block-->
-    			<div class="news-block col-md-4 col-sm-6 col-xs-12 wow fadeInRight" data-wow-delay="0ms" data-wow-duration="1500ms">
-    				<div class="inner-box">
-    					<!--Image Box-->
-    					<figure class="image-box">
-    						<a href="#"><img src="images/resource/news-1.jpg" alt="" /></a>
-    					</figure>
-    					<!--Lower Box-->
-    					<div class="lower-box">
-    						<h3><a href="#"> 5 years of Foundation: new look</a></h3>
-    						<div class="date"> Web Design | Oct 06. 2016 </div>
-    						<div class="text">Lorem ipsum dolor sit amet, iaculis lectus amet purus. Interdum cursus nullam varius sit metus lorem, luctus eius sagittis nam sed integer, phasellus enim, sapien sociosqu vitae tempus tincidunt vitae, ac risus justo praesentmorbi at......</div>
-    						<a href="#" class="read-more">Read More</a>
-    					</div>
-    				</div>
-    			</div>
-    			
-    		</div>
-    		
-    	</div>
-    </section>
-    <!--End Blog Section-->
-    
-    <!--Sponsors Section-->
-    <section class="sponsors-section" style="background-image:url(images/background/1.jpg)">
-    	<div class="auto-container">
-        	
-            <div class="sponsors-outer">
-            	<ul class="sponsors-carousel">
-                    <li class="slide-item"><figure class="image-box"><a href="#"><img src="images/sponsors/1.png" alt=""></a></figure></li>
-                    <li class="slide-item"><figure class="image-box"><a href="#"><img src="images/sponsors/2.png" alt=""></a></figure></li>
-                    <li class="slide-item"><figure class="image-box"><a href="#"><img src="images/sponsors/3.png" alt=""></a></figure></li>
-                    <li class="slide-item"><figure class="image-box"><a href="#"><img src="images/sponsors/4.png" alt=""></a></figure></li>
-                    <li class="slide-item"><figure class="image-box"><a href="#"><img src="images/sponsors/5.png" alt=""></a></figure></li>
-                    <li class="slide-item"><figure class="image-box"><a href="#"><img src="images/sponsors/6.png" alt=""></a></figure></li>
-                    <li class="slide-item"><figure class="image-box"><a href="#"><img src="images/sponsors/1.png" alt=""></a></figure></li>
-                    <li class="slide-item"><figure class="image-box"><a href="#"><img src="images/sponsors/2.png" alt=""></a></figure></li>
-                    <li class="slide-item"><figure class="image-box"><a href="#"><img src="images/sponsors/3.png" alt=""></a></figure></li>
-                    <li class="slide-item"><figure class="image-box"><a href="#"><img src="images/sponsors/4.png" alt=""></a></figure></li>
-                    <li class="slide-item"><figure class="image-box"><a href="#"><img src="images/sponsors/5.png" alt=""></a></figure></li>
-                    <li class="slide-item"><figure class="image-box"><a href="#"><img src="images/sponsors/6.png" alt=""></a></figure></li>
-                </ul>
-            </div>
-            
-        </div>
-    </section>
-    <!--End Sponsors Section-->
-    
-    <div class="footer">
-    <!--Contact Section-->
-    <section class="contact-section" id="contact-us">
-    	<div class="auto-container">
-    		<div class="sec-title">
-    			<h2>Contact</h2>
-    			<div class="separator"></div>
-    			<div class="text">Lorem ipsum dolor sit amet, tempus lorem nascetur donec libero vel, pellen- <br> tesque vulputate etest volutpat vivamus.</div>
-    		</div>
-    	</div>
-    	
-		<!--Map Section-->
-		<section class="map-section">
-			<div class="map-outer">
-				<!--Map Canvas-->
-				<div class="map-canvas"
-					data-zoom="13"
-					data-lat="-37.817085"
-					data-lng="144.955631"			  
-					data-type="roadmap"
-					data-hue="#008ffe"
-					data-title="Envato"
-					data-content="Melbourne VIC 3000, Australia<br><a href='mailto:info@youremail.com'>info@youremail.com</a>"							
-					style="height: 630px;">
-				</div>
-
-			</div>
-		</section>
-		<!--End Map Section-->
-		
-		<!--Contact Info-->
-		<div class="contact-info">
-			<div class="auto-container">
-				
-                <ul>
-                    <li><span class="icon flaticon-technology-1"></span>
-                        +1 (234) 567 89 10 <br>
-                        +1 (234) 567 89 10
-                    </li>
-                    
-                    <li><span class="icon flaticon-envelope"></span>
-                        company@gmail.com <br>
-                        company@gmail.com
-                    </li>
-                    
-                    <li><span class="icon flaticon-pin-1"></span>
-                        Vivian Corp 2016 Broadway st. NY, <br>
-                        KS23 9UY United States
-                    </li>
-                    
-                </ul>
-				
-			</div>
-		</div>
-		
-    </section>
-    <!--End Contact Section-->
-    
-	<!--Contact Form-->
-	<section class="contact-form-section">
-		<div class="auto-container">
-			
-			<div class="contact-form">
-				<form method="post" action="sendemail.php" id="contact-form">
-					<div class="row clearfix">
-						
-						<div class="form-title col-md-12 col-sm-12 col-xs-12">
-							<h2>Get In Touch</h2>
-						</div>
-						
-						<div class="form-group col-md-12 col-sm-12 col-xs-12">
-							<div class="group-inner">
-								<input type="text" name="username" value="" placeholder="Your Name..." required>
-							</div>
-						</div>
-
-						<div class="form-group col-md-12 col-sm-12 col-xs-12">
-							<div class="group-inner">
-								<input type="email" name="email" value="" placeholder="Your Email..." required>
-							</div>
-						</div>
-
-						<div class="form-group col-md-12 col-sm-12 col-xs-12">
-							<div class="group-inner">
-								<input type="text" name="subject" placeholder="Subject...">
-							</div>
-						</div>
-
-						<div class="form-group col-md-12 col-sm-12 col-xs-12">
-							<div class="group-inner">
-								<textarea name="message" placeholder="Message..."></textarea>
-							</div>
-						</div>
-						<div class="form-group text-center col-md-12 col-sm-12 col-xs-12">
-							<button type="submit" class="template-btn btn-style-two">SUBMIT </button>
-						</div>
-					</div>
-				</form>
-			</div>
-
-		</div>
-	</section>
-	
-	<!--Footer-->
-	<div class="footer-bottom">
-		<div class="auto-container">
-			<div class="row clearfix">
-				<div class="column col-md-6 col-sm-6 col-xs-12">
-					<div class="copyright">Copyright &copy; 2017.Company name All rights reserved.More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></div>
-				</div>
-				<div class="column col-md-6 col-sm-6 col-xs-12">
-					<div class="social-icon">
-						<a href="#" class="fa fa-facebook"></a>
-						<a href="#" class="fa fa-twitter"></a>
-						<a href="#" class="fa fa-google-plus"></a>
-						<a href="#" class="fa fa-behance"></a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+		<ul class="clearfix ulm3n">
+			<li data-animate="fadeInDown">
+				<h3><svg class="icon" style="width: 2em; height: 2em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3146"><path d="M574 744.4l167.7 167.7c7.2 7.2 14.2 14.5 21.6 21.4 30.6 28.8 75.3 31.5 112 14 37.3-17.8 56.5-62.1 50.6-101.7-3.5-23.5-15.7-42.6-32.2-59.1l-181-181c-9.2-9.2-24.7-9.2-33.9 0L574 710.5c-21.9 21.9 12 55.8 33.9 33.9l104.8-104.8h-33.9l167.7 167.7c7.2 7.2 14.5 14.2 21.4 21.6 24.6 26.1 8 69.2-23.4 79.7-37.6 12.7-65.5-27.1-88.6-50.2l-148-148c-21.8-21.8-55.8 12.1-33.9 34zM328.2 257.1l-21.3-64.8c-6.6-20.1-9.7-46.1-32.3-53.2L140.2 96.7c-8.1-2.6-17.5 0.3-23.3 6.2l-45.8 45.7c-5.9 5.9-8.7 15.3-6.2 23.3l35.6 112.7c4.9 15.6 7.7 36.8 25.3 42.6l55.5 18.2 31.6 10.4 9.6 3.1c8.6 2.8-8.5-6-7.5-4.9l24.1 24.1 104.1 104.1 54.2 54.2c9.2 9.2 24.7 9.2 33.9 0l73.2-73.3c9.2-9.2 9.2-24.7 0-33.9L322 246.5c-21.9-21.9-55.8 12-33.9 33.9l182.7 182.7v-33.9l-73.2 73.3h33.9L285.3 356.3c-14.7-14.7-30.6-37.3-51-44l-96-31.5 16.7 16.8-43.8-138.4-6.2 23.3 45.8-45.7-23.3 6.2 138.4 43.7-16.7-16.8 32.8 100c9.6 29.2 55.9 16.7 46.2-12.8z m0 0M623.7 728.7l73.2-73.3c9.2-9.2 9.2-24.7 0-33.9L609.5 534c-9.2-9.2-24.7-9.2-33.9 0l-73.3 73.3c-9.2 9.2-9.2 24.7 0 33.9l87.4 87.4c21.9 21.9 55.8-12 33.9-33.9l-87.4-87.4v33.9l73.2-73.3h-33.9l87.4 87.4v-33.9l-73.2 73.3c-21.8 21.9 12.1 55.8 34 34z m0 0M721.5 446c37.2 2.3 78.6-0.9 111-20.9 22.6-13.9 38.5-40.2 53.3-61.5 25-36 48.2-73.5 70.3-111.3 5.5-9.3 3.9-21.4-3.8-29.1L909.1 180c-9.2-9.2-24.7-9.2-33.9 0l-99.4 99.4h33.9l-65-65v33.9l99.4-99.4c9.2-9.2 9.2-24.7 0-33.9L801 71.9c-7.6-7.6-19.8-9.2-29.1-3.8-43.9 25.7-87.6 52.6-128.6 82.6-27.3 20-47.8 39.4-58.2 72.7-10.9 35.2-10.6 75.9-3.1 111.7l6.2-23.3-332.3 332.4-131.6 131.6c-52.4 52.4-30.4 136.2 36 163.1 41.7 16.9 82.2-4 111.3-33L645 532.4l93.4-93.5c21.9-21.9-12-55.8-33.9-33.9L374.7 734.9 231.8 877.8c-9.4 9.4-19.4 15.5-32.7 18.3-34.5 7.2-62.2-29.2-55.6-60.8 4.2-19.9 24.2-35.2 38-48.9l386-386 46.6-46.6 7.9-7.8c9.8-9.8 6.4-21.4 4.5-33.3-2.2-13.5-1.7-27.8-1-41.4 1.2-23.1 6-48.2 23.8-64.3 16.5-15 35.7-27.3 54.3-39.7 30.3-20.2 61.3-39.3 92.7-57.7l-29.1-3.8 43.1 43.1V115l-99.4 99.4c-9.2 9.2-9.2 24.7 0 33.9l65 65c9.2 9.2 24.7 9.2 33.9 0l99.4-99.4h-33.9l43.2 43.2-3.8-29.1c-19.7 33.6-40.3 66.7-61.9 99-12.3 18.3-24.7 37.2-40.2 53-20.8 21.3-64 19.5-91.1 17.9-30.9-1.8-30.7 46.2 0 48.1z m0 0" p-id="3147"></path></svg> 一流的技术人才</h3>
+				<p>我们团队的技术人才，每个都是资深程序员，精通JavaScript、NodeJs、PHP、Python等多种开发语言，拥有多年行业开发经验！开发过多种项目，例如：PC端程序开发、移动端APP开发、微信小程序开发、企业官网开发等。</p>
+			</li>
+			<li data-animate="fadeInDown">
+				<h3><svg class="icon" style="width: 2em; height: 2em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4201"><path d="M610.304 555.008a241.208889 241.208889 0 1 0-182.044444 0A364.088889 364.088889 0 0 0 153.6 905.898667a22.755556 22.755556 0 1 0 47.331556 0 318.577778 318.577778 0 0 1 637.155555 0 22.755556 22.755556 0 1 0 47.331556 0 364.088889 364.088889 0 0 0-275.114667-350.890667z m-284.444444-221.411556a193.877333 193.877333 0 1 1 193.877333 191.829334 192.967111 192.967111 0 0 1-193.877333-191.829334z" p-id="4202"></path><path d="M665.827556 333.596444a22.755556 22.755556 0 1 0-47.331556 0 98.986667 98.986667 0 0 1-197.973333 0 22.755556 22.755556 0 1 0-47.331556 0 146.318222 146.318222 0 0 0 292.636445 0zM823.296 541.354667a177.493333 177.493333 0 0 0-21.390222-324.266667 22.755556 22.755556 0 0 0-16.384 44.373333 130.844444 130.844444 0 0 1-45.511111 253.724445 22.755556 22.755556 0 0 0-22.755556 22.755555 22.755556 22.755556 0 0 0 1.365333 6.371556 22.755556 22.755556 0 0 0-1.365333 6.371555 22.755556 22.755556 0 0 0 22.755556 22.755556 221.184 221.184 0 0 1 222.094222 219.591111 22.755556 22.755556 0 1 0 47.331555 0 267.605333 267.605333 0 0 0-186.140444-251.676444zM308.565333 551.367111a22.755556 22.755556 0 0 0-1.365333-6.371555 22.755556 22.755556 0 0 0 1.365333-6.371556 22.755556 22.755556 0 0 0-22.755555-22.755556 130.844444 130.844444 0 0 1-45.511111-253.724444 22.755556 22.755556 0 1 0-16.384-44.373333 177.493333 177.493333 0 0 0-21.390223 324.266666 267.605333 267.605333 0 0 0-186.823111 252.586667 22.755556 22.755556 0 1 0 47.331556 0 221.184 221.184 0 0 1 222.094222-219.591111 22.755556 22.755556 0 0 0 23.438222-23.665778z" p-id="4203"></path></svg> 优秀的管理团队</h3>
+				<p>我们的管理团队，负责制定公司规章制度，奖罚分明，营造一个公平的内部环境，为每位员工提供发展的机会。每个人各司其职，把公司管理的井井有条。负责跟踪市场发展趋势，制定公司的发展战略。负责公司现金流控制，时刻让公司处于安全的运营环境。</p>
+			</li>
+			<li data-animate="fadeInDown">
+				<h3><svg class="icon" style="width: 2em; height: 2em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4883"><path d="M890.378 185.931v-87.011l-394.703 87.011h-33.281l-394.703-87.011v87.011h-41.486v695.564h431.986v0.957l4.205-0.957h33.281l4.205 0.957v-0.957h497.918v-695.564h-107.421zM109.383 185.931v-35.199l348.804 76.934v603.011l-348.804-76.973v-567.774zM848.722 150.654v602.969l-348.844 76.934v-602.969l348.844-76.934zM961.559 558.27h-48.986v-49.111h48.986v49.111zM88.513 831.553v-39.819l180.482 39.819h-180.482zM876.463 790.151v41.319h-187.354l187.354-41.319zM411.698 339.134l-258.582-86.096 5.747-17.164 7.497-22.368 258.582 86.096-13.247 39.529zM411.698 450.802l-258.582-86.096 13.164-39.529 258.582 86.096-13.164 39.529zM411.698 562.518l-258.582-86.096 13.164-39.529 258.582 86.096-13.164 39.529zM411.698 674.106l-258.582-86.055 13.164-39.529 258.582 86.055-13.164 39.529zM411.698 772.951l-258.582-86.055 13.164-39.529 258.582 86.055-13.164 39.529zM546.405 339.134l-13.164-39.529 258.54-86.096 7.497 22.368 5.79 17.164-258.666 86.096zM546.405 450.802l-13.164-39.529 258.54-86.096 13.164 39.529-258.54 86.096zM546.405 562.518l-13.164-39.529 258.54-86.096 13.164 39.529-258.54 86.096zM546.405 674.106l-13.164-39.529 258.54-86.055 13.164 39.529-258.54 86.055zM546.405 772.951l-13.164-39.529 258.54-86.055 13.164 39.529-258.54 86.055z" p-id="4884"></path></svg> 个性化的企业文化</h3>
+				<p>我们推崇个性的企业文化，为每位员工提供自由的发展空间。领导直接对下级负责，下级犯错，领导也要受到处罚。工作时间上我们实行朝九晚六，晚上六点统一下班，不准加班。当天不能完成当天的工作，说明能力不足，不能胜任该岗位。</p>
+			</li>
+		</ul>
 	</div>
 </div>
-<!--End pagewrapper-->
 
-<!--Scroll to top-->
-<div class="scroll-to-top scroll-to-target" data-target="html"><span class="fa fa-long-arrow-up"></span></div>
 
-<script src="js/jquery.js"></script> 
-<script src="js/bootstrap.min.js"></script>
-<script src="js/jquery.mCustomScrollbar.concat.min.js"></script>
-<script src="js/revolution.min.js"></script>
-<script src="js/jquery.fancybox.pack.js"></script>
-<script src="js/jquery.fancybox-media.js"></script>
-<script src="js/mixitup.js"></script>
-<script src="js/owl.js"></script>
-<script src="js/wow.js"></script>
-<script src="js/pagenav.js"></script>
-<script src="js/jquery.scrollTo.js"></script>
-<script src="js/validate.js"></script>
 
-<!---<script src="http://ditu.google.cn/maps/api/js?key=AIzaSyD39_Mb1wKUcuRD-0KPmQT6SQHhEMVX1O0"></script>
-<script src="js/map-script.js"></script>--->
-<!--End Google Map APi-->
 
-<script src="js/script.js"></script>
+<!--======services-us========-->
+<div data-target="#services-us" class="services-us">
+   <div class="bj">
+     <div class="container">
+			<div class="title">
+				 <h2 data-animate="fadeInUp" >我们的服务</h2>
+				  <div data-animate="fadeInUp" class="separator"></div>
+				 <p data-animate="fadeInUp2">我们始终坚持为客户提供更好的服务，更好的产品。</p>
+			</div>
+
+           <ul class="delayAll ulm4n clearfix">
+			   <li data-animate="fadeInDown" >
+			     <svg class="icon" style="width: 5em; height: 5em; color: #008ffe; vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1426"><path d="M919.565463 121.942283 104.433514 121.942283c-22.036899 0-40.066531 18.029632-40.066531 40.066531L64.366983 682.937161c0 22.036899 18.029632 40.066531 40.066531 40.066531l345.360725 0-10.544147 107.886149L250.5248 830.889841l-10.544147 71.167876 544.03767 0-11.598152-71.167876L584.748884 830.889841l-10.544147-107.886149 345.360725 0c22.036899 0 40.066531-18.029632 40.066531-40.066531L959.631994 162.008814C959.633017 139.971915 941.602362 121.942283 919.565463 121.942283zM935.467641 659.734716 88.531336 659.734716 88.531336 178.113607l846.936305 0L935.467641 659.734716z" p-id="1427"></path></svg>
+			     <h4>PC端程序开发</h4>
+			     <p>各种后台管理程序开发，例如大数据分析平台、企业管理平台，仓库管理平台等。</p>
+               </li>
+			   <li data-animate="fadeInDown" >
+			     <svg class="icon" style="width: 5em; height: 5em; color: #008ffe; vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2225"><path d="M694.9 64h-364c-76.1 0-138.1 63.1-138.1 140.8v614.5c0 77.6 61.9 140.7 138.1 140.7h363.9C771 960 833 896.9 833 819.3V204.8C833 127.1 771 64 694.9 64z m-325.3 61.9c0-6.6 5.4-12 12-12h262.5c6.6 0 12 5.4 12 12v4.5c0 6.6-5.4 12-12 12H381.6c-6.6 0-12-5.4-12-12v-4.5z m143.3 814.6c-17.7 0-32.1-14.4-32.1-32.1 0-17.7 14.4-32.1 32.1-32.1s32.1 14.4 32.1 32.1c0 17.8-14.3 32.1-32.1 32.1z m245.3-102.7c0 9.4-7.6 17-17 17H281.5c-9.4 0-17-7.6-17-17V185.4c0-9.4 7.6-17 17-17h459.6c9.4 0 17 7.6 17 17v652.4z" p-id="2226"></path></svg>
+			     <h4>移动端APP开发</h4>
+			     <p>各种混合APP开发，例如外卖APP，电子商务APP，物联网APP等。</p>
+               </li>
+			   <li data-animate="fadeInDown" >
+			     <svg class="icon" style="width: 5em; height: 5em; color: #008ffe; vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2756"><path d="M626.176 279.552c74.24 0 134.656 55.808 134.656 124.928 0 21.504-6.144 42.496-17.408 61.44-16.896 27.648-44.032 48.128-76.8 57.856-8.704 2.56-15.36 3.584-21.504 3.584-14.336 0-25.6-11.264-25.6-25.6s11.264-25.6 25.6-25.6c1.024 0 3.072 0 5.632-1.024 22.016-6.144 39.424-18.944 49.152-35.84 6.656-10.752 9.728-22.528 9.728-34.816 0-40.448-37.376-73.728-82.944-73.728-15.872 0-31.232 4.096-45.056 11.776-24.064 13.824-38.4 36.864-38.4 61.952v214.528c0 43.52-24.064 83.456-64 105.984-21.504 12.288-45.568 18.432-70.144 18.432-74.24 0-134.656-55.808-134.656-124.928 0-21.504 6.144-42.496 17.408-61.44 16.896-27.648 44.032-48.128 76.8-57.856 9.216-2.56 15.36-3.584 21.504-3.584 14.336 0 25.6 11.264 25.6 25.6s-11.264 25.6-25.6 25.6c-1.024 0-3.072 0-5.632 1.024-22.016 6.656-39.424 19.456-49.152 35.84-6.656 10.752-9.728 22.528-9.728 34.816 0 40.448 37.376 73.728 83.456 73.728 15.872 0 31.232-4.096 45.056-11.776 24.064-13.824 38.4-36.864 38.4-61.952V404.48c0-43.52 24.064-83.456 64-105.984 20.992-12.8 45.056-18.944 69.632-18.944z m-520.704 230.4c0 226.304 183.296 409.6 409.6 409.6s409.6-183.296 409.6-409.6-183.296-409.6-409.6-409.6-409.6 183.296-409.6 409.6z m-51.2 0c0-254.464 206.336-460.8 460.8-460.8s460.8 206.336 460.8 460.8-206.336 460.8-460.8 460.8-460.8-206.336-460.8-460.8z m0 0" fill="" p-id="2757"></path></svg>
+			     <h4>微信小程序开发</h4>
+			     <p>各种小程序开发，例如外卖平台，电子商务平台，物联网平台等。</p>
+               </li>
+			   <li data-animate="fadeInDown" >
+			     <svg class="icon" style="width: 5em; height: 5em; color: #008ffe; vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3089"><path d="M512 32C246.912 32 32 246.848 32 512s214.912 480 480 480c265.152 0 480-214.848 480-480S777.152 32 512 32zM320.256 143.04c20.864-10.88 42.688-20.16 65.408-27.392-23.616 34.624-43.968 78.656-59.904 129.6-23.808-15.232-37.76-33.472-37.76-53.248 0-17.984 12.224-34.56 32.256-48.96zM227.136 209.344c7.424 37.568 36.864 71.296 82.752 96.512-11.84 53.376-19.2 112.064-21.12 174.144H97.6a414.464 414.464 0 0 1 129.536-270.656z m0 605.312A414.464 414.464 0 0 1 97.6 544h191.104c1.92 62.08 9.344 120.768 21.184 174.144-45.888 25.088-75.328 58.944-82.752 96.512z m93.12 66.304C300.224 866.56 288 849.92 288 832c0-19.776 13.952-38.08 37.76-53.312 15.936 51.008 36.288 94.976 59.904 129.664a411.392 411.392 0 0 1-65.408-27.392z m159.744 38.656c-40.192-21.184-74.816-81.856-97.92-165.568a425.536 425.536 0 0 1 97.92-16.704v182.272z m0-245.824a454.592 454.592 0 0 0-111.68 20.288A966.4 966.4 0 0 1 352.64 544H480v129.792z m0-193.792H352.64a966.4 966.4 0 0 1 15.68-150.08 460.608 460.608 0 0 0 111.68 20.352V480z m0-193.344a432.512 432.512 0 0 1-97.92-16.704c23.104-83.712 57.728-144.32 97.92-165.568v182.272z m316.864-77.312A414.08 414.08 0 0 1 926.336 480h-191.104c-1.92-62.08-9.344-120.768-21.184-174.144 45.952-25.152 75.392-58.944 82.816-96.512z m-93.12-66.304c20.032 14.4 32.256 30.976 32.256 48.96 0 19.776-13.952 38.016-37.76 53.248-15.936-50.944-36.288-94.976-59.968-129.6a409.6 409.6 0 0 1 65.472 27.392zM544 104.384c40.256 21.248 74.88 81.856 97.92 165.568a432.512 432.512 0 0 1-97.92 16.704V104.384z m0 245.888a460.096 460.096 0 0 0 111.68-20.288c8.64 45.888 14.144 96.448 15.68 150.016H544V350.272z m0 193.728h127.36c-1.536 53.568-7.04 104.128-15.68 150.144a454.016 454.016 0 0 0-111.68-20.288V544z m0 375.616v-182.272a425.536 425.536 0 0 1 97.92 16.704c-23.04 83.712-57.664 144.384-97.92 165.568z m159.744-38.656c-20.864 10.88-42.688 20.16-65.408 27.456 23.616-34.688 44.032-78.656 59.968-129.664 23.808 15.232 37.76 33.536 37.76 53.312-0.064 17.856-12.288 34.496-32.32 48.896z m93.12-66.304c-7.424-37.568-36.928-71.36-82.816-96.512a936.96 936.96 0 0 0 21.184-174.144h191.104a414.08 414.08 0 0 1-129.472 270.656z" fill="" p-id="3090"></path></svg>
+			     <h4>企业官网开发</h4>
+			     <p>各种类型企业官网开发</p>
+               </li>
+          </ul>
+	</div>
+  </div>	
+</div>
+
+
+
+<!--======work-us========-->
+<div data-target="#work-us" class="work-us">
+	<div class="container">
+		  <div class="title">
+				 <h2 data-animate="fadeInUp">我们的项目</h2>
+				  <div data-animate="fadeInUp" class="separator"></div>
+				 <p data-animate="fadeInUp2">我们始终坚持做具备高技术含量，优秀的使用体验的产品。</p>
+		  </div>
+
+		  <ul class="clearfix ulm3n">
+			 <li data-animate="rollIn">
+			 	<a href="http://47.110.249.71:3000" target="_blank">
+			 		<img class="w100" alt="" src="images/cp1.jpg">
+			 		<div class="text">
+			 		    <h4>大数据平台(Nodejs)</h4>
+			 		    <p>技术架构：LayUI + Nodejs + MongoDB</p>
+			 		</div>
+			 	</a>
+			 </li>
+			 <li data-animate="rollIn">
+			 	<a href="http://47.110.249.71:5000" target="_blank">
+			 		<img class="w100" alt="" src="images/cp1.jpg">
+			 		<div class="text">
+			 		    <h4>大数据平台(Python)</h4>
+			 		    <p>技术架构：LayUI + Python + MySQL</p>
+			 		</div>
+			 	</a>
+			 </li>
+			 <li data-animate="rollIn">
+			 	<a href="http://47.110.249.71:6000" target="_blank">
+			 		<img class="w100" alt="" src="images/cp3.jpg">
+			 		<div class="text">
+			 		    <h4>物联网APP</h4>
+			 		    <p>技术架构：React Native</p>
+			 		</div>
+			 	</a>
+			 </li>
+			
+		  </ul>
+
+	  </div>	
+</div>
+
+
+
+
+<!--======team-us========-->
+<div data-target="#team-us" class="team-us" id="swiperloop7">
+	<div class="container">
+		<div class="title">
+			 <h2 data-animate="fadeInUp">我们的团队</h2>
+			  <div data-animate="fadeInUp" class="separator"></div>
+			 <p data-animate="fadeInUp2">一支年轻充满活力，且富有创造力的团队。</p>
+	   </div>
+       <div data-animate="fadeInUp" class="swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide"> 
+                <div class="text">
+              		<img alt="" src="images/author-1.jpg">
+              			<h4>余仙</h4>
+              			<h5>资深程序员</h5>
+              			<p>精通JavaScript，Nodejs，Python，PHP等语言。擅长全栈开发，PC端程序开发，手机APP开发，多年开发经验。<br>为人活波开朗，乐于助人，自学能力强。
+              			</p>
+                </div>
+            </div>
+            <div class="swiper-slide"> 
+                <div class="text">
+              		<img alt="" src="images/author-1.jpg">
+              			<h4>余仙</h4>
+              			<h5>资深程序员</h5>
+              			<p>精通JavaScript，Nodejs，Python，PHP等语言。擅长全栈开发，PC端程序开发，手机APP开发，多年开发经验。<br>为人活波开朗，乐于助人，自学能力强。
+              			</p>
+                </div>
+            </div>
+         	<div class="swiper-slide"> 
+                <div class="text">
+              		<img alt="" src="images/author-1.jpg">
+              			<h4>余仙</h4>
+              			<h5>资深程序员</h5>
+              			<p>精通JavaScript，Nodejs，Python，PHP等语言。擅长全栈开发，PC端程序开发，手机APP开发，多年开发经验。<br>为人活波开朗，乐于助人，自学能力强。
+              			</p>
+                </div>
+            </div>
+        </div>
+        <!-- Add dian -->
+        <div class="swiper-pagination"></div>
+        <!-- Add Arrows -->
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+       </div>
+	</div>
+</div>
+
+
+
+
+<!--======contact-us========-->
+<div data-target="#contact-us" class="contact-us">
+	<div class="container clearfix">
+
+		<ul class="clearfix ulm2n">
+			<li class="leftbox" data-animate="fadeInLeftBig">
+				<div>
+				    <img alt="" src="images/wechat1.png">
+					<p class="p1">扫码加微信</p>
+					<p>电话：16675199649</p> 
+		            <p>邮箱：1533165085@qq.com</p> 
+				</div>
+			</li>
+			<li class="rightbox" data-animate="fadeInRightBig">
+				<div>
+				    <form action="">
+					<p><label>Name:</label><input name="Name" placeholder="" type="text"></p>
+					<p><label>Phone:</label><input name="Phone" placeholder="" type="text"></p>
+					<p><label>Email:</label><input name="Email" placeholder="" type="text"></p>
+					<p>
+					  <label>Message:</label>
+					   <textarea placeholder=""></textarea>
+					</p>
+					<p><button type="button">提&nbsp;&nbsp;交</button></p>
+				 </form>
+				</div>
+			</li>
+		</ul>
+  
+	  </div>	
+</div>
+    
+    
+    
+<!--======footer========-->
+<div class="footer">
+	<div class="container">
+		<div class="text"><p>Copyright © 2017 1533165085@qq.com All rights</p></div>
+	</div>
+</div>
+
+    
+    
+</div>
+
+
+
+
+
+<script src="js/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="js/swiper-3.3.1.jquery.min.js"></script>
+<script src="js/common.js"></script>
 </body>
 </html>

@@ -60,9 +60,9 @@ $(function(){
     $(".header-pc ul li a").on('click', function() {
     	var li = $(this).parent("li");
     	li.addClass("current").siblings("li").removeClass("current");
-		var target = $(this).attr('href');
+		var target = $(this).attr('data-target');
 	    $('html, body').animate({
-		   scrollTop: $("div[data-target='"+target+"']").offset().top
+		   scrollTop: $("div[data-target='"+target+"']").offset().top - 80
 		}, 1000);
 	});
 
@@ -91,9 +91,9 @@ $(function(){
 	$(".header-mobile ul li a").on('click', function() {
     	var li = $(this).parent("li");
     	li.addClass("current").siblings("li").removeClass("current");
-		var target = $(this).attr('href');
+		var target = $(this).attr('data-target');
 	    $('html, body').animate({
-		   scrollTop: $("div[data-target='"+target+"']").offset().top
+		   scrollTop: $("div[data-target='"+target+"']").offset().top- 60
 		}, 1000);
 
 		$(".header-mobile .btn_close").click();

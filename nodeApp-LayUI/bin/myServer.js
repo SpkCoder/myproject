@@ -3,7 +3,7 @@ const child_process = require('child_process');
 
 
 exports.restart = function () {
-	var workerProcess = child_process.exec('forever restart ./www', function (error, stdout, stderr) {
+	var workerProcess = child_process.exec('pm2 restart ./www', function (error, stdout, stderr) {
         if (error) {
             console.log(error.stack);
             console.log('Error code: '+error.code);

@@ -15,8 +15,8 @@ const moment = require('moment');
 router.get('/', function(req, res, next) {
 	
 	var dbName = req.baseUrl.split("/")[2];
-	var username = req.cookies["logining"].username;
-	var hash = req.cookies["logining"].hash;
+	var username = req.cookies["logining_node"].username;
+	var hash = req.cookies["logining_node"].hash;
 	
 	//返回错误
     function returnErr (value) {

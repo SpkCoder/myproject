@@ -317,7 +317,7 @@ router.post('/', function(req, res, next) {
 		}
 		var idArr = [];
 		for(let i=0; i<dataArr.length; i++){
-			dataArr[i].create_name = req.cookies["logining"].username;
+			dataArr[i].create_name = req.cookies["logining_node"].username;
             dataArr[i].create_time = moment().format("YYYY-MM-DD HH:mm:ss");
             idArr.push(dataArr[i].id);
 		}
@@ -378,7 +378,7 @@ router.post('/', function(req, res, next) {
 			return;
 		}
 		
-		updateData.update_name = req.cookies["logining"].username;
+		updateData.update_name = req.cookies["logining_node"].username;
         updateData.update_time = moment().format("YYYY-MM-DD HH:mm:ss");
 		var updateJson = {$set: updateData};
 		db.updateData(dbName, whereJson, updateJson, function(err,result){

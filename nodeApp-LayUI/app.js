@@ -43,7 +43,7 @@ app.all('*',function(req,res,next){
 		    next();
 		    return;
 		}
-		if(req.cookies["logining"] != null){
+		if(req.cookies["logining_node"] != null){
 		      next();
 		      return;
 		}

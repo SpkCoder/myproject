@@ -1,0 +1,19 @@
+{
+  "name": "layui",  
+  "script": "./bin/www", 
+  "cwd": "./",  
+  "watch": true,
+  "ignore_watch" : [  
+    "node_modules", 
+    "logs",
+    "public/uploadFile"
+  ],
+  "watch_options": {
+    "followSymlinks": false
+  },
+  "error_file" : "./logs/err.log",  
+  "out_file"   : "./logs/out.log",  
+  "env": {
+      "NODE_ENV": "production"  
+  }
+}

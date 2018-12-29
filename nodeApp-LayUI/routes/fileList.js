@@ -18,8 +18,8 @@ const upload = multer({ dest: '../public/uploadFile/',limits: { fileSize: 100*10
 router.get('/', function(req, res, next) {
 	
 	var dbName = req.baseUrl.split("/")[2];
-	var username = req.cookies["logining"].username;
-	var hash = req.cookies["logining"].hash;
+	var username = req.cookies["logining_node"].username;
+	var hash = req.cookies["logining_node"].hash;
 	
 	//返回错误
     function returnErr (value) {
@@ -123,8 +123,8 @@ router.get('/', function(req, res, next) {
 router.post('/', upload.array('file'), function(req, res, next) {
 	
 	var dbName = req.baseUrl.split("/")[2];
-	var username = req.cookies["logining"].username;
-	var hash = req.cookies["logining"].hash;
+	var username = req.cookies["logining_node"].username;
+	var hash = req.cookies["logining_node"].hash;
 	
 	//返回错误
     function returnErr (value) {
@@ -202,7 +202,7 @@ router.post('/', upload.array('file'), function(req, res, next) {
                 dataJson.name = req.files[i].originalname;
                 dataJson.size = req.files[i].size;
                 dataJson.url = _url;
-                dataJson.create_name = req.cookies["logining"].username;
+                dataJson.create_name = req.cookies["logining_node"].username;
                 dataJson.create_time = moment().format("YYYY-MM-DD HH:mm:ss");
 				var obj = JSON.parse(JSON.stringify(dataJson));
 			    dataArr.push(obj);
@@ -242,7 +242,7 @@ router.post('/', upload.array('file'), function(req, res, next) {
 
             //操作记录
 	        var content = "dataArr=" + JSON.stringify(dataArr).replace(/"/g,"'");
-	        var recordJson = {"username":username, "dbName":dbName, "action": "上传文件", "content": content, "os": req.cookies["logining"].os, "px": req.cookies["logining"].px, "ip": req.ip, "time": moment().format("YYYY-MM-DD HH:mm:ss")};
+	        var recordJson = {"username":username, "dbName":dbName, "action": "上传文件", "content": content, "os": req.cookies["logining_node"].os, "px": req.cookies["logining_node"].px, "ip": req.ip, "time": moment().format("YYYY-MM-DD HH:mm:ss")};
 	        db.setRecord(recordJson, function(recordErr,recordResult){
 		        if(recordErr){
 		            returnErr('setRecordError:'+ recordErr);
@@ -301,7 +301,7 @@ router.post('/', upload.array('file'), function(req, res, next) {
 		        
 		        //操作记录
 		        var content = "dataJson=" + JSON.stringify(whereJson).replace(/"/g,"'");
-		        var recordJson = {"username":username, "dbName":dbName, "action": "删除文件", "content": content, "os": req.cookies["logining"].os, "px": req.cookies["logining"].px, "ip": req.ip, "time": moment().format("YYYY-MM-DD HH:mm:ss")};
+		        var recordJson = {"username":username, "dbName":dbName, "action": "删除文件", "content": content, "os": req.cookies["logining_node"].os, "px": req.cookies["logining_node"].px, "ip": req.ip, "time": moment().format("YYYY-MM-DD HH:mm:ss")};
 		        db.setRecord(recordJson, function(recordErr,recordResult){
 			        if(recordErr){
 			            returnErr('setRecordError:'+ recordErr);

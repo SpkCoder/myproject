@@ -7,12 +7,12 @@ import os
 @app.route('/')
 def index():
     if request.cookies.get('logining'):
-        file_path = os.path.join(os.path.dirname(__file__), 'static\\index.html')
+        file_path = os.path.join(os.path.dirname(__file__), 'static/index.html')
         with open(file_path, encoding='utf-8') as file:
             data = file.read()
             return data
     else:
-        file_path = os.path.join(os.path.dirname(__file__), 'static\\login.html')
+        file_path = os.path.join(os.path.dirname(__file__), 'static/login.html')
         with open(file_path, encoding='utf-8') as file:
             data = file.read()
             return data

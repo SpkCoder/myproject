@@ -84,7 +84,7 @@ def operation(req):
         upload_files = req.files.getlist("file")
         for i, file in enumerate(upload_files):
             now_time = time.strftime("%Y-%m-%d-%H-%M-%S", time.localtime()) + "-" + str(time.time())[11:15]
-            now_path = os.path.dirname(os.path.dirname(__file__)) + "\\static\\uploadFile\\" + now_time + "___" + file.filename
+            now_path = os.path.dirname(os.path.dirname(__file__)) + "/static/uploadFile/" + now_time + "___" + file.filename
             if not os.path.exists(now_path):
                 file.save(now_path)
             else:

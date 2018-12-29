@@ -165,7 +165,7 @@ router.post('/', function(req, res, next) {
 			return;
 		}
 		for(let i=0; i<dataArr.length; i++){
-			dataArr[i].create_name = req.cookies["logining"].username;
+			dataArr[i].create_name = req.cookies["logining_node"].username;
             dataArr[i].create_time = moment().format("YYYY-MM-DD HH:mm:ss");
 		}
 		mysqldb.insertData(dbName,dataArr,function(errArr){
@@ -202,7 +202,7 @@ router.post('/', function(req, res, next) {
 			return;
 		}
 		
-		updateJson.update_name = req.cookies["logining"].username;
+		updateJson.update_name = req.cookies["logining_node"].username;
         updateJson.update_time = moment().format("YYYY-MM-DD HH:mm:ss");
 		mysqldb.updateData(dbName, whereStr, updateJson, function(err,result){
 		        if(err){

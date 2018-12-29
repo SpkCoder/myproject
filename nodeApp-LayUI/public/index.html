@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <title>MONGO大数据平台</title>
+  <title>仙鱼大数据平台</title>
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -190,15 +190,15 @@ layui.use(['element',"laytpl",'directorRouter','dataDB'], function(){
 								    }
 								    return "";
 								  } 
-								  var loginingStr = getCookie("logining");
-								  //console.log(loginingStr);
-								     if(!loginingStr){
+								  var logining_nodeStr = getCookie("logining_node");
+								  //console.log(logining_nodeStr);
+								     if(!logining_nodeStr){
 								       alert("No login, please log in");
 								       window.location.href = "/login.html";
 								       return;
 								     }else{
 								        //获取登录信息
-											  loginObj = JSON.parse(decodeURIComponent(loginingStr).split("j:")[1]);
+											  loginObj = JSON.parse(decodeURIComponent(logining_nodeStr).split("j:")[1]);
 											  //console.log(loginObj);
 											  $("#username").html(loginObj.username +'<span class="layui-nav-more"></span>');
 								     }

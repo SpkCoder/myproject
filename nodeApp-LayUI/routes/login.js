@@ -104,7 +104,7 @@ router.post('/', function(req, res, next) {
 			       var os = osJson.os ? osJson.os : "";
 			       var px = osJson.px ? osJson.px : "";
 			       var ip = req.ip;
-			       res.cookie("logining", {"username": whereJson.username, "hash": whereJson.password, "os":os, "px":px, "ip":ip }, { maxAge: 8*3600*1000});
+			       res.cookie("logining_node", {"username": whereJson.username, "hash": whereJson.password, "os":os, "px":px, "ip":ip }, { maxAge: 8*3600*1000});
 			       res.send("登录成功");
 			       
 			       //操作记录
@@ -126,15 +126,15 @@ router.post('/', function(req, res, next) {
 	
 	//退出 
 	function SignOut () {
-		var username = req.cookies["logining"].username;
-		res.clearCookie("logining");
+		var username = req.cookies["logining_node"].username;
+		res.clearCookie("logining_node");
 		console.log(username + "退出成功");
         //res.redirect('/login.html?'+Date.now());
         res.send("退出成功");
         
         //操作记录
         var content = "action=SignOut";
-        var recordJson = {"username":username, "dbName":"userList", "action": "退出", "content": content, "os": req.cookies["logining"].os, "px": req.cookies["logining"].px, "ip": req.ip, "time": moment().format("YYYY-MM-DD HH:mm:ss")};
+        var recordJson = {"username":username, "dbName":"userList", "action": "退出", "content": content, "os": req.cookies["logining_node"].os, "px": req.cookies["logining_node"].px, "ip": req.ip, "time": moment().format("YYYY-MM-DD HH:mm:ss")};
         db.setRecord(recordJson, function(recordErr,recordResult){
 	        if(recordErr){
 	            returnErr('setRecordError:'+ recordErr);
@@ -172,7 +172,7 @@ router.post('/', function(req, res, next) {
 			return;
 		}
 		
-		if(whereJson.username != req.cookies["logining"].username){
+		if(whereJson.username != req.cookies["logining_node"].username){
 			returnErr("没有权限");
 			return;
 		}
@@ -189,7 +189,7 @@ router.post('/', function(req, res, next) {
 		    }
 		}
 	    
-	    updateData.update_name = req.cookies["logining"].username;
+	    updateData.update_name = req.cookies["logining_node"].username;
         updateData.update_time = moment().format("YYYY-MM-DD HH:mm:ss");
     	var updateJson = {$set: updateData};
 		db.updateData("userList", whereJson, updateJson, function(err,result){
@@ -207,7 +207,7 @@ router.post('/', function(req, res, next) {
 		        
 		        //操作记录
 		        var content = "修改密码";
-		        var recordJson = {"username":whereJson.username, "dbName":"userList", "action": "修改", "content": content, "os": req.cookies["logining"].os, "px": req.cookies["logining"].px, "ip": req.ip, "time": moment().format("YYYY-MM-DD HH:mm:ss")};
+		        var recordJson = {"username":whereJson.username, "dbName":"userList", "action": "修改", "content": content, "os": req.cookies["logining_node"].os, "px": req.cookies["logining_node"].px, "ip": req.ip, "time": moment().format("YYYY-MM-DD HH:mm:ss")};
 		        db.setRecord(recordJson, function(recordErr,recordResult){
 			        if(recordErr){
 			            returnErr('setRecordError:'+ recordErr);

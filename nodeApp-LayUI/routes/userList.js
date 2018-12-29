@@ -15,8 +15,8 @@ const moment = require('moment');
 router.get('/', function(req, res, next) {
 	
 	var dbName = req.baseUrl.split("/")[2];
-	var username = req.cookies["logining"].username;
-	var hash = req.cookies["logining"].hash;
+	var username = req.cookies["logining_node"].username;
+	var hash = req.cookies["logining_node"].hash;
 	
 	//返回错误
     function returnErr (value) {
@@ -122,8 +122,8 @@ router.get('/', function(req, res, next) {
 router.post('/', function(req, res, next) {
 	
 	var dbName = req.baseUrl.split("/")[2];
-	var username = req.cookies["logining"].username;
-	var hash = req.cookies["logining"].hash;
+	var username = req.cookies["logining_node"].username;
+	var hash = req.cookies["logining_node"].hash;
 	
 	//返回错误
     function returnErr (value) {
@@ -198,7 +198,7 @@ router.post('/', function(req, res, next) {
 			let md5 = crypto.createHash("md5");
             let md5Password = md5.update(password).digest("hex");
             dataArr[i].password = md5Password;
-            dataArr[i].create_name = req.cookies["logining"].username;
+            dataArr[i].create_name = req.cookies["logining_node"].username;
             dataArr[i].create_time = moment().format("YYYY-MM-DD HH:mm:ss");
 		}
 		console.log(dataArr);
@@ -229,7 +229,7 @@ router.post('/', function(req, res, next) {
 			        
 			        //操作记录
 			        var content = "dataArr=" + JSON.stringify(dataArr).replace(/"/g,"'");
-			        var recordJson = {"username":username, "dbName":dbName, "action": "增加", "content": content, "os": req.cookies["logining"].os, "px": req.cookies["logining"].px, "ip": req.ip, "time": moment().format("YYYY-MM-DD HH:mm:ss")};
+			        var recordJson = {"username":username, "dbName":dbName, "action": "增加", "content": content, "os": req.cookies["logining_node"].os, "px": req.cookies["logining_node"].px, "ip": req.ip, "time": moment().format("YYYY-MM-DD HH:mm:ss")};
 			        db.setRecord(recordJson, function(recordErr,recordResult){
 				        if(recordErr){
 				            returnErr('setRecordError:'+ recordErr);
@@ -307,7 +307,7 @@ router.post('/', function(req, res, next) {
 		}
 	    
 	    function updateDataFn () {
-		    updateData.update_name = req.cookies["logining"].username;
+		    updateData.update_name = req.cookies["logining_node"].username;
             updateData.update_time = moment().format("YYYY-MM-DD HH:mm:ss");
 	    	var updateJson = {$set: updateData};
 			db.updateData(dbName, whereJson, updateJson, function(err,result){
@@ -325,7 +325,7 @@ router.post('/', function(req, res, next) {
 			        
 			        //操作记录
 			        var content = "searchJson=" + JSON.stringify(whereJson).replace(/"/g,"'") + "updateJson=" + JSON.stringify(updateJson).replace(/"/g,"'");
-			        var recordJson = {"username":username, "dbName":dbName, "action": "修改", "content": content, "os": req.cookies["logining"].os, "px": req.cookies["logining"].px, "ip": req.ip, "time": moment().format("YYYY-MM-DD HH:mm:ss")};
+			        var recordJson = {"username":username, "dbName":dbName, "action": "修改", "content": content, "os": req.cookies["logining_node"].os, "px": req.cookies["logining_node"].px, "ip": req.ip, "time": moment().format("YYYY-MM-DD HH:mm:ss")};
 			        db.setRecord(recordJson, function(recordErr,recordResult){
 				        if(recordErr){
 				            returnErr('setRecordError:'+ recordErr);
@@ -366,7 +366,7 @@ router.post('/', function(req, res, next) {
 		        
 		        //操作记录
 		        var content = "dataJson=" + JSON.stringify(whereJson).replace(/"/g,"'");
-		        var recordJson = {"username":username, "dbName":dbName, "action": "删除", "content": content, "os": req.cookies["logining"].os, "px": req.cookies["logining"].px, "ip": req.ip, "time": moment().format("YYYY-MM-DD HH:mm:ss")};
+		        var recordJson = {"username":username, "dbName":dbName, "action": "删除", "content": content, "os": req.cookies["logining_node"].os, "px": req.cookies["logining_node"].px, "ip": req.ip, "time": moment().format("YYYY-MM-DD HH:mm:ss")};
 		        db.setRecord(recordJson, function(recordErr,recordResult){
 			        if(recordErr){
 			            returnErr('setRecordError:'+ recordErr);

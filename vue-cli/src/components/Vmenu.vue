@@ -7,9 +7,9 @@
 						class="el-menu-demo nav" 
 						mode="horizontal" 
 						@select="handleSelect">
-					  <el-submenu v-for='(item, index) in rows' v-if='item.show == "true"' :index='item.id | toStr'>
+					  <el-submenu v-for='(item, index) in rows' :key="item.id" v-if='item.show == "true"' :index='item.id | toStr'>
 					    <template slot="title"><a href="javascript:;">{{ item.name }}</a></template>
-					    <el-menu-item v-for='(item2, index2) in item.children' v-if='item2.show == "true"' :index='item2.id | toStr'>
+					    <el-menu-item v-for='(item2, index2) in item.children' :key="item2.id" v-if='item2.show == "true"' :index='item2.id | toStr'>
 					    	<a :href="item2.href">{{ item2.name }}</a>
 					    </el-menu-item>
 					  </el-submenu>
@@ -72,3 +72,7 @@
     }
   }
 </script>
+
+<style scoped>
+
+</style>

@@ -1,8 +1,11 @@
 from flaskApp import app
 from flask import request, redirect
 from flaskApp.urls import dict_url
+from flask_cors import CORS
 import os
 
+# 允许跨越
+CORS(app, supports_credentials=True)
 
 @app.route('/')
 def index():

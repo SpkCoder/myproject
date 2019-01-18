@@ -7,8 +7,8 @@ import router from './router';
 import VueResource from 'vue-resource';
 
 import 'element-ui/lib/theme-chalk/index.css';
+import './assets/css/font-awesome.css';
 import './assets/css/style.css';
-import './assets/css/page.css';
 
 
 
@@ -16,7 +16,9 @@ Vue.use(ElementUI);
 Vue.use(VueResource);
 
 Vue.config.productionTip = false;
-
+Vue.prototype.GLOBAL = {
+  host: "http://127.0.0.1:5000"
+};
 
 /* eslint-disable no-new */
 new Vue({

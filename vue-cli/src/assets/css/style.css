@@ -28,7 +28,7 @@ a{color: #333; text-decoration:none; }
 
 
 .header{position: relative; height: 55px; background-color: #23262E;}
-.header .logo{position: absolute; left: 0; top: 0; width: 200px; height: 100%;}
+.header .logo{position: absolute; left: 0; top: 0; width: 200px; height: 100%; display: none;}
 .header .logo .img-mobel{display: none;}
 .header .side-arrow-moble{display: none; color: #fff; height: 55px; line-height: 60px; padding: 0 20px; cursor: pointer; }
 
@@ -69,8 +69,8 @@ a{color: #333; text-decoration:none; }
 .footer.left-aside-close {left: 0px; }
 
 
-
-
+.el-dialog__header{background: #f2f2f2;}
+.el-dialog__body{padding: 20px 20px;}
 
 
 

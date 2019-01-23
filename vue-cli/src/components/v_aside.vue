@@ -104,9 +104,9 @@
 							document.querySelector(".side-arrow-icon").classList.add("el-icon-arrow-right");
 					}
 
-					window.onresize= function () {
-						window.location.reload();
-					};
+					// window.onresize= function () {
+					// 	window.location.reload();
+					// };
 			});
     }
   }

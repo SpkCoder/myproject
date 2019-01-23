@@ -1,11 +1,13 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-//import HelloWorld from '@/components/HelloWorld'
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
+    { path: '/login', component: () => import('@/components/login')},
+    { path: '/sign', component: () => import('@/components/sign')},
+    { path: '/404', component: () => import('@/components/404')},
     {
       path: '/',
       redirect: '/page/model_list',
@@ -20,6 +22,11 @@ export default new Router({
       path: '/page/user_list',
       name: '用户列表',
       component: resolve => require(['@/components/user_list'], resolve)
+    },
+    {
+      path: '*',
+      name: '404',
+      component: resolve => require(['@/components/404'], resolve)
     }
   ]
 })

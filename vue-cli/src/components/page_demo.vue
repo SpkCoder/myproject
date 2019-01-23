@@ -12,7 +12,7 @@
 								<div style="margin-bottom:10px;">
 									<el-button-group>
 										<el-button type="primary" size="small" @click="btn_add()">增加</el-button>
-										<!-- <el-button type="primary" size="small" @click="btn_del()">删除</el-button> -->
+										<el-button type="primary" size="small" @click="btn_del()">删除</el-button>
 										<el-button type="primary" size="small" @click="btn_search()">查询</el-button>
 									</el-button-group>
 								</div>
@@ -121,8 +121,8 @@ export default {
 			modelName2: null,
 			url: null,
 			tabelwidth: null,
-      list: null,
-      listLoading: true,
+			list: null,
+			listLoading: true,
 			data_type: null,
 			field_ch: null,
 			field_en: null,
@@ -298,31 +298,31 @@ export default {
       this.addFormBox = false;
     },
     btn_del(){
-        // var _this = this;
-        // if(_this.multipleSelection.length == 0){
-        //   _this.$message({duration: 1000, message: "请勾选要删除的行" });
-        //   return;
-        // }
-        // _this.$confirm('确认删除?', '删除', {
-        //   confirmButtonText: '确定',
-        //   cancelButtonText: '取消',
-        //   type: 'warning'
-        // }).then(function () {
-        //     var idArr = [];
-        //     for(var i=0; i<_this.multipleSelection.length; i++){
-        //       idArr.push(_this.multipleSelection[i].id);
-        //     }
-        //     var whereJson = {"id": idArr};
-        //     var reqData = {'action': 'delData', 'whereJson': JSON.stringify(whereJson)};
-        //     DB.delData(_this, reqData, function (resData) {
-        //       //console.log(resData)
-        //       _this.$message({duration: 1000, message: resData });
-        //       if(resData != "操作成功"){ return; }
-        //       _this.getData();
-        //     });
-        // }).catch(function () {
-        //   //
-        // });
+        var _this = this;
+        if(_this.multipleSelection.length == 0){
+          _this.$message({duration: 1000, message: "请勾选要删除的行" });
+          return;
+        }
+        _this.$confirm('确认删除?', '删除', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(function () {
+            var idArr = [];
+            for(var i=0; i<_this.multipleSelection.length; i++){
+              idArr.push(_this.multipleSelection[i].id);
+            }
+            var whereJson = {"id": idArr};
+            var reqData = {'action': 'delData', 'whereJson': JSON.stringify(whereJson)};
+            DB.delData(_this, reqData, function (resData) {
+              //console.log(resData)
+              _this.$message({duration: 1000, message: resData });
+              if(resData != "操作成功"){ return; }
+              _this.getData();
+            });
+        }).catch(function () {
+          //
+        });
 
     },
     btn_search(){
@@ -374,7 +374,7 @@ export default {
               _this.getData();
 
             }else {
-              // console.log('error submit');
+              //console.log('error submit');
               return false;
             }
         });

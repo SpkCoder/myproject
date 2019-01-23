@@ -37,7 +37,7 @@
         <template slot="title">admin</template>
         <el-menu-item index="2-1"><a id="changePassword" href="javascript:;"><i class="layui-icon"></i>修改密码</a></el-menu-item>
         <el-menu-item index="2-2"><a id="loginOut" href="javascript:;"><i class="layui-icon"></i>安全退出</a></el-menu-item>
-        <el-menu-item index="2-3"><a id="useHelp" href="/static/page/my_use_help.html"><i class="layui-icon"></i>使用说明</a></el-menu-item>
+        <el-menu-item index="2-3"><a id="useHelp" href="/static/page/my_use_help.html" target="_blank"><i class="layui-icon"></i>使用说明</a></el-menu-item>
       </el-submenu>
     </el-menu>
     

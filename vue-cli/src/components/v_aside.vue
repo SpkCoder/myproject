@@ -59,10 +59,11 @@
 					//console.log(data.body);
 					if(typeof data.body != "object"){
 			          alert(data.body);
-			          window.location.href = "/login.html";
+			          _this.$router.push({ path: '/page/login' });
 			          return;
 			    }
 					_this.list = data.body.rows;
+					_this.$emit('leftMenuOver',{});
 					
 				},function(err){
 					console.log("err: _getMenu");

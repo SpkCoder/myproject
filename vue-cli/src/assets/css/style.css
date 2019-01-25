@@ -26,6 +26,12 @@ a{color: #333; text-decoration:none; }
 /* 清除浮动*/
 .clearfix:after{content:'';display:block;height:0;clear:both;visibility:hidden;}
 
+.login-bg {position: fixed; z-index: 999; left: 0; top: 0; width: 100%; height: 100%; background: url(../image/login-bg-8.jpg) no-repeat center center fixed; background-size: 100% 100%;}
+.login-box { width: 80%; max-width: 450px; margin: 10% auto; background-color: rgba(255, 255, 255, 0.4); border-radius: 10px; color: #fff; }
+.login-box h1{text-align: center; font-size: 25px; padding: 10px 0px; border-bottom: 1px solid #fff;}
+.login-box .el-form{padding: 10px 40px;}
+.login-box .el-form-item__label{color: #fff; font-size: 16px; padding: 0;}
+.login-box .el-checkbox{color: #fff; margin-left: 10px;}
 
 .header{position: relative; height: 55px; background-color: #23262E;}
 .header .logo{position: absolute; left: 0; top: 0; width: 200px; height: 100%; display: none;}

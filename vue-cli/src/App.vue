@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-  	<v-header></v-header>
-  	<v-aside></v-aside>
-    <router-view/>
+  	<v-header :msg="leftMenu" @topMenuOver="emitView"></v-header>
+  	<v-aside @leftMenuOver="emitTopMenu"></v-aside>
+    <router-view :msg="topMenu"/>
     <v-footer></v-footer>
   </div>
 </template>
@@ -20,11 +20,17 @@ export default {
   },
   data () {
         return {
-          
+          leftMenu: false,
+          topMenu: false
         }
   },
   methods: {
-
+      emitTopMenu(data) {
+          this.leftMenu = true;
+      },
+      emitView(data) {
+          this.topMenu = true;
+      }
   }
 }
 </script>

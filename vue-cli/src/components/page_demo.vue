@@ -82,7 +82,7 @@
 								</el-dialog>
 
                 <el-dialog
-									title="搜索"
+									title="查询"
 									:visible.sync="searchFormBox"
 									width="600px">
 									<el-form ref="searchForm" :model="searchForm" :rules="rules" size="small" label-width="150px">
@@ -386,24 +386,19 @@ export default {
       this.whereStr = '';
       this.getData();
     }
-	},
+  },
+  watch: {
+      msg(value, oldValue) {
+        //console.log(value, oldValue);
+      }
+  },
 	created() {
 		var _this = this;
 		_this.url = _this.GLOBAL.host + _this.$route.path.replace(/\/page/,"/python");
+    _this.modelName1 = _this.$route.name;
+    _this.modelName2 = _this.$route.meta.pname;
     _this.getData();
-  },
-	mounted: function () {
-    var _this = this;
-		_this.$nextTick(function () {
-			//console.log(_this.$route);
-			setTimeout(function () {
-        var this_a = document.querySelector('a[href="#'+_this.$route.path+'"]');
-        var this_li = this_a.parentNode.parentNode.parentNode;
-        _this.modelName2 = this_a.innerHTML;
-        _this.modelName1 = this_li.querySelector('.itemName1').innerHTML;
-      }, 0);
-		});
-	}
+  }
 }
 </script>
 

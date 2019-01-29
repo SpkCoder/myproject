@@ -12,7 +12,7 @@
 								<div style="margin-bottom:10px;">
 									<el-button-group>
 										<el-button type="primary" size="small" @click="btn_add()">增加</el-button>
-										<el-button type="primary" size="small" @click="btn_del()">删除</el-button>
+										<!-- <el-button type="primary" size="small" @click="btn_del()">删除</el-button> -->
 										<el-button type="primary" size="small" @click="btn_search()">查询</el-button>
 									</el-button-group>
 								</div>
@@ -36,7 +36,7 @@
 									<el-table-column fixed="right" label="操作" width="130"> 
 											<template slot-scope="scope"> 
 											<!-- <el-button @click="view(scope.row)" type="text" size="small" icon="el-icon-view">&nbsp;</el-button> -->
-											<el-button @click="edit(scope.row)" type="text" size="small" icon="el-icon-edit">&nbsp;</el-button>
+											<!-- <el-button @click="edit(scope.row)" type="text" size="small" icon="el-icon-edit">&nbsp;</el-button> -->
 											<el-button @click="del(scope.row)" type="text" size="small" icon="el-icon-delete">&nbsp;</el-button>
 											</template> 
 									</el-table-column>
@@ -51,9 +51,30 @@
 									width="600px">
 									<el-form ref="addForm" :model="addForm" :rules="rules" size="small" label-width="150px">
 											<template v-for='(item, index) in field_en'>
-                          <el-form-item :key="index" :label="field_ch[index]" :prop="item">
-                            <el-input v-model="addForm[item]"/>
-                          </el-form-item>
+                          <template v-if='item == "id" || item == "model_id" || item == "db_name" || item == "function_en"'>
+                          </template>
+                          <template v-else-if='item=="model_name"'>
+                            <el-form-item :key="index" :label="field_ch[index]" :prop="item">
+                              <el-select v-model="addForm['id']" placeholder="">
+                                <el-option v-for="item2 in modelList" :key="item2.id" :label="item2.name" :value="item2.id"> </el-option>
+                              </el-select>
+                            </el-form-item>
+                          </template>
+                          <template v-else-if='item=="function_ch"'>
+                            <el-form-item :key="index" :label="field_ch[index]" :prop="item">
+                              <el-select v-model="addForm['function_en']" placeholder="">
+                                <el-option label="查询" value="findData"> </el-option>
+                                <el-option label="增加" value="insertData"> </el-option>
+                                <el-option label="修改" value="updateData"> </el-option>
+                                <el-option label="删除" value="delData"> </el-option>
+                              </el-select>
+                            </el-form-item>
+                          </template>
+                          <template v-else>
+                            <el-form-item :key="index" :label="field_ch[index]" :prop="item">
+                              <el-input v-model="addForm[item]"/>
+                            </el-form-item>
+                          </template>
                       </template>
 
 											<el-form-item>
@@ -140,6 +161,7 @@ export default {
       editForm: {},
       addForm: {},
       searchForm: {},
+      modelList: [],
       currPage: 1,
       prePageNum: 10,
       count: 0,
@@ -176,6 +198,14 @@ export default {
 
         _this.rules = formVerify.rules(_this.field_en,_this.data_type);
         
+      });
+      
+      //加载model_list
+      var reqData = 'action=findData&whereStr=level=2&sortStr=id ASC&prePageNum=100000&currPage=1';
+      DB.findData(_this, _this.GLOBAL.host+'/python/model_list', reqData, function (resData) {
+        if(resData){
+          _this.modelList = resData.rows;
+        }
 			});
 			
     },
@@ -249,6 +279,10 @@ export default {
     del(row) {
         //console.log(row);
         var _this = this;
+        if(row.model_id==100001 || row.model_id==100002 || row.model_id==100003 || row.model_id==100004 || row.model_id==100005 || row.model_id==100006 || row.model_id==100007 || row.model_id==100008){
+          _this.$message({duration: 1000, message: "禁止操作系统模块！" });
+          return;
+        }
         _this.$confirm('确认删除?', '删除', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',

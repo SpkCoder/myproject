@@ -11,8 +11,8 @@
 
 								<div style="margin-bottom:10px;">
 									<el-button-group>
-										<el-button type="primary" size="small" @click="btn_add()">增加</el-button>
-										<el-button type="primary" size="small" @click="btn_del()">删除</el-button>
+										<!-- <el-button type="primary" size="small" @click="btn_add()">增加</el-button> -->
+										<!-- <el-button type="primary" size="small" @click="btn_del()">删除</el-button> -->
 										<el-button type="primary" size="small" @click="btn_search()">查询</el-button>
 									</el-button-group>
 								</div>
@@ -33,13 +33,13 @@
 									<template v-for='(item, index) in field_en'>
 											<el-table-column :key="item.id" show-overflow-tooltip sortable="custom" :prop="item" :label="field_ch[index]" :width="field_width[index] | field_width_filter"> </el-table-column>
 									</template>
-									<el-table-column fixed="right" label="操作" width="130"> 
+									<!-- <el-table-column fixed="right" label="操作" width="130"> 
 											<template slot-scope="scope"> 
-											<!-- <el-button @click="view(scope.row)" type="text" size="small" icon="el-icon-view">&nbsp;</el-button> -->
+											<el-button @click="view(scope.row)" type="text" size="small" icon="el-icon-view">&nbsp;</el-button>
 											<el-button @click="edit(scope.row)" type="text" size="small" icon="el-icon-edit">&nbsp;</el-button>
 											<el-button @click="del(scope.row)" type="text" size="small" icon="el-icon-delete">&nbsp;</el-button>
 											</template> 
-									</el-table-column>
+									</el-table-column> -->
 								</el-table>
 
 								<el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currPage" :page-sizes="[10,50,100,500]" :page-size="prePageNum" layout="prev, pager, next, jumper, total, sizes" :total="count"> 
@@ -169,7 +169,7 @@ export default {
 				_this.field_width.forEach(element => {
 						_this.tabelwidth+=Number(element);
 				});
-				_this.tabelwidth = _this.tabelwidth + 40 + 130 + 5 + "px";
+				_this.tabelwidth = _this.tabelwidth + 40 + 5 + "px";
         _this.currPage = resData.currPage;
         _this.prePageNum = resData.prePageNum;
         _this.count = resData.count;
@@ -355,9 +355,9 @@ export default {
                   }else if(field_type_this == "date(YYYY-MM-DD HH:mm:ss)" || field_type_this == "date(YYYY)" || field_type_this == "date(YYYY-MM)" || field_type_this == "date(YYYY-MM-DD)" || field_type_this == "date(HH:mm:ss)"){
                     if(_this.searchForm[item]){
                       if(num == 0){
-                          whereStr += item + '>="' + _this.searchForm[item] + '"';
+                          whereStr += item + '>="' + moment(_this.searchForm[item]).format("YYYY-MM-DD HH:mm:ss") + '"';
                       }else{
-                          whereStr += ' and ' + item + '>="' + _this.searchForm[item] + '"';
+                          whereStr += ' and ' + item + '>="' + moment(_this.searchForm[item]).format("YYYY-MM-DD HH:mm:ss") + '"';
                       }
                       num++;
                     }

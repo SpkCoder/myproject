@@ -20,10 +20,22 @@ export default new Router({
       component: resolve => require(['@/components/model_list'], resolve)
     },
     {
+      path: '/page/model_list_fn',
+      name: '模块功能',
+      meta: { pname: '系统设置'},
+      component: resolve => require(['@/components/model_list_fn'], resolve)
+    },
+    {
       path: '/page/user_list',
       name: '用户列表',
       meta: { pname: '系统设置'},
       component: resolve => require(['@/components/user_list'], resolve)
+    },
+    {
+      path: '/page/record_list',
+      name: '操作记录',
+      meta: { pname: '系统设置' },
+      component: resolve => require(['@/components/record_list'], resolve)
     },
     {
       path: '*',

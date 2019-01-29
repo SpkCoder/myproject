@@ -51,7 +51,25 @@
 									width="600px">
 									<el-form ref="addForm" :model="addForm" :rules="rules" size="small" label-width="150px">
 											<template v-for='(item, index) in field_en'>
-                          <el-form-item :key="index" :label="field_ch[index]" :prop="item">
+                          <el-form-item v-if='item=="level"' :key="index" :label="field_ch[index]" :prop="item">
+                            <el-select v-model="addForm[item]" placeholder="">
+                              <el-option label="1" value="1"> </el-option>
+                              <el-option label="2" value="2"> </el-option>
+                            </el-select>
+                          </el-form-item>
+                          <el-form-item v-else-if='item=="position"' :key="index" :label="field_ch[index]" :prop="item">
+                            <el-select v-model="addForm[item]" placeholder="">
+                              <el-option label="左侧" value="left"> </el-option>
+                              <el-option label="顶部" value="top"> </el-option>
+                            </el-select>
+                          </el-form-item>
+                          <el-form-item v-else-if='item=="show"' :key="index" :label="field_ch[index]" :prop="item">
+                            <el-radio-group v-model="addForm[item]">
+                              <el-radio label="true">是</el-radio>
+                              <el-radio label="false">否</el-radio>
+                            </el-radio-group>
+                          </el-form-item>
+                          <el-form-item v-else :key="index" :label="field_ch[index]" :prop="item">
                             <el-input v-model="addForm[item]"/>
                           </el-form-item>
                       </template>
@@ -106,6 +124,7 @@
 </template>
 
 <script>
+import moment from 'moment';
 import DB from '@/common/db';
 import formVerify from '@/common/formVerify';
 export default {
@@ -150,7 +169,7 @@ export default {
       var _this = this;
       _this.listLoading = true;
       var reqData = 'action=findData&whereStr='+_this.whereStr+'&sortStr='+_this.sortStr+'&prePageNum='+_this.prePageNum+'&currPage='+_this.currPage;
-      DB.findData(_this, reqData, function (resData) {
+      DB.findData(_this, _this.url, reqData, function (resData) {
         //console.log(resData);
         _this.listLoading = false;
 				if(typeof resData != "object"){
@@ -226,7 +245,7 @@ export default {
               var updateJson =_this.editForm;
               delete updateJson.id;
               var reqData = {'action': 'updateData', 'whereStr': whereStr, 'updateJson': JSON.stringify(updateJson)};      
-              DB.updateData(_this, reqData, function (resData) {
+              DB.updateData(_this, _this.url, reqData, function (resData) {
                 //console.log(data)
                 _this.$message({duration: 1000, message: resData });
                 if(resData != "操作成功"){ return; }
@@ -253,7 +272,7 @@ export default {
         }).then(function () {
           var whereJson = {"id": [row.id]};
           var reqData = {'action': 'delData', 'whereJson': JSON.stringify(whereJson)};
-          DB.delData(_this, reqData, function (resData) {
+          DB.delData(_this, _this.url, reqData, function (resData) {
             //console.log(data)
             _this.$message({duration: 1000, message: resData });
             if(resData != "操作成功"){ return; }
@@ -265,7 +284,10 @@ export default {
         });
     },
     btn_add(){
-       this.addFormBox = true;
+      this.$set(this.addForm, "level", "1");
+      this.$set(this.addForm, "position", "left");
+      this.$set(this.addForm, "show", "true");
+      this.addFormBox = true;
     },
     addSubmitForm() {
         var _this = this;
@@ -281,7 +303,7 @@ export default {
               var dataArr=[];
               dataArr.push(_this.addForm);
               var reqData = {'action': 'insertData', 'dataArr': JSON.stringify(dataArr)};
-              DB.insertData(_this, reqData, function (resData) {
+              DB.insertData(_this, _this.url, reqData, function (resData) {
                 //console.log(resData)
                 _this.$message({duration: 1000, message: resData });
                 if(resData != "操作成功"){ return; }
@@ -315,7 +337,7 @@ export default {
         //     }
         //     var whereJson = {"id": idArr};
         //     var reqData = {'action': 'delData', 'whereJson': JSON.stringify(whereJson)};
-        //     DB.delData(_this, reqData, function (resData) {
+        //     DB.delData(_this, _this.url, reqData, function (resData) {
         //       //console.log(resData)
         //       _this.$message({duration: 1000, message: resData });
         //       if(resData != "操作成功"){ return; }
@@ -399,6 +421,7 @@ export default {
     _this.modelName1 = _this.$route.name;
     _this.modelName2 = _this.$route.meta.pname;
     _this.getData();
+
   }
 }
 </script>

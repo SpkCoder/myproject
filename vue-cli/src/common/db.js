@@ -1,6 +1,6 @@
 export default {
-    findData: function (_this, reqData, callback) {
-        _this.$http.get(_this.url + '?' + reqData, { responseType: 'text', credentials: true })
+    findData: function (_this, url, reqData, callback) {
+        _this.$http.get(url + '?' + reqData, { responseType: 'text', credentials: true })
             .then(function (res) {
                 // console.log(res.data);
                 callback(res.data);
@@ -8,8 +8,8 @@ export default {
                 callback(err);
             });
     },
-    insertData: function (_this, reqData, callback) {
-        _this.$http.post(_this.url, reqData, {emulateJSON: true, responseType: 'text', credentials: true })
+    insertData: function (_this, url, reqData, callback) {
+        _this.$http.post(url, reqData, {emulateJSON: true, responseType: 'text', credentials: true })
             .then(function (res) {
                 //console.log(res.data);
                 callback(res.data);
@@ -17,8 +17,8 @@ export default {
                 callback(err);
             });
     },
-    updateData: function (_this, reqData, callback) {
-        _this.$http.post(_this.url, reqData, {emulateJSON:true, responseType: 'text', credentials: true })
+    updateData: function (_this, url, reqData, callback) {
+        _this.$http.post(url, reqData, {emulateJSON:true, responseType: 'text', credentials: true })
             .then(function (res) {
                 //console.log(res.data);
                 callback(res.data);
@@ -26,8 +26,8 @@ export default {
                 callback(err);
             });
     },
-    delData: function (_this, reqData, callback) {
-        _this.$http.post(_this.url, reqData, {emulateJSON:true, responseType: 'text', credentials: true })
+    delData: function (_this, url, reqData, callback) {
+        _this.$http.post(url, reqData, {emulateJSON:true, responseType: 'text', credentials: true })
             .then(function (res) {
                 //console.log(res.data);
                 callback(res.data);

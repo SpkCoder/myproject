@@ -5,6 +5,7 @@
 		      :default-active="activeIndex" 
 					:unique-opened=true
 		      class="el-menu-vertical-demo"
+		      @select="handleSelect"
 		      @open="handleOpen"
 	        @close="handleClose"
 		      background-color="#23262E"
@@ -15,9 +16,9 @@
 							<template slot="title"><i :class="item.iconfont"></i><span class="itemName1">{{ item.name }}</span></template>
 							<template v-for='(item2, index2) in item.children'>
 								<el-menu-item :key="item2.id" v-if='item2.show == "true"' :index='item2.id | toStr'>
-								<i :class="item.iconfont"></i>
-								<a :href="item2.href">{{ item2.name }}</a>
-							</el-menu-item>
+									<i :class="item.iconfont"></i>
+									<a :href="item2.href">{{ item2.name }}</a>
+								</el-menu-item>
 							</template>
 						</el-submenu>
 					</template>
@@ -39,14 +40,18 @@
       };
     },
     filters: {
-		  toStr: function (value) {
-		    if (!value) return '';
-		    return value.toString();
-		  }
-	},
+				toStr: function (value) {
+					if (!value) return '';
+					return value.toString();
+				}
+		},
     methods: {
+			handleSelect(key, keyPath) {
+				//console.log(key, keyPath);
+				localStorage.setItem("activeIndex",key);
+	    },
 	    handleOpen(key, keyPath) {
-          //console.log(key, keyPath);
+        // console.log(key, keyPath);
 	    },
 	    handleClose(key, keyPath) {
 	      //console.log(key, keyPath);
@@ -95,6 +100,9 @@
     	this._getMenu();
 			this.$nextTick(function () {
 					console.log(this.GLOBAL);
+					if(localStorage.getItem("activeIndex")){
+						this.activeIndex = localStorage.getItem("activeIndex");
+					}
 
 				  if(document.body.clientWidth <= 768){
 							document.querySelector(".left-aside").classList.add("left-aside-close");

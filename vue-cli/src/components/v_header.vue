@@ -112,8 +112,9 @@
     },
     methods: {
       handleSelect(key, keyPath) {
-          console.log(key, keyPath);
-      },
+				//console.log(key, keyPath);
+				localStorage.setItem("activeIndex",key);
+	    },
       _getMenu () {
 				var _this = this;
 				var reqUrl = _this.GLOBAL.host + "/python/menu?action=findData&timeStamp=" + Date.now();

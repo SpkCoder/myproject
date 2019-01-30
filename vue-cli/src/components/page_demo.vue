@@ -51,9 +51,13 @@
 									width="600px">
 									<el-form ref="addForm" :model="addForm" :rules="rules" size="small" label-width="150px">
 											<template v-for='(item, index) in field_en'>
-                          <el-form-item :key="index" :label="field_ch[index]" :prop="item">
-                            <el-input v-model="addForm[item]"/>
-                          </el-form-item>
+                          <template v-if='item == "id"'>
+                          </template>
+                          <template v-else>
+                            <el-form-item :key="index" :label="field_ch[index]" :prop="item">
+                              <el-input v-model="addForm[item]"/>
+                            </el-form-item>
+                          </template>
                       </template>
 
 											<el-form-item>
@@ -69,9 +73,13 @@
 									width="600px">
 									<el-form ref="editForm" :model="editForm" :rules="rules" size="small" label-width="150px">
 											<template v-for='(item, index) in field_en'>
-                          <el-form-item :key="index" :label="field_ch[index]" :prop="item">
-                            <el-input v-model="editForm[item]"/>
-                          </el-form-item>
+                          <template v-if='item == "id"'>
+                          </template>
+                          <template v-else>
+                            <el-form-item :key="index" :label="field_ch[index]" :prop="item">
+                              <el-input v-model="editForm[item]"/>
+                            </el-form-item>
+                          </template>
                       </template>
 
 											<el-form-item>
@@ -210,7 +218,7 @@ export default {
         //console.log(row);
         var _this = this;
         _this.field_en.forEach(function(item,index){
-            _this.editForm[item] = row[item] + '';
+            _this.$set(_this.editForm, item, row[item]);
         });
         this.editFormBox = true;
     },
@@ -281,6 +289,7 @@ export default {
                     _this.addForm[item] = Number(_this.addForm[item]);
                   }
               });
+              delete _this.addForm.id;
               var dataArr=[];
               dataArr.push(_this.addForm);
               var reqData = {'action': 'insertData', 'dataArr': JSON.stringify(dataArr)};

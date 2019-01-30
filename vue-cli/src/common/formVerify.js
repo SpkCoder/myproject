@@ -7,7 +7,7 @@ export default {
                     {
                         validator: function (rule, value, callback) {
                             if (/['|"]+/.test(value)) {
-                                return callback(new Error('The input text does not contain single quotes or double quotes'));
+                                return callback(new Error('输入的文本不能包含英文单引号或双引号'));
                             }
                             callback();
                         },
@@ -19,7 +19,7 @@ export default {
                     {
                         validator: function (rule, value, callback) {
                             if (/['|"]+/.test(value)) {
-                                return callback(new Error('The input text does not contain single quotes or double quotes'));
+                                return callback(new Error('输入的文本不能包含英文单引号或双引号'));
                             }
                             callback();
                         },
@@ -31,7 +31,7 @@ export default {
                     {
                         validator: function (rule, value, callback) {
                             if (! /^[1-9][0-9]*$/.test(value)) {
-                                return callback(new Error('Please enter a positive integer'));
+                                return callback(new Error('请输入正整数'));
                             }
                             callback();
                         },
@@ -43,7 +43,7 @@ export default {
                     {
                         validator: function (rule, value, callback) {
                             if (! /^[1-9][0-9]{5}$/.test(value)) {
-                                return callback(new Error('Please enter 6 positive integers'));
+                                return callback(new Error('请输入6位正整数'));
                             }
                             callback();
                         },
@@ -55,7 +55,7 @@ export default {
                     {
                         validator: function (rule, value, callback) {
                             if (! /^[1-9]*[0]?\.[0-9]{2}$/.test(value)) {
-                                return callback(new Error('Please keep 2 decimal numbers'));
+                                return callback(new Error('请保留2位小数'));
                             }
                             callback();
                         },
@@ -67,7 +67,7 @@ export default {
                     {
                         validator: function (rule, value, callback) {
                             if (! /^[1-9]*[0]?\.[0-9]{4}$/.test(value)) {
-                                return callback(new Error('Please keep 4 decimal numbers'));
+                                return callback(new Error('请保留4位小数'));
                             }
                             callback();
                         },
@@ -79,7 +79,7 @@ export default {
                     {
                         validator: function (rule, value, callback) {
                             if (! /^[0-9]{4}-[0-9]{2}-[0-9]{2}[ ][0-6]{2}:[0-6]{2}:[0-6]{2}$/.test(value)) {
-                                return callback(new Error('Please input format(YYYY-MM-DD HH:mm:ss)'));
+                                return callback(new Error('请输入正确格式'));
                             }
                             callback();
                         },
@@ -91,7 +91,7 @@ export default {
                     {
                         validator: function (rule, value, callback) {
                             if (! /^[0-9]{4}$/.test(value)) {
-                                return callback(new Error('Please input format(YYYY)'));
+                                return callback(new Error('请输入正确格式'));
                             }
                             callback();
                         },
@@ -103,7 +103,7 @@ export default {
                     {
                         validator: function (rule, value, callback) {
                             if (! /^[0-9]{4}-[0-9]{2}$/.test(value)) {
-                                return callback(new Error('Please input format(YYYY-MM)'));
+                                return callback(new Error('请输入正确格式'));
                             }
                             callback();
                         },
@@ -115,7 +115,7 @@ export default {
                     {
                         validator: function (rule, value, callback) {
                             if (! /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/.test(value)) {
-                                return callback(new Error('Please input format(YYYY-MM-DD)'));
+                                return callback(new Error('请输入正确格式'));
                             }
                             callback();
                         },
@@ -127,7 +127,7 @@ export default {
                     {
                         validator: function (rule, value, callback) {
                             if (! /^[0-6]{2}:[0-6]{2}:[0-6]{2}$/.test(value)) {
-                                return callback(new Error('Please input format(HH:mm:ss)'));
+                                return callback(new Error('请输入正确格式'));
                             }
                             callback();
                         },
@@ -138,14 +138,11 @@ export default {
         
         });
 
-        obj["UserName"] = [
+        obj["username"] = [
             {
                 validator: function (rule, value, callback) {
-                    if (!value) {
-                        return callback(new Error('Can not be empty value'));
-                    }
-                    if (/['|"]+/.test(value)) {
-                        return callback(new Error('The input text does not contain single quotes or double quotes'));
+                    if (! /[(\w)]{1,30}/.test(value)) {
+                        return callback(new Error('用户名必须是字母数字下划线组合'));
                     }
                     callback();
                 },
@@ -153,15 +150,13 @@ export default {
             }
         ];
 
-        obj["Password"] = [
+        obj["password"] = [
             {
                 validator: function (rule, value, callback) {
-                    if (! /[(\w)|@|#|-|$|%|^|&|+|=|!|?]{8,36}/.test(value)) {
-                        return callback(new Error('Password must contain special character - @#-_$%^&+=!? and length>=8'));
+                    if (! /[(\w)]{6,30}/.test(value)) {
+                        return callback(new Error('密码必须是字母数字下划线组合且长度>=6'));
                     }
-                    if (! /[_|@|#|-|$|%|^|&|+|=|!|?]+/.test(value)) {
-                        return callback(new Error('Password must contain special character - @#-_$%^&+=!? and length>=8'));
-                    }
+                    
                     callback();
                 },
                 trigger: 'blur'

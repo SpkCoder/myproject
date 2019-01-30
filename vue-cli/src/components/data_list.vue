@@ -35,15 +35,15 @@
 									</template>
 									<el-table-column fixed="right" label="操作" width="130"> 
 											<template slot-scope="scope"> 
-											<!-- <el-button @click="view(scope.row)" type="text" size="small" icon="el-icon-view">&nbsp;</el-button> -->
-											<el-button @click="edit(scope.row)" type="text" size="small" icon="el-icon-edit">&nbsp;</el-button>
+											<el-button @click="view(scope.row)" type="text" size="small" icon="el-icon-view">&nbsp;</el-button>
+											<!-- <el-button @click="edit(scope.row)" type="text" size="small" icon="el-icon-edit">&nbsp;</el-button> -->
 											<el-button @click="del(scope.row)" type="text" size="small" icon="el-icon-delete">&nbsp;</el-button>
 											</template> 
 									</el-table-column>
 								</el-table>
 
-								<el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currPage" :page-sizes="[10,50,100,500]" :page-size="prePageNum" layout="prev, pager, next, jumper, total, sizes" :total="count"> 
-									</el-pagination>
+								<!-- <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currPage" :page-sizes="[10,50,100,500]" :page-size="prePageNum" layout="prev, pager, next, jumper, total, sizes" :total="count"> 
+									</el-pagination> -->
 								
 								<el-dialog
 									title="增加"
@@ -51,27 +51,20 @@
 									width="600px">
 									<el-form ref="addForm" :model="addForm" :rules="rules" size="small" label-width="150px">
 											<template v-for='(item, index) in field_en'>
-                          <el-form-item v-if='item=="level"' :key="index" :label="field_ch[index]" :prop="item">
-                            <el-select v-model="addForm[item]" placeholder="">
-                              <el-option label="1" value="1"> </el-option>
-                              <el-option label="2" value="2"> </el-option>
-                            </el-select>
-                          </el-form-item>
-                          <el-form-item v-else-if='item=="position"' :key="index" :label="field_ch[index]" :prop="item">
-                            <el-select v-model="addForm[item]" placeholder="">
-                              <el-option label="左侧" value="left"> </el-option>
-                              <el-option label="顶部" value="top"> </el-option>
-                            </el-select>
-                          </el-form-item>
-                          <el-form-item v-else-if='item=="show"' :key="index" :label="field_ch[index]" :prop="item">
-                            <el-radio-group v-model="addForm[item]">
-                              <el-radio label="true">是</el-radio>
-                              <el-radio label="false">否</el-radio>
-                            </el-radio-group>
-                          </el-form-item>
-                          <el-form-item v-else :key="index" :label="field_ch[index]" :prop="item">
-                            <el-input v-model="addForm[item]"/>
-                          </el-form-item>
+                          <template v-if='item=="id"'>
+                            <el-form-item :key="index" :label="field_ch[index]">
+                              <el-select @change="modelChange" id="id_select" v-model="addForm['id']" placeholder="">
+                                <el-option v-for="item2 in modelList" :key="item2.id" :label="item2.name" :value="item2.id"> </el-option>
+                              </el-select>
+                            </el-form-item>
+                          </template>
+                          <template v-else-if='item=="id" || item=="name" || item=="name_ch"'>
+                            <el-form-item :key="index" :label="field_ch[index]" :prop="item">
+                              <el-input v-model="addForm[item]"/>
+                            </el-form-item>
+                          </template>
+                          <template v-else>
+                          </template>
                       </template>
 
 											<el-form-item>
@@ -87,27 +80,13 @@
 									width="600px">
 									<el-form ref="editForm" :model="editForm" :rules="rules" size="small" label-width="150px">
 											<template v-for='(item, index) in field_en'>
-                          <el-form-item v-if='item=="level"' :key="index" :label="field_ch[index]" :prop="item">
-                            <el-select v-model="editForm[item]" placeholder="">
-                              <el-option label="1" value="1"> </el-option>
-                              <el-option label="2" value="2"> </el-option>
-                            </el-select>
-                          </el-form-item>
-                          <el-form-item v-else-if='item=="position"' :key="index" :label="field_ch[index]" :prop="item">
-                            <el-select v-model="editForm[item]" placeholder="">
-                              <el-option label="左侧" value="left"> </el-option>
-                              <el-option label="顶部" value="top"> </el-option>
-                            </el-select>
-                          </el-form-item>
-                          <el-form-item v-else-if='item=="show"' :key="index" :label="field_ch[index]" :prop="item">
-                            <el-radio-group v-model="editForm[item]">
-                              <el-radio label="true">是</el-radio>
-                              <el-radio label="false">否</el-radio>
-                            </el-radio-group>
-                          </el-form-item>
-                          <el-form-item v-else :key="index" :label="field_ch[index]" :prop="item">
-                            <el-input v-model="editForm[item]"/>
-                          </el-form-item>
+                          <template v-if='item == "id"'>
+                          </template>
+                          <template v-else>
+                            <el-form-item :key="index" :label="field_ch[index]" :prop="item">
+                              <el-input v-model="editForm[item]"/>
+                            </el-form-item>
+                          </template>
                       </template>
 
 											<el-form-item>
@@ -123,7 +102,10 @@
 									width="600px">
 									<el-form ref="searchForm" :model="searchForm" :rules="rules" size="small" label-width="150px">
                       <template v-for='(item, index) in field_en'>
-                          <el-form-item :key="index" :label="field_ch[index]">
+                          <el-form-item v-if='/date/.test(data_type[index])' :key="index" :label="field_ch[index]">
+                            <el-date-picker v-model="searchForm[item]" type="datetime" placeholder="选择日期时间"> </el-date-picker>
+                          </el-form-item>
+                          <el-form-item v-else :key="index" :label="field_ch[index]">
                             <el-input v-model="searchForm[item]"/>
                           </el-form-item>
                       </template>
@@ -135,6 +117,7 @@
 										</el-form>
 								</el-dialog>							
 
+                <div class="loadingBox" v-show="showloading"><div><i class="el-icon-loading"></i><p>系统重启中...</p></div></div>
 						</div>
 					</div>
 		</div>
@@ -146,8 +129,7 @@ import moment from 'moment';
 import DB from '@/common/db';
 import formVerify from '@/common/formVerify';
 export default {
-  name: 'model_list',
-  props: ["msg"],
+	name: 'model_list',
 	filters: {
     field_width_filter(value) {
        if(value){return value+"px"}
@@ -159,8 +141,9 @@ export default {
 			modelName2: null,
 			url: null,
 			tabelwidth: null,
-      list: null,
-      listLoading: true,
+			list: null,
+			listLoading: true,
+			showloading: false,
 			data_type: null,
 			field_ch: null,
 			field_en: null,
@@ -174,8 +157,9 @@ export default {
       editForm: {},
       addForm: {},
       searchForm: {},
+      modelList: [],
       currPage: 1,
-      prePageNum: 10,
+      prePageNum: 5000,
       count: 0,
       sortStr : '',
       whereStr : '',
@@ -186,7 +170,7 @@ export default {
     getData() {
       var _this = this;
       _this.listLoading = true;
-      var reqData = 'action=findData&whereStr='+_this.whereStr+'&sortStr='+_this.sortStr+'&prePageNum='+_this.prePageNum+'&currPage='+_this.currPage;
+      var reqData = 'action=findDataAll&whereStr='+_this.whereStr+'&sortStr='+_this.sortStr+'&prePageNum='+_this.prePageNum+'&currPage='+_this.currPage;
       DB.findData(_this, _this.url, reqData, function (resData) {
         //console.log(resData);
         _this.listLoading = false;
@@ -210,6 +194,24 @@ export default {
 
         _this.rules = formVerify.rules(_this.field_en,_this.data_type);
         
+      });
+      
+      //加载model_list
+      var reqData = 'action=findData&whereStr=level=2&sortStr=id ASC&prePageNum=100000&currPage=1';
+      DB.findData(_this, _this.GLOBAL.host+'/python/model_list', reqData, function (resData) {
+        if(resData){
+          var modelIdArr = [];
+          _this.list.forEach(function (item, index) {
+            modelIdArr.push(item.id);
+          });
+          var arr = [];
+          resData.rows.forEach(function (item, index) {
+            if(modelIdArr.indexOf(item.id) == -1){
+              arr.push(item);
+            }
+          });
+          _this.modelList = arr;
+        }
 			});
 			
     },
@@ -236,6 +238,17 @@ export default {
       var _this = this;
       _this.currPage = num;
       _this.getData();
+    },
+    modelChange(val) {
+      var _this = this;
+      _this.modelList.forEach(function (item, index) {
+        if(item.id == val){
+          var name = "";
+          if(item.href.split("/")[2]){name = item.href.split("/")[2]}
+          _this.$set(_this.addForm, "name", name);
+          _this.$set(_this.addForm, "name_ch", item.name);
+        }
+      });
     },
     view(row) {
        //console.log(row);
@@ -302,10 +315,7 @@ export default {
         });
     },
     btn_add(){
-      this.$set(this.addForm, "level", "1");
-      this.$set(this.addForm, "position", "left");
-      this.$set(this.addForm, "show", "true");
-      this.addFormBox = true;
+       this.addFormBox = true;
     },
     addSubmitForm() {
         var _this = this;
@@ -313,21 +323,41 @@ export default {
             if(valid) {
               //console.log(_this.addForm);
               _this.field_en.forEach(function(item,index){
-                  var field_type_this = _this.data_type[index];
-                  if(field_type_this == "int" || field_type_this == "int(6)" || field_type_this == "decimal(2)" || field_type_this == "decimal(4)"){
-                    _this.addForm[item] = Number(_this.addForm[item]);
+                  if(_this.addForm[item] != null){
+                    var field_type_this = _this.data_type[index];
+                    if(field_type_this == "int" || field_type_this == "int(6)" || field_type_this == "decimal(2)" || field_type_this == "decimal(4)"){
+                      _this.addForm[item] = Number(_this.addForm[item]);
+                    }
                   }
               });
-              var dataArr=[];
-              dataArr.push(_this.addForm);
-              var reqData = {'action': 'insertData', 'dataArr': JSON.stringify(dataArr)};
-              DB.insertData(_this, _this.url, reqData, function (resData) {
-                //console.log(resData)
-                _this.$message({duration: 1000, message: resData });
-                if(resData != "操作成功"){ return; }
-                _this.addFormBox = false;
-                _this.getData();
+              _this.addForm.field_ch = "ID";
+              _this.addForm.field_en = "id";
+              if(!_this.addForm.id || !_this.addForm.name || !_this.addForm.name_ch){_this.$message({duration: 1000, message: "模块ID和数据表名称不能为空" });return false;}
+              
+              var reqData = 'action=findData&whereStr=name="'+_this.addForm.name+'"&prePageNum=1&currPage=1';
+              DB.findData(_this, _this.url, reqData, function (resData) {
+                if(resData.rows.length > 0){
+                  _this.$message({duration: 1000, message: "数据表名称已存在" });
+                  return false;
+                }
+                var dataArr=[];
+                dataArr.push(_this.addForm);
+                var reqData = {'action': 'insertData', 'dataArr': JSON.stringify(dataArr)};
+                DB.insertData(_this, _this.url, reqData, function (resData) {
+                  //console.log(resData)
+                  _this.$message({duration: 1000, message: resData });
+                  if(resData != "操作成功"){ return; }
+                  _this.addFormBox = false;
+
+                  //系统重启
+                  _this.showloading = true;
+                  setTimeout(function () {
+                    window.location.reload();
+                  },5000);
+
+                });
               });
+
             }else {
               //console.log('error submit');
               return false;
@@ -339,31 +369,31 @@ export default {
       this.addFormBox = false;
     },
     btn_del(){
-        // var _this = this;
-        // if(_this.multipleSelection.length == 0){
-        //   _this.$message({duration: 1000, message: "请勾选要删除的行" });
-        //   return;
-        // }
-        // _this.$confirm('确认删除?', '删除', {
-        //   confirmButtonText: '确定',
-        //   cancelButtonText: '取消',
-        //   type: 'warning'
-        // }).then(function () {
-        //     var idArr = [];
-        //     for(var i=0; i<_this.multipleSelection.length; i++){
-        //       idArr.push(_this.multipleSelection[i].id);
-        //     }
-        //     var whereJson = {"id": idArr};
-        //     var reqData = {'action': 'delData', 'whereJson': JSON.stringify(whereJson)};
-        //     DB.delData(_this, _this.url, reqData, function (resData) {
-        //       //console.log(resData)
-        //       _this.$message({duration: 1000, message: resData });
-        //       if(resData != "操作成功"){ return; }
-        //       _this.getData();
-        //     });
-        // }).catch(function () {
-        //   //
-        // });
+        var _this = this;
+        if(_this.multipleSelection.length == 0){
+          _this.$message({duration: 1000, message: "请勾选要删除的行" });
+          return;
+        }
+        _this.$confirm('确认删除?', '删除', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(function () {
+            var idArr = [];
+            for(var i=0; i<_this.multipleSelection.length; i++){
+              idArr.push(_this.multipleSelection[i].id);
+            }
+            var whereJson = {"id": idArr};
+            var reqData = {'action': 'delData', 'whereJson': JSON.stringify(whereJson)};
+            DB.delData(_this, _this.url, reqData, function (resData) {
+              //console.log(resData)
+              _this.$message({duration: 1000, message: resData });
+              if(resData != "操作成功"){ return; }
+              _this.getData();
+            });
+        }).catch(function () {
+          //
+        });
 
     },
     btn_search(){
@@ -415,7 +445,7 @@ export default {
               _this.getData();
 
             }else {
-              // console.log('error submit');
+              //console.log('error submit');
               return false;
             }
         });
@@ -439,7 +469,6 @@ export default {
     _this.modelName1 = _this.$route.name;
     _this.modelName2 = _this.$route.meta.pname;
     _this.getData();
-
   }
 }
 </script>

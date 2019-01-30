@@ -169,22 +169,22 @@ def operation(req):
 
     # 删除数据
     def del_data():
-        if 'dataArr' in req.form:
+        if 'whereJson' in req.form:
             try:
-                list_data = json.loads(req.form['dataArr'])
-                if len(list_data) == 0:
-                    return make_response('dataArr错误')
+                dict_where = json.loads(req.form['whereJson'])
+                if len(dict_where) != 1:
+                    return make_response('whereJson错误')
             except:
-                return make_response('dataArr错误')
+                return make_response('whereJson错误')
         else:
-            return make_response('dataArr错误')
+            return make_response('whereJson错误')
 
-        result = mysqldb.del_data(table_name, list_data)
+        result = mysqldb.del_data(table_name, dict_where)
         # print(result)
 
         if result:
             # 操作记录
-            content = 'whereJson=' + re.sub(r'\"', "'", json.dumps(list_data, ensure_ascii=False))
+            content = 'whereJson=' + re.sub(r'\"', "'", json.dumps(dict_where, ensure_ascii=False))
             dict_record = {'username': dict_login['username'], 'dbName': table_name, 'action': '删除', 'content': content, 'os': dict_login['os'], 'px': dict_login['px'], 'ip': req.remote_addr, 'time': time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())}
             mysqldb.set_record(dict_record)
 

@@ -12,7 +12,7 @@
 								<div style="margin-bottom:10px;">
 									<el-button-group>
 										<el-button type="primary" size="small" @click="btn_add()">增加</el-button>
-										<!-- <el-button type="primary" size="small" @click="btn_del()">删除</el-button> -->
+										<el-button type="primary" size="small" @click="btn_del()">删除</el-button>
 										<el-button type="primary" size="small" @click="btn_search()">查询</el-button>
 									</el-button-group>
 								</div>
@@ -51,27 +51,13 @@
 									width="600px">
 									<el-form ref="addForm" :model="addForm" :rules="rules" size="small" label-width="150px">
 											<template v-for='(item, index) in field_en'>
-                          <el-form-item v-if='item=="level"' :key="index" :label="field_ch[index]" :prop="item">
-                            <el-select v-model="addForm[item]" placeholder="">
-                              <el-option label="1" value="1"> </el-option>
-                              <el-option label="2" value="2"> </el-option>
-                            </el-select>
-                          </el-form-item>
-                          <el-form-item v-else-if='item=="position"' :key="index" :label="field_ch[index]" :prop="item">
-                            <el-select v-model="addForm[item]" placeholder="">
-                              <el-option label="左侧" value="left"> </el-option>
-                              <el-option label="顶部" value="top"> </el-option>
-                            </el-select>
-                          </el-form-item>
-                          <el-form-item v-else-if='item=="show"' :key="index" :label="field_ch[index]" :prop="item">
-                            <el-radio-group v-model="addForm[item]">
-                              <el-radio label="true">是</el-radio>
-                              <el-radio label="false">否</el-radio>
-                            </el-radio-group>
-                          </el-form-item>
-                          <el-form-item v-else :key="index" :label="field_ch[index]" :prop="item">
-                            <el-input v-model="addForm[item]"/>
-                          </el-form-item>
+                          <template v-if='item == "id"'>
+                          </template>
+                          <template v-else>
+                            <el-form-item :key="index" :label="field_ch[index]" :prop="item">
+                              <el-input v-model="addForm[item]"/>
+                            </el-form-item>
+                          </template>
                       </template>
 
 											<el-form-item>
@@ -87,27 +73,13 @@
 									width="600px">
 									<el-form ref="editForm" :model="editForm" :rules="rules" size="small" label-width="150px">
 											<template v-for='(item, index) in field_en'>
-                          <el-form-item v-if='item=="level"' :key="index" :label="field_ch[index]" :prop="item">
-                            <el-select v-model="editForm[item]" placeholder="">
-                              <el-option label="1" value="1"> </el-option>
-                              <el-option label="2" value="2"> </el-option>
-                            </el-select>
-                          </el-form-item>
-                          <el-form-item v-else-if='item=="position"' :key="index" :label="field_ch[index]" :prop="item">
-                            <el-select v-model="editForm[item]" placeholder="">
-                              <el-option label="左侧" value="left"> </el-option>
-                              <el-option label="顶部" value="top"> </el-option>
-                            </el-select>
-                          </el-form-item>
-                          <el-form-item v-else-if='item=="show"' :key="index" :label="field_ch[index]" :prop="item">
-                            <el-radio-group v-model="editForm[item]">
-                              <el-radio label="true">是</el-radio>
-                              <el-radio label="false">否</el-radio>
-                            </el-radio-group>
-                          </el-form-item>
-                          <el-form-item v-else :key="index" :label="field_ch[index]" :prop="item">
-                            <el-input v-model="editForm[item]"/>
-                          </el-form-item>
+                          <template v-if='item == "id"'>
+                          </template>
+                          <template v-else>
+                            <el-form-item :key="index" :label="field_ch[index]" :prop="item">
+                              <el-input v-model="editForm[item]"/>
+                            </el-form-item>
+                          </template>
                       </template>
 
 											<el-form-item>
@@ -123,7 +95,10 @@
 									width="600px">
 									<el-form ref="searchForm" :model="searchForm" :rules="rules" size="small" label-width="150px">
                       <template v-for='(item, index) in field_en'>
-                          <el-form-item :key="index" :label="field_ch[index]">
+                          <el-form-item v-if='/date/.test(data_type[index])' :key="index" :label="field_ch[index]">
+                            <el-date-picker v-model="searchForm[item]" type="datetime" placeholder="选择日期时间"> </el-date-picker>
+                          </el-form-item>
+                          <el-form-item v-else :key="index" :label="field_ch[index]">
                             <el-input v-model="searchForm[item]"/>
                           </el-form-item>
                       </template>
@@ -146,8 +121,7 @@ import moment from 'moment';
 import DB from '@/common/db';
 import formVerify from '@/common/formVerify';
 export default {
-  name: 'model_list',
-  props: ["msg"],
+	name: 'model_list',
 	filters: {
     field_width_filter(value) {
        if(value){return value+"px"}
@@ -159,8 +133,8 @@ export default {
 			modelName2: null,
 			url: null,
 			tabelwidth: null,
-      list: null,
-      listLoading: true,
+			list: null,
+			listLoading: true,
 			data_type: null,
 			field_ch: null,
 			field_en: null,
@@ -302,22 +276,20 @@ export default {
         });
     },
     btn_add(){
-      this.$set(this.addForm, "level", "1");
-      this.$set(this.addForm, "position", "left");
-      this.$set(this.addForm, "show", "true");
-      this.addFormBox = true;
+       this.addFormBox = true;
     },
     addSubmitForm() {
         var _this = this;
         _this.$refs["addForm"].validate (function (valid) {
             if(valid) {
-              //console.log(_this.addForm);
+              // console.log(_this.addForm);
               _this.field_en.forEach(function(item,index){
                   var field_type_this = _this.data_type[index];
                   if(field_type_this == "int" || field_type_this == "int(6)" || field_type_this == "decimal(2)" || field_type_this == "decimal(4)"){
                     _this.addForm[item] = Number(_this.addForm[item]);
                   }
               });
+              delete _this.addForm.id;
               var dataArr=[];
               dataArr.push(_this.addForm);
               var reqData = {'action': 'insertData', 'dataArr': JSON.stringify(dataArr)};
@@ -339,31 +311,31 @@ export default {
       this.addFormBox = false;
     },
     btn_del(){
-        // var _this = this;
-        // if(_this.multipleSelection.length == 0){
-        //   _this.$message({duration: 1000, message: "请勾选要删除的行" });
-        //   return;
-        // }
-        // _this.$confirm('确认删除?', '删除', {
-        //   confirmButtonText: '确定',
-        //   cancelButtonText: '取消',
-        //   type: 'warning'
-        // }).then(function () {
-        //     var idArr = [];
-        //     for(var i=0; i<_this.multipleSelection.length; i++){
-        //       idArr.push(_this.multipleSelection[i].id);
-        //     }
-        //     var whereJson = {"id": idArr};
-        //     var reqData = {'action': 'delData', 'whereJson': JSON.stringify(whereJson)};
-        //     DB.delData(_this, _this.url, reqData, function (resData) {
-        //       //console.log(resData)
-        //       _this.$message({duration: 1000, message: resData });
-        //       if(resData != "操作成功"){ return; }
-        //       _this.getData();
-        //     });
-        // }).catch(function () {
-        //   //
-        // });
+        var _this = this;
+        if(_this.multipleSelection.length == 0){
+          _this.$message({duration: 1000, message: "请勾选要删除的行" });
+          return;
+        }
+        _this.$confirm('确认删除?', '删除', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(function () {
+            var idArr = [];
+            for(var i=0; i<_this.multipleSelection.length; i++){
+              idArr.push(_this.multipleSelection[i].id);
+            }
+            var whereJson = {"id": idArr};
+            var reqData = {'action': 'delData', 'whereJson': JSON.stringify(whereJson)};
+            DB.delData(_this, _this.url, reqData, function (resData) {
+              //console.log(resData)
+              _this.$message({duration: 1000, message: resData });
+              if(resData != "操作成功"){ return; }
+              _this.getData();
+            });
+        }).catch(function () {
+          //
+        });
 
     },
     btn_search(){
@@ -415,7 +387,7 @@ export default {
               _this.getData();
 
             }else {
-              // console.log('error submit');
+              //console.log('error submit');
               return false;
             }
         });
@@ -439,7 +411,6 @@ export default {
     _this.modelName1 = _this.$route.name;
     _this.modelName2 = _this.$route.meta.pname;
     _this.getData();
-
   }
 }
 </script>

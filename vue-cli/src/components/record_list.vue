@@ -143,7 +143,7 @@ export default {
       currPage: 1,
       prePageNum: 10,
       count: 0,
-      sortStr : '',
+      sortStr : 'time desc',
       whereStr : '',
       rules: {}
     }
@@ -210,7 +210,7 @@ export default {
         //console.log(row);
         var _this = this;
         _this.field_en.forEach(function(item,index){
-            _this.editForm[item] = row[item] + '';
+            _this.editForm[item] = row[item];
         });
         this.editFormBox = true;
     },

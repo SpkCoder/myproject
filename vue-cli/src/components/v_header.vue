@@ -94,7 +94,7 @@
             password:[
                 { validator: function(rule, value, callback) {
                   if(! /[(\w)]{6,30}/.test(value)){
-                    return callback(new Error('密码必须是字母数字下划线组合且长度>=8'));
+                    return callback(new Error('密码必须是字母数字下划线组合且长度>=6'));
                   }
                   callback();
                   }, 

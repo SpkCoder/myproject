@@ -6,7 +6,7 @@ import time
 import re
 import os
 import shutil
-import uwsgi
+# import uwsgi
 
 #http://localhost:3000/python/http_test?action=findData&whereStr=id=1 and name="xx"&fieldStr=field1,field2&prePageNum=10&currPage=1&sortStr=id ASC|DESC  //查询数据
 #http://localhost:3000/python/http_test?action=insertData&dataArr=[{"name":"mick","age":18},{"name":"tina","age":35}]  //插入数据
@@ -142,7 +142,7 @@ def operation(req):
         f.closed
 
         # 重启server
-        uwsgi.reload()
+        # uwsgi.reload()
         print("重启server")
         return make_response('操作成功')
 
@@ -188,7 +188,7 @@ def operation(req):
         f.closed
 
         # 重启server
-        uwsgi.reload()
+        # uwsgi.reload()
         print("重启server")
         return make_response('操作成功')
 

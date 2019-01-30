@@ -54,15 +54,15 @@
                           <template v-if='item == "id" || item == "model_id" || item == "db_name" || item == "function_en"'>
                           </template>
                           <template v-else-if='item=="model_name"'>
-                            <el-form-item :key="index" :label="field_ch[index]" :prop="item">
-                              <el-select v-model="addForm['id']" placeholder="">
+                            <el-form-item :key="index" :label="field_ch[index]">
+                              <el-select id="id_select" v-model="addForm['id']" placeholder="">
                                 <el-option v-for="item2 in modelList" :key="item2.id" :label="item2.name" :value="item2.id"> </el-option>
                               </el-select>
                             </el-form-item>
                           </template>
                           <template v-else-if='item=="function_ch"'>
-                            <el-form-item :key="index" :label="field_ch[index]" :prop="item">
-                              <el-select v-model="addForm['function_en']" placeholder="">
+                            <el-form-item :key="index" :label="field_ch[index]">
+                              <el-select id="function_en_select" v-model="addForm['function_en']" placeholder="">
                                 <el-option label="查询" value="findData"> </el-option>
                                 <el-option label="增加" value="insertData"> </el-option>
                                 <el-option label="修改" value="updateData"> </el-option>
@@ -240,7 +240,7 @@ export default {
         //console.log(row);
         var _this = this;
         _this.field_en.forEach(function(item,index){
-            _this.editForm[item] = row[item] + '';
+            _this.$set(_this.editForm, item, row[item]);
         });
         this.editFormBox = true;
     },
@@ -302,6 +302,8 @@ export default {
         });
     },
     btn_add(){
+       this.$set(this.addForm, "id", this.modelList[0].id);
+       this.$set(this.addForm, "function_en", "findData");
        this.addFormBox = true;
     },
     addSubmitForm() {
@@ -309,22 +311,27 @@ export default {
         _this.$refs["addForm"].validate (function (valid) {
             if(valid) {
               //console.log(_this.addForm);
-              _this.field_en.forEach(function(item,index){
-                  var field_type_this = _this.data_type[index];
-                  if(field_type_this == "int" || field_type_this == "int(6)" || field_type_this == "decimal(2)" || field_type_this == "decimal(4)"){
-                    _this.addForm[item] = Number(_this.addForm[item]);
-                  }
+              _this.addForm.id = Number(_this.addForm.id);
+              _this.addForm.model_id = _this.addForm.id;
+              _this.addForm.model_name = document.querySelector("#id_select").value;
+              _this.addForm.function_ch = document.querySelector("#function_en_select").value;
+
+              var reqData = 'action=findData&whereStr=modelId='+_this.addForm.model_id+'&prePageNum=1&currPage=1';
+              DB.findData(_this, _this.GLOBAL.host+'/python/data_list', reqData, function (resData) {
+                _this.addForm.db_name = resData.rows[0].name;
+                delete _this.addForm.id;
+                var dataArr=[];
+                dataArr.push(_this.addForm);
+                var reqData = {'action': 'insertData', 'dataArr': JSON.stringify(dataArr)};
+                DB.insertData(_this, _this.url, reqData, function (resData) {
+                  //console.log(resData)
+                  _this.$message({duration: 1000, message: resData });
+                  if(resData != "操作成功"){ return; }
+                  _this.addFormBox = false;
+                  _this.getData();
+                });
               });
-              var dataArr=[];
-              dataArr.push(_this.addForm);
-              var reqData = {'action': 'insertData', 'dataArr': JSON.stringify(dataArr)};
-              DB.insertData(_this, _this.url, reqData, function (resData) {
-                //console.log(resData)
-                _this.$message({duration: 1000, message: resData });
-                if(resData != "操作成功"){ return; }
-                _this.addFormBox = false;
-                _this.getData();
-              });
+             
             }else {
               //console.log('error submit');
               return false;

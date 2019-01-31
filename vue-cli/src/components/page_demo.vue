@@ -408,8 +408,8 @@ export default {
 	created() {
 		var _this = this;
 		_this.url = _this.GLOBAL.host + _this.$route.path.replace(/\/page/,"/python");
-    _this.modelName1 = _this.$route.name;
-    _this.modelName2 = _this.$route.meta.pname;
+    _this.modelName1 = _this.$route.meta.pname;
+    _this.modelName2 = _this.$route.name;
     _this.getData();
   }
 }

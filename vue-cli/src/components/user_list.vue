@@ -292,6 +292,10 @@ export default {
     del(row) {
         //console.log(row);
         var _this = this;
+        if(row.username == JSON.parse(localStorage.getItem("loginStatus")).username){
+          _this.$message({duration: 1000, message: "禁止删除自己！" });
+          return;
+        }
         _this.$confirm('确认删除?', '删除', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
@@ -446,8 +450,8 @@ export default {
 	created() {
 		var _this = this;
 		_this.url = _this.GLOBAL.host + _this.$route.path.replace(/\/page/,"/python");
-    _this.modelName1 = _this.$route.name;
-    _this.modelName2 = _this.$route.meta.pname;
+    _this.modelName1 = _this.$route.meta.pname;
+    _this.modelName2 = _this.$route.name;
     _this.getData();
   }
 }

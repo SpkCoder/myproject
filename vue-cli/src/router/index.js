@@ -26,6 +26,12 @@ export default new Router({
       component: resolve => require(['@/components/data_list'], resolve)
     },
     {
+      path: '/page/data_list_detail/:id',
+      name: '数据列表字段',
+      meta: { pname: '系统设置' },
+      component: resolve => require(['@/components/data_list_detail'], resolve)
+    },
+    {
       path: '/page/model_list_fn',
       name: '模块功能',
       meta: { pname: '系统设置'},
@@ -48,6 +54,12 @@ export default new Router({
       name: '角色分类',
       meta: { pname: '系统设置' },
       component: resolve => require(['@/components/role_class'], resolve)
+    },
+    {
+      path: '/page/file_list',
+      name: '文件列表',
+      meta: { pname: '系统设置' },
+      component: resolve => require(['@/components/file_list'], resolve)
     },
     {
       path: '/page/record_list',

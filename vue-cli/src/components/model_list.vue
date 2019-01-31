@@ -243,6 +243,10 @@ export default {
     edit(row) {
         //console.log(row);
         var _this = this;
+        if(row.id==100000 || row.id==100001 || row.id==100002 || row.id==100003 || row.id==100004 || row.id==100005 || row.id==100006 || row.id==100007 || row.id==100008){
+          _this.$message({duration: 1000, message: "禁止操作系统模块！" });
+          return;
+        }
         _this.field_en.forEach(function(item,index){
             _this.$set(_this.editForm, item, row[item]);
         });
@@ -283,6 +287,10 @@ export default {
     del(row) {
         //console.log(row);
         var _this = this;
+        if(row.id==100000 || row.id==100001 || row.id==100002 || row.id==100003 || row.id==100004 || row.id==100005 || row.id==100006 || row.id==100007 || row.id==100008){
+          _this.$message({duration: 1000, message: "禁止操作系统模块！" });
+          return;
+        }
         _this.$confirm('确认删除?', '删除', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
@@ -436,8 +444,8 @@ export default {
 	created() {
 		var _this = this;
 		_this.url = _this.GLOBAL.host + _this.$route.path.replace(/\/page/,"/python");
-    _this.modelName1 = _this.$route.name;
-    _this.modelName2 = _this.$route.meta.pname;
+    _this.modelName1 = _this.$route.meta.pname;
+    _this.modelName2 = _this.$route.name;
     _this.getData();
 
   }

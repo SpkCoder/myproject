@@ -11,8 +11,8 @@
 
 								<div style="margin-bottom:10px;">
 									<el-button-group>
-										<!-- <el-button type="primary" size="small" @click="btn_add()">增加</el-button> -->
-										<!-- <el-button type="primary" size="small" @click="btn_del()">删除</el-button> -->
+										<el-button type="primary" size="small" @click="btn_add()">增加</el-button>
+										<el-button type="primary" size="small" @click="btn_del()">删除</el-button>
 										<el-button type="primary" size="small" @click="btn_search()">查询</el-button>
 									</el-button-group>
 								</div>
@@ -31,15 +31,18 @@
 									:style={width:tabelwidth}>
 									<el-table-column fixed="left" type="selection" width="40"></el-table-column>
 									<template v-for='(item, index) in field_en'>
-											<el-table-column :key="item.id" show-overflow-tooltip sortable="custom" :prop="item" :label="field_ch[index]" :width="field_width[index] | field_width_filter"> </el-table-column>
+											<el-table-column v-if='item=="size"' :key="item.id" show-overflow-tooltip sortable="custom" :prop="item" :label="field_ch[index]" :width="field_width[index] | field_width_filter">
+                        <template slot-scope="scope"> {{ scope.row.size | size_filter}}</template> 
+                      </el-table-column>
+											<el-table-column v-else :key="item.id" show-overflow-tooltip sortable="custom" :prop="item" :label="field_ch[index]" :width="field_width[index] | field_width_filter"> </el-table-column>
 									</template>
-									<!-- <el-table-column fixed="right" label="操作" width="130"> 
+									<el-table-column fixed="right" label="操作" width="130"> 
 											<template slot-scope="scope"> 
 											<el-button @click="view(scope.row)" type="text" size="small" icon="el-icon-view">&nbsp;</el-button>
-											<el-button @click="edit(scope.row)" type="text" size="small" icon="el-icon-edit">&nbsp;</el-button>
+											<!-- <el-button @click="edit(scope.row)" type="text" size="small" icon="el-icon-edit">&nbsp;</el-button> -->
 											<el-button @click="del(scope.row)" type="text" size="small" icon="el-icon-delete">&nbsp;</el-button>
 											</template> 
-									</el-table-column> -->
+									</el-table-column>
 								</el-table>
 
 								<el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currPage" :page-sizes="[10,50,100,500]" :page-size="prePageNum" layout="prev, pager, next, jumper, total, sizes" :total="count"> 
@@ -51,9 +54,16 @@
 									width="600px">
 									<el-form ref="addForm" :model="addForm" :rules="rules" size="small" label-width="150px">
 											<template v-for='(item, index) in field_en'>
-                          <el-form-item :key="index" :label="field_ch[index]" :prop="item">
-                            <el-input v-model="addForm[item]"/>
-                          </el-form-item>
+                          <template v-if='item == "class_name"'>
+														<el-form-item :key="index" :label="field_ch[index]" :prop="item">
+                              <el-input v-model="addForm[item]"/>
+                            </el-form-item>
+                            <el-form-item :key="index+'a1'" label="上传文件">
+                              <input id="file" type="file" name="file" multiple="multiple"/>
+                            </el-form-item>
+                          </template>
+													<template v-else>
+                          </template>
                       </template>
 
 											<el-form-item>
@@ -69,9 +79,13 @@
 									width="600px">
 									<el-form ref="editForm" :model="editForm" :rules="rules" size="small" label-width="150px">
 											<template v-for='(item, index) in field_en'>
-                          <el-form-item :key="index" :label="field_ch[index]" :prop="item">
-                            <el-input v-model="editForm[item]"/>
-                          </el-form-item>
+                          <template v-if='item == "id"'>
+                          </template>
+                          <template v-else>
+                            <el-form-item :key="index" :label="field_ch[index]" :prop="item">
+                              <el-input v-model="editForm[item]"/>
+                            </el-form-item>
+                          </template>
                       </template>
 
 											<el-form-item>
@@ -102,6 +116,7 @@
 										</el-form>
 								</el-dialog>							
 
+                <form name="btn_add" style="hidden: true;"></form>
 						</div>
 					</div>
 		</div>
@@ -117,6 +132,9 @@ export default {
 	filters: {
     field_width_filter(value) {
        if(value){return value+"px"}
+    },
+    size_filter(value) {
+       if(value){return value/1000+"KB"}
     }
   },
   data () {
@@ -143,7 +161,7 @@ export default {
       currPage: 1,
       prePageNum: 10,
       count: 0,
-      sortStr : 'time desc',
+      sortStr : '',
       whereStr : '',
       rules: {}
     }
@@ -169,7 +187,7 @@ export default {
 				_this.field_width.forEach(element => {
 						_this.tabelwidth+=Number(element);
 				});
-				_this.tabelwidth = _this.tabelwidth + 40 + 5 + "px";
+				_this.tabelwidth = _this.tabelwidth + 40 + 130 + 5 + "px";
         _this.currPage = resData.currPage;
         _this.prePageNum = resData.prePageNum;
         _this.count = resData.count;
@@ -205,12 +223,13 @@ export default {
     },
     view(row) {
        //console.log(row);
+       window.open(row.url);
     },
     edit(row) {
         //console.log(row);
         var _this = this;
         _this.field_en.forEach(function(item,index){
-            _this.editForm[item] = row[item];
+            _this.$set(_this.editForm, item, row[item]);
         });
         this.editFormBox = true;
     },
@@ -275,22 +294,39 @@ export default {
         _this.$refs["addForm"].validate (function (valid) {
             if(valid) {
               //console.log(_this.addForm);
-              _this.field_en.forEach(function(item,index){
-                  var field_type_this = _this.data_type[index];
-                  if(field_type_this == "int" || field_type_this == "int(6)" || field_type_this == "decimal(2)" || field_type_this == "decimal(4)"){
-                    _this.addForm[item] = Number(_this.addForm[item]);
-                  }
+              if(!_this.addForm.class_name){
+                _this.$message({duration: 1000, message: "文件分类不能为空" });
+                return false;
+              }
+              var dataArr = [];
+              var fileArr = [];
+              var files = document.getElementById("file").files;
+              for(var i=0; i<files.length; i++){
+                if(files[i].size > 100*1024*1024){
+                  layer.msg("文件不能大于100M",{time: 1000});
+                  return false;
+                }
+                fileArr.push(files[i]);
+                dataArr.push({"class_name": _this.addForm.class_name});
+              }
+              var formData = new FormData(document.forms['btn_add']);
+              formData.append("dataArr",JSON.stringify(dataArr));
+              formData.append("fileArr",fileArr);
+              formData.append("action","insertData");
+              console.log(formData);
+              return false;
+                  
+              _this.$http.post(url, formData, {emulateJSON: true, responseType: 'text', credentials: true, headers: {contentType: false, processData: false} })
+              .then(function (resData) {
+                  //console.log(resData)
+                  _this.$message({duration: 1000, message: resData });
+                  if(resData != "操作成功"){ return; }
+                  _this.addFormBox = false;
+                  _this.getData();
+              }, function (err) {
+                  console.log(err);
               });
-              var dataArr=[];
-              dataArr.push(_this.addForm);
-              var reqData = {'action': 'insertData', 'dataArr': JSON.stringify(dataArr)};
-              DB.insertData(_this, _this.url, reqData, function (resData) {
-                //console.log(resData)
-                _this.$message({duration: 1000, message: resData });
-                if(resData != "操作成功"){ return; }
-                _this.addFormBox = false;
-                _this.getData();
-              });
+              
             }else {
               //console.log('error submit');
               return false;
@@ -355,9 +391,9 @@ export default {
                   }else if(field_type_this == "date(YYYY-MM-DD HH:mm:ss)" || field_type_this == "date(YYYY)" || field_type_this == "date(YYYY-MM)" || field_type_this == "date(YYYY-MM-DD)" || field_type_this == "date(HH:mm:ss)"){
                     if(_this.searchForm[item]){
                       if(num == 0){
-                          whereStr += item + '>="' + moment(_this.searchForm[item]).format("YYYY-MM-DD HH:mm:ss") + '"';
+                          whereStr += item + '>="' + _this.searchForm[item] + '"';
                       }else{
-                          whereStr += ' and ' + item + '>="' + moment(_this.searchForm[item]).format("YYYY-MM-DD HH:mm:ss") + '"';
+                          whereStr += ' and ' + item + '>="' + _this.searchForm[item] + '"';
                       }
                       num++;
                     }

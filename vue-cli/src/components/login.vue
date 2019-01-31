@@ -82,6 +82,7 @@ export default {
                 }else{
                 	localStorage.removeItem("loginStatus");
                 }
+                localStorage.setItem("activeIndex","100001");
                 //_this.$router.push({ path: '/' });
                 window.location.href = '/';
               }, function (err) {

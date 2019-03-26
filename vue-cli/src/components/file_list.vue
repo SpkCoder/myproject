@@ -52,7 +52,7 @@
 									title="增加"
 									:visible.sync="addFormBox"
 									width="600px">
-									<el-form ref="addForm" :model="addForm" :rules="rules" size="small" label-width="150px">
+									<el-form name="addForm" enctype="multipart/form-data" ref="addForm" :model="addForm" :rules="rules" size="small" label-width="150px">
 											<template v-for='(item, index) in field_en'>
                           <template v-if='item == "class_name"'>
 														<el-form-item :key="index" :label="field_ch[index]" :prop="item">
@@ -116,7 +116,6 @@
 										</el-form>
 								</el-dialog>							
 
-                <form name="btn_add" style="hidden: true;"></form>
 						</div>
 					</div>
 		</div>
@@ -273,7 +272,7 @@ export default {
           cancelButtonText: '取消',
           type: 'warning'
         }).then(function () {
-          var whereJson = {"id": [row.id]};
+          var whereJson = {"url": [row.url]};
           var reqData = {'action': 'delData', 'whereJson': JSON.stringify(whereJson)};
           DB.delData(_this, _this.url, reqData, function (resData) {
             //console.log(data)
@@ -309,18 +308,17 @@ export default {
                 fileArr.push(files[i]);
                 dataArr.push({"class_name": _this.addForm.class_name});
               }
-              var formData = new FormData(document.forms['btn_add']);
+              var formData = new FormData(document.forms["addForm"]);
               formData.append("dataArr",JSON.stringify(dataArr));
               formData.append("fileArr",fileArr);
               formData.append("action","insertData");
-              console.log(formData);
-              return false;
-                  
-              _this.$http.post(url, formData, {emulateJSON: true, responseType: 'text', credentials: true, headers: {contentType: false, processData: false} })
+              // console.log(formData.get("dataArr"));
+              // return false;
+              _this.$http.post(_this.url, formData, {emulateJSON: true, responseType: 'text', credentials: true, headers: { 'Content-Type': 'multipart/form-data' } })
               .then(function (resData) {
                   //console.log(resData)
-                  _this.$message({duration: 1000, message: resData });
-                  if(resData != "操作成功"){ return; }
+                  _this.$message({duration: 1000, message: resData.body });
+                  if(resData.body != "操作成功"){ return; }
                   _this.addFormBox = false;
                   _this.getData();
               }, function (err) {
@@ -348,11 +346,11 @@ export default {
           cancelButtonText: '取消',
           type: 'warning'
         }).then(function () {
-            var idArr = [];
+            var urlArr = [];
             for(var i=0; i<_this.multipleSelection.length; i++){
-              idArr.push(_this.multipleSelection[i].id);
+              urlArr.push(_this.multipleSelection[i].url);
             }
-            var whereJson = {"id": idArr};
+            var whereJson = {"url": urlArr};
             var reqData = {'action': 'delData', 'whereJson': JSON.stringify(whereJson)};
             DB.delData(_this, _this.url, reqData, function (resData) {
               //console.log(resData)

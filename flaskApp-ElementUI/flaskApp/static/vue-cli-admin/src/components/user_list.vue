@@ -450,8 +450,24 @@ export default {
 	created() {
 		var _this = this;
 		_this.url = _this.GLOBAL.host + _this.$route.path.replace(/\/page/,"/python");
-    _this.modelName1 = _this.$route.meta.pname;
-    _this.modelName2 = _this.$route.name;
+    var leftAsideVue = function(){
+        var obj = {};
+        _this.$parent.$children.forEach(function(item,index){
+           if(item.activeIndex){
+              obj=item;
+           }
+        });
+        return obj;
+    }();
+    leftAsideVue.list.forEach(function(item,index){
+       item.children.forEach(function(item2,index2){
+           if(item2.id == localStorage.getItem("activeIndex")){
+              _this.modelName1 = item.name;
+              _this.modelName2 = item2.name;
+              return false;
+           }
+        });
+    });
     _this.getData();
   }
 }

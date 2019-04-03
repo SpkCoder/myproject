@@ -100,25 +100,26 @@ def operation(req):
 
     # 复制前后端代码文件
     def copy_file_fn(this_table_name):
-        file_src_html = os.path.normpath(os.path.dirname(os.path.dirname(__file__)) + "/static/page/page_demo.html")
-        file_dest_html = os.path.normpath(os.path.dirname(os.path.dirname(__file__)) + "/static/page/" + this_table_name + ".html")
+        file_src_html = os.path.normpath(os.path.dirname(os.path.dirname(__file__)) + "/static/vue-cli-admin/src/components/page_demo.vue")
+        file_dest_html = os.path.normpath(os.path.dirname(os.path.dirname(__file__)) + "/static/vue-cli-admin/src/components/" + this_table_name + ".vue")
         file_src_py = os.path.normpath(os.path.dirname(os.path.dirname(__file__)) + "/views/page_demo.py")
         file_dest_py = os.path.normpath(os.path.dirname(os.path.dirname(__file__)) + "/views/" + this_table_name + ".py")
         if not os.path.exists(file_dest_html):
             shutil.copyfile(file_src_html, file_dest_html)
-            print("复制" + this_table_name + ".html成功")
+            print("复制" + this_table_name + ".vue成功")
         if not os.path.exists(file_dest_py):
             shutil.copyfile(file_src_py, file_dest_py)
             print("复制" + this_table_name + ".py成功")
 
         # 给routerUrl.js添加routerUrl
-        file_routerUrl = os.path.normpath(os.path.dirname(os.path.dirname(__file__)) + "/static/js/router/routerUrl.js")
+        file_routerUrl = os.path.normpath(os.path.dirname(os.path.dirname(__file__)) + "/static/vue-cli-admin/src/router/routerUrl.js")
         with open(file_routerUrl, 'r+') as f:
             data = f.read()
-            list_router_url = json.loads(data.split(" = ")[1])
+            data = re.sub(r'\}', '', data)
+            list_router_url = json.loads(data.split(" : ")[1])
             router_url_this = "/page/" + this_table_name
             list_router_url.append(router_url_this)
-            router_url_str = "var routerUrl = " + json.dumps(list_router_url)
+            router_url_str = "export default {routerUrl : " + json.dumps(list_router_url) + "}"
             f.seek(0, 0)
             f.truncate()
             f.write(router_url_str)
@@ -146,25 +147,31 @@ def operation(req):
         print("重启server")
         return make_response('操作成功')
 
+        # vue-cli-admin 打包
+        build_path = os.path.dirname(os.path.dirname(__file__)) + "/static/vue-cli-admin/build/build.js"
+        build_result = os.system("node " + build_path)
+        print("打包成功")
+
     # 删除前后端代码文件
     def remove_file_fn(this_table_name):
-        file_dest_html = os.path.normpath(os.path.dirname(os.path.dirname(__file__)) + "/static/page/" + this_table_name + ".html")
+        file_dest_html = os.path.normpath(os.path.dirname(os.path.dirname(__file__)) + "/static/vue-cli-admin/src/components/" + this_table_name + ".vue")
         file_dest_py = os.path.normpath(os.path.dirname(os.path.dirname(__file__)) + "/views/" + this_table_name + ".py")
         if os.path.exists(file_dest_html):
             os.remove(file_dest_html)
-            print("删除" + this_table_name + ".html成功")
+            print("删除" + this_table_name + ".vue成功")
         if os.path.exists(file_dest_py):
             os.remove(file_dest_py)
             print("删除" + this_table_name + ".py成功")
 
         # 给routerUrl.js删除routerUrl
-        file_routerUrl = os.path.normpath(os.path.dirname(os.path.dirname(__file__)) + "/static/js/router/routerUrl.js")
+        file_routerUrl = os.path.normpath(os.path.dirname(os.path.dirname(__file__)) + "/static/vue-cli-admin/src/router/routerUrl.js")
         with open(file_routerUrl, 'r+') as f:
             data = f.read()
-            list_router_url = json.loads(data.split(" = ")[1])
+            data = re.sub(r'\}', '', data)
+            list_router_url = json.loads(data.split(" : ")[1])
             router_url_this = '/page/' + this_table_name
             list_router_url.remove(router_url_this)
-            router_url_str = "var routerUrl = " + json.dumps(list_router_url)
+            router_url_str = "export default {routerUrl : " + json.dumps(list_router_url) + "}"
             f.seek(0, 0)
             f.truncate()
             f.write(router_url_str)
@@ -191,6 +198,11 @@ def operation(req):
         # uwsgi.reload()
         print("重启server")
         return make_response('操作成功')
+
+        # vue-cli-admin 打包
+        build_path = os.path.dirname(os.path.dirname(__file__)) + "/static/vue-cli-admin/build/build.js"
+        build_result = os.system("node " + build_path)
+        print("打包成功")
 
     # 插入list_data
     def insert_data_fn(list_data):

@@ -37,7 +37,7 @@
         <template slot="title">{{username}}</template>
         <el-menu-item index="2-1"><a style="display:block" @click="changePassword" href="javascript:;"><i class="layui-icon"></i>修改密码</a></el-menu-item>
         <el-menu-item index="2-2"><a style="display:block" @click="logOut" href="javascript:;"><i class="layui-icon"></i>安全退出</a></el-menu-item>
-        <el-menu-item index="2-3"><a style="display:block" id="useHelp" href="/static/page/my_use_help.html" target="_blank"><i class="layui-icon"></i>使用说明</a></el-menu-item>
+        <el-menu-item index="2-3"><a style="display:block" id="useHelp" href="/static/static-vue/page/my_use_help.html" target="_blank"><i class="layui-icon"></i>使用说明</a></el-menu-item>
       </el-submenu>
     </el-menu>
     
@@ -46,11 +46,11 @@
       :visible.sync="editFormBox"
       width="600px">
       <el-form ref="editForm" :model="editForm" :rules="rules" label-width="150px">
-          <el-form-item label="UserName">
+          <el-form-item label="用户名">
             <el-input disabled v-model="editForm.username"/>
           </el-form-item>
 
-          <el-form-item label="Password" prop="password">
+          <el-form-item label="密码" prop="password">
             <el-input v-model="editForm.password"/>
           </el-form-item>
 

@@ -62,7 +62,7 @@
                           </template>
                           <template v-else-if='item=="id" || item=="name" || item=="name_ch"'>
                             <el-form-item :key="index" :label="field_ch[index]" :prop="item">
-                              <el-input v-model="addForm[item]"/>
+                              <el-input v-model="addForm[item]" />
                             </el-form-item>
                           </template>
                           <template v-else>
@@ -119,7 +119,7 @@
 										</el-form>
 								</el-dialog>							
 
-                <div class="loadingBox" v-show="showloading"><div><i class="el-icon-loading"></i><p>系统重启中...</p></div></div>
+                <div class="loadingBox" v-show="showloading"><div><i class="el-icon-loading"></i><p>系统重启中{{ showloadingTime }}</p></div></div>
 						</div>
 					</div>
 		</div>
@@ -145,7 +145,8 @@ export default {
 			tabelwidth: null,
 			list: null,
 			listLoading: true,
-			showloading: false,
+      showloading: false,
+			showloadingTime: 0,
 			data_type: null,
 			field_ch: null,
 			field_en: null,
@@ -195,26 +196,27 @@ export default {
         _this.count = resData.count;
 
         _this.rules = formVerify.rules(_this.field_en,_this.data_type);
+
+        //加载model_list
+        var reqData = 'action=findData&whereStr=level=2&sortStr=id ASC&prePageNum=100000&currPage=1';
+        DB.findData(_this, _this.GLOBAL.host+'/python/model_list', reqData, function (resData) {
+          if(resData){
+            var modelIdArr = [];
+            _this.list.forEach(function (item, index) {
+              modelIdArr.push(item.id);
+            });
+            var arr = [];
+            resData.rows.forEach(function (item, index) {
+              if(modelIdArr.indexOf(item.id) == -1){
+                arr.push(item);
+              }
+            });
+            _this.modelList = arr;
+          }
+        });
         
       });
       
-      //加载model_list
-      var reqData = 'action=findData&whereStr=level=2&sortStr=id ASC&prePageNum=100000&currPage=1';
-      DB.findData(_this, _this.GLOBAL.host+'/python/model_list', reqData, function (resData) {
-        if(resData){
-          var modelIdArr = [];
-          _this.list.forEach(function (item, index) {
-            modelIdArr.push(item.id);
-          });
-          var arr = [];
-          resData.rows.forEach(function (item, index) {
-            if(modelIdArr.indexOf(item.id) == -1){
-              arr.push(item);
-            }
-          });
-          _this.modelList = arr;
-        }
-			});
 			
     },
     selectionChange(dataArr) {
@@ -307,14 +309,23 @@ export default {
           cancelButtonText: '取消',
           type: 'warning'
         }).then(function () {
-          var whereJson = {"id": [row.id]};
+          var whereJson = {"modelId": [row.id]};
           var reqData = {'action': 'delData', 'whereJson': JSON.stringify(whereJson)};
           DB.delData(_this, _this.url, reqData, function (resData) {
             //console.log(data)
             _this.$message({duration: 1000, message: resData });
             if(resData != "操作成功"){ return; }
-            _this.addFormBox = false;
-            _this.getData();
+
+            //系统重启
+            _this.showloading = true;
+            _this.showloadingTime = 30;
+            var timer = setInterval(function () {
+              _this.showloadingTime-=1;
+              if(_this.showloadingTime==0){
+                clearInterval(timer);
+                window.location.reload();
+              }
+            },1000);
           });
         }).catch(function () {
           //
@@ -357,9 +368,14 @@ export default {
 
                   //系统重启
                   _this.showloading = true;
-                  setTimeout(function () {
-                    window.location.reload();
-                  },5000);
+                  _this.showloadingTime = 30;
+                  var timer = setInterval(function () {
+                    _this.showloadingTime-=1;
+                    if(_this.showloadingTime==0){
+                      clearInterval(timer);
+                      window.location.reload();
+                    }
+                  },1000);
 
                 });
               });
@@ -472,8 +488,24 @@ export default {
 	created() {
 		var _this = this;
 		_this.url = _this.GLOBAL.host + _this.$route.path.replace(/\/page/,"/python");
-    _this.modelName1 = _this.$route.meta.pname;
-    _this.modelName2 = _this.$route.name;
+    var leftAsideVue = function(){
+        var obj = {};
+        _this.$parent.$children.forEach(function(item,index){
+           if(item.activeIndex){
+              obj=item;
+           }
+        });
+        return obj;
+    }();
+    leftAsideVue.list.forEach(function(item,index){
+       item.children.forEach(function(item2,index2){
+           if(item2.id == localStorage.getItem("activeIndex")){
+              _this.modelName1 = item.name;
+              _this.modelName2 = item2.name;
+              return false;
+           }
+        });
+    });
     _this.getData();
   }
 }

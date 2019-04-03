@@ -5,17 +5,17 @@
               <h1>仙鱼大数据平台</h1>
               <el-form ref="formData" :model="formData" :rules="rules" :label-position="labelPosition" size="medium" label-width="180px">
                 <div class="login-top-box">
-                  <el-form-item label="Username" prop="username">
-                      <el-input tabindex="1" type="text" v-model="formData.username" placeholder="username"></el-input>
+                  <el-form-item label="用户名" prop="username">
+                      <el-input tabindex="1" type="text" v-model="formData.username" placeholder="输入用户名"></el-input>
                   </el-form-item>  
-                    <el-form-item label="Password" prop="password">
-                      <el-input tabindex="2" type="password" v-model="formData.password" placeholder="password"></el-input>
+                    <el-form-item label="密码" prop="password">
+                      <el-input tabindex="2" type="password" v-model="formData.password" placeholder="输入密码"></el-input>
                   </el-form-item>  
                   
                 </div>
                 <div class="login-bottom-box">
                     <el-form-item>
-                          <el-button size="medium" type="primary" @click="submitForm">登录</el-button> <el-checkbox tabindex="3" v-model="formData.rememberMe">Remember me</el-checkbox> 
+                          <el-button size="medium" type="primary" @click="submitForm">登录</el-button> <el-checkbox tabindex="3" v-model="formData.rememberMe">记住帐号？</el-checkbox> 
                       </el-form-item>
                 </div>
             </el-form>

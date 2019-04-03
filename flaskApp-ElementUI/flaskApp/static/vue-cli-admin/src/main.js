@@ -17,7 +17,8 @@ Vue.use(VueResource);
 
 Vue.config.productionTip = false;
 Vue.prototype.GLOBAL = {
-  host: "http://127.0.0.1:5000"
+  // host: "http://127.0.0.1:4000",
+  host: ""
 };
 
 /* eslint-disable no-new */

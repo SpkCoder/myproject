@@ -920,3 +920,80 @@ ImmutableMultiDict([('action', 'SignOut')])
 {'username': 'yuxian', 'hash': 'd8f76ca8a2939f1cf0f200ef840a955e', 'os': 'windows', 'px': '1920x1080', 'ip': '183.14.135.9'}
 insert into record_list(`username`, `dbName`, `action`, `content`, `os`, `px`, `ip`, `time`, `modelId`, `dbName_ch`) values ('yuxian', 'user_list', '退出', 'action=SignOut', 'windows', '1920x1080', '183.14.135.9', '2018-12-28 12:59:53', 100004, '用户列表')
 yuxian退出成功
+*** Starting uWSGI 2.0.17.1 (64bit) on [Sun Mar 31 17:20:05 2019] ***
+compiled with version: 7.3.0 on 16 December 2018 11:36:53
+os: Linux-4.15.0-42-generic #45-Ubuntu SMP Thu Nov 15 19:32:57 UTC 2018
+nodename: dell-3576
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 8
+current working directory: /media/xian/Work/myproject/flaskApp-LayUI
+writing pidfile to ./uwsgi.pid
+detected binary path: /home/xian/.local/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+chdir() to /media/xian/Work/myproject/flaskApp-LayUI
+your processes number limit is 30966
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uwsgi socket 0 bound to TCP address 127.0.0.1:5111 fd 6
+Python version: 3.6.7 (default, Oct 22 2018, 11:32:17)  [GCC 8.2.0]
+*** Python threads support is disabled. You can enable it with --enable-threads ***
+Python main interpreter initialized at 0x559cdcd02d90
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 364520 bytes (355 KB) for 4 cores
+*** Operational MODE: preforking ***
+WSGI app 0 (mountpoint='') ready in 0 seconds on interpreter 0x559cdcd02d90 pid: 3593 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 3593)
+spawned uWSGI worker 1 (pid: 3595, cores: 1)
+spawned uWSGI worker 2 (pid: 3596, cores: 1)
+spawned uWSGI worker 3 (pid: 3597, cores: 1)
+spawned uWSGI worker 4 (pid: 3598, cores: 1)
+*** Stats server enabled on 127.0.0.1:5112 fd: 18 ***
+ImmutableMultiDict([('action', 'SignIn'), ('whereJson', '{"username":"yuxian","password":"BNM123"}'), ('osJson', '{"os":"linux","px":"1920x1080"}')])
+{'username': 'yuxian', 'password': '4f6e14af56733b0f443af67b36c598fd'}
+select username,password from user_list where username="yuxian" and password="4f6e14af56733b0f443af67b36c598fd"
+yuxian登录成功
+insert into record_list(`username`, `dbName`, `action`, `content`, `os`, `px`, `ip`, `time`, `modelId`, `dbName_ch`) values ('yuxian', 'user_list', '登录', 'action=SignIn', 'linux', '1920x1080', '127.0.0.1', '2019-03-31 17:23:07', 100004, '用户列表')
+ImmutableMultiDict([('action', 'findData'), ('timeStamp', '1554024187832')])
+select * from model_list order by level ASC, sort ASC
+ImmutableMultiDict([('action', 'findData'), ('searchJson', ''), ('prePageNum', '1'), ('currPage', '1')])
+select * from record_list limit 1
+ImmutableMultiDict([('currPage', '1'), ('prePageNum', '10'), ('action', 'findData'), ('sortStr', 'time desc')])
+select * from record_list order by time desc limit 10
+ImmutableMultiDict([('action', 'findData'), ('timeStamp', '1554025132090')])
+select * from model_list order by level ASC, sort ASC
+ImmutableMultiDict([('action', 'findData'), ('searchJson', ''), ('prePageNum', '1'), ('currPage', '1')])
+select * from record_list limit 1
+ImmutableMultiDict([('currPage', '1'), ('prePageNum', '10'), ('action', 'findData'), ('sortStr', 'time desc')])
+select * from record_list order by time desc limit 10
+ImmutableMultiDict([('action', 'findData'), ('timeStamp', '1554028174477')])
+select * from model_list order by level ASC, sort ASC
+ImmutableMultiDict([('action', 'findData'), ('searchJson', ''), ('prePageNum', '1'), ('currPage', '1')])
+select * from record_list limit 1
+ImmutableMultiDict([('currPage', '1'), ('prePageNum', '10'), ('action', 'findData'), ('sortStr', 'time desc')])
+select * from record_list order by time desc limit 10
+ImmutableMultiDict([('action', 'findData'), ('searchJson', ''), ('prePageNum', '1'), ('currPage', '1')])
+select * from model_list limit 1
+ImmutableMultiDict([('currPage', '1'), ('prePageNum', '10'), ('action', 'findData')])
+select * from model_list limit 10
+ImmutableMultiDict([('action', 'findData'), ('searchJson', ''), ('prePageNum', '1'), ('currPage', '1')])
+select * from record_list limit 1
+ImmutableMultiDict([('currPage', '1'), ('prePageNum', '10'), ('action', 'findData'), ('sortStr', 'time desc')])
+select * from record_list order by time desc limit 10
+ImmutableMultiDict([('action', 'findData'), ('timeStamp', '1554029069325')])
+select * from model_list order by level ASC, sort ASC
+ImmutableMultiDict([('action', 'findData'), ('searchJson', ''), ('prePageNum', '1'), ('currPage', '1')])
+select * from record_list limit 1
+ImmutableMultiDict([('currPage', '1'), ('prePageNum', '10'), ('action', 'findData'), ('sortStr', 'time desc')])
+select * from record_list order by time desc limit 10
+SIGINT/SIGQUIT received...killing workers...
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+goodbye to uWSGI.
+VACUUM: pidfile removed.

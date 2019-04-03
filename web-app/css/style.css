@@ -113,7 +113,9 @@ header,footer,article,aside,section,nav,menu,hgroup,details,dialog,figure,figcap
 	-webkit-transition: 0.5s; /* Safari and Chrome */
 	-o-transition:0.5s; /* Opera */
 }
-.work-us ul li:hover .text{bottom: 0; } .work-us ul li h4{font-size: 18px; overflow: hidden; margin-top: 20px; margin-bottom: 15px;}
+.work-us ul li:hover .text{bottom: 0; } 
+.work-us ul li h4{font-size: 18px; overflow: hidden; margin-top: 20px; margin-bottom: 15px;}
+.work-us ul li p{text-align: left;}
 
 
 

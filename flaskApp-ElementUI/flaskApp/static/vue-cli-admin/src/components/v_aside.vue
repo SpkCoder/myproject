@@ -1,5 +1,5 @@
 <template>
-    <div class="left-aside">
+    <div id='left-aside' class="left-aside">
 	    <div class="left-aside-scroll">
 	    	<el-menu
 		      :default-active="activeIndex" 
@@ -99,7 +99,7 @@
 	created: function () {
     	this._getMenu();
 			this.$nextTick(function () {
-					console.log(this.GLOBAL);
+					// console.log(this.GLOBAL);
 					if(localStorage.getItem("activeIndex")){
 						this.activeIndex = localStorage.getItem("activeIndex");
 					}

@@ -8,7 +8,7 @@ layui.define(["jquery"],function(exports){
                 type: "GET",
                 dataType:"html",
                 success: function (data,status,xhr) {
-                  //console.log(url);
+                  ////console.log(url);
                   $("#layUI_routerView").attr("data-href",url);
                   $("#layUI_routerView").html(data);
                   //初始化当前页

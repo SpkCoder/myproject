@@ -10,7 +10,8 @@ def connect_db():
     try:
         db = pymysql.connect(app.config['dbArgs']['host'], app.config['dbArgs']['user'], app.config['dbArgs']['password'], app.config['dbArgs']['database'], charset='utf8')
         return db
-    except:
+    except Exception:
+        print("数据库连接错误:",Exception)
         return 'Error'
 
 

@@ -920,3 +920,16 @@ ImmutableMultiDict([('action', 'SignOut')])
 {'username': 'yuxian', 'hash': 'd8f76ca8a2939f1cf0f200ef840a955e', 'os': 'windows', 'px': '1920x1080', 'ip': '183.14.135.9'}
 insert into record_list(`username`, `dbName`, `action`, `content`, `os`, `px`, `ip`, `time`, `modelId`, `dbName_ch`) values ('yuxian', 'user_list', '退出', 'action=SignOut', 'windows', '1920x1080', '183.14.135.9', '2018-12-28 12:59:53', 100004, '用户列表')
 yuxian退出成功
+*** Starting uWSGI 2.0.17.1 (64bit) on [Fri Apr  5 00:11:47 2019] ***
+compiled with version: 7.3.0 on 16 December 2018 11:36:53
+os: Linux-4.15.0-42-generic #45-Ubuntu SMP Thu Nov 15 19:32:57 UTC 2018
+nodename: dell-3576
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 8
+current working directory: /media/xian/Work/myproject/flaskApp-ElementUI
+writing pidfile to ./uwsgi.pid
+detected binary path: /home/xian/.local/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+chdir() to /home/myproject/flaskApp-ElementUI/
+chdir(): No such file or directory [core/uwsgi.c line 2631]

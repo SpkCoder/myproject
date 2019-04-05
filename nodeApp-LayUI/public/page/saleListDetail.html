@@ -25,7 +25,7 @@ layui.use(['jquery','dataDB'], function(){
   var this_id = Number(url.split("?")[1]);
   var this_searchJson = JSON.stringify({"id": this_id});
   url = url.split("?")[0];
-  console.log(url);
+  //console.log(url);
   //当前定位
   var this_href = "#"+$("#layUI_routerView").attr("data-href").split("Detail.html")[0];
   var this_a = $(".layui-nav a[href='"+this_href+"']");

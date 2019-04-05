@@ -10,8 +10,8 @@ app.config['MAX_CONTENT_LENGTH'] = 100 * 1024 * 1024            #设置上传文
 app.config['UPLOAD_FOLDER'] = '/static/uploadFile'     #设置上传文件路径
 
 if app.config['ENV'] == 'development':
-    app.config['DEBUG'] = True
+    app.config['DEBUG'] = False
     app.config['dbArgs'] = {'host': 'localhost', 'user': 'root', 'password': '', 'port': '3306', 'database': 'mydb'}
 else:
     app.config['DEBUG'] = False
-    app.config['dbArgs'] = {'host': 'localhost', 'user': 'root', 'password': '123456', 'port': '3306', 'database': 'mydb'}
+    app.config['dbArgs'] = {'host': 'localhost', 'user': 'root', 'password': '123456xx', 'port': '3306', 'database': 'mydb'}

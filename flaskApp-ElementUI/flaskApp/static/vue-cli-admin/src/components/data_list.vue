@@ -146,7 +146,7 @@ export default {
 			list: null,
 			listLoading: true,
       showloading: false,
-			showloadingTime: 0,
+			showloadingTime: null,
 			data_type: null,
 			field_ch: null,
 			field_en: null,
@@ -311,14 +311,15 @@ export default {
         }).then(function () {
           var whereJson = {"modelId": [row.id]};
           var reqData = {'action': 'delData', 'whereJson': JSON.stringify(whereJson)};
+          _this.showloading = true;
           DB.delData(_this, _this.url, reqData, function (resData) {
             //console.log(data)
             _this.$message({duration: 1000, message: resData });
-            if(resData != "操作成功"){ return; }
+            if(resData != "操作成功"){_this.showloading = false; return; }
 
             //系统重启
             _this.showloading = true;
-            _this.showloadingTime = 30;
+            _this.showloadingTime = 5;
             var timer = setInterval(function () {
               _this.showloadingTime-=1;
               if(_this.showloadingTime==0){
@@ -360,15 +361,16 @@ export default {
                 var dataArr=[];
                 dataArr.push(_this.addForm);
                 var reqData = {'action': 'insertData', 'dataArr': JSON.stringify(dataArr)};
+                _this.addFormBox = false;
+                _this.showloading = true;
                 DB.insertData(_this, _this.url, reqData, function (resData) {
                   //console.log(resData)
                   _this.$message({duration: 1000, message: resData });
-                  if(resData != "操作成功"){ return; }
-                  _this.addFormBox = false;
+                  if(resData != "操作成功"){_this.showloading = false; return; }
 
                   //系统重启
                   _this.showloading = true;
-                  _this.showloadingTime = 30;
+                  _this.showloadingTime = 5;
                   var timer = setInterval(function () {
                     _this.showloadingTime-=1;
                     if(_this.showloadingTime==0){

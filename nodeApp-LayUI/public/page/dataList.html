@@ -29,7 +29,7 @@
 layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'dataDB', 'formVerify'], function(){
   var $ = layui.$;
   var url = $("#layUI_routerView").attr("data-href").replace(/\/page\//,"/nodejs/").replace(/\.html/,"");
-  console.log(url);
+  //console.log(url);
   //当前定位
   var this_href = "#"+$("#layUI_routerView").attr("data-href").split(".html")[0];
   var this_a = $(".layui-nav a[href='"+this_href+"']");
@@ -238,9 +238,17 @@ layui.use(['jquery','laydate', 'laypage', 'layer', 'table', 'form', 'upload', 'd
 	                  $(".btn_esc").on("click",function () { layer.close(index); return false; });
 	                  
 	                  form.on('select(id)', function(data){
-						  //console.log(data);
-						  $("form input[name=name_ch]").val($("form select[name=id] option:selected").text());
-					  }); 
+        						  //console.log(data.value);
+        						  // $("form input[name=name_ch]").val($("form select[name=id] option:selected").text());
+                      modelList.forEach(function (item, index) {
+                        if(item.id == data.value){
+                          var name = "";
+                          if(item.href.split("/")[2]){name = item.href.split("/")[2]}
+                          $("form input[name=name]").val(name)
+                          $("form input[name=name_ch]").val(item.name)
+                        }
+                      });
+        					  }); 
 	                  
 	                  //监听提交
 	                  form.on('submit(formDemo)', function(data){

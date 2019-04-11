@@ -6,10 +6,10 @@ const fn = function () {
 
 
 //创建文件夹
-fn.prototype.mkdirSync = function (url,mode,cb) {
+fn.prototype.mkdirSync = function (url,callBack) {
     var arr = url.split("/");
-    mode = mode || 0755;
-    cb = cb || function(){};
+    mode = 0755;
+    callBack = callBack || function(){};
     if(arr[0]==="."){//处理 ./aaa
         arr.shift();
     }
@@ -23,7 +23,7 @@ fn.prototype.mkdirSync = function (url,mode,cb) {
         if(arr.length){
             inner(cur + "/"+arr.shift());
         }else{
-            cb();
+            callBack();
         }
     }
     arr.length && inner(arr.shift());
@@ -46,8 +46,8 @@ fn.prototype.rmdirSync = (function(){
             iterator(path+"/"+el,dirs);
         }
     }
-    return function(dir,cb){
-        cb = cb || function(){};
+    return function(dir,callBack){
+        callBack = callBack || function(){};
         var dirs = [];
  
         try{
@@ -55,9 +55,9 @@ fn.prototype.rmdirSync = (function(){
             for(var i = 0, el ; el = dirs[i++];){
                 fs.rmdirSync(el);//一次性删除所有收集到的目录
             }
-            cb()
+            callBack()
         }catch(e){//如果文件或目录本来就不存在，fs.statSync会报错，不过我们还是当成没有异常发生
-            e.code === "ENOENT" ? cb() : cb(e);
+            e.code === "ENOENT" ? callBack() : callBack(e);
         }
     }
 })();
@@ -81,8 +81,8 @@ fn.prototype.getAllFiles = (function(){
             iterator(path+"/"+el,dirs);
         }
     }
-    return function(dir,cb){
-        cb = cb || function(){};
+    return function(dir,callBack){
+        callBack = callBack || function(){};
         var dirs = [];
  
         try{
@@ -90,9 +90,9 @@ fn.prototype.getAllFiles = (function(){
             for(var i = 0, el ; el = dirs[i++];){
                 fs.rmdirSync(el);//一次性删除所有收集到的目录
             }
-            cb()
+            callBack()
         }catch(e){//如果文件或目录本来就不存在，fs.statSync会报错，不过我们还是当成没有异常发生
-            e.code === "ENOENT" ? cb() : cb(e);
+            e.code === "ENOENT" ? callBack() : callBack(e);
         }
     }
 })();

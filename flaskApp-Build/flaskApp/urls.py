@@ -1,0 +1,1 @@
+dict_url = {'/python/http_test': 'flaskApp.views.http_test', '/python/vue_build': 'flaskApp.views.vue_build'}

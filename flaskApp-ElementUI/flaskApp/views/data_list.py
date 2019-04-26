@@ -147,9 +147,10 @@ def operation(req):
         # vue-cli-admin打包
         async def vue_build():
             print("vue-cli-admin打包")
-            build_path = os.path.dirname(os.path.dirname(__file__)) + "/static/vue-cli-admin/build/build.js"
-            print(build_path)
-            os.system("node " + build_path) 
+            # build_path = os.path.dirname(os.path.dirname(__file__)) + "/static/vue-cli-admin/build/build.js"
+            # print(build_path)
+            # os.system("node " + build_path)
+            os.system("curl http://localhost:4040/python/vue_build") 
 
         new_loop = asyncio.new_event_loop()
         asyncio.set_event_loop(new_loop)
@@ -207,9 +208,10 @@ def operation(req):
         # vue-cli-admin打包
         async def vue_build():
             print("vue-cli-admin打包")
-            build_path = os.path.dirname(os.path.dirname(__file__)) + "/static/vue-cli-admin/build/build.js"
-            print(build_path)
-            os.system("node " + build_path) 
+            # build_path = os.path.dirname(os.path.dirname(__file__)) + "/static/vue-cli-admin/build/build.js"
+            # print(build_path)
+            # os.system("node " + build_path) 
+            os.system("curl http://localhost:4040/python/vue_build")
 
         new_loop = asyncio.new_event_loop()
         asyncio.set_event_loop(new_loop)

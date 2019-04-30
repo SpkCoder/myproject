@@ -42,7 +42,7 @@ export default {
         username:[
               { validator: function(rule, value, callback) {
                 if(value == ""){
-                    return callback(new Error('Please input UserName'));
+                    return callback(new Error('请输入用户名'));
                 }
                 callback();
                 }, 
@@ -52,7 +52,7 @@ export default {
           password:[
               { validator: function(rule, value, callback) {
                 if(value == ""){
-                    return callback(new Error('Please input Password'));
+                    return callback(new Error('请输入密码'));
                 }
                 callback();
                 }, 

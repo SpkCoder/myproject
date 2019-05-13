@@ -12,22 +12,45 @@ import hashlib
 # http://localhost:3000/python/login?action=updateData&whereJson={"username":"tom"}&updateJson={"password":"123456"}  //修改密码
 
 
-def operation(req):
-    table_name = 'user_list'
+class model(object):
+    def __init__(self,req):
+        self.req = req 
+        self.table_name = 'user_list'
+
+    # 分配方法
+    def actions(self):
+        # GET请求
+        if self.req.method == 'GET':
+            return make_response('None GET')
+        
+        # POST请求
+        elif self.req.method == 'POST':
+            print(self.req.form)
+            if self.req.form['action'] == 'SignIn':
+                return self.sign_in()
+            elif self.req.form['action'] == 'SignOut':
+                return self.sign_out()
+            elif self.req.form['action'] == 'updateData':
+                return self.update_data()
+            else:
+                return make_response('action错误')
+
+        else:
+            return make_response('method错误')
 
     # 登录
-    def sign_in():
-        if 'whereJson' in req.form:
+    def sign_in(self):
+        if 'whereJson' in self.req.form:
             try:
-                dict_where = json.loads(req.form['whereJson'])
+                dict_where = json.loads(self.req.form['whereJson'])
             except:
                 return make_response('whereJson错误')
         else:
             return make_response('whereJson错误')
 
-        if 'osJson' in req.form:
+        if 'osJson' in self.req.form:
             try:
-                dict_os = json.loads(req.form['osJson'])
+                dict_os = json.loads(self.req.form['osJson'])
             except:
                 return make_response('osJson错误')
         else:
@@ -46,17 +69,17 @@ def operation(req):
         str_where = 'username="'+dict_where['username']+'" and password="'+dict_where['password']+'"'
         str_field = 'username,password'
         args = {}
-        result = mysqldb.find_data(table_name, str_where, str_field, args)
+        result = mysqldb.find_data(self.table_name, str_where, str_field, args)
         # print(result)
         if result and result['count'] > 0:
             print(dict_where['username'] + "登录成功")
             os = dict_os['os'] or ""
             px = dict_os['px'] or ""
-            ip = req.remote_addr
+            ip = self.req.remote_addr
 
             # 操作记录
             content = 'action=SignIn'
-            dict_record = {'username': dict_where['username'], 'dbName': table_name, 'action': '登录', 'content': content, 'os': os, 'px': px, 'ip': ip, 'time': time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())}
+            dict_record = {'username': dict_where['username'], 'dbName': self.table_name, 'action': '登录', 'content': content, 'os': os, 'px': px, 'ip': ip, 'time': time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())}
             mysqldb.set_record(dict_record)
 
             res = make_response('登录成功')
@@ -68,14 +91,14 @@ def operation(req):
 
 
     # 退出
-    def sign_out():
-        dict_login = json.loads(req.cookies['logining'])
+    def sign_out(self):
+        dict_login = json.loads(self.req.cookies['logining'])
         print(dict_login)
 
         # 操作记录
         content = 'action=SignOut'
-        dict_record = {'username': dict_login['username'], 'dbName': table_name, 'action': '退出', 'content': content,
-                       'os': dict_login['os'], 'px': dict_login['px'], 'ip': req.remote_addr,
+        dict_record = {'username': dict_login['username'], 'dbName': self.table_name, 'action': '退出', 'content': content,
+                       'os': dict_login['os'], 'px': dict_login['px'], 'ip': self.req.remote_addr,
                        'time': time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())}
         mysqldb.set_record(dict_record)
 
@@ -87,18 +110,18 @@ def operation(req):
 
 
     # 修改密码
-    def update_data():
-        if 'whereJson' in req.form:
+    def update_data(self):
+        if 'whereJson' in self.req.form:
             try:
-                dict_where = json.loads(req.form['whereJson'])
+                dict_where = json.loads(self.req.form['whereJson'])
             except:
                 return make_response('whereJson错误')
         else:
             return make_response('whereJson错误')
 
-        if 'updateJson' in req.form:
+        if 'updateJson' in self.req.form:
             try:
-                dict_update = json.loads(req.form['updateJson'])
+                dict_update = json.loads(self.req.form['updateJson'])
                 if len(dict_update) == 0:
                     return make_response('updateJson错误')
             except:
@@ -111,7 +134,7 @@ def operation(req):
         else:
             pass
 
-        dict_login = json.loads(req.cookies['logining'])
+        dict_login = json.loads(self.req.cookies['logining'])
         if dict_where['username'] != dict_login['username']:
             return make_response('没有权限')
         else:
@@ -130,15 +153,15 @@ def operation(req):
         dict_update['update_name'] = dict_login['username']
         dict_update['update_time'] = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
 
-        result = mysqldb.update_data(table_name, str_where, dict_update)
+        result = mysqldb.update_data(self.table_name, str_where, dict_update)
         # print(result)
 
         if result:
 
             # 操作记录
             content = 'change password'
-            dict_record = {'username': dict_login['username'], 'dbName': table_name, 'action': '修改', 'content': content,
-                           'os': dict_login['os'], 'px': dict_login['px'], 'ip': req.remote_addr,
+            dict_record = {'username': dict_login['username'], 'dbName': self.table_name, 'action': '修改', 'content': content,
+                           'os': dict_login['os'], 'px': dict_login['px'], 'ip': self.req.remote_addr,
                            'time': time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())}
             mysqldb.set_record(dict_record)
 
@@ -146,17 +169,3 @@ def operation(req):
         else:
             return make_response('操作失败')
 
-
-    # POST请求
-    if req.method == 'POST':
-        print(req.form)
-        if req.form['action'] == 'SignIn':
-            return sign_in()
-        elif req.form['action'] == 'SignOut':
-            return sign_out()
-        elif req.form['action'] == 'updateData':
-            return update_data()
-        else:
-            return make_response('action错误')
-
-    return make_response('action错误')

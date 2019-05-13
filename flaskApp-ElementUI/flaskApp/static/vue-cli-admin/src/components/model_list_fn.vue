@@ -318,6 +318,10 @@ export default {
 
               var reqData = 'action=findData&whereStr=modelId='+_this.addForm.model_id+'&prePageNum=1&currPage=1';
               DB.findData(_this, _this.GLOBAL.host+'/python/data_list', reqData, function (resData) {
+                if(resData.rows.length == 0){
+                  _this.$message({duration: 1000, message: "请先添加数据列表" });
+                  return false;
+                }
                 _this.addForm.db_name = resData.rows[0].name;
                 delete _this.addForm.id;
                 var dataArr=[];

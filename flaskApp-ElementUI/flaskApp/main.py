@@ -31,14 +31,14 @@ def require(arg):
     if request.cookies.get('logining'):
         req_url = '/python/' + arg
         if req_url in dict_url:
-            ip_module = __import__(dict_url[req_url], fromlist=["*"])
-            return ip_module.operation(request)
+            import_module = __import__(dict_url[req_url], fromlist=["*"])
+            return import_module.model(request).actions()
         else:
             return redirect('/static/error.html')
     else:
         if arg == 'login':
-            ip_module = __import__(dict_url['/python/login'], fromlist=["*"])
-            return ip_module.operation(request)
+            import_module = __import__(dict_url['/python/login'], fromlist=["*"])
+            return import_module.model(request).actions()
         else:
             return '没有登录，请先登录！'
 

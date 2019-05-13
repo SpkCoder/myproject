@@ -197,10 +197,24 @@
     created: function () {
         var _this = this;
         _this.url = _this.GLOBAL.host + "/python/login";
-        if(localStorage.getItem("loginStatus")){
-            var loginStatus = JSON.parse(localStorage.getItem("loginStatus"));
-            this.username = loginStatus['username'];
+        function getCookie(name)
+          {
+          var strCookie=document.cookie;
+          var arrCookie=strCookie.split("; ");
+          for(var i=0;i<arrCookie.length;i++)
+          {
+            var arr=arrCookie[i].split("=");
+            if(arr[0]==name)return arr[1];
+          }
+          return "";
+        } 
+        var logining = getCookie('logining');
+        if(logining){
+          logining = logining.replace(/\\\"/g,'\"').replace(/\\054/g,",").replace(/\"\{/,"\{").replace(/\}\"/,"\}");
+          logining = JSON.parse(logining);
+          this.username = logining['username'];
         }
+        
     }
 
   }

@@ -13,45 +13,80 @@ import os
 #http://localhost:3000/python/http_test?action=delData&whereJson={"url":[url1,url2]}  //删除文件
 
 
-def operation(req):
-    table_name = req.path[8:]
-    dict_login = json.loads(req.cookies['logining'])
+class model(object):
+    def __init__(self,req):
+        self.req = req 
+        self.table_name = self.req.path[8:] 
+        self.dict_login = json.loads(self.req.cookies['logining'])
+
+    # 分配方法
+    def actions(self):
+        # GET请求
+        if self.req.method == 'GET':
+            print(self.req.args)
+
+            # 判断权限
+            if not mysqldb.get_power(self.dict_login['username'], self.dict_login['hash'], self.table_name, self.req.args['action']):
+                return make_response('没有权限')
+
+            if self.req.args['action'] == 'findData':
+                return self.find_data()
+            else:
+                return make_response('action错误')
+
+        # POST请求
+        elif self.req.method == 'POST':
+            print(self.req.form)
+
+            # 判断权限
+            if not mysqldb.get_power(self.dict_login['username'], self.dict_login['hash'], self.table_name, self.req.form['action']):
+                return make_response('没有权限')
+
+            if self.req.form['action'] == 'insertData':
+                return self.insert_data()
+            elif self.req.form['action'] == 'delData':
+                return self.del_data()
+            else:
+                return make_response('action错误')
+
+        else:
+            return make_response('method错误')
 
     # 查询数据
-    def find_data():
+    def find_data(self):
 
-        if 'whereStr' in req.args:
-            str_where = req.args['whereStr']
+        if 'whereStr' in self.req.args:
+            str_where = self.req.args['whereStr']
         else:
             str_where = ''
 
-        if 'fieldStr' in req.args:
-            str_field = req.args['fieldStr']
+        if 'fieldStr' in self.req.args:
+            str_field = self.req.args['fieldStr']
         else:
             str_field = ''
 
-        if 'sortStr' in req.args:
-            str_sort = req.args['sortStr']
+        if 'sortStr' in self.req.args:
+            str_sort = self.req.args['sortStr']
         else:
             str_sort = ''
 
-        if 'prePageNum' in req.args:
-            pre_page_num = int(req.args['prePageNum'])
+        if 'prePageNum' in self.req.args:
+            pre_page_num = int(self.req.args['prePageNum'])
         else:
             pre_page_num = 0
 
-        if 'currPage' in req.args:
-            curr_page = int(req.args['currPage'])
+        if 'currPage' in self.req.args:
+            curr_page = int(self.req.args['currPage'])
         else:
             curr_page = 0
 
         args = {'pre_page_num': pre_page_num, 'curr_page': curr_page, 'sort': str_sort}
-        result = mysqldb.find_data(table_name, str_where, str_field, args)
+        result = mysqldb.find_data(self.table_name, str_where, str_field, args)
         # print(result)
 
         if result:
             # 获取表头数据
-            list_head = mysqldb.get_head('name="' + table_name + '"')
+            list_head = mysqldb.get_head('name="' + self.table_name + '"')
 
             if list_head and len(list_head) > 0:
                 dict_json = {'code': 0, 'msg': '', 'count': result['count'], 'prePageNum': pre_page_num,
@@ -70,10 +105,10 @@ def operation(req):
 
 
     # 上传文件
-    def insert_data():
-        if 'dataArr' in req.form:
+    def insert_data(self):
+        if 'dataArr' in self.req.form:
             try:
-                list_data = json.loads(req.form['dataArr'])
+                list_data = json.loads(self.req.form['dataArr'])
                 if len(list_data) == 0:
                     return make_response('dataArr错误')
             except:
@@ -81,7 +116,7 @@ def operation(req):
         else:
             return make_response('dataArr错误')
 
-        upload_files = req.files.getlist("file")
+        upload_files = self.req.files.getlist("file")
         for i, file in enumerate(upload_files):
             now_time = time.strftime("%Y-%m-%d-%H-%M-%S", time.localtime()) + "-" + str(time.time())[11:15]
             now_path = os.path.dirname(os.path.dirname(__file__)) + "/static/uploadFile/" + now_time + "___" + file.filename
@@ -93,17 +128,17 @@ def operation(req):
             list_data[i]['name'] = file.filename
             list_data[i]['size'] = os.path.getsize(now_path)
             list_data[i]['url'] = url
-            list_data[i]['create_name'] = dict_login['username']
+            list_data[i]['create_name'] = self.dict_login['username']
             list_data[i]['create_time'] = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
 
         # print(list_data)
-        result = mysqldb.insert_data(table_name, list_data)
+        result = mysqldb.insert_data(self.table_name, list_data)
         # print(result)
 
         if result:
             # 操作记录
             content = 'dataArr=' + re.sub(r'\"', "'", json.dumps(list_data, ensure_ascii=False))
-            dict_record = {'username': dict_login['username'], 'dbName': table_name, 'action': '上传文件', 'content': content, 'os': dict_login['os'], 'px': dict_login['px'], 'ip': req.remote_addr, 'time': time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())}
+            dict_record = {'username': self.dict_login['username'], 'dbName': self.table_name, 'action': '上传文件', 'content': content, 'os': self.dict_login['os'], 'px': self.dict_login['px'], 'ip': self.req.remote_addr, 'time': time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())}
             mysqldb.set_record(dict_record)
 
             return make_response('操作成功')
@@ -112,10 +147,10 @@ def operation(req):
 
 
     # 删除文件
-    def del_data():
-        if 'whereJson' in req.form:
+    def del_data(self):
+        if 'whereJson' in self.req.form:
             try:
-                dict_where = json.loads(req.form['whereJson'])
+                dict_where = json.loads(self.req.form['whereJson'])
                 if not dict_where['url']:
                     return make_response('whereJson错误')
             except:
@@ -123,7 +158,7 @@ def operation(req):
         else:
             return make_response('whereJson错误')
 
-        result = mysqldb.del_data(table_name, dict_where)
+        result = mysqldb.del_data(self.table_name, dict_where)
         # print(result)
 
         if result:
@@ -136,39 +171,10 @@ def operation(req):
 
             # 操作记录
             content = 'whereJson=' + re.sub(r'\"', "'", json.dumps(dict_where, ensure_ascii=False))
-            dict_record = {'username': dict_login['username'], 'dbName': table_name, 'action': '删除文件', 'content': content, 'os': dict_login['os'], 'px': dict_login['px'], 'ip': req.remote_addr, 'time': time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())}
+            dict_record = {'username': self.dict_login['username'], 'dbName': self.table_name, 'action': '删除文件', 'content': content, 'os': self.dict_login['os'], 'px': self.dict_login['px'], 'ip': self.req.remote_addr, 'time': time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())}
             mysqldb.set_record(dict_record)
 
             return make_response('操作成功')
         else:
             return make_response('操作失败')
 
-    # GET请求
-    if req.method == 'GET':
-        print(req.args)
-
-        # 判断权限
-        if not mysqldb.get_power(dict_login['username'], dict_login['hash'], table_name, req.args['action']):
-            return make_response('没有权限')
-
-        if req.args['action'] == 'findData':
-            return find_data()
-        else:
-            return make_response('action错误')
-
-    # POST请求
-    if req.method == 'POST':
-        print(req.form)
-
-        # 判断权限
-        if not mysqldb.get_power(dict_login['username'], dict_login['hash'], table_name, req.form['action']):
-            return make_response('没有权限')
-
-        if req.form['action'] == 'insertData':
-            return insert_data()
-        elif req.form['action'] == 'delData':
-            return del_data()
-        else:
-            return make_response('action错误')
-
-    return make_response('action错误')

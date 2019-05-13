@@ -292,7 +292,21 @@ export default {
     del(row) {
         //console.log(row);
         var _this = this;
-        if(row.username == JSON.parse(localStorage.getItem("loginStatus")).username){
+        function getCookie(name)
+          {
+          var strCookie=document.cookie;
+          var arrCookie=strCookie.split("; ");
+          for(var i=0;i<arrCookie.length;i++)
+          {
+            var arr=arrCookie[i].split("=");
+            if(arr[0]==name)return arr[1];
+          }
+          return "";
+        } 
+        var logining = getCookie('logining');
+        logining = logining.replace(/\\\"/g,'\"').replace(/\\054/g,",").replace(/\"\{/,"\{").replace(/\}\"/,"\}");
+        logining = JSON.parse(logining);
+        if(row.username == logining['username']){
           _this.$message({duration: 1000, message: "禁止删除自己！" });
           return;
         }

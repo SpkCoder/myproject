@@ -15,45 +15,89 @@ import asyncio
 #http://localhost:3000/python/http_test?action=delData&whereJson={"id":[1,3,5]}  //删除数据
 
 
-def operation(req):
-    table_name = req.path[8:]
-    dict_login = json.loads(req.cookies['logining'])
+class model(object):
+    def __init__(self,req):
+        self.req = req 
+        self.table_name = self.req.path[8:] 
+        self.dict_login = json.loads(self.req.cookies['logining'])
+
+    # 分配方法
+    def actions(self):
+        # GET请求
+        if self.req.method == 'GET':
+            print(self.req.args)
+
+            # 判断权限
+            if self.req.args['action'] == 'findDataAll':
+                action2 = 'findData'
+            else:
+                action2 = self.req.args['action']
+            if not mysqldb.get_power(self.dict_login['username'], self.dict_login['hash'], self.table_name, action2):
+                return make_response('没有权限')
+
+            if self.req.args['action'] == 'findData':
+                return self.find_data()
+            elif self.req.args['action'] == 'findDataAll':
+                return self.find_data_all()
+            else:
+                return make_response('action错误')
+
+        # POST请求
+        elif self.req.method == 'POST':
+            print(self.req.form)
+
+            # 判断权限
+            if not mysqldb.get_power(self.dict_login['username'], self.dict_login['hash'], self.table_name, self.req.form['action']):
+                return make_response('没有权限')
+
+            if self.req.form['action'] == 'insertData':
+                return self.insert_data()
+            elif self.req.form['action'] == 'updateData':
+                return self.update_data()
+            elif self.req.form['action'] == 'delData':
+                return self.del_data()
+            else:
+                return make_response('action错误')
+
+        else:
+            return make_response('method错误')
+
 
     # 查询数据
-    def find_data():
+    def find_data(self):
 
-        if 'whereStr' in req.args:
-            str_where = req.args['whereStr']
+        if 'whereStr' in self.req.args:
+            str_where = self.req.args['whereStr']
         else:
             str_where = ''
 
-        if 'fieldStr' in req.args:
-            str_field = req.args['fieldStr']
+        if 'fieldStr' in self.req.args:
+            str_field = self.req.args['fieldStr']
         else:
             str_field = ''
 
-        if 'sortStr' in req.args:
-            str_sort = req.args['sortStr']
+        if 'sortStr' in self.req.args:
+            str_sort = self.req.args['sortStr']
         else:
             str_sort = ''
 
-        if 'prePageNum' in req.args:
-            pre_page_num = int(req.args['prePageNum'])
+        if 'prePageNum' in self.req.args:
+            pre_page_num = int(self.req.args['prePageNum'])
         else:
             pre_page_num = 0
 
-        if 'currPage' in req.args:
-            curr_page = int(req.args['currPage'])
+        if 'currPage' in self.req.args:
+            curr_page = int(self.req.args['currPage'])
         else:
             curr_page = 0
 
         args = {'pre_page_num': pre_page_num, 'curr_page': curr_page, 'sort': str_sort}
-        result = mysqldb.find_data(table_name, str_where, str_field, args)
+        result = mysqldb.find_data(self.table_name, str_where, str_field, args)
         # print(result)
 
         if result:
             # 获取表头数据
-            list_head = mysqldb.get_head('name="' + table_name + '"')
+            list_head = mysqldb.get_head('name="' + self.table_name + '"')
 
             if list_head and len(list_head) > 0:
                 dict_json = {'code': 0, 'msg': '', 'count': result['count'], 'prePageNum': pre_page_num,
@@ -72,9 +116,9 @@ def operation(req):
 
 
     # 查询处理过的数据
-    def find_data_all():
-        if 'whereStr' in req.args:
-            str_where = req.args['whereStr']
+    def find_data_all(self):
+        if 'whereStr' in self.req.args:
+            str_where = self.req.args['whereStr']
         else:
             str_where = ''
 
@@ -100,17 +144,17 @@ def operation(req):
 
 
     # 复制前后端代码文件
-    def copy_file_fn(this_table_name):
+    def copy_file_fn(self,table_this_name):
         file_src_html = os.path.normpath(os.path.dirname(os.path.dirname(__file__)) + "/static/vue-cli-admin/src/components/page_demo.vue")
-        file_dest_html = os.path.normpath(os.path.dirname(os.path.dirname(__file__)) + "/static/vue-cli-admin/src/components/" + this_table_name + ".vue")
+        file_dest_html = os.path.normpath(os.path.dirname(os.path.dirname(__file__)) + "/static/vue-cli-admin/src/components/" + table_this_name + ".vue")
         file_src_py = os.path.normpath(os.path.dirname(os.path.dirname(__file__)) + "/views/page_demo.py")
-        file_dest_py = os.path.normpath(os.path.dirname(os.path.dirname(__file__)) + "/views/" + this_table_name + ".py")
+        file_dest_py = os.path.normpath(os.path.dirname(os.path.dirname(__file__)) + "/views/" + table_this_name + ".py")
         if not os.path.exists(file_dest_html):
             shutil.copyfile(file_src_html, file_dest_html)
-            print("复制" + this_table_name + ".vue成功")
+            print("复制" + table_this_name + ".vue成功")
         if not os.path.exists(file_dest_py):
             shutil.copyfile(file_src_py, file_dest_py)
-            print("复制" + this_table_name + ".py成功")
+            print("复制" + table_this_name + ".py成功")
 
         # 给routerUrl.js添加routerUrl
         file_routerUrl = os.path.normpath(os.path.dirname(os.path.dirname(__file__)) + "/static/vue-cli-admin/src/router/routerUrl.js")
@@ -118,7 +162,7 @@ def operation(req):
             data = f.read()
             data = re.sub(r'\}', '', data)
             list_router_url = json.loads(data.split(" : ")[1])
-            router_url_this = "/page/" + this_table_name
+            router_url_this = "/page/" + table_this_name
             list_router_url.append(router_url_this)
             router_url_str = "export default {routerUrl : " + json.dumps(list_router_url) + "}"
             f.seek(0, 0)
@@ -133,8 +177,8 @@ def operation(req):
             data = f.read()
             data = re.sub(r'\'', '"', data.split(" = ")[1])
             dict_url = json.loads(data)
-            url_this = "/python/" + this_table_name
-            dict_url[url_this] = "flaskApp.views." + this_table_name
+            url_this = "/python/" + table_this_name
+            dict_url[url_this] = "flaskApp.views." + table_this_name
             dict_url_str = "dict_url = " + json.dumps(dict_url)
             dict_url_str = re.sub(r'"', '\'', dict_url_str)
             f.seek(0, 0)
@@ -164,15 +208,15 @@ def operation(req):
         
 
     # 删除前后端代码文件
-    def remove_file_fn(this_table_name):
-        file_dest_html = os.path.normpath(os.path.dirname(os.path.dirname(__file__)) + "/static/vue-cli-admin/src/components/" + this_table_name + ".vue")
-        file_dest_py = os.path.normpath(os.path.dirname(os.path.dirname(__file__)) + "/views/" + this_table_name + ".py")
+    def remove_file_fn(self,table_this_name):
+        file_dest_html = os.path.normpath(os.path.dirname(os.path.dirname(__file__)) + "/static/vue-cli-admin/src/components/" + table_this_name + ".vue")
+        file_dest_py = os.path.normpath(os.path.dirname(os.path.dirname(__file__)) + "/views/" + table_this_name + ".py")
         if os.path.exists(file_dest_html):
             os.remove(file_dest_html)
-            print("删除" + this_table_name + ".vue成功")
+            print("删除" + table_this_name + ".vue成功")
         if os.path.exists(file_dest_py):
             os.remove(file_dest_py)
-            print("删除" + this_table_name + ".py成功")
+            print("删除" + table_this_name + ".py成功")
 
         # 给routerUrl.js删除routerUrl
         file_routerUrl = os.path.normpath(os.path.dirname(os.path.dirname(__file__)) + "/static/vue-cli-admin/src/router/routerUrl.js")
@@ -180,7 +224,7 @@ def operation(req):
             data = f.read()
             data = re.sub(r'\}', '', data)
             list_router_url = json.loads(data.split(" : ")[1])
-            router_url_this = '/page/' + this_table_name
+            router_url_this = '/page/' + table_this_name
             list_router_url.remove(router_url_this)
             router_url_str = "export default {routerUrl : " + json.dumps(list_router_url) + "}"
             f.seek(0, 0)
@@ -195,7 +239,7 @@ def operation(req):
             data = f.read()
             data = re.sub(r'\'', '"', data.split(" = ")[1])
             dict_url = json.loads(data)
-            url_this = '/python/' + this_table_name
+            url_this = '/python/' + table_this_name
             del dict_url[url_this]
             dict_url_str = "dict_url = " + json.dumps(dict_url)
             dict_url_str = re.sub(r'"', '\'', dict_url_str)
@@ -224,16 +268,16 @@ def operation(req):
         return make_response('操作成功')
 
     # 插入list_data
-    def insert_data_fn(list_data):
-        result = mysqldb.insert_data(table_name, list_data)
+    def insert_data_fn(self,list_data):
+        result = mysqldb.insert_data(self.table_name, list_data)
         # print(result)
         if result:
             print('插入list_data成功')
 
             # 操作记录
             content = 'dataArr=' + re.sub(r'\"', "'", json.dumps(list_data, ensure_ascii=False))
-            dict_record = {'username': dict_login['username'], 'dbName': table_name, 'action': '增加', 'content': content,
-                           'os': dict_login['os'], 'px': dict_login['px'], 'ip': req.remote_addr,
+            dict_record = {'username': self.dict_login['username'], 'dbName': self.table_name, 'action': '增加', 'content': content,
+                           'os': self.dict_login['os'], 'px': self.dict_login['px'], 'ip': self.req.remote_addr,
                            'time': time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())}
             mysqldb.set_record(dict_record)
 
@@ -243,10 +287,10 @@ def operation(req):
 
 
     # 插入数据
-    def insert_data():
-        if 'dataArr' in req.form:
+    def insert_data(self):
+        if 'dataArr' in self.req.form:
             try:
-                list_data = json.loads(req.form['dataArr'])
+                list_data = json.loads(self.req.form['dataArr'])
                 if len(list_data) == 0:
                     return make_response('dataArr错误')
             except:
@@ -262,7 +306,7 @@ def operation(req):
                 item['data_type'] = 'int'
                 item['field_width'] = 100
                 item['field_sort'] = 1
-            item['create_name'] = dict_login['username']
+            item['create_name'] = self.dict_login['username']
             item['create_time'] = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
             item['update_name'] = ''
             item['update_time'] = ''
@@ -294,19 +338,19 @@ def operation(req):
         str_where = 'modelId=' + str(list_data[0]['modelId']) + ' and field_en in' + str_field_en
         str_field = 'modelId,field_en'
         args = {'pre_page_num': 1, 'curr_page': 1, 'sort': ''}
-        result = mysqldb.find_data(table_name, str_where, str_field, args)
+        result = mysqldb.find_data(self.table_name, str_where, str_field, args)
         if result['count'] > 0:
             return make_response('字段名已存在')
 
-        this_table_name = list_data[0]['name']
+        table_this_name = list_data[0]['name']
         if list_data[0]['field_en'] == 'id':
             # 创建数据表
-            result = mysqldb.create_table(this_table_name)
+            result = mysqldb.create_table(table_this_name)
             if not result:
                 return make_response('操作失败')
             print("创建数据表完成")
-            insert_data_fn(list_data)
-            return copy_file_fn(this_table_name)
+            self.insert_data_fn(list_data)
+            return self.copy_file_fn(table_this_name)
         else:
             # 给数据表插入列
             if list_data[0]['data_type'] == 'int' or list_data[0]['data_type'] == 'int(6)':
@@ -318,24 +362,23 @@ def operation(req):
             else:
                 data_type = 'VARCHAR(100)'
             str_data = 'add ' + list_data[0]['field_en'] + ' ' + data_type + ' not null'
-            result = mysqldb.update_col(this_table_name, str_data)
+            result = mysqldb.update_col(table_this_name, str_data)
             print("插入列完成")
             if not result:
                 return make_response('操作失败')
-            return insert_data_fn(list_data)
+            return self.insert_data_fn(list_data)
 
     # 修改数据
-    def update_data_fn(table_name, str_where, dict_update):
-        result = mysqldb.update_data(table_name, str_where, dict_update)
+    def update_data_fn(self, str_where, dict_update):
+        result = mysqldb.update_data(self.table_name, str_where, dict_update)
         # print(result)
-
         if result:
             # 操作记录
             content = 'whereStr=' + re.sub(r'\"', "'", str_where) + '&updateJson=' + re.sub(r'\"', "'",
                                                                                             json.dumps(dict_update,
                                                                                                        ensure_ascii=False))
-            dict_record = {'username': dict_login['username'], 'dbName': table_name, 'action': '修改', 'content': content,
-                           'os': dict_login['os'], 'px': dict_login['px'], 'ip': req.remote_addr,
+            dict_record = {'username': self.dict_login['username'], 'dbName': self.table_name, 'action': '修改', 'content': content,
+                           'os': self.dict_login['os'], 'px': self.dict_login['px'], 'ip': self.req.remote_addr,
                            'time': time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())}
             mysqldb.set_record(dict_record)
 
@@ -344,17 +387,17 @@ def operation(req):
             return make_response('操作失败')
 
     # 修改数据
-    def update_data():
-        if 'whereStr' in req.form:
-            str_where = req.form['whereStr']
+    def update_data(self):
+        if 'whereStr' in self.req.form:
+            str_where = self.req.form['whereStr']
             if not str_where:
                 return make_response('whereStr错误')
         else:
             return make_response('whereStr错误')
 
-        if 'updateJson' in req.form:
+        if 'updateJson' in self.req.form:
             try:
-                dict_update = json.loads(req.form['updateJson'])
+                dict_update = json.loads(self.req.form['updateJson'])
                 if len(dict_update) == 0:
                     return make_response('updateJson错误')
                 if 'id' in dict_update:
@@ -382,22 +425,22 @@ def operation(req):
         if dict_update['field_en'] == 'id':
             return make_response('该字段不能修改')
 
-        dict_update['update_name'] = dict_login['username']
+        dict_update['update_name'] = self.dict_login['username']
         dict_update['update_time'] = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
 
         str_field = 'name,modelId,field_en'
         args = {'pre_page_num': 1, 'curr_page': 1, 'sort': ''}
-        result = mysqldb.find_data(table_name, str_where, str_field, args)
+        result = mysqldb.find_data(self.table_name, str_where, str_field, args)
         if result['rows'][0]['field_en'] == dict_update['field_en']:
-            return update_data_fn(table_name, str_where, dict_update)
+            return self.update_data_fn(str_where, dict_update)
         else:
-            this_table_name = result['rows'][0]['name']
+            table_this_name = result['rows'][0]['name']
 
             # 查询字段是否存在
             this_str_where = 'modelId=' + str(result['rows'][0]['modelId']) + ' and field_en="' + dict_update['field_en'] + '"'
             str_field = 'field_en'
             args = {'pre_page_num': 1, 'curr_page': 1, 'sort': ''}
-            this_result = mysqldb.find_data(table_name, this_str_where, str_field, args)
+            this_result = mysqldb.find_data(self.table_name, this_str_where, str_field, args)
             if this_result['count'] > 0:
                 return make_response('字段已存在')
 
@@ -407,21 +450,21 @@ def operation(req):
             else:
                 data_type = 'VARCHAR(100)'
             str_data = 'change ' + result['rows'][0]['field_en'] + ' ' + dict_update['field_en'] + ' ' + data_type + ' not null'
-            result = mysqldb.update_col(this_table_name, str_data)
+            result = mysqldb.update_col(table_this_name, str_data)
             if not result:
                 return make_response('操作失败')
-            return update_data_fn(table_name, str_where, dict_update)
+            return self.update_data_fn(str_where, dict_update)
 
 
-    def delete_data_fn(table_name, dict_where):
-        result = mysqldb.del_data(table_name, dict_where)
+    def delete_data_fn(self, dict_where):
+        result = mysqldb.del_data(self.table_name, dict_where)
         # print(result)
 
         if result:
             # 操作记录
             content = 'whereJson=' + re.sub(r'\"', "'", json.dumps(dict_where, ensure_ascii=False))
-            dict_record = {'username': dict_login['username'], 'dbName': table_name, 'action': '删除', 'content': content,
-                           'os': dict_login['os'], 'px': dict_login['px'], 'ip': req.remote_addr,
+            dict_record = {'username': self.dict_login['username'], 'dbName': self.table_name, 'action': '删除', 'content': content,
+                           'os': self.dict_login['os'], 'px': self.dict_login['px'], 'ip': self.req.remote_addr,
                            'time': time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())}
             mysqldb.set_record(dict_record)
 
@@ -430,10 +473,10 @@ def operation(req):
             return make_response('操作失败')
 
     # 删除数据
-    def del_data():
-        if 'whereJson' in req.form:
+    def del_data(self):
+        if 'whereJson' in self.req.form:
             try:
-                dict_where = json.loads(req.form['whereJson'])
+                dict_where = json.loads(self.req.form['whereJson'])
                 if len(dict_where) != 1:
                     return make_response('whereJson错误')
             except:
@@ -447,60 +490,23 @@ def operation(req):
             str_where = 'modelId=' + str(dict_where['modelId'][0])
         str_field = 'name,field_en'
         args = {'pre_page_num': 1, 'curr_page': 1, 'sort': ''}
-        result = mysqldb.find_data(table_name, str_where, str_field, args)
-        this_table_name = result['rows'][0]['name']
+        result = mysqldb.find_data(self.table_name, str_where, str_field, args)
+        table_this_name = result['rows'][0]['name']
         if 'id' in dict_where:
             # 删除列
             str_data = 'drop ' + result['rows'][0]['field_en']
-            result = mysqldb.update_col(this_table_name, str_data)
+            result = mysqldb.update_col(table_this_name, str_data)
             if not result:
                 return make_response('操作失败')
-            return delete_data_fn(table_name, dict_where)
+            return self.delete_data_fn(dict_where)
 
         else:
             # 删除表
-            result = mysqldb.drop_table(this_table_name)
+            result = mysqldb.drop_table(table_this_name)
             if not result:
                 return make_response('操作失败')
             print("删除数据表完成")
-            delete_data_fn(table_name, dict_where)
-            return remove_file_fn(this_table_name)
+            self.delete_data_fn(dict_where)
+            return self.remove_file_fn(table_this_name)
 
 
-    # GET请求
-    if req.method == 'GET':
-        print(req.args)
-
-        # 判断权限
-        if req.args['action'] == 'findDataAll':
-            action2 = 'findData'
-        else:
-            action2 = req.args['action']
-        if not mysqldb.get_power(dict_login['username'], dict_login['hash'], table_name, action2):
-            return make_response('没有权限')
-
-        if req.args['action'] == 'findData':
-            return find_data()
-        elif req.args['action'] == 'findDataAll':
-            return find_data_all()
-        else:
-            return make_response('action错误')
-
-    # POST请求
-    if req.method == 'POST':
-        print(req.form)
-
-        # 判断权限
-        if not mysqldb.get_power(dict_login['username'], dict_login['hash'], table_name, req.form['action']):
-            return make_response('没有权限')
-
-        if req.form['action'] == 'insertData':
-            return insert_data()
-        elif req.form['action'] == 'updateData':
-            return update_data()
-        elif req.form['action'] == 'delData':
-            return del_data()
-        else:
-            return make_response('action错误')
-
-    return make_response('action错误')

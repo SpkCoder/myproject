@@ -72,8 +72,8 @@ export default {
               var reqData = {'action': 'SignIn', 'whereJson': JSON.stringify({username: _this.formData.username, password: _this.formData.password, password: _this.formData.password}), 'osJson': JSON.stringify({os: device.os, px: device.px})};
               _this.$http.post(_this.url, reqData, {emulateJSON: true, responseType: 'text', credentials: true })
               .then(function (res) {
-                  console.log(res.data);
-                  if(res.data != "登录成功"){
+                console.log(res.data);
+                if(res.data != "登录成功"){
                   _this.$message({duration: 1000, message: res.data});
                   return;
                 }

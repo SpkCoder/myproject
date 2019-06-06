@@ -1,0 +1,26 @@
+extends layout
+
+block content
+    h2 #{ data.UserInfo.DeviceName } Device - #{ data.SerialNumber }
+    div(class="row")
+        - const header = ['Patient Name', 'Patient Email', 'Doctor Email', 'Device Name', 'Serial Number'];
+        each item in header
+            div(class="col-5")= item
+    div(class="row")
+        div(class="col-5") #{ data.UserInfo.PatientName }
+        div(class="col-5") #{ data.UserInfo.PatientEmail }
+        div(class="col-5") #{ data.UserInfo.DoctorEmail }
+        div(class="col-5") #{ data.UserInfo.DeviceName }
+        div(class="col-5") #{ data.SerialNumber }
+    div(class="row content")
+        div(class="col-3") Update Time
+        div(class="col-3") Usage Data
+        div(class="col-3") Preset Data
+    each val, index in data.UpdateData
+        div(class="row")
+            div(class="col-3") #{ data.UpdateData[index].UpdateTime }
+            div(class="col-3")
+                a(href="../data/detail/#{ index }") Detail
+            div(class="col-3")
+                a(href="../data/ConfigPreset/#{ index }") Detail
+

@@ -1,0 +1,79 @@
+extends layout
+
+block content
+    h2 #{ data.UserInfo.DeviceName } Device - #{ data.SerialNumber } (Usage Data)
+    div(class="row tabMenu")
+        div(class="col-3 active") Usage
+        div(class="col-3") Question
+        div(class="col-3") All
+    //- div(class="row half bold")
+    //-     div(class="col-2 usage") Usage
+    //-     div(class="col-2 ans") Question
+
+    div(class="tabBox")
+        div(class="box active")
+            div(class="row content bold")
+                - const UsageHeader = ['Code','Date', 'Time', 'Preset#', 'Min. of Use'];
+                each item in UsageHeader
+                    div(class="col-5")= item
+            each val, i in data.UpdateData[index].UsageData
+                - if (data.UpdateData[index].UsageData[i].Type == 'U')
+                    div(class="row")
+                        div(class="col-5") #{ i + 1 }
+                        div(class="col-5") #{ data.UpdateData[index].UsageData[i].DateOfTreatment }
+                        div(class="col-5") #{ data.UpdateData[index].UsageData[i].TimeOfTreatment }
+                        div(class="col-5") #{ data.UpdateData[index].UsageData[i].PresetNumber }
+                        div(class="col-5") #{ data.UpdateData[index].UsageData[i].MinOfUse }
+                        a(href="../detail/more/#{ index }/#{ i }", class="more") &gt;&gt;
+        div(class="box")
+            div(class="row content bold")
+                - const UsageHeader2 = ['Code','Date', 'Time', 'Preset#', 'Min. of Use'];
+                each item in UsageHeader2
+                    div(class="col-5")= item
+            each val, i in data.UpdateData[index].UsageData
+                - if (data.UpdateData[index].UsageData[i].Type == 'A')
+                    div(class="row")
+                        div(class="col-6") #{ i + 1 }
+                        div(class="col-6") #{ data.UpdateData[index].UsageData[i].DateOfTreatment }
+                        div(class="col-6") #{ data.UpdateData[index].UsageData[i].TimeOfTreatment }
+                        div(class="col-10") #{ data.UpdateData[index].UsageData[i].PainBefore }
+                        div(class="col-10") #{ data.UpdateData[index].UsageData[i].PainAfter }
+                        div(class="col-10") #{ data.UpdateData[index].UsageData[i].DecrMeds }
+                        div(class="col-10") #{ data.UpdateData[index].UsageData[i].HelpWork }
+                        div(class="col-10") #{ data.UpdateData[index].UsageData[i].HelpHome }
+                        a(href="../detail/more/#{ index }/#{ i }", class="more") &gt;&gt;
+        div(class="box")
+            div(class="row content bold")
+                - const UsageHeader3 = ['Code','Date', 'Time', 'Preset#', 'Min. of Use'];
+                each item in UsageHeader3
+                    div(class="col-4")= item
+            each val, i in data.UpdateData[index].UsageData
+               - if (data.UpdateData[index].UsageData[i].Type === 'U')
+                    div(class="row")
+                        div(class="col-6") #{ i + 1 }
+                        div(class="col-5") #{ data.UpdateData[index].UsageData[i].DateOfTreatment }
+                        div(class="col-5") #{ data.UpdateData[index].UsageData[i].TimeOfTreatment }
+                        div(class="col-5") #{ data.UpdateData[index].UsageData[i].PresetNumber }
+                        div(class="col-5") #{ data.UpdateData[index].UsageData[i].MinOfUse }
+                        a(href="../detail/more/#{ index }/#{ i }", class="more") &gt;&gt;
+                - if (data.UpdateData[index].UsageData[i].Type === 'A')
+                    div(class="row")
+                        div(class="col-6") #{ i + 1 }
+                        div(class="col-6") #{ data.UpdateData[index].UsageData[i].DateOfTreatment }
+                        div(class="col-6") #{ data.UpdateData[index].UsageData[i].TimeOfTreatment }
+                        div(class="col-10") #{ data.UpdateData[index].UsageData[i].PainBefore }
+                        div(class="col-10") #{ data.UpdateData[index].UsageData[i].PainAfter }
+                        div(class="col-10") #{ data.UpdateData[index].UsageData[i].DecrMeds }
+                        div(class="col-10") #{ data.UpdateData[index].UsageData[i].HelpWork }
+                        div(class="col-10") #{ data.UpdateData[index].UsageData[i].HelpHome }
+                        a(href="../detail/more/#{ index }/#{ i }", class="more") &gt;&gt;
+    
+
+    script(type="text/javascript").
+        $(function(){
+            $(".tabMenu div").on("click",function(){
+                var index = $(this).index();
+                $(this).addClass("active").siblings("div").removeClass("active");
+                $(".tabBox .box").eq(index).show().siblings("div").hide();
+            });
+        });

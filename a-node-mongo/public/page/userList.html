@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link type="favicon" rel="shortcut icon" href="../favicon.ico" />
+	<link rel='stylesheet' href='../css/style.css'/>
+</head>
+<body>
+    <div class="navbox">
+       <a href="/users" target="_self">users data</a>
+       <a href="/page/userList.html" target="_self">user list</a>
+       <span style="float:right; font-size:16px">ver1.0.0</span>
+       <a style="float:right; font-size:16px; color: #0097e2; margin-right:10px" href="/">sign out</a>
+    </div>
+
+
+
+	<div class="container">
+	    <h2>User List</h2>
+	    <div id="tableBox"></div>
+	    <div id="formBox" style="display: none;">
+            <form action="">
+                <p><label>User Name: </label><input disabled name="user_name" type="text" value=""></p>
+                <p><label>Permission: </label>
+                   <select name="permission">
+                      <option value="1">administrator</option>
+                      <option value="2">activate</option>
+                      <option value="3">register</option>
+                   </select>
+                </p>
+                <p><label></label><button id="btnSub">Save</button><button onclick="history.go(-1);">Cancel</button></p>
+            </form>
+	    </div>
+    </div>
+    
+    <script type="text/javascript" src="../js/jquery.js"></script>
+    <script type="text/javascript" src="../js/modeljs/dataDB.js"></script>
+    <script type="text/javascript" src="../js/modeljs/drag.js"></script>
+	<script type="text/javascript">
+	    var url = "/nodejs/userList";
+        var dbInit = new dataDB();  
+
+        function dataInit(data){
+            //console.log(data);
+
+            var tableHtml='<div class="row"> <div class="col-4">User Name</div> <div class="col-4">Permission</div> <div class="col-4">create_time</div> <div class="col-4">Operation</div> </div>'; 
+	        data.rows.forEach(function (item,index) {
+	        	tableHtml+='<div class="row"> <div class="col-4">'+item.user_name+'</div>'+'<div class="col-4">'+item.permission+'</div>'+'<div class="col-4">'+item.create_time+'</div>'+'<div class="col-4"><a href="javascript:;" onclick="edit('+index+')">edit</a></div> </div>';
+	        });
+	        $("#tableBox").html(tableHtml);
+	        $("#tableBox").data("data",data);
+
+        }
+
+
+
+        function edit(index){
+        	var thisRowData = $("#tableBox").data("data").rows[index];
+        	//console.log(thisRowData);
+            $("#formBox input[name=user_name]").val(thisRowData.user_name);
+            $("#formBox select[name=permission] option[value='"+thisRowData.permission+"']").attr("selected","").siblings("option").removeAttr("selected");
+
+            $("#tableBox").hide();
+            $("#formBox").show();
+
+            $("#btnSub").on("click", function () {
+            	var whereJson={"user_name": $("#formBox input[name=user_name]").val()}
+            	var updateJson={"permission": Number($("#formBox select[name=permission]").val())}
+                var reqData2 = 'action=updateData&whereJson=' + JSON.stringify(whereJson) + '&updateJson=' + JSON.stringify(updateJson);
+                dbInit.updateData(url,reqData2,function (data2) {
+                    if(data2 != "Success"){
+                    	alert(data2);
+                    	return;
+                    }
+
+                    dbInit.findData(url,reqData,dataInit);
+                    $("#tableBox").show();
+                    $("#formBox").hide();
+                });
+
+            	return false;
+            });
+
+        }
+
+
+        
+
+
+        //初始化数据
+		var reqData = 'action=findData&whereJson=&prePageNum=10&currPage=1';
+		dbInit.findData(url,reqData,dataInit);
+		//初始化数据 结束
+	</script>
+</body>
+</html>
+

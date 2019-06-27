@@ -89,12 +89,13 @@ def find_data(table_name, str_where, str_field, args):
         return 0
     else:
         try:
-            sql = 'select * from ' + table_name
+            sql = 'select count(*) as number from ' + table_name
             if str_where:
                 sql += ' where ' + str_where
             cursor = db.cursor(pymysql.cursors.DictCursor)
             cursor.execute(sql)
-            count = cursor.rowcount
+            # count = cursor.rowcount
+            count = cursor.fetchone()['number']
 
         except:
             db.close()

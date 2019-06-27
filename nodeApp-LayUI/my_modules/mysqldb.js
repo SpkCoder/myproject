@@ -60,14 +60,14 @@ exports.dropCollection = function (collectionName,callback) {
 //查找关联数据 
 exports.findDataLookup = function (sql_lookup, whereStr, fieldStr, args, callback) {
     _connectDB(function (db) {
-    	db.query("SELECT * FROM "+ sql_lookup, function (err, result) {
+    	db.query("SELECT count(*) as number FROM "+ sql_lookup, function (err, result) {
             if(err){
            	 callback(err, result);
            	 db.end(); //关闭数据库
            	 return;
             }
             
-            var count = result.length;
+            var count = result[0].number;
 	        var field = fieldStr || '*';
 	    	var sql = 'SELECT '+field+' FROM ' + sql_lookup;
 	    	
@@ -115,7 +115,7 @@ exports.findDataLookup = function (sql_lookup, whereStr, fieldStr, args, callbac
 //查询数据
 exports.findData = function (collectionName, whereStr, fieldStr, args, callback) {
     _connectDB(function (db) {
-    	var sql = 'SELECT * FROM ' + collectionName;
+    	var sql = 'SELECT count(*) as number FROM ' + collectionName;
     	if(whereStr){
 	    	sql += ' WHERE ' + whereStr
 	    }
@@ -125,7 +125,7 @@ exports.findData = function (collectionName, whereStr, fieldStr, args, callback)
            	 db.end(); //关闭数据库
            	 return;
             }
-	        var count = result.length;
+	        var count = result[0].number;
 	        var field = fieldStr || '*';
 	    	var sql = 'SELECT '+field+' FROM ' + collectionName;
 	    	

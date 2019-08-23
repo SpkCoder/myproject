@@ -7,6 +7,9 @@
       <text class="userinfo-nickname">{{userInfo.nickName}}</text>
     </block>
   </view>
+  <view class="btn-area" id="buttonContainer">
+    <button bindtap="bindViewTap2" type="primary">发送请求</button>
+    </view>
   <view class="usermotto">
     <text class="user-motto">{{motto}}</text>
   </view>

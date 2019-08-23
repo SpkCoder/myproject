@@ -1,16 +1,16 @@
 import axios from 'axios'
-let baseUrl = "";
-switch (process.env.NODE_ENV) {
-    case 'development':
-        baseUrl = "http://192.168.40.236:2234" //这里是本地的请求url
-        break
-    case 'production':
-        baseUrl = "http://api.ottmon.com:2234" //这里是本地的请求url
-        break
-    case 'test':
-        baseUrl = "http://api.hz.ottmon.com:49994"
-        break
-}
+let baseUrl = "http://127.0.0.1:4000";
+// switch (process.env.NODE_ENV) {
+//     case 'development':
+//         baseUrl = "http://192.168.40.236:2234" //这里是本地的请求url
+//         break
+//     case 'production':
+//         baseUrl = "http://api.ottmon.com:2234" //这里是本地的请求url
+//         break
+//     case 'test':
+//         baseUrl = "http://api.hz.ottmon.com:49994"
+//         break
+// }
 const instance = axios.create({
         baseURL: baseUrl,
         'Access-Control-Allow-Origin': '*',
@@ -34,7 +34,7 @@ const http = {
     },
     get(url, params) {
         return instance.get(url, {
-            params
+            params: params
         })
     },
     post(url, data) {

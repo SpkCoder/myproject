@@ -103,7 +103,21 @@ export default {
 		var _this = this;
     _this.url = _this.GLOBAL.host + _this.$route.path.replace(/\/page/,"/python");
     
-    //获取登录状态
+    var params = {
+      "params":{
+        "action":"findData",
+        "limit":10,
+        "page":1,
+        "tocken": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwicm9sZV9pZCI6MSwiZXhwIjoxNTYzMjk0OTU0fQ.wtOVUr-LIrsQYOcGnr1cyIFarn4_Ir_sWkYEyLer8DA"
+      }
+    }
+    _this.$axiosHttp.get("/python/role_class", params).then(function (res) {
+      console.log(res);
+    }).catch(function (err) {
+      console.log(err);
+    });
+
+    // 获取登录状态
     if(localStorage.getItem("loginStatus")){
         var loginStatus = JSON.parse(localStorage.getItem("loginStatus"));
         _this.$set(_this.formData, 'username', loginStatus['username']);

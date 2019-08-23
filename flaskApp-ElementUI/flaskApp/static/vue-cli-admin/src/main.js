@@ -10,8 +10,8 @@ import 'element-ui/lib/theme-chalk/index.css';
 import './assets/css/font-awesome.css';
 import './assets/css/style.css';
 
-// import axiosHttp from './common/axiosHttp'
-// Vue.prototype.$http = axiosHttp
+import axiosHttp from './common/axiosHttp'
+Vue.prototype.$axiosHttp = axiosHttp
 
 Vue.use(ElementUI);
 Vue.use(VueResource);

@@ -3,6 +3,7 @@
 from flaskApp.modules import db_mysql
 from flaskApp.modules import my_email
 from datetime import datetime, timedelta, timezone
+from multiprocessing import Process
 import logging
 import json
 import re
@@ -19,7 +20,7 @@ class model():
         self.mysqldb = db_mysql.model()
         self.myemail = my_email.model()
 
-    # 查询该段时间的数据是否超过阀值
+    # 发送邮件
     def sendemail(self, obj):
         str_html = ''
         str_html+='<p>告警开始时间：'+obj['first_alarm_time']+'</p>'
@@ -74,7 +75,9 @@ class model():
                     sql = 'select alarm_list.client_ip, alarm_list.alarm_type_id, min(alarm_list.alarm_time) as first_alarm_time, max(alarm_list.alarm_time) as last_alarm_time, alarm_list.alarm_msg, alarm_list.status, alarm_type_list.alarm_type from alarm_list left join alarm_type_list on alarm_list.alarm_type_id = alarm_type_list.id where alarm_list.status = 1 and alarm_list.client_ip="'+item['client_ip']+'" and alarm_list.alarm_type_id='+alarm_result['rows'][6]['id']+' group by client_ip, alarm_type_id order by alarm_time desc'
                     result = self.mysqldb.find_data(table_name, params, sql)
                     if result and len(result['rows'])>0:
-                        self.sendemail(result['rows'][0])
+                        # self.sendemail(result['rows'][0])
+                        p = Process(target=self.sendemail, args=(result['rows'][0],))
+                        p.start()
                 if int(item['ram_rate']*100) >= int(alarm_result['rows'][5]['tvalue']) and alarm_result['rows'][5]['status']=='ON':
                     alarm_msg = '内存使用率'+str(int(item['ram_rate']*100))+'%'
                     list_data = [{'client_ip': item['client_ip'], 'alarm_type_id': alarm_result['rows'][5]['id'], 'alarm_time': item['log_time'], 'alarm_msg': alarm_msg, 'status': 1}]
@@ -83,7 +86,9 @@ class model():
                     sql = 'select alarm_list.client_ip, alarm_list.alarm_type_id, min(alarm_list.alarm_time) as first_alarm_time, max(alarm_list.alarm_time) as last_alarm_time, alarm_list.alarm_msg, alarm_list.status, alarm_type_list.alarm_type from alarm_list left join alarm_type_list on alarm_list.alarm_type_id = alarm_type_list.id where alarm_list.status = 1 and alarm_list.client_ip="'+item['client_ip']+'" and alarm_list.alarm_type_id='+alarm_result['rows'][5]['id']+' group by client_ip, alarm_type_id order by alarm_time desc'
                     result = self.mysqldb.find_data(table_name, params, sql)
                     if result and len(result['rows'])>0:
-                        self.sendemail(result['rows'][0])
+                        # self.sendemail(result['rows'][0])
+                        p = Process(target=self.sendemail, args=(result['rows'][0],))
+                        p.start()
         else:
             print('操作失败')
 
@@ -109,7 +114,9 @@ class model():
                     sql = 'select alarm_list.client_ip, alarm_list.alarm_type_id, min(alarm_list.alarm_time) as first_alarm_time, max(alarm_list.alarm_time) as last_alarm_time, alarm_list.alarm_msg, alarm_list.status, alarm_type_list.alarm_type from alarm_list left join alarm_type_list on alarm_list.alarm_type_id = alarm_type_list.id'+whereStr+' group by client_ip, alarm_type_id order by alarm_time desc'
                     result2 = self.mysqldb.find_data(table_name, params, sql)
                     if result2 and len(result2['rows'])>0:
-                        self.sendemail(result2['rows'][0])
+                        # self.sendemail(result2['rows'][0])
+                        p = Process(target=self.sendemail, args=(result2['rows'][0],))
+                        p.start()
 
         else:
             print('操作失败')
@@ -135,7 +142,9 @@ class model():
                     sql = 'select alarm_list.client_ip, alarm_list.alarm_type_id, min(alarm_list.alarm_time) as first_alarm_time, max(alarm_list.alarm_time) as last_alarm_time, alarm_list.alarm_msg, alarm_list.status, alarm_type_list.alarm_type from alarm_list left join alarm_type_list on alarm_list.alarm_type_id = alarm_type_list.id'+whereStr+' group by client_ip, alarm_type_id order by alarm_time desc'
                     result2 = self.mysqldb.find_data(table_name, params, sql)
                     if result2 and len(result2['rows'])>0:
-                        self.sendemail(result2['rows'][0])
+                        # self.sendemail(result2['rows'][0])
+                        p = Process(target=self.sendemail, args=(result2['rows'][0],))
+                        p.start()
 
         else:
             print('操作失败')

@@ -53,6 +53,9 @@ class model(object):
         dict_req = self.req.dict_req
         # im_code = self.req.cookies['im_code'] if 'im_code' in self.req.cookies else ''
         # im_code2 = dict_req['code'] if 'code' in dict_req else ''
+        # if not im_code:
+        #     dict_res = {'code': 500, 'msg': '验证码已过期'}
+        #     return make_response(json.dumps(dict_res, ensure_ascii=False))
         # if im_code != im_code2:
         #     dict_res = {'code': 500, 'msg': '验证码错误'}
         #     return make_response(json.dumps(dict_res, ensure_ascii=False))
@@ -164,6 +167,6 @@ class model(object):
         code,buf_image = mypillow.code_image('code.png')
         res = make_response(buf_image)
         res.headers['Content-Type'] = 'image/png'
-        res.set_cookie('im_code', code, max_age=3)
+        res.set_cookie('im_code', code, max_age=30)
         return res
 

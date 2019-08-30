@@ -138,7 +138,7 @@ class model(object):
                     if item != 'ALL':
                         result[item].append(num)
                 result['ALL'].append(num_all)
-                result['time'].append(str_time.split(' ')[1])
+                result['time'].append(str_time)
             sum_ALL = sum(result['ALL'])
             result['rate'] = []
             for item in result['type_name']:

@@ -89,14 +89,14 @@ class model(object):
                 str_lt = datetime.fromtimestamp(int_lt).strftime('%Y-%m-%d %H:%M:%S')
                 str_gte = datetime.fromtimestamp(int_lt-300).strftime('%Y-%m-%d %H:%M:%S')
                 # 查询在线设备
-                sql = 'select id, client_ip from device_run_list where create_time < "'+str_lt+'" and create_time >= "'+str_gte+'" group by client_ip'
+                sql = 'select client_ip from device_run_list where create_time < "'+str_lt+'" and create_time >= "'+str_gte+'" group by client_ip'
                 result_online = self.mysqldb.find_data(self.table_name, params, sql)
                 list_online = []
                 if result_online:
                     for item in result_online['rows']:
                         list_online.append(item['client_ip'])
                 # 查询告警设备
-                sql = 'select id, client_ip from alarm_list where status = 1 group by client_ip'
+                sql = 'select client_ip from alarm_list where status = 1 group by client_ip'
                 result_alarm = self.mysqldb.find_data(self.table_name, params, sql)
                 list_alarm = []
                 if result_alarm:
@@ -265,6 +265,8 @@ class model(object):
         if 'updateJson' not in self.req.dict_req:
             dict_res = {'code': 500, 'msg': 'miss updateJson'}
             return make_response(json.dumps(dict_res, ensure_ascii=False))
+        if 'id' in self.req.dict_req['updateJson']:
+            dict_res = {'code': 500, 'msg': '禁止修改id'}
 
         whereJson = self.req.dict_req['whereJson']
         updateJson = self.req.dict_req['updateJson']
@@ -325,7 +327,7 @@ class model(object):
         list_title_en = ['code','name','ip','level','factory','device_type','os','os_version','cpu','ram','disk','power','address','message','online_time']
         result = mycsv.read(file_path,list_title_en)
         if result['msg']:
-            dict_res = {'code': 200, 'msg': result['msg']}
+            dict_res = {'code': 500, 'msg': result['msg']}
             return make_response(json.dumps(dict_res, ensure_ascii=False))
 
         list_data = result['rows']

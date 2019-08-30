@@ -107,6 +107,8 @@ class model(object):
         if 'updateJson' not in self.req.dict_req:
             dict_res = {'code': 500, 'msg': 'miss updateJson'}
             return make_response(json.dumps(dict_res, ensure_ascii=False))
+        if 'id' in self.req.dict_req['updateJson']:
+            dict_res = {'code': 500, 'msg': '禁止修改id'}
 
         whereJson = self.req.dict_req['whereJson']
         updateJson = self.req.dict_req['updateJson']

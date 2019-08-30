@@ -130,7 +130,7 @@ class model(object):
                 else:
                     num = 0
                 result['ALL'].append(num)
-                result['time'].append(str_time.split(' ')[1])
+                result['time'].append(str_time)
             del result['count']
             del result['rows']
             del result['dict_time']

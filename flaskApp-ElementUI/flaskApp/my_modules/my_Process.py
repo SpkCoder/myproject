@@ -1,20 +1,20 @@
 # -*- coding: utf-8 -*-
-from multiprocessing import Process, Pool, cpu_count
+from multiprocessing import Process, Pool, cpu_count, Queue
 import os, time, random
 import requests
 
 # 子进程要执行的代码
-def run_proc(name):
-    time.sleep(random.random() * 3)
-    print('Run child process %s (%s)...' % (name, os.getpid()))
+# def run_proc(name):
+#     time.sleep(random.random() * 3)
+#     print('Run child process %s (%s)...' % (name, os.getpid()))
 
-if __name__=='__main__':
-    print('Parent process %s.' % os.getpid())
-    p = Process(target=run_proc, args=('test',))
-    print('Child process will start.')
-    p.start()
-    p.join()
-    print('Child process end.')
+# if __name__=='__main__':
+#     print('Parent process %s.' % os.getpid())
+#     p = Process(target=run_proc, args=('test',))
+#     print('Child process will start.')
+#     p.start()
+#     p.join()
+#     print('Child process end.')
 
 
 # 进程池
@@ -37,3 +37,33 @@ if __name__=='__main__':
 #     p.close()
 #     p.join()
 #     print('All subprocesses done.')
+
+
+
+#写进程
+def write(q):
+    for i in range(3):
+         q.put(i)
+         print("put {0} to queue".format(i))
+#读进程
+def read(q):
+    while True:
+        result = q.get()
+        time.sleep(1)
+        print("get {0} from queue".format(result))
+
+
+if __name__ == "__main__":
+    # 父进程创建Queue，并传给各个子进程：
+    q = Queue()
+    # 启动子进程pw，写入:
+    pw = Process(target=write,args=(q,))
+    pw.start()
+    # 启动子进程pr，读入:
+    pr = Process(target=read,args=(q,))
+    pr.start()
+    # 等待pw结束:
+    # pw.join()
+    # pr进程里是死循环，无法等待其结束，只能强行终止:
+    # pr.terminate()
+

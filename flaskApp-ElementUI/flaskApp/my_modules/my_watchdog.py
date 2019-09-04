@@ -20,7 +20,7 @@ class FileEventHandler(FileSystemEventHandler):
             count = 0
             for line in list_line[self.dict_num[file_name]:]:
                 count=count+1
-                print(line.strip())
+                print(str(self.dict_num[file_name]+count) +' '+line.strip())
             self.dict_num[file_name] = self.dict_num[file_name]+count
             del list_line
             # print(self.dict_num)

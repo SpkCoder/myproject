@@ -21,15 +21,11 @@
                           <el-option v-for="item2 in deviceList" :key="item2.id" :label="item2.ip" :value="item2.ip"> </el-option>
                         </el-select>
                       </el-form-item><br>
-                      <el-form-item label="时间">
-                        <el-date-picker
-                          v-model="searchForm['log_time_arr']"
-                          type="datetimerange"
-                          range-separator="至"
-                          start-placeholder="开始时间"
-                          end-placeholder="结束时间"
-                          value-format="yyyy-MM-dd HH:mm:ss">
-                        </el-date-picker>
+                      <el-form-item label="开始时间">
+                        <el-date-picker v-model="searchForm['time_start']" type="datetime" value-format="yyyy-MM-dd HH:mm:ss"> </el-date-picker>
+                      </el-form-item>
+                      <el-form-item label="结束时间">
+                        <el-date-picker v-model="searchForm['time_end']" type="datetime" value-format="yyyy-MM-dd HH:mm:ss"> </el-date-picker>
                       </el-form-item>
 
                       <el-form-item>
@@ -101,6 +97,9 @@ export default {
             },
             tooltip: {},
             xAxis: {
+                axisLabel : {
+                    rotate: 45
+                },
                 data: _this.xdata
             },
             yAxis: {
@@ -153,12 +152,11 @@ export default {
         _this.$refs["searchForm"].validate (function (valid) {
             if(valid) {
               // console.log(_this.searchForm);
-              if(_this.searchForm.log_time_arr){
-                _this.searchForm.time_start = _this.searchForm.log_time_arr[0]
-                _this.searchForm.time_end = _this.searchForm.log_time_arr[1]
+              if(!_this.searchForm.time_start || _this.searchForm.time_end){
+                _this.$message({duration: 1000, message: "请输入开始时间和结束时间！"});
+                return false;
               }
               _this.whereJson = Object.assign({"type":"host"}, _this.searchForm)
-              delete _this.whereJson.log_time_arr
               _this.getData();
 
             }else {
@@ -171,7 +169,8 @@ export default {
       this.searchForm = {};
       this.whereJson = {"type": "5M", "time_start": moment().format("YYYY-MM-DD HH:mm:ss").split(" ")[0]+" 00:00:00","time_end": moment().format("YYYY-MM-DD HH:mm:ss")};
       this.$set(this.searchForm, "type", this.typeList[0].id);
-      this.$set(this.searchForm, "log_time_arr", [this.whereJson.time_start, this.whereJson.time_end]);
+      this.$set(this.searchForm, "time_start", this.whereJson.time_start);
+      this.$set(this.searchForm, "time_end", this.whereJson.time_end);
       this.$refs["searchForm"].resetFields();
       this.getData();
     }
@@ -205,7 +204,8 @@ export default {
 
     _this.whereJson = {"type": "5M", "time_start": moment().format("YYYY-MM-DD HH:mm:ss").split(" ")[0]+" 00:00:00","time_end": moment().format("YYYY-MM-DD HH:mm:ss")};
     _this.$set(this.searchForm, "type", this.typeList[0].id);
-    _this.$set(this.searchForm, "log_time_arr", [_this.whereJson.time_start, _this.whereJson.time_end]);
+    _this.$set(this.searchForm, "time_start", _this.whereJson.time_start);
+    _this.$set(this.searchForm, "time_end", _this.whereJson.time_end);
     _this.getData();
 
     //加载device_list

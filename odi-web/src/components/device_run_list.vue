@@ -42,7 +42,17 @@
 									:style={width:tabelwidth}>
 									<el-table-column fixed="left" type="selection" width="40"></el-table-column>
 									<template v-for='(item, index) in field_en'>
-											<el-table-column :key="item.id" show-overflow-tooltip sortable="custom" :prop="item" :label="field_ch[index]" :width="field_width[index] | field_width_filter"> </el-table-column>
+                      <el-table-column v-if='item == "cpu_rate"' :key="item.id" show-overflow-tooltip sortable="custom" :prop="item" :label="field_ch[index]" :width="field_width[index] | field_width_filter">
+                        <template slot-scope="scope">
+                          {{ scope.row.cpu_rate | cpu_rate_filter}}
+                        </template>
+                      </el-table-column>
+                      <el-table-column v-else-if='item == "ram_rate"' :key="item.id" show-overflow-tooltip sortable="custom" :prop="item" :label="field_ch[index]" :width="field_width[index] | field_width_filter">
+                        <template slot-scope="scope">
+                          {{ scope.row.cpu_rate | ram_rate_filter}}
+                        </template>
+                      </el-table-column>
+											<el-table-column v-else :key="item.id" show-overflow-tooltip sortable="custom" :prop="item" :label="field_ch[index]" :width="field_width[index] | field_width_filter"> </el-table-column>
 									</template>
 								</el-table>
 
@@ -63,6 +73,12 @@ export default {
 	filters: {
     field_width_filter(value) {
        if(value){return value+"px"}
+    },
+    cpu_rate_filter(value) {
+       if(value >= 0){return parseInt(value*100)+"%"}
+    },
+    ram_rate_filter(value) {
+       if(value >= 0){return parseInt(value*100)+"%"}
     }
   },
   data () {

@@ -49,6 +49,7 @@ a{color: #333; text-decoration:none; }
 .el-submenu .el-menu-item{padding: 0 30px !important;}
 /* .el-submenu.is-active i{ color: inherit; } */
 .el-table--mini, .el-table--small, .el-table__expand-icon{font-size: 14px;}
+.el-date-editor.el-input, .el-date-editor.el-input__inner{width: 185px;}
 
 .left-aside {position: fixed;left: 0px; top: 55px; bottom: 0; z-index: 999; width: 200px; background: #393D49; overflow-x: hidden; }
 .left-aside .left-aside-scroll{width: 220px; height: 100%; overflow-x: hidden;}

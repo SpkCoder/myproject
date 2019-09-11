@@ -12,7 +12,7 @@
                 <div style="margin-bottom:10px;">
                     <p><span class="span1">设备总数：{{device_num}}</span>   <span class="span2">在线数量：{{online_num}}</span>   <span class="span3">告警数量：{{alarm_num}}</span></p>
                 </div>
-                <div id="eChart" style="width: auto;height:400px;"></div>
+                <div id="eChart" style="width: auto;height:500px;"></div>
 
 								<el-dialog
 									title="详细"
@@ -88,6 +88,7 @@ export default {
         }
 
         var option = {
+            // color: ['#c23531', '#2f4554', '#61a0a8'],
             series : [
                 {
                     type:'graph',
@@ -103,8 +104,8 @@ export default {
                         }
                     },
                     force: {
-                        repulsion: 500,
-                        edgeLength:100
+                        repulsion: 600,
+                        edgeLength:60
                     },
                     nodes: [],
                     links: []
@@ -115,13 +116,13 @@ export default {
         var device_num = 0;
         var online_num = 0;
         var alarm_num = 0;
-        option.series[0].nodes.push({name: "infoblox",category: 0, symbolSize : 30})
+        option.series[0].nodes.push({name: "infoblox",category: 0, symbolSize : 30, itemStyle: {color: '#c23531'} })
         res.rows.forEach(function (item, index) {
           item.name = item.level;
-          option.series[0].nodes.push({name: item.name, category: 1, symbolSize : 20})
+          option.series[0].nodes.push({name: item.name, category: 1, symbolSize : 20, itemStyle: {color: '#2f4554'} })
           option.series[0].links.push({source: item.name, target: 'infoblox'})
           item.children.forEach(function (item2, index2) {
-            option.series[0].nodes.push({name: item2.name, index:index2, category: 1, symbolSize : 15})
+            option.series[0].nodes.push({name: item2.name, index:index2, category: 1, symbolSize : 15, itemStyle: {color: '#61a0a8'} })
             option.series[0].links.push({source: item2.name, target: item.name})
             if(item2.online_status == 'true'){online_num++}
             if(item2.alarm_status == 'true'){alarm_num++}

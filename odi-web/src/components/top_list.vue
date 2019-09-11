@@ -22,15 +22,11 @@
                               <el-form-item label="域名">
                                 <el-input v-model="searchForm['client_host']" placeholder=""/>
                               </el-form-item><br>
-                              <el-form-item label="时间">
-                                <el-date-picker
-                                  v-model="searchForm['log_time_arr']"
-                                  type="datetimerange"
-                                  range-separator="至"
-                                  start-placeholder="开始时间"
-                                  end-placeholder="结束时间"
-                                  value-format="yyyy-MM-dd HH:mm:ss">
-                                </el-date-picker>
+                              <el-form-item label="开始时间">
+                                <el-date-picker v-model="searchForm['time_start']" type="datetime" value-format="yyyy-MM-dd HH:mm:ss"> </el-date-picker>
+                              </el-form-item>
+                              <el-form-item label="结束时间">
+                                <el-date-picker v-model="searchForm['time_end']" type="datetime" value-format="yyyy-MM-dd HH:mm:ss"> </el-date-picker>
                               </el-form-item>
 
                               <el-form-item>
@@ -77,15 +73,11 @@
                               <el-form-item label="客户端IP">
                                 <el-input v-model="searchForm2['client_ip']" placeholder=""/>
                               </el-form-item><br>
-                              <el-form-item label="时间">
-                                <el-date-picker
-                                  v-model="searchForm2['log_time_arr']"
-                                  type="datetimerange"
-                                  range-separator="至"
-                                  start-placeholder="开始时间"
-                                  end-placeholder="结束时间"
-                                  value-format="yyyy-MM-dd HH:mm:ss">
-                                </el-date-picker>
+                              <el-form-item label="开始时间">
+                                <el-date-picker v-model="searchForm2['time_start']" type="datetime" value-format="yyyy-MM-dd HH:mm:ss"> </el-date-picker>
+                              </el-form-item>
+                              <el-form-item label="结束时间">
+                                <el-date-picker v-model="searchForm2['time_end']" type="datetime" value-format="yyyy-MM-dd HH:mm:ss"> </el-date-picker>
                               </el-form-item>
 
                               <el-form-item>
@@ -307,11 +299,12 @@ export default {
                 _this.searchForm.client_host = "/"+_this.searchForm.client_host+"/"
               }
               delete _this.searchForm.log_time
-              if(_this.searchForm.log_time_arr){
-                _this.searchForm.log_time = {"$gte":_this.searchForm.log_time_arr[0],"$lt":_this.searchForm.log_time_arr[1]}
+              if(_this.searchForm.time_start && _this.searchForm.time_end){
+                  _this.searchForm.log_time = {"$gte":_this.searchForm.time_start,"$lt":_this.searchForm.time_end}
               }
               _this.whereJson = Object.assign({"type":"host"}, _this.searchForm)
-              delete _this.whereJson.log_time_arr
+              delete _this.whereJson.time_start
+              delete _this.whereJson.time_end
               _this.getData();
 
             }else {
@@ -326,11 +319,12 @@ export default {
             if(valid) {
               // console.log(_this.searchForm2);
               delete _this.searchForm2.log_time
-              if(_this.searchForm2.log_time_arr){
-                _this.searchForm2.log_time = {"$gte":_this.searchForm2.log_time_arr[0],"$lt":_this.searchForm2.log_time_arr[1]}
+              if(_this.searchForm2.time_start && _this.searchForm2.time_end){
+                  _this.searchForm2.log_time = {"$gte":_this.searchForm2.time_start,"$lt":_this.searchForm2.time_end}
               }
               _this.whereJson2 = Object.assign({"type":"ip"}, _this.searchForm2)
-              delete _this.whereJson2.log_time_arr
+              delete _this.whereJson2.time_start
+              delete _this.whereJson2.time_end
               _this.getData2();
 
             }else {

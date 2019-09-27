@@ -10,7 +10,7 @@
 						<div class="list-page">
 
                 <div style="margin-bottom:10px;">
-                  <el-form ref="searchForm" :inline="true" :model="searchForm" :rules="rules" size="small" label-width="100px">
+                  <el-form v-loading.fullscreen.lock="listLoading" ref="searchForm" :inline="true" :model="searchForm" :rules="rules" size="small" label-width="100px">
                       <el-form-item label="粒度">
                         <el-select v-model="searchForm['type']" placeholder="">
                           <el-option v-for="item2 in typeList" :key="item2.id" :label="item2.name" :value="item2.id"> </el-option>
@@ -36,7 +36,7 @@
                       </el-form-item>
                     </el-form>
                 </div>
-                <div id="eChart" style="width: auto;height:400px;"></div>
+                <div id="eChart" style="width: auto;height:300px;"></div>
 
 						</div>
 					</div>
@@ -95,10 +95,13 @@ export default {
                 text: 'DNS错误应答趋势图',
                 left: 'center'
             },
-            tooltip: {},
+            tooltip: {trigger: 'axis'},
             xAxis: {
                 axisLabel : {
-                    rotate: 45
+                    rotate: 45,
+                    formatter:(data) => {
+                      return moment(data).format('MM-DD HH:mm');
+                    }
                 },
                 data: _this.xdata
             },
@@ -107,6 +110,7 @@ export default {
             series: [{
                 name: '错误次数',
                 type: 'line',
+                lineStyle: {width: 1},
                 data: _this.ydata
             }]
         };
@@ -115,12 +119,11 @@ export default {
         myChart.on('click', function (params) {
             // console.log(params.name);
             var obj = {}
-            obj.create_time = _this.whereJson.time_start.split(" ")[0]+" "+params.name
+            obj.create_time = params.name
             obj.type = _this.whereJson.type
             if (_this.whereJson.ip){
               obj["client_ip"] = _this.whereJson.ip
             }
-            _this.whereJson.time_start.split(" ")[0]+" "+params.name;
             _this.$router.push({ path: '/page/dns_err_list_detail/'+JSON.stringify(obj) });
 
         });
@@ -152,11 +155,12 @@ export default {
         _this.$refs["searchForm"].validate (function (valid) {
             if(valid) {
               // console.log(_this.searchForm);
-              if(!_this.searchForm.time_start || _this.searchForm.time_end){
+              if(!_this.searchForm.time_start || !_this.searchForm.time_end){
                 _this.$message({duration: 1000, message: "请输入开始时间和结束时间！"});
                 return false;
               }
-              _this.whereJson = Object.assign({"type":"host"}, _this.searchForm)
+              _this.whereJson = _this.searchForm;
+              sessionStorage.setItem("dns_err_list_whereJson", JSON.stringify(_this.whereJson));
               _this.getData();
 
             }else {
@@ -172,6 +176,7 @@ export default {
       this.$set(this.searchForm, "time_start", this.whereJson.time_start);
       this.$set(this.searchForm, "time_end", this.whereJson.time_end);
       this.$refs["searchForm"].resetFields();
+      sessionStorage.removeItem("dns_err_list_whereJson");
       this.getData();
     }
   },
@@ -183,16 +188,23 @@ export default {
 	created() {
 		var _this = this;
 		_this.url = _this.GLOBAL.host + _this.$route.path.replace(/\/page/,"/api/python");
-    var leftAsideVue = function(){
-        var obj = {};
-        _this.$parent.$children.forEach(function(item,index){
-           if(item.activeIndex){
-              obj=item;
-           }
-        });
-        return obj;
-    }();
-    leftAsideVue.list.forEach(function(item,index){
+
+    if(sessionStorage.getItem("dns_err_list_whereJson")){
+        _this.whereJson = JSON.parse(sessionStorage.getItem("dns_err_list_whereJson"))
+        _this.$set(this.searchForm, "type", _this.whereJson.type);
+        if(_this.whereJson.ip){
+          _this.$set(this.searchForm, "ip", _this.whereJson.ip);
+        }
+    }else{
+      _this.whereJson = {"type": "5M", "time_start": moment().format("YYYY-MM-DD HH:mm:ss").split(" ")[0]+" 00:00:00","time_end": moment().format("YYYY-MM-DD HH:mm:ss")};
+      _this.$set(this.searchForm, "type", this.typeList[0].id);
+    }
+    _this.$set(this.searchForm, "time_start", _this.whereJson.time_start);
+    _this.$set(this.searchForm, "time_end", _this.whereJson.time_end);
+    _this.getData();
+
+    var menuRows = _this.$store.state.menuRows;
+    menuRows.forEach(function(item,index){
        item.children.forEach(function(item2,index2){
            if(item2.id == localStorage.getItem("activeIndex")){
               _this.modelName1 = item.name;
@@ -201,12 +213,6 @@ export default {
            }
         });
     });
-
-    _this.whereJson = {"type": "5M", "time_start": moment().format("YYYY-MM-DD HH:mm:ss").split(" ")[0]+" 00:00:00","time_end": moment().format("YYYY-MM-DD HH:mm:ss")};
-    _this.$set(this.searchForm, "type", this.typeList[0].id);
-    _this.$set(this.searchForm, "time_start", _this.whereJson.time_start);
-    _this.$set(this.searchForm, "time_end", _this.whereJson.time_end);
-    _this.getData();
 
     //加载device_list
     var reqUrl = _this.GLOBAL.host+'/api/python/device_list'

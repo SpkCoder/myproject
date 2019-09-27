@@ -8,9 +8,9 @@
 		      @select="handleSelect"
 		      @open="handleOpen"
 	        @close="handleClose"
-		      background-color="#23262E"
-		      text-color="#fff"
-		      active-text-color="#409eff">
+		      background-color="#bbc6d3"
+		      text-color="#1f2935"
+		      active-text-color="#409EFF">
 					<template v-for='(item, index) in list'>
 							<el-submenu :key="item.id" v-if='item.show == "true"' :index='item.id | toStr'>
 							<template slot="title"><i :class="item.iconfont"></i><span class="itemName1">{{ item.name }}</span></template>

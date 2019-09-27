@@ -16,24 +16,6 @@
 									</el-button-group>
 								</div>
 
-								<!-- <div style="margin-bottom:10px;">
-									<el-form ref="searchForm" :inline="true" :model="searchForm" :rules="rules" size="small" label-width="100px">
-                      <template v-for='(item, index) in field_en'>
-                          <template v-if='item == "fieldxx"'>
-														<el-form-item :key="index" :label="field_ch[index]">
-                              <el-input v-model="searchForm[item]"/>
-                            </el-form-item>
-                          </template>
-													<template v-else>
-                          </template>
-                      </template>
-
-											<el-form-item>
-												<el-button icon="el-icon-search" type="primary" @click="searchSubmitForm">查询</el-button>
-												<el-button icon="el-icon-refresh" @click="searchCancelSubmit">取消</el-button>
-											</el-form-item>
-										</el-form>
-								</div> -->
 
 								<el-table
 									:data="list"
@@ -92,7 +74,7 @@
 										</el-form>
 								</el-dialog>
 
-								<el-dialog
+								<!-- <el-dialog
 									title="修改"
 									:visible.sync="editFormBox"
 									width="600px">
@@ -117,7 +99,7 @@
 												<el-button @click="editCancelSubmit">取消</el-button>
 											</el-form-item>
 										</el-form>
-								</el-dialog>
+								</el-dialog> -->
 
 						</div>
 					</div>
@@ -384,16 +366,10 @@ export default {
 	created() {
 		var _this = this;
 		_this.url = _this.GLOBAL.host + _this.$route.path.replace(/\/page/,"/api/python");
-    var leftAsideVue = function(){
-        var obj = {};
-        _this.$parent.$children.forEach(function(item,index){
-           if(item.activeIndex){
-              obj=item;
-           }
-        });
-        return obj;
-    }();
-    leftAsideVue.list.forEach(function(item,index){
+    _this.getData();
+
+    var menuRows = _this.$store.state.menuRows;
+    menuRows.forEach(function(item,index){
        item.children.forEach(function(item2,index2){
            if(item2.id == localStorage.getItem("activeIndex")){
               _this.modelName1 = item.name;
@@ -402,7 +378,6 @@ export default {
            }
         });
     });
-    _this.getData();
   }
 }
 </script>

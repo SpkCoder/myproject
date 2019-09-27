@@ -177,7 +177,7 @@ export default {
 				_this.field_ch = ["IP", "告警类型", "内容", "第一次告警时间", "最后告警时间"];
 				_this.field_en = ["client_ip", "alarm_type", "alarm_msg", "first_alarm_time", "last_alarm_time"];
 				_this.data_type = ["text", "text", "text", "text", "text"];
-				_this.field_width = [120, 150, 150, 150, 150];
+				_this.field_width = [120, 150, 200, 160, 160];
 				_this.field_width.forEach(element => {
 						_this.tabelwidth+=Number(element);
 				});
@@ -191,18 +191,6 @@ export default {
           console.log(err);
         });
 
-      //加载alarm_type_class
-      var reqUrl = _this.GLOBAL.host+'/api/python/alarm_type_list'
-			var reqData = {"action":"findData", "page":1, "limit":-1, "tocken": sessionStorage.getItem('tocken')}
-      _this.$axiosHttp.get(reqUrl, {"params":reqData}).then(function (res) {
-        if(res.code != 200){
-				  _this.$message({duration: 1000, message: res.msg});
-          return false;
-        }
-        _this.alarm_type_class = res.rows;
-        }).catch(function (err) {
-          console.log(err);
-        });
 
     },
     selectionChange(dataArr) {
@@ -395,16 +383,10 @@ export default {
 	created() {
 		var _this = this;
 		_this.url = _this.GLOBAL.host + _this.$route.path.replace(/\/page/,"/api/python");
-    var leftAsideVue = function(){
-        var obj = {};
-        _this.$parent.$children.forEach(function(item,index){
-           if(item.activeIndex){
-              obj=item;
-           }
-        });
-        return obj;
-    }();
-    leftAsideVue.list.forEach(function(item,index){
+    _this.getData();
+
+    var menuRows = _this.$store.state.menuRows;
+    menuRows.forEach(function(item,index){
        item.children.forEach(function(item2,index2){
            if(item2.id == localStorage.getItem("activeIndex")){
               _this.modelName1 = item.name;
@@ -413,7 +395,19 @@ export default {
            }
         });
     });
-    _this.getData();
+
+  //加载alarm_type_class
+  var reqUrl = _this.GLOBAL.host+'/api/python/alarm_type_list'
+  var reqData = {"action":"findData", "page":1, "limit":-1, "tocken": sessionStorage.getItem('tocken')}
+  _this.$axiosHttp.get(reqUrl, {"params":reqData}).then(function (res) {
+    if(res.code != 200){
+      _this.$message({duration: 1000, message: res.msg});
+      return false;
+    }
+    _this.alarm_type_class = res.rows;
+    }).catch(function (err) {
+      console.log(err);
+    });
   }
 }
 </script>

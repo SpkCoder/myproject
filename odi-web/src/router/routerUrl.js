@@ -4,6 +4,8 @@ export default {
     "/page/role_class",
     "/page/power_list_detail/:id",  
     "/page/device_list_icon",
+    "/page/device_alarm_detail/:ip",
+    "/page/device_watching_detail/:ip",
     "/page/device_list", 
     "/page/device_run_list", 
     "/page/operation_list", 

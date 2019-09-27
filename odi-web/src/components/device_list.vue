@@ -31,6 +31,8 @@
 											<el-form-item>
 												<el-button icon="el-icon-search" type="primary" @click="searchSubmitForm">查询</el-button>
 												<el-button icon="el-icon-refresh" @click="searchCancelSubmit">取消</el-button>
+                        <el-button icon="el-icon-upload2" @click="btn_import()">导入</el-button>
+                        <input style="display: none" id="file_input" type="file" name="file" multiple="multiple"/>
                         <el-button icon="el-icon-download" @click="btn_export()">导出</el-button>
                         <a style="display: none" id="a_export" href="" target="_self" download></a>
 											</el-form-item>
@@ -75,9 +77,18 @@
 											<template v-for='(item, index) in field_en'>
                           <template v-if='item == "id"'>
                           </template>
-                          <template v-else-if='item == "code" || item == "name" || item == "ip"'>
+                          <template v-else-if='item == "code" || item == "name" || item == "ip" || item == "level"'>
                             <el-form-item :key="index" :label="field_ch[index]" :prop="item" required>
                               <el-input v-model="addForm[item]"/>
+                            </el-form-item>
+                          </template>
+                          <template v-else-if='item == "os"'>
+														<el-form-item :key="index" :label="field_ch[index]">
+                              <el-select v-model="addForm[item]" placeholder="">
+                                <el-option label="Window" value="Window"> </el-option>
+                                <el-option label="Linux" value="Linux"> </el-option>
+                                <el-option label="CentOS" value="CentOS"> </el-option>
+                              </el-select>
                             </el-form-item>
                           </template>
                           <template v-else-if='/date\(yyyy-MM-dd\)/.test(data_type[index])'>
@@ -115,6 +126,15 @@
                           <template v-else-if='item == "code" || item == "name" || item == "ip"'>
                             <el-form-item :key="index" :label="field_ch[index]" :prop="item" required>
                               <el-input v-model="editForm[item]"/>
+                            </el-form-item>
+                          </template>
+                          <template v-else-if='item == "os"'>
+														<el-form-item :key="index" :label="field_ch[index]">
+                              <el-select v-model="editForm[item]" placeholder="">
+                                <el-option label="Window" value="Window"> </el-option>
+                                <el-option label="Linux" value="Linux"> </el-option>
+                                <el-option label="CentOS" value="CentOS"> </el-option>
+                              </el-select>
                             </el-form-item>
                           </template>
                           <template v-else-if='/date\(yyyy-MM-dd\)/.test(data_type[index])'>
@@ -212,6 +232,18 @@ export default {
         _this.count = res.count;
 
         _this.rules = formVerify.rules(_this.field_en,_this.data_type);
+        _this.rules["code"] = [
+            { required: true, message: '请输入密码', trigger: 'blur' },
+            {
+                validator: function (rule, value, callback) {
+                    if (! /^[A-Z][0-9]+$/.test(value)) {
+                        return callback(new Error('设备编号必须是大写字母数字组合'));
+                    }
+                    callback();
+                },
+                trigger: 'blur'
+            }
+        ];
         }).catch(function (err) {
           console.log(err);
         });
@@ -376,6 +408,29 @@ export default {
         });
 
     },
+    btn_import() {
+        var _this = this;
+        document.getElementById('file_input').click();
+        document.getElementById('file_input').onchange = function () {
+          var file = document.getElementById("file_input").files[0];
+          if(! /\.csv/.test(file.name)){
+              _this.$message({duration: 1000, message: '请导入.csv格式文件'});
+              return false;
+          }
+          var formData = new FormData();
+          var reqData = {"action":"importData", "tocken": sessionStorage.getItem('tocken')}
+          formData.append("file",file);
+          formData.append("params",JSON.stringify(reqData));
+          _this.$axiosHttp.post(_this.url, formData,{headers: {'Content-Type': 'multipart/form-data'}}).then(function (res) {
+            _this.$message({duration: 1000, message: res.msg});
+            if(res.code != 200){ return false; }
+            _this.getData();
+
+          }).catch(function (err) {
+            console.log(err);
+          });
+        };
+    },
     btn_export() {
         var _this = this;
         var reqData = {"action":"exportData", "page":_this.page, "limit":_this.limit, "whereJson":_this.whereJson, "sortJson":_this.sortJson, "tocken": sessionStorage.getItem('tocken')}
@@ -421,16 +476,10 @@ export default {
 	created() {
 		var _this = this;
 		_this.url = _this.GLOBAL.host + _this.$route.path.replace(/\/page/,"/api/python");
-    var leftAsideVue = function(){
-        var obj = {};
-        _this.$parent.$children.forEach(function(item,index){
-           if(item.activeIndex){
-              obj=item;
-           }
-        });
-        return obj;
-    }();
-    leftAsideVue.list.forEach(function(item,index){
+    _this.getData();
+
+    var menuRows = _this.$store.state.menuRows;
+    menuRows.forEach(function(item,index){
        item.children.forEach(function(item2,index2){
            if(item2.id == localStorage.getItem("activeIndex")){
               _this.modelName1 = item.name;
@@ -439,7 +488,6 @@ export default {
            }
         });
     });
-    _this.getData();
   }
 }
 </script>

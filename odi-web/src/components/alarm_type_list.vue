@@ -9,32 +9,6 @@
 		  	  <div class="container clearfix">
 						<div class="list-page">
 
-								<!-- <div style="margin-bottom:10px;">
-									<el-button-group>
-										<el-button icon="el-icon-plus" type="primary" size="small" @click="btn_add()">增加</el-button>
-										<el-button icon="el-icon-delete" type="primary" size="small" @click="btn_del()">删除</el-button>
-									</el-button-group>
-								</div> -->
-
-								<!-- <div style="margin-bottom:10px;">
-									<el-form ref="searchForm" :inline="true" :model="searchForm" :rules="rules" size="small" label-width="100px">
-                      <template v-for='(item, index) in field_en'>
-                          <template v-if='item == "fieldxx"'>
-														<el-form-item :key="index" :label="field_ch[index]">
-                              <el-input v-model="searchForm[item]"/>
-                            </el-form-item>
-                          </template>
-													<template v-else>
-                          </template>
-                      </template>
-
-											<el-form-item>
-												<el-button icon="el-icon-search" type="primary" @click="searchSubmitForm">查询</el-button>
-												<el-button icon="el-icon-refresh" @click="searchCancelSubmit">取消</el-button>
-											</el-form-item>
-										</el-form>
-								</div> -->
-
 								<el-table
 									:data="list"
                   v-loading="listLoading"
@@ -65,27 +39,6 @@
 								<el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="page" :page-sizes="[10,50,100,500]" :page-size="limit" layout="prev, pager, next, jumper, total, sizes" :total="count"> 
 									</el-pagination>
 								
-								<el-dialog
-									title="增加"
-									:visible.sync="addFormBox"
-									width="600px">
-									<el-form ref="addForm" :model="addForm" :rules="rules" size="small" label-width="150px">
-											<template v-for='(item, index) in field_en'>
-                          <template v-if='item == "id"'>
-                          </template>
-                          <template v-else>
-                            <el-form-item :key="index" :label="field_ch[index]" :prop="item">
-                              <el-input v-model="addForm[item]"/>
-                            </el-form-item>
-                          </template>
-                      </template>
-
-											<el-form-item>
-												<el-button type="primary" @click="addSubmitForm">提交</el-button>
-												<el-button @click="addCancelSubmit">取消</el-button>
-											</el-form-item>
-										</el-form>
-								</el-dialog>
 
 								<el-dialog
 									title="修改"
@@ -112,7 +65,7 @@
                             </el-form-item>
                           </template>
                           <template v-else>
-                            <el-form-item :key="index" :label="field_ch[index]" :prop="item">
+                            <el-form-item :key="index" :label="field_ch[index]" :prop="item" required>
                               <el-input v-model="editForm[item]"/>
                             </el-form-item>
                           </template>
@@ -186,7 +139,7 @@ export default {
 				_this.field_ch = ["ID", "类型", "操作符", "阀值", "单位", "状态"];
 				_this.field_en = ["id", "alarm_type", "symbol", "tvalue", "unit", "status"];
 				_this.data_type = ["int", "text", "text", "text", "text", "text"];
-				_this.field_width = [100, 100, 100, 100, 100, 100];
+				_this.field_width = [100, 200, 100, 100, 100, 100];
 				_this.field_width.forEach(element => {
 						_this.tabelwidth+=Number(element);
 				});
@@ -390,16 +343,10 @@ export default {
 	created() {
 		var _this = this;
 		_this.url = _this.GLOBAL.host + _this.$route.path.replace(/\/page/,"/api/python");
-    var leftAsideVue = function(){
-        var obj = {};
-        _this.$parent.$children.forEach(function(item,index){
-           if(item.activeIndex){
-              obj=item;
-           }
-        });
-        return obj;
-    }();
-    leftAsideVue.list.forEach(function(item,index){
+    _this.getData();
+
+    var menuRows = _this.$store.state.menuRows;
+    menuRows.forEach(function(item,index){
        item.children.forEach(function(item2,index2){
            if(item2.id == localStorage.getItem("activeIndex")){
               _this.modelName1 = item.name;
@@ -408,7 +355,6 @@ export default {
            }
         });
     });
-    _this.getData();
   }
 }
 </script>

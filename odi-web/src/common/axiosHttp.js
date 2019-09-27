@@ -26,7 +26,12 @@ const http = {
             params: params
         })
     },
-    post(url, data) {
+    post(url, data, headers) {
+        if (headers){
+            return instance.post(url, data, headers)
+        }else{
+            return instance.post(url, data)
+        }
         return instance.post(url, data)
     },
     put(url, data) {

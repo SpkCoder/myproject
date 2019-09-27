@@ -9,7 +9,7 @@ export default {
   name: 'Vfooter',
   data () {
     return {
-      copyright: 'Copyright © 2018 1533165085@qq.com 保留所有权利。'
+      copyright: 'Copyright © 2019 www.suqueen.com 版权所有。'
     }
   },
   methods: {

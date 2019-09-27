@@ -174,16 +174,10 @@ export default {
     var _this = this;
     _this.whereJson = JSON.parse(_this.$route.params.obj);
     _this.url = _this.GLOBAL.host + "/api/python/"+ _this.$route.path.split("/")[2].replace(/\_detail/,"");
-    var leftAsideVue = function(){
-        var obj = {};
-        _this.$parent.$children.forEach(function(item,index){
-           if(item.activeIndex){
-              obj=item;
-           }
-        });
-        return obj;
-    }();
-    leftAsideVue.list.forEach(function(item,index){
+    _this.getData();
+
+    var menuRows = _this.$store.state.menuRows;
+    menuRows.forEach(function(item,index){
        item.children.forEach(function(item2,index2){
            if(item2.id == localStorage.getItem("activeIndex")){
               _this.modelName1 = item.name;
@@ -193,7 +187,6 @@ export default {
            }
         });
     });
-    _this.getData();
   }
 }
 </script>

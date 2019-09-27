@@ -142,16 +142,10 @@ export default {
     var _this = this;
     _this.whereJson = {"role_id": _this.$route.params.id};
     _this.url = _this.GLOBAL.host + "/api/python/power_list";
-    var leftAsideVue = function(){
-        var obj = {};
-        _this.$parent.$children.forEach(function(item,index){
-           if(item.activeIndex){
-              obj=item;
-           }
-        });
-        return obj;
-    }();
-    leftAsideVue.list.forEach(function(item,index){
+    _this.getData();
+
+    var menuRows = _this.$store.state.menuRows;
+    menuRows.forEach(function(item,index){
        item.children.forEach(function(item2,index2){
            if(item2.id == localStorage.getItem("activeIndex")){
               _this.modelName1 = item.name;
@@ -161,7 +155,6 @@ export default {
            }
         });
     });
-    _this.getData();
   }
 }
 </script>

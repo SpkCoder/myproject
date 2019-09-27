@@ -12,9 +12,9 @@
       :default-active="activeIndex" 
       class="el-menu-demo nav-left" 
       mode="horizontal" 
-      background-color="#23262E"
-      text-color="#fff"
-      active-text-color="#409eff"
+      background-color="#1f2935"
+      text-color="rgba(255,255,255,.7)"
+      active-text-color="rgba(255,255,255,.7)"
       @select="handleSelect">
       <template v-for='(item, index) in list'>
           <el-submenu :key="item.id" v-if='item.position == "top" && item.show == "true"' :index='item.id | toStr'>
@@ -30,15 +30,14 @@
     </el-menu>
     
     <el-menu class="el-menu-demo nav-right" mode="horizontal"
-      background-color="#23262E"
+      background-color="#1f2935"
       text-color="rgba(255,255,255,.7)"
-      active-text-color="#409eff">
+      active-text-color="rgba(255,255,255,.7)">
       <li class="el-submenu"> <div class="side-arrow-moble" @click="sideArrowClick"><i class="fa fa-navicon" style="font-size: 28px;"></i></div></li>
       <el-submenu index="2">
         <template slot="title"><i class="fa fa-user" style="margin-right: 5px;"></i>{{username}}</template>
         <el-menu-item index="2-1"><a style="display:block" @click="changePassword" href="javascript:;"><i class="layui-icon"></i>修改密码</a></el-menu-item>
         <el-menu-item index="2-2"><a style="display:block" @click="logOut" href="javascript:;"><i class="layui-icon"></i>安全退出</a></el-menu-item>
-        <!-- <el-menu-item index="2-3"><a style="display:block" id="useHelp" href="/static/static-vue/page/my_use_help.html" target="_blank"><i class="layui-icon"></i>使用说明</a></el-menu-item> -->
       </el-submenu>
     </el-menu>
     
@@ -116,7 +115,7 @@
             password3:[
                 { validator: function(rule, value, callback) {
                   if(value == ""){
-                      return callback(new Error('请输入密码'));
+                      return callback(new Error('请重复新密码'));
                   }
                   if(value != _this.editForm.password2){
                     return callback(new Error('两次密码输入不一致'));

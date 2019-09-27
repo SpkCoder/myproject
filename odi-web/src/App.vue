@@ -29,6 +29,8 @@ export default {
       emitTopMenu(data) {
           this.leftMenu = true;
           this.menuRows = data['menuRows'];
+          //vuex 存储menuRows
+          this.$store.commit("store_menuRows", this.menuRows)
       },
       emitView(data) {
           this.topMenu = true;

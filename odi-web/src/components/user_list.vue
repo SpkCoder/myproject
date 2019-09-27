@@ -120,9 +120,9 @@
                           </template>
 													<template v-else-if='item == "id" || item == "roleId"'>
                           </template>
-                          <template v-else-if='item=="roleName"'>
+                          <template v-else-if='item=="class_name"'>
                             <el-form-item :key="index" :label="field_ch[index]">
-                              <el-select v-model="editForm['roleId']" placeholder="">
+                              <el-select v-model="editForm['role_id']" placeholder="">
                                 <el-option v-for="item2 in roleClass" :key="item2.id" :label="item2.class_name" :value="item2.id"> </el-option>
                               </el-select>
                             </el-form-item>
@@ -137,6 +137,7 @@
 											<el-form-item>
 												<el-button type="primary" @click="editSubmitForm">提交</el-button>
 												<el-button @click="editCancelSubmit">取消</el-button>
+                        <el-button style="margin-left:30px;" type="primary" @click="resetpassword">重置密码</el-button>
 											</el-form-item>
 										</el-form>
 								</el-dialog>
@@ -202,7 +203,7 @@ export default {
 				_this.field_ch = ["用户名", "手机", "邮箱", "姓名", "性别", "年龄", "描述信息", "用户角色"];
 				_this.field_en = ["username", "phone", "email", "name", "sex", "age", "message", "class_name"];
 				_this.data_type = ["text", "text", "text", "text", "text", "int", "text", "text"];
-				_this.field_width = [100, 100, 100, 100, 100, 100, 120, 120];
+				_this.field_width = [100, 150, 150, 100, 100, 100, 120, 120];
 				_this.field_width.forEach(element => {
 						_this.tabelwidth+=Number(element);
 				});
@@ -216,18 +217,6 @@ export default {
           console.log(err);
         });
 
-      //加载role_class
-      var reqUrl = _this.GLOBAL.host+'/api/python/role_class'
-			var reqData = {"action":"findData", "page":1, "limit":-1, "tocken": sessionStorage.getItem('tocken')}
-      _this.$axiosHttp.get(reqUrl, {"params":reqData}).then(function (res) {
-        if(res.code != 200){
-				  _this.$message({duration: 1000, message: res.msg});
-          return false;
-        }
-        _this.roleClass = res.rows;
-        }).catch(function (err) {
-          console.log(err);
-        });
 
     },
     selectionChange(dataArr) {
@@ -259,11 +248,12 @@ export default {
        //console.log(row);
     },
     edit(row) {
-        //console.log(row);
+        // console.log(row);
         var _this = this;
         _this.field_en.forEach(function(item,index){
             _this.$set(_this.editForm, item, row[item]);
         });
+        _this.$set(this.editForm, "role_id", row.role_id);
         this.editFormBox = true;
     },
     editSubmitForm() {
@@ -301,6 +291,30 @@ export default {
     editCancelSubmit() {
       this.$refs["editForm"].resetFields();
       this.editFormBox = false;
+    },
+    resetpassword() {
+        var _this = this;
+        _this.$confirm('确认重置?', '重置', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(function () {
+          var whereJson = {"username": _this.editForm.username};
+          var updateJson = {"password": "123456"};
+          var reqData = {'action': 'updateData', 'whereJson': whereJson, 'updateJson': updateJson, "tocken": sessionStorage.getItem('tocken')};
+          _this.$axiosHttp.post(_this.url, reqData).then(function (res) {
+            if(res.code != 200){
+              _this.$message({duration: 2000, message: res.msg}); 
+              return false; 
+            }else{
+              _this.$message({duration: 2000, message: "重置密码为：123456"}); 
+            }
+          }).catch(function (err) {
+            console.log(err);
+          });
+        }).catch(function () {
+          //
+        });
     },
     del(row) {
         //console.log(row);
@@ -427,16 +441,10 @@ export default {
 	created() {
 		var _this = this;
 		_this.url = _this.GLOBAL.host + _this.$route.path.replace(/\/page/,"/api/python");
-    var leftAsideVue = function(){
-        var obj = {};
-        _this.$parent.$children.forEach(function(item,index){
-           if(item.activeIndex){
-              obj=item;
-           }
-        });
-        return obj;
-    }();
-    leftAsideVue.list.forEach(function(item,index){
+    _this.getData();
+
+    var menuRows = _this.$store.state.menuRows;
+    menuRows.forEach(function(item,index){
        item.children.forEach(function(item2,index2){
            if(item2.id == localStorage.getItem("activeIndex")){
               _this.modelName1 = item.name;
@@ -445,7 +453,19 @@ export default {
            }
         });
     });
-    _this.getData();
+
+  //加载role_class
+  var reqUrl = _this.GLOBAL.host+'/api/python/role_class'
+  var reqData = {"action":"findData", "page":1, "limit":-1, "tocken": sessionStorage.getItem('tocken')}
+  _this.$axiosHttp.get(reqUrl, {"params":reqData}).then(function (res) {
+    if(res.code != 200){
+      _this.$message({duration: 1000, message: res.msg});
+      return false;
+    }
+    _this.roleClass = res.rows;
+    }).catch(function (err) {
+      console.log(err);
+    });
   }
 }
 </script>

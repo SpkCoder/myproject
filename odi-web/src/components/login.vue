@@ -2,7 +2,10 @@
 	<div class="view-body clearfix">
 	    <div class="login-bg">
           <div class="login-box">
-              <h1>DNS集中监控系统</h1>
+              <div class="logo-box">
+                <img src="../assets/image/logo.png" />
+                <h1>DNS集中监控系统</h1>
+              </div>
               <el-form ref="formData" :model="formData" :rules="rules" :label-position="labelPosition" size="medium" label-width="60px">
                 <div class="login-top-box">
                   <el-form-item label="用户名" prop="username">

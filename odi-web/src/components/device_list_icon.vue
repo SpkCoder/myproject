@@ -9,14 +9,22 @@
 		  	  <div class="container clearfix">
 						<div class="list-page">
 
-                <div style="margin-bottom:10px;">
-                    <p><span class="span1">设备总数：{{device_num}}</span>   <span class="span2">在线数量：{{online_num}}</span>   <span class="span3">告警数量：{{alarm_num}}</span></p>
+                <div>
+                    <p class="alarm_num_p"><span class="span1">设备总数：{{device_num}}</span><span class="span2">在线数量：{{online_num}}</span><span class="span3">告警数量：{{alarm_num}}</span></p>
                 </div>
                 <div id="eChart" style="width: auto;height:500px;"></div>
 
+                <ul id="device_menu"
+                  v-show="showMenu"
+                  :style="menuStyle">
+                  <li @click="deviceDetailClick">查看设备信息</li>
+                  <li @click="alarmDetailClick">查看告警详情</li>
+                  <li @click="watchingDetailClick">查看监控详情</li>
+                </ul>
+
 								<el-dialog
 									title="详细"
-									:visible.sync="viewFormBox"
+									:visible.sync="viewDetailBox"
 									width="600px">
 									<el-form ref="viewForm" :model="viewForm" size="small" label-width="150px">
 											<template v-for='(item, index) in field_en'>
@@ -42,6 +50,9 @@
 import moment from 'moment';
 import echarts from 'echarts';
 import formVerify from '@/common/formVerify';
+const serverGreen = require('@/assets/image/server_green.png');
+const serverRed = require('@/assets/image/server_red.png');
+const serverGray = require('@/assets/image/server_gray.png');
 export default {
 	name: 'model_list',
 	filters: {
@@ -64,12 +75,14 @@ export default {
 			listLoading: true,
       searchFormBox: false,
       searchForm: {},
-      viewFormBox: false,
+      viewDetailBox: false,
       viewForm: {},
 			roleClass: [],
       page: 1,
       limit: 10,
       count: 0,
+      menuStyle: {},
+      showMenu: false,
       sortJson : {},
       whereJson : {"type": "device_list_icon"},
       rules: {}
@@ -93,6 +106,8 @@ export default {
                 {
                     type:'graph',
                     layout:'force',
+                    roam: true,  //缩放
+                    draggable: true, //平移
                     categories : [{name:'level1'},{name:'level2'},{name: 'level3'}],
                     label: {
                         normal: {
@@ -104,8 +119,8 @@ export default {
                         }
                     },
                     force: {
-                        repulsion: 600,
-                        edgeLength:60
+                        repulsion:1000
+                        // edgeLength:60
                     },
                     nodes: [],
                     links: []
@@ -122,10 +137,11 @@ export default {
           option.series[0].nodes.push({name: item.name, category: 1, symbolSize : 20, itemStyle: {color: '#2f4554'} })
           option.series[0].links.push({source: item.name, target: 'infoblox'})
           item.children.forEach(function (item2, index2) {
-            option.series[0].nodes.push({name: item2.name, index:index2, category: 1, symbolSize : 15, itemStyle: {color: '#61a0a8'} })
+            var device_color = serverGray;
+            if(item2.online_status == 'true'){device_color = serverGreen; online_num++}
+            if(item2.alarm_status == 'true'){device_color = serverRed; alarm_num++}
+            option.series[0].nodes.push({name: item2.name, index:index2, category: 1, symbolSize : 18, symbol : "image://"+device_color, customData : item2, itemStyle: {color: '#61a0a8'} })
             option.series[0].links.push({source: item2.name, target: item.name})
-            if(item2.online_status == 'true'){online_num++}
-            if(item2.alarm_status == 'true'){alarm_num++}
             device_num++
           });
         });
@@ -137,18 +153,21 @@ export default {
 
         var myChart = echarts.init(document.getElementById('eChart'));
         myChart.setOption(option, true);
-        myChart.on('click', function (params) {
-          // console.log(params.name);
-          res.rows.forEach(function (item, index) {
-            item.children.forEach(function (item2, index2) {
-              if(item2.name == params.name){
-                // console.log(item2)
-                _this.view(item2)
-                return false;
-              }
-            });
-          });
-
+        // myChart.on('click', function (params) {
+        //   // console.log(params.name);
+        //   _this.view(params.data.customData)
+        // });
+        document.getElementById("eChart").onclick = function(){ _this.showMenu = false; }
+        document.getElementById("eChart").oncontextmenu = function(){ return false; }
+        myChart.on('contextmenu', function (params) {
+          // console.log(params.data.customData)
+          _this.customData = params.data.customData;
+          if (params.data.symbol) {
+            _this.menuStyle = {"left": params.event.offsetX + 40 + "px", "top": params.event.offsetY + 40 + "px" }
+            _this.showMenu = true;
+          } else {
+            _this.showMenu = false;
+          }
         });
 
       }).catch(function (err) {
@@ -164,7 +183,18 @@ export default {
             _this.$set(_this.viewForm, item, row[item]);
         });
         _this.thisrow = row
-        this.viewFormBox = true;
+        this.viewDetailBox = true;
+    },
+    deviceDetailClick() {
+      this.view(this.customData)
+    },
+    alarmDetailClick() {
+      // console.log(this.customData)
+      this.$router.push({ path: "/page/device_alarm_detail/" + this.customData.ip });
+    },
+    watchingDetailClick() {
+      // console.log(this.customData)
+      this.$router.push({ path: "/page/device_watching_detail/" + this.customData.ip });
     },
     searchSubmitForm() {
         var _this = this;
@@ -197,21 +227,15 @@ export default {
   watch: {
       msg(value, oldValue) {
         //console.log(value, oldValue);
-      }
+      },
   },
 	created() {
 		var _this = this;
 		_this.url = _this.GLOBAL.host + "/api/python/device_list";
-    var leftAsideVue = function(){
-        var obj = {};
-        _this.$parent.$children.forEach(function(item,index){
-           if(item.activeIndex){
-              obj=item;
-           }
-        });
-        return obj;
-    }();
-    leftAsideVue.list.forEach(function(item,index){
+    _this.getData();
+
+    var menuRows = _this.$store.state.menuRows;
+    menuRows.forEach(function(item,index){
        item.children.forEach(function(item2,index2){
            if(item2.id == localStorage.getItem("activeIndex")){
               _this.modelName1 = item.name;
@@ -220,12 +244,42 @@ export default {
            }
         });
     });
-    _this.getData();
 
   }
 }
 </script>
 
 <style scoped>
+#device_menu {
+  width: 110px;
+  position: absolute;
+  z-index: 2;
+  border: 1px solid gray;
+  background: #eeeeee;
+  padding: 0;
+}
+#device_menu li {    
+  list-style-type: none;
+  font-size: 16px;
+  line-height: 24px;
+  height: 24px;
+  width: 100%;
+  text-align: center;
+  cursor: pointer;
+}
+
+#device_menu li:hover {    
+  background: #BBC6D3;
+}
+
+.alarm_num_p span {
+  margin-right: 10px;
+}
+.alarm_num_p .span2 {
+  color: #3cb371;
+}
+.alarm_num_p .span3 {
+  color: #dc143c;
+}
 
 </style>

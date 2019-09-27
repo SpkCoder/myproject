@@ -14,14 +14,14 @@
                     <el-tab-pane label="Top100域名统计" name="tab1">
                         <div style="margin-bottom:10px;">
                           <el-form ref="searchForm" :inline="true" :model="searchForm" :rules="rules" size="small" label-width="100px">
-                              <el-form-item label="设备IP">
+                              <!-- <el-form-item label="设备IP">
                                 <el-select v-model="searchForm['server_ip']" placeholder="">
                                   <el-option v-for="item2 in deviceList" :key="item2.id" :label="item2.ip" :value="item2.ip"> </el-option>
                                 </el-select>
-                              </el-form-item>
+                              </el-form-item> -->
                               <el-form-item label="域名">
                                 <el-input v-model="searchForm['client_host']" placeholder=""/>
-                              </el-form-item><br>
+                              </el-form-item>
                               <el-form-item label="开始时间">
                                 <el-date-picker v-model="searchForm['time_start']" type="datetime" value-format="yyyy-MM-dd HH:mm:ss"> </el-date-picker>
                               </el-form-item>
@@ -32,6 +32,8 @@
                               <el-form-item>
                                 <el-button icon="el-icon-search" type="primary" @click="searchSubmitForm">查询</el-button>
                                 <el-button icon="el-icon-refresh" @click="searchCancelSubmit">取消</el-button>
+                                <el-button icon="el-icon-download" @click="btn_export()">导出</el-button>
+                                <a style="display: none" id="a_export" href="" target="_self" download></a>
                               </el-form-item>
                             </el-form>
                         </div>
@@ -48,31 +50,32 @@
                           @selection-change="selectionChange" 
                           @sort-change="sortChange"
                           :style={width:tabelwidth}>
-                          <el-table-column fixed="left" type="selection" width="40"></el-table-column>
+                          <!-- <el-table-column fixed="left" type="selection" width="40"></el-table-column> -->
                           <template v-for='(item, index) in field_en'>
                               <el-table-column v-if='item == "err_rate"' :key="item.id" show-overflow-tooltip sortable="custom" :prop="item" :label="field_ch[index]" :width="field_width[index] | field_width_filter">
                                 <template slot-scope="scope">
                                   {{ scope.row.err_rate | err_rate_filter}}
                                 </template>
                               </el-table-column>
+                              <el-table-column v-else-if='item == "index"' :key="item.id" :prop="item" :label="field_ch[index]" :width="field_width[index] | field_width_filter"> </el-table-column>
                               <el-table-column v-else :key="item.id" show-overflow-tooltip sortable="custom" :prop="item" :label="field_ch[index]" :width="field_width[index] | field_width_filter"> </el-table-column>
                           </template>
                         </el-table>
 
-                        <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="page" :page-sizes="[10,50,100,500]" :page-size="limit" layout="prev, pager, next, jumper, total, sizes" :total="count"> 
+                        <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="page" :page-sizes="[10,20,50,100]" :page-size="limit" layout="prev, pager, next, jumper, total, sizes" :total="count"> 
                           </el-pagination>
                     </el-tab-pane>
                     <el-tab-pane label="Top100客户端IP统计" name="tab2">
                         <div style="margin-bottom:10px;">
                           <el-form ref="searchForm2" :inline="true" :model="searchForm2" :rules="rules" size="small" label-width="100px">
-                              <el-form-item label="设备IP">
+                              <!-- <el-form-item label="设备IP">
                                 <el-select v-model="searchForm2['server_ip']" placeholder="">
                                   <el-option v-for="item2 in deviceList" :key="item2.id" :label="item2.ip" :value="item2.ip"> </el-option>
                                 </el-select>
-                              </el-form-item>
+                              </el-form-item> -->
                               <el-form-item label="客户端IP">
                                 <el-input v-model="searchForm2['client_ip']" placeholder=""/>
-                              </el-form-item><br>
+                              </el-form-item>
                               <el-form-item label="开始时间">
                                 <el-date-picker v-model="searchForm2['time_start']" type="datetime" value-format="yyyy-MM-dd HH:mm:ss"> </el-date-picker>
                               </el-form-item>
@@ -83,6 +86,8 @@
                               <el-form-item>
                                 <el-button icon="el-icon-search" type="primary" @click="searchSubmitForm2">查询</el-button>
                                 <el-button icon="el-icon-refresh" @click="searchCancelSubmit2">取消</el-button>
+                                <el-button icon="el-icon-download" @click="btn_export2()">导出</el-button>
+                                <a style="display: none" id="a_export2" href="" target="_self" download></a>
                               </el-form-item>
                             </el-form>
                         </div>
@@ -99,18 +104,19 @@
                           @selection-change="selectionChange" 
                           @sort-change="sortChange2"
                           :style={width:tabelwidth2}>
-                          <el-table-column fixed="left" type="selection" width="40"></el-table-column>
+                          <!-- <el-table-column fixed="left" type="selection" width="40"></el-table-column> -->
                           <template v-for='(item, index) in field_en2'>
                               <el-table-column v-if='item == "err_rate"' :key="item.id" show-overflow-tooltip sortable="custom" :prop="item" :label="field_ch2[index]" :width="field_width2[index] | field_width_filter">
                                 <template slot-scope="scope">
                                   {{ scope.row.err_rate | err_rate_filter}}
                                 </template>
                               </el-table-column>
+                              <el-table-column v-else-if='item == "index"' :key="item.id" :prop="item" :label="field_ch2[index]" :width="field_width2[index] | field_width_filter"> </el-table-column>
                               <el-table-column v-else :key="item.id" show-overflow-tooltip sortable="custom" :prop="item" :label="field_ch2[index]" :width="field_width2[index] | field_width_filter"> </el-table-column>
                           </template>
                         </el-table>
 
-                        <el-pagination @size-change="handleSizeChange2" @current-change="handleCurrentChange2" :current-page="page2" :page-sizes="[10,50,100,500]" :page-size="limit2" layout="prev, pager, next, jumper, total, sizes" :total="count2"> 
+                        <el-pagination @size-change="handleSizeChange2" @current-change="handleCurrentChange2" :current-page="page2" :page-sizes="[10,20,50,100]" :page-size="limit2" layout="prev, pager, next, jumper, total, sizes" :total="count2"> 
                           </el-pagination>
                     </el-tab-pane>
                   </el-tabs>
@@ -184,15 +190,18 @@ export default {
 				  _this.$message({duration: 1000, message: res.msg});
           return false;
         }
+        res.rows.forEach(function (item,index) {
+          item.index = index+1;
+        });
 				_this.list = res.rows;
-				_this.field_ch = ["域名", "DNS查询次数", "错误次数", "错误率"];
-				_this.field_en = ["client_host", "num", "num_err", "err_rate"];
+				_this.field_ch = ["#", "域名", "DNS查询次数", "错误次数", "错误率"];
+				_this.field_en = ["index", "client_host", "num", "num_err", "err_rate"];
 				_this.data_type = ["text", "text", "text", "text"];
-				_this.field_width = [200, 200, 200, 200];
+				_this.field_width = [60, 400, 200, 200, 200];
 				_this.field_width.forEach(element => {
 						_this.tabelwidth+=Number(element);
 				});
-				_this.tabelwidth = _this.tabelwidth + 40 + 5 + "px";
+				_this.tabelwidth = _this.tabelwidth + 5 + "px";
         _this.page = res.page;
         _this.limit = res.limit;
         _this.count = res.count;
@@ -201,18 +210,6 @@ export default {
           console.log(err);
         });
 
-      //加载device_list
-      var reqUrl = _this.GLOBAL.host+'/api/python/device_list'
-			var reqData = {"action":"findData", "page":1, "limit":-1, "tocken": sessionStorage.getItem('tocken')}
-      _this.$axiosHttp.get(reqUrl, {"params":reqData}).then(function (res) {
-        if(res.code != 200){
-				  _this.$message({duration: 1000, message: res.msg});
-          return false;
-        }
-        _this.deviceList = res.rows;
-        }).catch(function (err) {
-          console.log(err);
-        });
 
     },
     getData2() {
@@ -225,15 +222,18 @@ export default {
 				  _this.$message({duration: 1000, message: res.msg});
           return false;
         }
+        res.rows.forEach(function (item,index) {
+          item.index = index+1;
+        });
 				_this.list2 = res.rows;
-				_this.field_ch2 = ["客户端IP", "解析次数", "请求域名个数", "错误次数", "错误率"];
-				_this.field_en2 = ["client_ip", "num", "num_host", "num_err", "err_rate"];
-				_this.data_type2 = ["text", "text", "text", "text", "text"];
-				_this.field_width2 = [200, 200, 200, 200, 200];
+				_this.field_ch2 = ["#", "客户端IP", "解析次数", "请求域名个数", "错误次数", "错误率"];
+				_this.field_en2 = ["index", "client_ip", "num", "num_host", "num_err", "err_rate"];
+				_this.data_type2 = ["text", "text", "text", "text", "text", "text"];
+				_this.field_width2 = [60, 400, 150, 150, 150, 150];
 				_this.field_width2.forEach(element => {
 						_this.tabelwidth2+=Number(element);
 				});
-				_this.tabelwidth2 = _this.tabelwidth2 + 40 + 5 + "px";
+				_this.tabelwidth2 = _this.tabelwidth2 + 5 + "px";
         _this.page2 = res.page;
         _this.limit2 = res.limit;
         _this.count2 = res.count;
@@ -289,6 +289,36 @@ export default {
     },
     view(row) {
        //console.log(row);
+    },
+    btn_export() {
+        var _this = this;
+        var reqData = {"action":"exportData", "page":_this.page, "limit":_this.limit, "whereJson":_this.whereJson, "sortJson":_this.sortJson, "tocken": sessionStorage.getItem('tocken')}
+        _this.$axiosHttp.get(_this.url, {"params":reqData}).then(function (res) {
+          if(res.code != 200){
+            _this.$message({duration: 1000, message: res.msg});
+            return false;
+          }
+          document.getElementById('a_export').href = _this.GLOBAL.host + res.url;
+          document.getElementById('a_export').click();
+
+        }).catch(function (err) {
+          console.log(err);
+        });
+    },
+    btn_export2() {
+        var _this = this;
+        var reqData = {"action":"exportData", "page":_this.page2, "limit":_this.limit2, "whereJson":_this.whereJson2, "sortJson":_this.sortJson2, "tocken": sessionStorage.getItem('tocken')}
+        _this.$axiosHttp.get(_this.url, {"params":reqData}).then(function (res) {
+          if(res.code != 200){
+            _this.$message({duration: 1000, message: res.msg});
+            return false;
+          }
+          document.getElementById('a_export2').href = _this.GLOBAL.host + res.url;
+          document.getElementById('a_export2').click();
+
+        }).catch(function (err) {
+          console.log(err);
+        });
     },
     searchSubmitForm() {
         var _this = this;
@@ -363,16 +393,10 @@ export default {
 	created() {
 		var _this = this;
 		_this.url = _this.GLOBAL.host + _this.$route.path.replace(/\/page/,"/api/python");
-    var leftAsideVue = function(){
-        var obj = {};
-        _this.$parent.$children.forEach(function(item,index){
-           if(item.activeIndex){
-              obj=item;
-           }
-        });
-        return obj;
-    }();
-    leftAsideVue.list.forEach(function(item,index){
+    _this.getData();
+
+    var menuRows = _this.$store.state.menuRows;
+    menuRows.forEach(function(item,index){
        item.children.forEach(function(item2,index2){
            if(item2.id == localStorage.getItem("activeIndex")){
               _this.modelName1 = item.name;
@@ -381,7 +405,20 @@ export default {
            }
         });
     });
-    _this.getData();
+
+    //加载device_list
+    var reqUrl = _this.GLOBAL.host+'/api/python/device_list'
+    var reqData = {"action":"findData", "page":1, "limit":-1, "tocken": sessionStorage.getItem('tocken')}
+    _this.$axiosHttp.get(reqUrl, {"params":reqData}).then(function (res) {
+      if(res.code != 200){
+        _this.$message({duration: 1000, message: res.msg});
+        return false;
+      }
+      _this.deviceList = res.rows;
+      }).catch(function (err) {
+        console.log(err);
+      });
+
   }
 }
 </script>

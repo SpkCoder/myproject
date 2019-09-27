@@ -100,7 +100,7 @@ export default {
 				_this.field_ch = ["IP", "告警类型", "内容", "告警时间"];
 				_this.field_en = ["client_ip", "alarm_type", "alarm_msg", "alarm_time"];
 				_this.data_type = ["text", "text", "text", "text"];
-				_this.field_width = [120, 150, 150, 150];
+				_this.field_width = [120, 150, 150, 160];
 				_this.field_width.forEach(element => {
 						_this.tabelwidth+=Number(element);
 				});
@@ -174,16 +174,10 @@ export default {
     var _this = this;
     _this.whereJson = {"client_ip": _this.$route.params.id, "alarm_type_id": Number(_this.$route.params.id2), "status": 0};
     _this.url = _this.GLOBAL.host + "/api/python/alarm_list";
-    var leftAsideVue = function(){
-        var obj = {};
-        _this.$parent.$children.forEach(function(item,index){
-           if(item.activeIndex){
-              obj=item;
-           }
-        });
-        return obj;
-    }();
-    leftAsideVue.list.forEach(function(item,index){
+    _this.getData();
+
+    var menuRows = _this.$store.state.menuRows;
+    menuRows.forEach(function(item,index){
        item.children.forEach(function(item2,index2){
            if(item2.id == localStorage.getItem("activeIndex")){
               _this.modelName1 = item.name;
@@ -193,7 +187,6 @@ export default {
            }
         });
     });
-    _this.getData();
   }
 }
 </script>

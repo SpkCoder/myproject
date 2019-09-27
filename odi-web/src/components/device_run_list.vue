@@ -14,7 +14,9 @@
                       <template v-for='(item, index) in field_en'>
                           <template v-if='item == "client_ip"'>
 														<el-form-item :key="index" :label="field_ch[index]">
-                              <el-input v-model="searchForm[item]"/>
+                              <el-select v-model="searchForm['client_ip']" placeholder="">
+                                <el-option v-for="item2 in deviceList" :key="item2.id" :label="item2.ip" :value="item2.ip"> </el-option>
+                              </el-select>
                             </el-form-item>
                           </template>
 													<template v-else>
@@ -24,6 +26,8 @@
 											<el-form-item>
 												<el-button icon="el-icon-search" type="primary" @click="searchSubmitForm">查询</el-button>
 												<el-button icon="el-icon-refresh" @click="searchCancelSubmit">取消</el-button>
+                        <el-button icon="el-icon-download" @click="btn_export()">导出</el-button>
+                        <a style="display: none" id="a_export" href="" target="_self" download></a>
 											</el-form-item>
 										</el-form>
 								</div>
@@ -49,7 +53,7 @@
                       </el-table-column>
                       <el-table-column v-else-if='item == "ram_rate"' :key="item.id" show-overflow-tooltip sortable="custom" :prop="item" :label="field_ch[index]" :width="field_width[index] | field_width_filter">
                         <template slot-scope="scope">
-                          {{ scope.row.cpu_rate | ram_rate_filter}}
+                          {{ scope.row.ram_rate | ram_rate_filter}}
                         </template>
                       </el-table-column>
 											<el-table-column v-else :key="item.id" show-overflow-tooltip sortable="custom" :prop="item" :label="field_ch[index]" :width="field_width[index] | field_width_filter"> </el-table-column>
@@ -98,7 +102,7 @@ export default {
       addFormBox: false,
       searchFormBox: false,
       multipleSelection: [],
-			permissionList: [],
+			deviceList: [],
       editForm: {},
       addForm: {},
 			searchForm: {},
@@ -123,7 +127,7 @@ export default {
           return false;
         }
 				_this.list = res.rows;
-				_this.field_ch = ["IP", "CPU使用率", "内存使用率", "接收流量(Kb)", "发送流量(Kb)", "网速(Kb/s)", "时间"];
+				_this.field_ch = ["设备IP", "CPU使用率", "内存使用率", "接收流量(Kb)", "发送流量(Kb)", "网速(Kb/s)", "时间"];
 				_this.field_en = ["client_ip", "cpu_rate", "ram_rate", "net_flow_receive", "net_flow_send", "net_speed", "log_time"];
 				_this.data_type = ["text", "text", "text", "text", "text", "text", "text"];
 				_this.field_width = [120, 120, 120, 140, 140, 120, 160];
@@ -169,6 +173,21 @@ export default {
     view(row) {
        //console.log(row);
     },
+    btn_export() {
+        var _this = this;
+        var reqData = {"action":"exportData", "page":_this.page, "limit":_this.limit, "whereJson":_this.whereJson, "sortJson":_this.sortJson, "tocken": sessionStorage.getItem('tocken')}
+        _this.$axiosHttp.get(_this.url, {"params":reqData}).then(function (res) {
+          if(res.code != 200){
+            _this.$message({duration: 1000, message: res.msg});
+            return false;
+          }
+          document.getElementById('a_export').href = _this.GLOBAL.host + res.url;
+          document.getElementById('a_export').click();
+
+        }).catch(function (err) {
+          console.log(err);
+        });
+    },
     searchSubmitForm() {
         var _this = this;
         _this.$refs["searchForm"].validate (function (valid) {
@@ -199,16 +218,10 @@ export default {
 	created() {
 		var _this = this;
 		_this.url = _this.GLOBAL.host + _this.$route.path.replace(/\/page/,"/api/python");
-    var leftAsideVue = function(){
-        var obj = {};
-        _this.$parent.$children.forEach(function(item,index){
-           if(item.activeIndex){
-              obj=item;
-           }
-        });
-        return obj;
-    }();
-    leftAsideVue.list.forEach(function(item,index){
+    _this.getData();
+
+    var menuRows = _this.$store.state.menuRows;
+    menuRows.forEach(function(item,index){
        item.children.forEach(function(item2,index2){
            if(item2.id == localStorage.getItem("activeIndex")){
               _this.modelName1 = item.name;
@@ -217,7 +230,20 @@ export default {
            }
         });
     });
-    _this.getData();
+
+    //加载device_list
+    var reqUrl = _this.GLOBAL.host+'/api/python/device_list'
+    var reqData = {"action":"findData", "page":1, "limit":-1, "tocken": sessionStorage.getItem('tocken')}
+    _this.$axiosHttp.get(reqUrl, {"params":reqData}).then(function (res) {
+      if(res.code != 200){
+        _this.$message({duration: 1000, message: res.msg});
+        return false;
+      }
+      _this.deviceList = res.rows;
+    }).catch(function (err) {
+        console.log(err);
+    });
+
   }
 }
 </script>

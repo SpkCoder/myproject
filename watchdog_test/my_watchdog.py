@@ -39,8 +39,8 @@ class FileEventHandler(FileSystemEventHandler):
                 count=count+1
                 str_line = line.strip()
                 print(str_line)
-                sql = 'insert into log_test(`message`) values ("%s")' % (str_line)
-                self.insert_data(sql)
+                # sql = 'insert into log_test(`message`) values ("%s")' % (str_line)
+                # self.insert_data(sql)
             self.dict_num[file_name] = self.dict_num[file_name]+count
             del list_line
             # print(self.dict_num)

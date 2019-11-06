@@ -56,15 +56,16 @@ a{color: #333; text-decoration:none; }
 .left-aside {position: fixed;left: 0px; top: 55px; bottom: 0; z-index: 999; width: 200px; background: #bbc6d3; overflow-x: hidden; }
 .left-aside .left-aside-scroll{width: 220px; height: 100%; overflow-x: hidden;}
 .left-aside .el-menu-vertical-demo{width: 200px; }
-.left-aside .el-menu a{color:#1f2935; display: inline-block;}
-.left-aside .el-menu .el-menu-item.is-active a{color:#409EFF;}
+.left-aside .el-menu a{color:#1f2935; display: inline-block; width: 100%;}
+.left-aside .el-menu .el-menu-item {cursor: default;}
+.left-aside .el-menu .el-menu-item.is-active a{color:#0065cc;}
 .left-aside .el-menu .el-submenu{border-bottom: 1px solid #97a1ab}
 .left-aside .side-arrow {position: fixed; display: block; top: 45%; left: 200px; color: #fff; background-color: #bbc6d3; height: 50px; width: 12px; z-index: 1000; line-height: 50px; text-align: center; cursor: pointer; border-top-right-radius: 3px; border-bottom-right-radius: 3px; }
 .left-aside .side-arrow:hover {background-color: #409EFF; }
 .view-body{position: absolute; top: 55px; left: 200px; right: 0; bottom: 30px; width: auto; height: auto; overflow: hidden; }
 .list-page-point {position: relative; height: 34px; line-height: 34px; padding: 0px 10px; color: #1f2935; font-size: 12px; /* background-color: #f2f2f2; */ border-bottom: 1px solid #97a1ab; overflow: hidden; }
 .list-page-box {position: absolute; left: 0; right: 0; top: 35px; bottom: 0; width: auto; overflow: hidden; overflow-y: auto; box-sizing: border-box; }
-.list-page {position:relative; padding: 10px; }
+.list-page {position:relative; padding: 10px 20px; }
 .list-page .eChart_bottom_box {position: relative;}
 .list-page .eChart_bottom_box > div{float: left;}
 

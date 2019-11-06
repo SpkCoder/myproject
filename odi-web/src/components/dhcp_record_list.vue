@@ -176,6 +176,8 @@ export default {
             if(valid) {
               // console.log(_this.searchForm);
               _this.whereJson = _this.searchForm
+              _this.page = 1;
+              _this.limit = 10;
               _this.getData();
 
             }else {
@@ -189,6 +191,8 @@ export default {
       this.$refs["searchForm"].resetFields();
       this.searchFormBox = false;
       this.whereJson = {};
+      this.page = 1;
+      this.limit = 10;
       this.getData();
     }
   },

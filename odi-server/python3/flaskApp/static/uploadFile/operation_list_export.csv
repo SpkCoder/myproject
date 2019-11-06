@@ -1,0 +1,2 @@
+﻿用户,设备IP,操作类型,操作信息,时间
+admin,192.168.200.3,登录,Login_Allowed - - to=AdminConnector ip=192.168.40.254 auth=LOCAL group=admin-group apparently_via=GU,2019-07-22 11:55:33

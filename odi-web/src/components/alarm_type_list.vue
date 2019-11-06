@@ -21,7 +21,7 @@
 									@selection-change="selectionChange" 
 									@sort-change="sortChange"
 									:style={width:tabelwidth}>
-									<el-table-column fixed="left" type="selection" width="40"></el-table-column>
+									<!-- <el-table-column fixed="left" type="selection" width="40"></el-table-column> -->
 									<template v-for='(item, index) in field_en'>
 											<el-table-column :key="item.id" show-overflow-tooltip sortable="custom" :prop="item" :label="field_ch[index]" :width="field_width[index] | field_width_filter"> </el-table-column>
 									</template>
@@ -30,7 +30,7 @@
                       <!-- <router-link :to="'/page/page_demo_detail/' + scope.row.id">
                         <el-button type="text" size="small" icon="el-icon-view">&nbsp;</el-button>
                       </router-link> -->
-											<el-button @click="edit(scope.row)" type="text" size="small" icon="el-icon-edit">&nbsp;</el-button>
+											<el-button @click="edit(scope.row)" type="text" size="small" icon="el-icon-edit">修改</el-button>
 											<!-- <el-button @click="del(scope.row)" type="text" size="small" icon="el-icon-delete">&nbsp;</el-button> -->
 											</template> 
 									</el-table-column>
@@ -65,7 +65,7 @@
                             </el-form-item>
                           </template>
                           <template v-else>
-                            <el-form-item :key="index" :label="field_ch[index]" :prop="item" required>
+                            <el-form-item :key="index" :label="field_ch[index]" :prop="item">
                               <el-input v-model="editForm[item]"/>
                             </el-form-item>
                           </template>
@@ -136,19 +136,33 @@ export default {
           return false;
         }
 				_this.list = res.rows;
-				_this.field_ch = ["ID", "类型", "操作符", "阀值", "单位", "状态"];
+				_this.field_ch = ["ID", "类型", "操作符", "阈值", "单位", "状态"];
 				_this.field_en = ["id", "alarm_type", "symbol", "tvalue", "unit", "status"];
 				_this.data_type = ["int", "text", "text", "text", "text", "text"];
 				_this.field_width = [100, 200, 100, 100, 100, 100];
 				_this.field_width.forEach(element => {
 						_this.tabelwidth+=Number(element);
 				});
-				_this.tabelwidth = _this.tabelwidth + 40 + 130 + 5 + "px";
+				_this.tabelwidth = _this.tabelwidth + 130 + 5 + "px";
         _this.page = res.page;
         _this.limit = res.limit;
         _this.count = res.count;
 
         _this.rules = formVerify.rules(_this.field_en,_this.data_type);
+        _this.rules["tvalue"] = [
+            { required: true, message: '请输入阀值', trigger: 'blur' },
+            {
+                validator: function (rule, value, callback) {
+                    if(value){
+                        if (! /^[1-9][0-9]*$/.test(value)) {
+                            return callback(new Error('请输入正整数'));
+                        }
+                    }
+                    callback();
+                },
+                trigger: 'blur'
+            }
+        ];
         }).catch(function (err) {
           console.log(err);
         });
@@ -199,9 +213,9 @@ export default {
               _this.field_en.forEach(function(item,index){
                   var field_type_this = _this.data_type[index];
                   if(field_type_this == "int" || field_type_this == "int(6)" || field_type_this == "decimal(2)" || field_type_this == "decimal(4)"){
-                    _this.addForm[item] = _this.addForm[item] ? Number(_this.addForm[item]) : 0;
+                    _this.editForm[item] = _this.editForm[item] ? Number(_this.editForm[item]) : 0;
                   }else{
-                    _this.addForm[item] = _this.addForm[item] ? String(_this.addForm[item]) : "";
+                    _this.editForm[item] = _this.editForm[item] ? String(_this.editForm[item]) : "";
                   }
               });
               var whereJson = {"id": _this.thisrow.id};
@@ -319,6 +333,8 @@ export default {
             if(valid) {
               // console.log(_this.searchForm);
               _this.whereJson = _this.searchForm
+              _this.page = 1;
+              _this.limit = 10;
               _this.getData();
 
             }else {
@@ -332,6 +348,8 @@ export default {
       this.$refs["searchForm"].resetFields();
       this.searchFormBox = false;
       this.whereJson = {};
+      this.page = 1;
+      this.limit = 10;
       this.getData();
     }
   },

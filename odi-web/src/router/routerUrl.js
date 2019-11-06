@@ -8,6 +8,7 @@ export default {
     "/page/device_watching_detail/:ip",
     "/page/device_list", 
     "/page/device_run_list", 
+    "/page/device_run_list_detail/:ip",
     "/page/operation_list", 
     "/page/dhcp_record_list", 
     "/page/address_rate_list", 

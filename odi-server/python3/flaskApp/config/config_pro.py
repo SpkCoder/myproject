@@ -17,3 +17,4 @@ DB_INSERT_NUM = 1000
 JWT_SECRET = 'jwtsecret123'     #tocken秘钥
 
 DB_SQLITE_NAME = 'ott-dns-info.db'              #sqlite数据库名称
+SPLIT_NUMBER = 10000000         #table切割长度

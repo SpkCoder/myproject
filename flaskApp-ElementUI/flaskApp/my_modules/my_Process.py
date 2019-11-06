@@ -24,7 +24,7 @@ import requests
 def long_time_task(name):
     print('Run task %s (%s)...' % (name, os.getpid()))
     start = time.time()
-    time.sleep(1)
+    time.sleep(3)
     # time.sleep(random.random() * 3)
     # data = {'params': ''}
     # res = requests.get('http://127.0.0.1:4000/api/python/user_list', params=data)
@@ -41,9 +41,9 @@ if __name__=='__main__':
         res = p.apply_async(long_time_task, args=(i,))
         list_res.append(res)
     print('Waiting for all subprocesses done...')
-    for res in list_res:
-        print(res.get())
-    # p.close()
+    # for res in list_res:
+    #     print(res.get())
+    p.close()
     # p.join()
     print('All subprocesses done.')
 

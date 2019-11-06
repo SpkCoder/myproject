@@ -12,16 +12,17 @@
                 <template>
                   <el-tabs v-model="activeName" @tab-click="tabHandleClick">
                     <el-tab-pane label="Top100域名统计" name="tab1">
-                        <div style="margin-bottom:10px;">
-                          <el-form ref="searchForm" :inline="true" :model="searchForm" :rules="rules" size="small" label-width="100px">
-                              <!-- <el-form-item label="设备IP">
+                        <div style="margin-bottom:10px; margin-left: -34px;">
+                          <el-form v-loading.fullscreen.lock="fullLoading" element-loading-text="Loading" ref="searchForm" :inline="true" :model="searchForm" :rules="rules" size="small" label-width="100px">
+                              <el-form-item label="设备IP">
                                 <el-select v-model="searchForm['server_ip']" placeholder="">
+                                  <el-option label="全部" value=""> </el-option>
                                   <el-option v-for="item2 in deviceList" :key="item2.id" :label="item2.ip" :value="item2.ip"> </el-option>
                                 </el-select>
-                              </el-form-item> -->
+                              </el-form-item>
                               <el-form-item label="域名">
                                 <el-input v-model="searchForm['client_host']" placeholder=""/>
-                              </el-form-item>
+                              </el-form-item><br>
                               <el-form-item label="开始时间">
                                 <el-date-picker v-model="searchForm['time_start']" type="datetime" value-format="yyyy-MM-dd HH:mm:ss"> </el-date-picker>
                               </el-form-item>
@@ -62,20 +63,21 @@
                           </template>
                         </el-table>
 
-                        <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="page" :page-sizes="[10,20,50,100]" :page-size="limit" layout="prev, pager, next, jumper, total, sizes" :total="count"> 
-                          </el-pagination>
+                        <!-- <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="page" :page-sizes="[10,20,50,100]" :page-size="limit" layout="prev, pager, next, jumper, total, sizes" :total="count"> 
+                          </el-pagination> -->
                     </el-tab-pane>
                     <el-tab-pane label="Top100客户端IP统计" name="tab2">
-                        <div style="margin-bottom:10px;">
+                        <div style="margin-bottom:10px; margin-left: -34px;">
                           <el-form ref="searchForm2" :inline="true" :model="searchForm2" :rules="rules" size="small" label-width="100px">
-                              <!-- <el-form-item label="设备IP">
+                              <el-form-item label="设备IP">
                                 <el-select v-model="searchForm2['server_ip']" placeholder="">
+                                  <el-option label="全部" value=""> </el-option>
                                   <el-option v-for="item2 in deviceList" :key="item2.id" :label="item2.ip" :value="item2.ip"> </el-option>
                                 </el-select>
-                              </el-form-item> -->
+                              </el-form-item>
                               <el-form-item label="客户端IP">
                                 <el-input v-model="searchForm2['client_ip']" placeholder=""/>
-                              </el-form-item>
+                              </el-form-item><br>
                               <el-form-item label="开始时间">
                                 <el-date-picker v-model="searchForm2['time_start']" type="datetime" value-format="yyyy-MM-dd HH:mm:ss"> </el-date-picker>
                               </el-form-item>
@@ -116,8 +118,8 @@
                           </template>
                         </el-table>
 
-                        <el-pagination @size-change="handleSizeChange2" @current-change="handleCurrentChange2" :current-page="page2" :page-sizes="[10,20,50,100]" :page-size="limit2" layout="prev, pager, next, jumper, total, sizes" :total="count2"> 
-                          </el-pagination>
+                        <!-- <el-pagination @size-change="handleSizeChange2" @current-change="handleCurrentChange2" :current-page="page2" :page-sizes="[10,20,50,100]" :page-size="limit2" layout="prev, pager, next, jumper, total, sizes" :total="count2"> 
+                          </el-pagination> -->
                     </el-tab-pane>
                   </el-tabs>
                 </template>
@@ -152,6 +154,7 @@ export default {
 			list: null,
 			list2: null,
 			listLoading: true,
+			fullLoading: false,
 			data_type: null,
 			data_type2: null,
 			field_ch: null,
@@ -163,18 +166,19 @@ export default {
 			field_width: null,
 			field_width2: null,
       multipleSelection: [],
+      deviceList: [],
 			searchForm: {},
 			searchForm2: {},
       page: 1,
-      limit: 10,
+      limit: 100,
       count: 0,
       sortJson : {"num":-1},
-      whereJson : {"type":"host"},
+      whereJson : {},
       page2: 1,
-      limit2: 10,
+      limit2: 100,
       count2: 0,
       sortJson2 : {"num":-1},
-      whereJson2 : {"type":"ip"},
+      whereJson2 : {},
       deviceList: [],
       rules: {}
     }
@@ -226,7 +230,7 @@ export default {
           item.index = index+1;
         });
 				_this.list2 = res.rows;
-				_this.field_ch2 = ["#", "客户端IP", "解析次数", "请求域名个数", "错误次数", "错误率"];
+				_this.field_ch2 = ["#", "客户端IP", "DNS查询次数", "请求域名个数", "错误次数", "错误率"];
 				_this.field_en2 = ["index", "client_ip", "num", "num_host", "num_err", "err_rate"];
 				_this.data_type2 = ["text", "text", "text", "text", "text", "text"];
 				_this.field_width2 = [60, 400, 150, 150, 150, 150];
@@ -293,7 +297,9 @@ export default {
     btn_export() {
         var _this = this;
         var reqData = {"action":"exportData", "page":_this.page, "limit":_this.limit, "whereJson":_this.whereJson, "sortJson":_this.sortJson, "tocken": sessionStorage.getItem('tocken')}
+        _this.fullLoading = true;
         _this.$axiosHttp.get(_this.url, {"params":reqData}).then(function (res) {
+          _this.fullLoading = false;
           if(res.code != 200){
             _this.$message({duration: 1000, message: res.msg});
             return false;
@@ -308,7 +314,9 @@ export default {
     btn_export2() {
         var _this = this;
         var reqData = {"action":"exportData", "page":_this.page2, "limit":_this.limit2, "whereJson":_this.whereJson2, "sortJson":_this.sortJson2, "tocken": sessionStorage.getItem('tocken')}
+        _this.fullLoading = true;
         _this.$axiosHttp.get(_this.url, {"params":reqData}).then(function (res) {
+          _this.fullLoading = false;
           if(res.code != 200){
             _this.$message({duration: 1000, message: res.msg});
             return false;
@@ -325,16 +333,27 @@ export default {
         _this.$refs["searchForm"].validate (function (valid) {
             if(valid) {
               // console.log(_this.searchForm);
-              if(_this.searchForm.client_host){
-                _this.searchForm.client_host = "/"+_this.searchForm.client_host+"/"
-              }
               delete _this.searchForm.log_time
               if(_this.searchForm.time_start && _this.searchForm.time_end){
+                  var time_s_num = (new Date(_this.searchForm.time_end).getTime() - new Date(_this.searchForm.time_start).getTime())/1000;
+                  if(time_s_num <= 0){
+                    _this.$message({duration: 1000, message: "时间区间必须大于0秒！"});
+                    return false;
+                  }
                   _this.searchForm.log_time = {"$gte":_this.searchForm.time_start,"$lt":_this.searchForm.time_end}
               }
-              _this.whereJson = Object.assign({"type":"host"}, _this.searchForm)
+              _this.whereJson = {"type":"host"};
+              // console.log(_this.searchForm)
+              for(var item in _this.searchForm){
+                if(String(_this.searchForm[item]).trim()){_this.whereJson[item] = typeof(_this.searchForm[item]) == "string" ? _this.searchForm[item].trim() :  _this.searchForm[item]}
+              };
+              if(_this.whereJson.client_host){
+                _this.whereJson.client_host = "/"+_this.whereJson.client_host+"/"
+              }
               delete _this.whereJson.time_start
               delete _this.whereJson.time_end
+              _this.page = 1;
+              _this.limit = 100;
               _this.getData();
 
             }else {
@@ -350,11 +369,21 @@ export default {
               // console.log(_this.searchForm2);
               delete _this.searchForm2.log_time
               if(_this.searchForm2.time_start && _this.searchForm2.time_end){
+                  var time_s_num = (new Date(_this.searchForm2.time_end).getTime() - new Date(_this.searchForm2.time_start).getTime())/1000;
+                  if(time_s_num <= 0){
+                    _this.$message({duration: 1000, message: "时间区间必须大于0秒！"});
+                    return false;
+                  }
                   _this.searchForm2.log_time = {"$gte":_this.searchForm2.time_start,"$lt":_this.searchForm2.time_end}
               }
-              _this.whereJson2 = Object.assign({"type":"ip"}, _this.searchForm2)
+              _this.whereJson2 = {"type":"ip"};
+              for(var item in _this.searchForm2){
+                if(String(_this.searchForm2[item]).trim()){_this.whereJson2[item] = typeof(_this.searchForm2[item]) == "string" ? _this.searchForm2[item].trim() :  _this.searchForm2[item]}
+              };
               delete _this.whereJson2.time_start
               delete _this.whereJson2.time_end
+              _this.page2 = 1;
+              _this.limit2 = 100;
               _this.getData2();
 
             }else {
@@ -365,14 +394,24 @@ export default {
     },
     searchCancelSubmit() {
       this.searchForm = {};
+      this.whereJson = {"type": "host", "log_time": {"$gte":moment().format("YYYY-MM-DD HH:mm:ss").split(" ")[0]+" 00:00:00","$lt":moment().format("YYYY-MM-DD HH:mm:ss")}};
+      this.$set(this.searchForm, "time_start", this.whereJson.log_time["$gte"]);
+      this.$set(this.searchForm, "time_end", this.whereJson.log_time["$lt"]);
+      this.$set(this.searchForm, "server_ip", "");
       this.$refs["searchForm"].resetFields();
-      this.whereJson = {"type":"host"};
+      this.page = 1;
+      this.limit = 100;
       this.getData();
     },
     searchCancelSubmit2() {
       this.searchForm2 = {};
+      this.whereJson2 = {"type": "ip", "log_time": {"$gte":moment().format("YYYY-MM-DD HH:mm:ss").split(" ")[0]+" 00:00:00","$lt":moment().format("YYYY-MM-DD HH:mm:ss")}};
+      this.$set(this.searchForm2, "time_start", this.whereJson2.log_time["$gte"]);
+      this.$set(this.searchForm2, "time_end", this.whereJson2.log_time["$lt"]);
+      this.$set(this.searchForm2, "server_ip", "");
       this.$refs["searchForm2"].resetFields();
-      this.whereJson2 = {"type":"ip"};
+      this.page2 = 1;
+      this.limit2 = 100;
       this.getData2();
     },
     tabHandleClick(tab, event) {
@@ -392,7 +431,13 @@ export default {
   },
 	created() {
 		var _this = this;
-		_this.url = _this.GLOBAL.host + _this.$route.path.replace(/\/page/,"/api/python");
+    _this.url = _this.GLOBAL.host + _this.$route.path.replace(/\/page/,"/api/python");
+    _this.whereJson = {"type": "host", "log_time": {"$gte":moment().format("YYYY-MM-DD HH:mm:ss").split(" ")[0]+" 00:00:00","$lt":moment().format("YYYY-MM-DD HH:mm:ss")}};
+    _this.$set(_this.searchForm, "time_start", _this.whereJson.log_time["$gte"]);
+    _this.$set(_this.searchForm, "time_end", _this.whereJson.log_time["$lt"]);
+    _this.whereJson2 = {"type": "ip", "log_time": {"$gte":moment().format("YYYY-MM-DD HH:mm:ss").split(" ")[0]+" 00:00:00","$lt":moment().format("YYYY-MM-DD HH:mm:ss")}};
+    _this.$set(_this.searchForm2, "time_start", _this.whereJson2.log_time["$gte"]);
+    _this.$set(_this.searchForm2, "time_end", _this.whereJson2.log_time["$lt"]);
     _this.getData();
 
     var menuRows = _this.$store.state.menuRows;
@@ -418,6 +463,8 @@ export default {
       }).catch(function (err) {
         console.log(err);
       });
+    _this.$set(_this.searchForm, "server_ip", "");
+    _this.$set(_this.searchForm2, "server_ip", "");
 
   }
 }

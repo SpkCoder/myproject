@@ -65,19 +65,30 @@ class model(object):
             else:
                 sortStr = ' order by ' + self.mysqldb.get_sortStr(params)
         whereStr = ''
+        whereStr_err = 'req_status > 0'
+        str_gte = params['whereJson']['log_time']['$gte']
+        str_lt = params['whereJson']['log_time']['$lt']
         if params['whereJson']['type'] == 'host':
             del params['whereJson']['type']
             if len(params['whereJson']) > 0:
-                whereStr = ' where '+self.mysqldb.get_whereStr(params)
-            sql = 'select t1.client_host, t1.num, t2.num_err from (select client_host, count(*) as num from dns_req_list'+whereStr+' group by client_host) t1 left join (select client_host, count(*) as num_err from dns_err_list where req_status = "SERVFAIL" group by client_host) t2 on t1.client_host=t2.client_host'+sortStr+' limit '+str(params['offset'])+','+str(params['limit'])
-            sql_count = 'select count(*) as number from (select count(*) as number from dns_req_list'+whereStr+' group by client_host) gyd'
+                #index索引排序
+                params['whereJson'] = {x:params['whereJson'][x] for x in ['log_time', 'server_ip', 'client_host'] if x in params['whereJson']}
+                whereStr = self.mysqldb.get_whereStr(params)
+                whereStr_err = whereStr_err +' and '+whereStr
+            union_sql = self.mysqldb.get_union_sql('dns_req_list_latest', str_gte, str_lt, whereStr)
+            union_sql_err = self.mysqldb.get_union_sql('dns_req_list_latest', str_gte, str_lt, whereStr_err)
+            sql = 'select t1.client_host, t1.num, t2.num_err from (select client_host, count(*) as num from '+union_sql+' group by client_host) t1 left join (select client_host, count(*) as num_err from '+union_sql_err+' group by client_host) t2 on t1.client_host=t2.client_host'+sortStr+' limit '+str(params['offset'])+','+str(params['limit'])
         else:
             del params['whereJson']['type']
             if len(params['whereJson']) > 0:
-                whereStr = ' where '+self.mysqldb.get_whereStr(params)
-            sql = 'select t3.client_ip, t3.num_host, t3.num, t2.num_err from (select t1.client_ip, count(*) as num_host, cast(sum(t1.num_host) as signed) as num from (select client_ip, client_host, count(*) as num_host from dns_req_list'+whereStr+' group by client_ip, client_host) t1 group by t1.client_ip) t3 left join (select client_ip, count(*) as num_err from dns_err_list where req_status = "SERVFAIL" group by client_ip) t2 on t3.client_ip=t2.client_ip'+sortStr+' limit '+str(params['offset'])+','+str(params['limit'])
-            sql_count = 'select count(*) as number from (select t.client_ip, count(*) as num_host, sum(t.num_host) as num from (select client_ip, client_host, count(*) as num_host from dns_req_list'+whereStr+' group by client_ip, client_host) t group by t.client_ip) gyd'
-        result = self.mysqldb.find_data(self.table_name, params, sql, sql_count)
+                #index索引排序
+                params['whereJson'] = {x:params['whereJson'][x] for x in ['log_time', 'server_ip', 'client_ip'] if x in params['whereJson']}
+                whereStr = self.mysqldb.get_whereStr(params)
+                whereStr_err = whereStr_err +' and '+whereStr
+            union_sql = self.mysqldb.get_union_sql('dns_req_list_latest', str_gte, str_lt, whereStr)
+            union_sql_err = self.mysqldb.get_union_sql('dns_req_list_latest', str_gte, str_lt, whereStr_err)
+            sql = 'select t3.client_ip, t3.num_host, t3.num, t2.num_err from (select t1.client_ip, count(*) as num_host, cast(sum(t1.num_host) as signed) as num from (select client_ip, client_host, count(*) as num_host from '+union_sql+' group by client_ip, client_host) t1 group by t1.client_ip) t3 left join (select client_ip, count(*) as num_err from '+union_sql_err+' group by client_ip) t2 on t3.client_ip=t2.client_ip'+sortStr+' limit '+str(params['offset'])+','+str(params['limit'])
+        result = self.mysqldb.find_data(self.table_name, params, sql)
         # print(result)
 
         if result:
@@ -89,10 +100,7 @@ class model(object):
                     result['rows']=sorted(result['rows'],key=lambda x:x['err_rate'])
                 else:
                     result['rows']=sorted(result['rows'],key=lambda x:x['err_rate'],reverse=True)
-            if result['count'] > 100:
-                result['count'] = 100
-                result['rows'] = result['rows'][:100]
-            dict_res = {'code': 200, 'msg': '操作成功', 'limit': params['limit'], 'page': params['page'], 'count': result['count'], 'rows': result['rows']}
+            dict_res = {'code': 200, 'msg': '操作成功', 'limit': params['limit'], 'page': params['page'], 'count': len(result['rows']), 'rows': result['rows']}
             return make_response(json.dumps(dict_res, ensure_ascii=False))
         else:
             dict_res = {'code': 500, 'msg': '操作失败'}
@@ -115,31 +123,40 @@ class model(object):
 
         sortStr = ' order by num desc'
         whereStr = ''
+        whereStr = ''
+        whereStr_err = 'req_status > 0'
+        str_gte = params['whereJson']['log_time']['$gte']
+        str_lt = params['whereJson']['log_time']['$lt']
         if params['whereJson']['type'] == 'host':
             del params['whereJson']['type']
             if len(params['whereJson']) > 0:
-                whereStr = ' where '+self.mysqldb.get_whereStr(params)
-            sql = 'select t1.client_host, t1.num, t2.num_err from (select client_host, count(*) as num from dns_req_list'+whereStr+' group by client_host) t1 left join (select client_host, count(*) as num_err from dns_err_list where req_status = "SERVFAIL" group by client_host) t2 on t1.client_host=t2.client_host'+sortStr+' limit '+str(params['offset'])+','+str(params['limit'])
-            sql_count = 'select count(*) as number from (select count(*) as number from dns_req_list'+whereStr+' group by client_host) gyd'
+                #index索引排序
+                params['whereJson'] = {x:params['whereJson'][x] for x in ['log_time', 'server_ip', 'client_host'] if x in params['whereJson']}
+                whereStr = self.mysqldb.get_whereStr(params)
+                whereStr_err = whereStr_err +' and '+whereStr
+            union_sql = self.mysqldb.get_union_sql('dns_req_list_latest', str_gte, str_lt, whereStr)
+            union_sql_err = self.mysqldb.get_union_sql('dns_req_list_latest', str_gte, str_lt, whereStr_err)
+            sql = 'select t1.client_host, t1.num, t2.num_err from (select client_host, count(*) as num from '+union_sql+' group by client_host) t1 left join (select client_host, count(*) as num_err from '+union_sql_err+' group by client_host) t2 on t1.client_host=t2.client_host'+sortStr+' limit '+str(params['offset'])+','+str(params['limit'])
             list_title = ['域名', 'NDS查询次数', '错误次数', '错误率']
             list_title_en = ['client_host', 'num', 'num_err', 'err_rate']
         else:
             del params['whereJson']['type']
             if len(params['whereJson']) > 0:
-                whereStr = ' where '+self.mysqldb.get_whereStr(params)
-            sql = 'select t3.client_ip, t3.num_host, t3.num, t2.num_err from (select t1.client_ip, count(*) as num_host, cast(sum(t1.num_host) as signed) as num from (select client_ip, client_host, count(*) as num_host from dns_req_list'+whereStr+' group by client_ip, client_host) t1 group by t1.client_ip) t3 left join (select client_ip, count(*) as num_err from dns_err_list where req_status = "SERVFAIL" group by client_ip) t2 on t3.client_ip=t2.client_ip'+sortStr+' limit '+str(params['offset'])+','+str(params['limit'])
-            sql_count = 'select count(*) as number from (select t.client_ip, count(*) as num_host, sum(t.num_host) as num from (select client_ip, client_host, count(*) as num_host from dns_req_list'+whereStr+' group by client_ip, client_host) t group by t.client_ip) gyd'
-            list_title = ['客户端IP', '解析次数', '请求域名次数', '错误次数', '错误率']
+                #index索引排序
+                params['whereJson'] = {x:params['whereJson'][x] for x in ['log_time', 'server_ip', 'client_ip'] if x in params['whereJson']}
+                whereStr = self.mysqldb.get_whereStr(params)
+                whereStr_err = whereStr_err +' and '+whereStr
+            union_sql = self.mysqldb.get_union_sql('dns_req_list_latest', str_gte, str_lt, whereStr)
+            union_sql_err = self.mysqldb.get_union_sql('dns_req_list_latest', str_gte, str_lt, whereStr_err)
+            sql = 'select t3.client_ip, t3.num_host, t3.num, t2.num_err from (select t1.client_ip, count(*) as num_host, cast(sum(t1.num_host) as signed) as num from (select client_ip, client_host, count(*) as num_host from '+union_sql+' group by client_ip, client_host) t1 group by t1.client_ip) t3 left join (select client_ip, count(*) as num_err from '+union_sql_err+' group by client_ip) t2 on t3.client_ip=t2.client_ip'+sortStr+' limit '+str(params['offset'])+','+str(params['limit'])
+            list_title = ['客户端IP', 'DNS查询次数', '请求域名次数', '错误次数', '错误率']
             list_title_en = ['client_ip', 'num', 'num_host', 'num_err', 'err_rate']
-        result = self.mysqldb.find_data(self.table_name, params, sql, sql_count)
+        result = self.mysqldb.find_data(self.table_name, params, sql)
         # print(result)
         if result:
             for item in result['rows']:
                 item['num_err'] = item['num_err'] if item['num_err'] else 0
                 item['err_rate'] = str(int(item['num_err']/item['num']))+'%'
-            if result['count'] > 100:
-                result['count'] = 100
-                result['rows'] = result['rows'][:100]
             file_path = os.path.dirname(os.path.dirname(__file__)) + '/static/uploadFile/'+ self.table_name +'_export.csv'
             # list_title = []
             # list_title_en = []

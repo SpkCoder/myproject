@@ -30,8 +30,10 @@ export default {
                 obj[field] = [
                     {
                         validator: function (rule, value, callback) {
-                            if (! /^[1-9][0-9]*$/.test(value)) {
-                                return callback(new Error('请输入正整数'));
+                            if(value){
+                                if (! /^[1-9][0-9]*$/.test(value)) {
+                                    return callback(new Error('请输入正整数'));
+                                }
                             }
                             callback();
                         },
@@ -42,8 +44,10 @@ export default {
                 obj[field] = [
                     {
                         validator: function (rule, value, callback) {
-                            if (! /^[1-9][0-9]{5}$/.test(value)) {
-                                return callback(new Error('请输入6位正整数'));
+                            if(value){
+                                if (! /^[1-9][0-9]{5}$/.test(value)) {
+                                    return callback(new Error('请输入6位正整数'));
+                                }
                             }
                             callback();
                         },
@@ -54,8 +58,10 @@ export default {
                 obj[field] = [
                     {
                         validator: function (rule, value, callback) {
-                            if (! /^[1-9]*[0]?\.[0-9]{2}$/.test(value)) {
-                                return callback(new Error('请保留2位小数'));
+                            if(value){
+                                if (! /^[1-9]*[0]?\.[0-9]{2}$/.test(value)) {
+                                    return callback(new Error('请保留2位小数'));
+                                }
                             }
                             callback();
                         },
@@ -66,8 +72,10 @@ export default {
                 obj[field] = [
                     {
                         validator: function (rule, value, callback) {
-                            if (! /^[1-9]*[0]?\.[0-9]{4}$/.test(value)) {
-                                return callback(new Error('请保留4位小数'));
+                            if(value){
+                                if (! /^[1-9]*[0]?\.[0-9]{4}$/.test(value)) {
+                                    return callback(new Error('请保留4位小数'));
+                                }
                             }
                             callback();
                         },
@@ -158,7 +166,19 @@ export default {
                     if (! /[(\w)]{6,30}/.test(value)) {
                         return callback(new Error('密码必须是字母或数字或下划线组合且长度>=6'));
                     }
-                    
+                    callback();
+                },
+                trigger: 'blur'
+            }
+        ];
+
+        obj["email"] = [
+            { required: true, message: '请输入邮箱', trigger: 'blur' },
+            {
+                validator: function (rule, value, callback) {
+                    if (! /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/.test(value)) {
+                        return callback(new Error('邮箱格式错误'));
+                    }
                     callback();
                 },
                 trigger: 'blur'

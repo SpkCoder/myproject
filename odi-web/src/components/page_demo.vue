@@ -230,9 +230,9 @@ export default {
               _this.field_en.forEach(function(item,index){
                   var field_type_this = _this.data_type[index];
                   if(field_type_this == "int" || field_type_this == "int(6)" || field_type_this == "decimal(2)" || field_type_this == "decimal(4)"){
-                    _this.addForm[item] = _this.addForm[item] ? Number(_this.addForm[item]) : 0;
+                    _this.editForm[item] = _this.editForm[item] ? Number(_this.editForm[item]) : 0;
                   }else{
-                    _this.addForm[item] = _this.addForm[item] ? String(_this.addForm[item]) : "";
+                    _this.editForm[item] = _this.editForm[item] ? String(_this.editForm[item]) : "";
                   }
               });
               var whereJson = {"id": _this.thisrow.id};
@@ -349,7 +349,12 @@ export default {
         _this.$refs["searchForm"].validate (function (valid) {
             if(valid) {
               // console.log(_this.searchForm);
-              _this.whereJson = _this.searchForm
+              _this.whereJson = {};
+              for(var item in _this.searchForm){
+                if(String(_this.searchForm[item]).trim()){_this.whereJson[item] = typeof(_this.searchForm[item]) == "string" ? _this.searchForm[item].trim() :  _this.searchForm[item]}
+              };
+              _this.page = 1;
+              _this.limit = 10;
               _this.getData();
 
             }else {
@@ -363,6 +368,8 @@ export default {
       this.$refs["searchForm"].resetFields();
       this.searchFormBox = false;
       this.whereJson = {};
+      this.page = 1;
+      this.limit = 10;
       this.getData();
     }
   },

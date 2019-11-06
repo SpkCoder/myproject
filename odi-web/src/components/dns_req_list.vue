@@ -9,8 +9,8 @@
 		  	  <div class="container clearfix">
 						<div class="list-page">
 
-                <div style="margin-bottom:10px;">
-                  <el-form v-loading.fullscreen.lock="listLoading" ref="searchForm" :inline="true" :model="searchForm" :rules="rules" size="small" label-width="100px">
+                <div style="margin-bottom:10px; margin-left: -33px;">
+                  <el-form v-loading.fullscreen.lock="fullLoading" element-loading-text="Loading" ref="searchForm" :inline="true" :model="searchForm" :rules="rules" size="small" label-width="100px">
                       <el-form-item label="粒度">
                         <el-select v-model="searchForm['type']" placeholder="">
                           <el-option v-for="item2 in typeList" :key="item2.id" :label="item2.name" :value="item2.id"> </el-option>
@@ -18,6 +18,7 @@
                       </el-form-item>
                       <el-form-item label="设备IP">
                         <el-select v-model="searchForm['ip']" placeholder="">
+                          <el-option label="全部" value=""> </el-option>
                           <el-option v-for="item2 in deviceList" :key="item2.id" :label="item2.ip" :value="item2.ip"> </el-option>
                         </el-select>
                       </el-form-item><br>
@@ -66,7 +67,7 @@ export default {
 			url: null,
 			xdata: [],
 			ydata: [],
-			listLoading: true,
+			fullLoading: true,
       searchFormBox: false,
 			searchForm: {},
 			roleClass: [],
@@ -76,17 +77,17 @@ export default {
       sortJson : {},
       whereJson : {},
       deviceList: [],
-      typeList: [{"id": "5M", "name": "5分钟"}, {"id": "1H", "name": "1小时"}, {"id": "1M", "name": "1分钟"}],
+      typeList: [{"id": "1H", "name": "1小时"}, {"id": "5M", "name": "5分钟"}, {"id": "1M", "name": "1分钟"}],
       rules: {}
     }
 	},
 	methods: {
     getData() {
       var _this = this;
-      _this.listLoading = true;
+      _this.fullLoading = true;
 			var reqData = {"action":"findData", "page":_this.page, "limit":_this.limit, "whereJson":_this.whereJson, "sortJson":_this.sortJson, "tocken": sessionStorage.getItem('tocken')}
       _this.$axiosHttp.get(_this.url, {"params":reqData}).then(function (res) {
-        _this.listLoading = false;
+        _this.fullLoading = false;
         if(res.code != 200){
 				  _this.$message({duration: 1000, message: res.msg});
           return false;
@@ -96,7 +97,7 @@ export default {
 
         var option = {
             title: {
-                text: 'DNS查询趋势图',
+                text: 'DNS问询趋势图',
                 left: 'center'
             },
             color: ['#409EFF'],
@@ -116,7 +117,7 @@ export default {
               type: 'value'
             },
             series: [{
-                name: 'DNS查询次数',
+                name: 'DNS问询次数',
                 type: 'line',
                 lineStyle: {width: 1},
                 data: _this.ydata
@@ -220,7 +221,9 @@ export default {
         var _this = this;
         var reqData = {"action":"exportData", "page":_this.page, "limit":_this.limit, "whereJson":_this.whereJson, "sortJson":_this.sortJson, "tocken": sessionStorage.getItem('tocken')}
         delete reqData.whereJson.type;
+        _this.fullLoading = true;
         _this.$axiosHttp.get(_this.url, {"params":reqData}).then(function (res) {
+          _this.fullLoading = false;
           if(res.code != 200){
             _this.$message({duration: 1000, message: res.msg});
             return false;
@@ -241,7 +244,23 @@ export default {
                 _this.$message({duration: 1000, message: "请输入开始时间和结束时间！"});
                 return false;
               }
-              _this.whereJson = _this.searchForm;
+              var time_s_num = (new Date(_this.searchForm.time_end).getTime() - new Date(_this.searchForm.time_start).getTime())/1000;
+              var type_s_num = 0;
+              if(_this.searchForm.type == '1H'){
+                type_s_num = 3600;
+              }else if(_this.searchForm.type == '5M'){
+                type_s_num = 300;
+              }else{
+                type_s_num = 60;
+              }
+              if(time_s_num < type_s_num){
+                _this.$message({duration: 1000, message: "时间区间必须大于粒度！"});
+                return false;
+              }
+              _this.whereJson = {};
+              for(var item in _this.searchForm){
+                if(String(_this.searchForm[item]).trim()){_this.whereJson[item] = typeof(_this.searchForm[item]) == "string" ? _this.searchForm[item].trim() :  _this.searchForm[item]}
+              };
               sessionStorage.setItem("dns_req_list_whereJson", JSON.stringify(_this.whereJson));
               _this.getData();
 
@@ -253,8 +272,9 @@ export default {
     },
     searchCancelSubmit() {
       this.searchForm = {};
-      this.whereJson = {"type": "5M", "time_start": moment().format("YYYY-MM-DD HH:mm:ss").split(" ")[0]+" 00:00:00","time_end": moment().format("YYYY-MM-DD HH:mm:ss")};
+      this.whereJson = {"type": "1H", "time_start": moment().format("YYYY-MM-DD HH:mm:ss").split(" ")[0]+" 00:00:00","time_end": moment().format("YYYY-MM-DD HH:mm:ss")};
       this.$set(this.searchForm, "type", this.typeList[0].id);
+      this.$set(this.searchForm, "ip", "");
       this.$set(this.searchForm, "time_start", this.whereJson.time_start);
       this.$set(this.searchForm, "time_end", this.whereJson.time_end);
       this.$refs["searchForm"].resetFields();
@@ -273,16 +293,19 @@ export default {
 
     if(sessionStorage.getItem("dns_req_list_whereJson")){
         _this.whereJson = JSON.parse(sessionStorage.getItem("dns_req_list_whereJson"))
-        _this.$set(this.searchForm, "type", _this.whereJson.type);
+        _this.$set(_this.searchForm, "type", _this.whereJson.type);
         if(_this.whereJson.ip){
-          _this.$set(this.searchForm, "ip", _this.whereJson.ip);
+          _this.$set(_this.searchForm, "ip", _this.whereJson.ip);
+        }else{
+          _this.$set(_this.searchForm, "ip", "");
         }
     }else{
-      _this.whereJson = {"type": "5M", "time_start": moment().format("YYYY-MM-DD HH:mm:ss").split(" ")[0]+" 00:00:00","time_end": moment().format("YYYY-MM-DD HH:mm:ss")};
-      _this.$set(this.searchForm, "type", this.typeList[0].id);
+      _this.whereJson = {"type": "1H", "time_start": moment().format("YYYY-MM-DD HH:mm:ss").split(" ")[0]+" 00:00:00","time_end": moment().format("YYYY-MM-DD HH:mm:ss")};
+      _this.$set(_this.searchForm, "type", _this.typeList[0].id);
+      _this.$set(_this.searchForm, "ip", "");
     }
-    _this.$set(this.searchForm, "time_start", _this.whereJson.time_start);
-    _this.$set(this.searchForm, "time_end", _this.whereJson.time_end);
+    _this.$set(_this.searchForm, "time_start", _this.whereJson.time_start);
+    _this.$set(_this.searchForm, "time_end", _this.whereJson.time_end);
     _this.getData();
 
     var menuRows = _this.$store.state.menuRows;

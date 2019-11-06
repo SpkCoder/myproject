@@ -82,7 +82,7 @@ class model(object):
         }
         result = self.mysqldb.find_data(self.table_name, params)
         if result and result['count'] > 0:
-            expire_time = int(time.time()+3600*8) #8小时
+            expire_time = int(time.time()+3600*12) #12小时
             str_tocken=jwt.encode( { 'username':result['rows'][0]['username'], 'password': dict_req['password'], 'role_id':result['rows'][0]['role_id'], 'exp':expire_time }, JWT_SECRET, algorithm='HS256' ).decode('utf-8')
             dict_res = {'code': 200, 'msg': '登录成功', 'tocken': str_tocken}
             logging.debug(dict_req['username'] + '登录成功')

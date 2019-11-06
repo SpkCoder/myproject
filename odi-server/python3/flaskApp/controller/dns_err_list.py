@@ -15,7 +15,7 @@ from datetime import datetime
 class model(object):
     def __init__(self,req):
         self.req = req 
-        self.table_name = 'dns_err_list'
+        self.table_name = 'dns_req_list'
         self.mysqldb = db_mysql.model()
 
     # 分配方法
@@ -45,22 +45,40 @@ class model(object):
         params = self.req.dict_req
         params['limit'] = int(params['limit']) if 'limit' in params else 10
         params['page'] = int(params['page']) if 'page' in params else 1
+        params['offset'] = params['limit'] * (int(params['page']) - 1) if 'page' in params else 0
         params['whereJson'] = params['whereJson'] if 'whereJson' in params else {}
 
         # 下钻
         if 'create_time' in params['whereJson']:
+            #index索引排序
+            params['whereJson'] = {x:params['whereJson'][x] for x in ['create_time', 'client_ip', 'type'] if x in params['whereJson']}
+            params['whereJson']['req_status'] = {'$gt': 0}
+            str_gte = params['whereJson']['create_time']
+            int_gte = int(datetime.strptime(str_gte, '%Y-%m-%d %H:%M:%S').timestamp())
+            if params['whereJson']['type'] == '1H':
+                str_lt = datetime.fromtimestamp(int_gte + 3600).strftime('%Y-%m-%d %H:%M:%S')
+                params['whereJson']['log_time'] = {'$gte': str_gte, '$lt': str_lt}
+                del params['whereJson']['create_time']
+            if params['whereJson']['type'] == '5M':
+                str_lt = datetime.fromtimestamp(int_gte + 300).strftime('%Y-%m-%d %H:%M:%S')
+                params['whereJson']['log_time'] = {'$gte': str_gte, '$lt': str_lt}
+                del params['whereJson']['create_time']
+            if params['whereJson']['type'] == '1M':
+                str_lt = datetime.fromtimestamp(int_gte + 60).strftime('%Y-%m-%d %H:%M:%S')
+                params['whereJson']['log_time'] = {'$gte': str_gte, '$lt': str_lt}
+                del params['whereJson']['create_time']
             if 'client_ip' in params['whereJson']:
                 params['whereJson']['server_ip'] = params['whereJson']['client_ip']
                 del params['whereJson']['client_ip']
-            if params['whereJson']['type'] == '1H':
-                params['whereJson']['date_format(log_time,"%Y-%m-%d %H:00:00")'] = params['whereJson']['create_time']
-                del params['whereJson']['create_time']
-            if params['whereJson']['type'] == '1M':
-                params['whereJson']['date_format(log_time,"%Y-%m-%d %H:%i:00")'] = params['whereJson']['create_time']
-                del params['whereJson']['create_time']
-            params['whereJson']['req_status'] = 'SERVFAIL'
             del params['whereJson']['type']
-            result = self.mysqldb.find_data(self.table_name, params)
+            whereStr = self.mysqldb.get_whereStr(params)
+            sortStr = self.mysqldb.get_sortStr(params)
+            str_gte = params['whereJson']['log_time']['$gte']
+            str_lt = params['whereJson']['log_time']['$lt']
+            union_sql = self.mysqldb.get_union_sql('dns_req_list_latest', str_gte, str_lt, whereStr)
+            sql = 'select * from '+union_sql+' order by '+sortStr+' limit '+str(params['offset'])+','+str(params['limit'])
+            sql_count = 'select count(*) as number from '+union_sql
+            result = self.mysqldb.find_data(self.table_name, params, sql, sql_count)
             # print(result)
 
             if result:
@@ -102,15 +120,16 @@ class model(object):
         int_lt = int(date_lt.timestamp())
         int_lt = int_lt - int_lt % time_interval
         int_num = int((int_lt-int_gte)/time_interval)
-        whereStr = 'req_status = "SERVFAIL" and log_time < "'+str_lt+'" and log_time >= "'+str_gte+'"'
+        whereStr = 'req_status > 0 and log_time >= "'+str_gte+'" and log_time < "'+str_lt+'"'
         if 'ip' in params['whereJson']:
             whereStr += ' and server_ip = "'+params['whereJson']['ip']+'"'
+        union_sql = self.mysqldb.get_union_sql('dns_req_list_latest', str_gte, str_lt, whereStr)
         if time_interval == 3600:
-            sql = 'select date_format(log_time,"%Y-%m-%d %H:00:00") as time, count(*) as num from dns_err_list where '+whereStr+' group by time order by create_time asc'
+            sql = 'select date_format(log_time,"%Y-%m-%d %H:00:00") as time, count(*) as num from '+union_sql+' group by time order by time asc'
         if time_interval == 300:
-            sql = 'select create_time as time, count(*) as num from dns_err_list where '+whereStr+' group by create_time order by create_time asc'
+            sql = 'select create_time as time, count(*) as num from '+union_sql+' group by create_time order by time asc'
         if time_interval == 60:
-            sql = 'select date_format(log_time,"%Y-%m-%d %H:%i:00") as time, count(*) as num from dns_err_list where '+whereStr+' group by time order by create_time asc'
+            sql = 'select date_format(log_time,"%Y-%m-%d %H:%i:00") as time, count(*) as num from '+union_sql+' group by time order by time asc'
         result = self.mysqldb.find_data(self.table_name, params, sql)
         # print(result)
 
@@ -152,20 +171,19 @@ class model(object):
         if params['whereJson']['time_start'] == '' or params['whereJson']['time_end'] == '':
             dict_res = {'code': 500, 'msg': 'whereJson错误'}
             return make_response(json.dumps(dict_res, ensure_ascii=False))
+        str_gte = params['whereJson']['time_start']
+        str_lt = params['whereJson']['time_end']
+        whereStr = 'log_time >= "'+str_gte+'"' + ' and log_time < "'+str_lt+'"'
         if 'ip' in params['whereJson']:
-            params['whereJson']['server_ip'] = params['whereJson']['ip']
-            del params['whereJson']['ip']
-        params['whereJson']['log_time'] = {'$gte': params['whereJson']['time_start'], '$lt': params['whereJson']['time_end']}
-        params['whereJson']['req_status'] = 'SERVFAIL'
-        del params['whereJson']['time_start']
-        del params['whereJson']['time_end']
-        params['sortJson'] = {'log_time': 1}
-        result = self.mysqldb.find_data(self.table_name, params)
+            whereStr += ' and server_ip = "'+params['whereJson']['ip']+'"'
+        union_sql = self.mysqldb.get_union_sql('dns_req_list_latest', str_gte, str_lt, whereStr)
+        sql = 'select * from '+union_sql+' order by log_time asc'
+        result = self.mysqldb.find_data(self.table_name, params, sql)
         # print(result)
         if result:
             file_path = os.path.dirname(os.path.dirname(__file__)) + '/static/uploadFile/'+ self.table_name +'_export.csv'
-            list_title = ['设备IP', '域名', '客户端IP', '端口', '类型', '时间']
-            list_title_en = ['server_ip','client_host','client_ip','client_port','type_name','log_time']
+            list_title = ['设备IP', '域名', '客户端IP', '类型', '错误码', '时间']
+            list_title_en = ['server_ip','client_host','client_ip','type_name','req_status','log_time']
             mycsv = my_csv.model()
             result = mycsv.write(file_path,list_title,list_title_en,result['rows'])
             str_url = result['url']

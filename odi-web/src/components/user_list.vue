@@ -16,7 +16,7 @@
 									</el-button-group>
 								</div>
 
-								<div style="margin-bottom:10px;">
+								<div style="margin-bottom:10px; margin-left: -46px;">
 									<el-form ref="searchForm" :inline="true" :model="searchForm" :rules="rules" size="small" label-width="100px">
                       <template v-for='(item, index) in field_en'>
                           <template v-if='item == "username"'>
@@ -27,6 +27,7 @@
                           <template v-else-if='item=="class_name"'>
                             <el-form-item :key="index" :label="field_ch[index]">
                               <el-select v-model="searchForm['role_id']" placeholder="">
+                                <el-option label="全部" value=""> </el-option>
                                 <el-option v-for="item2 in roleClass" :key="item2.id" :label="item2.class_name" :value="item2.id"> </el-option>
                               </el-select>
                             </el-form-item>
@@ -61,8 +62,8 @@
 									<el-table-column fixed="right" label="操作" width="130"> 
 											<template slot-scope="scope"> 
 											<!-- <el-button @click="view(scope.row)" type="text" size="small" icon="el-icon-view">&nbsp;</el-button> -->
-											<el-button @click="edit(scope.row)" type="text" size="small" icon="el-icon-edit">&nbsp;</el-button>
-											<el-button @click="del(scope.row)" type="text" size="small" icon="el-icon-delete">&nbsp;</el-button>
+											<el-button @click="edit(scope.row)" type="text" size="small" icon="el-icon-edit">修改</el-button>
+											<el-button @click="del(scope.row)" type="text" size="small" icon="el-icon-delete">删除</el-button>
 											</template> 
 									</el-table-column>
 								</el-table>
@@ -264,9 +265,9 @@ export default {
               _this.field_en.forEach(function(item,index){
                   var field_type_this = _this.data_type[index];
                   if(field_type_this == "int" || field_type_this == "int(6)" || field_type_this == "decimal(2)" || field_type_this == "decimal(4)"){
-                    _this.addForm[item] = _this.addForm[item] ? Number(_this.addForm[item]) : 0;
+                    _this.editForm[item] = _this.editForm[item] ? Number(_this.editForm[item]) : 0;
                   }else{
-                    _this.addForm[item] = _this.addForm[item] ? String(_this.addForm[item]) : "";
+                    _this.editForm[item] = _this.editForm[item] ? String(_this.editForm[item]) : "";
                   }
               });
               var whereJson = {"username": _this.editForm.username};
@@ -416,7 +417,12 @@ export default {
         _this.$refs["searchForm"].validate (function (valid) {
             if(valid) {
               // console.log(_this.searchForm);
-              _this.whereJson = _this.searchForm
+              _this.whereJson = {};
+              for(var item in _this.searchForm){
+                if(String(_this.searchForm[item]).trim()){_this.whereJson[item] = typeof(_this.searchForm[item]) == "string" ? _this.searchForm[item].trim() :  _this.searchForm[item]}
+              };
+              _this.page = 1;
+              _this.limit = 10;
               _this.getData();
 
             }else {
@@ -426,10 +432,12 @@ export default {
         });
     },
     searchCancelSubmit() {
-      this.searchForm = {};
+      this.searchForm = {"role_id": ""};
       this.$refs["searchForm"].resetFields();
       this.searchFormBox = false;
       this.whereJson = {};
+      this.page = 1;
+      this.limit = 10;
       this.getData();
     }
   },
@@ -465,7 +473,9 @@ export default {
     _this.roleClass = res.rows;
     }).catch(function (err) {
       console.log(err);
-    });
+  });
+  _this.$set(_this.searchForm, "role_id", "");
+
   }
 }
 </script>

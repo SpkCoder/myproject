@@ -11,6 +11,14 @@ class model():
         self.mail_pass = "kfcqwrxtqktabafh"   # 密码
 
     def send(self, option):
+        if 'email' in option['from']:
+            self.mail_user = option['from']['email']
+        if 'email_password' in option['from']:
+            self.mail_pass = option['from']['email_password']
+        if 'server' in option['from']:
+            self.mail_host = option['from']['server']
+        if 'port' in option['from']:
+            self.mail_port = int(option['from']['port'])
         message = MIMEText(option['html'], 'html', 'utf-8')
         message['Subject'] = option['subject']
         message['From'] = self.mail_user
@@ -24,7 +32,7 @@ class model():
             logging.debug("邮件发送成功")
             return 1
         except Exception as e:
-            logging.debug('邮件发送失败: ' + str(e))
+            logging.error('邮件发送失败: ' + str(e))
             return 0
 
 

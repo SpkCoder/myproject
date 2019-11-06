@@ -16,17 +16,21 @@
 									</el-button-group>
 								</div> -->
 
-								<div style="margin-bottom:10px;">
+								<div style="margin-bottom:10px; margin-left: -46px;">
 									<el-form ref="searchForm" :inline="true" :model="searchForm" :rules="rules" size="small" label-width="100px">
                       <template v-for='(item, index) in field_en'>
                           <template v-if='item == "client_ip"'>
 														<el-form-item :key="index" :label="field_ch[index]">
-                              <el-input v-model="searchForm[item]"/>
+                              <el-select v-model="searchForm['client_ip']" placeholder="">
+                                <el-option label="全部" value=""> </el-option>
+                                <el-option v-for="item2 in deviceList" :key="item2.id" :label="item2.ip" :value="item2.ip"> </el-option>
+                              </el-select>
                             </el-form-item>
                           </template>
                           <template v-else-if='item=="alarm_type"'>
                             <el-form-item :key="index" :label="field_ch[index]">
                               <el-select v-model="searchForm['alarm_type_id']" placeholder="">
+                                <el-option label="全部" value=""> </el-option>
                                 <el-option v-for="item2 in alarm_type_class" :key="item2.id" :label="item2.alarm_type" :value="item2.id"> </el-option>
                               </el-select>
                             </el-form-item>
@@ -54,17 +58,17 @@
 									@selection-change="selectionChange" 
 									@sort-change="sortChange"
 									:style={width:tabelwidth}>
-									<el-table-column fixed="left" type="selection" width="40"></el-table-column>
+									<!-- <el-table-column fixed="left" type="selection" width="40"></el-table-column> -->
 									<template v-for='(item, index) in field_en'>
 											<el-table-column :key="item.id" show-overflow-tooltip sortable="custom" :prop="item" :label="field_ch[index]" :width="field_width[index] | field_width_filter"> </el-table-column>
 									</template>
 									<el-table-column fixed="right" label="操作" width="130"> 
 											<template slot-scope="scope"> 
                       <router-link :to="'/page/alarm_list_detail/' + scope.row.client_ip + '/' + scope.row.alarm_type_id">
-                        <el-button type="text" size="small" icon="el-icon-view">&nbsp;</el-button>
+                        <el-button type="text" size="small" icon="el-icon-view">查看</el-button>
                       </router-link>
 											<!-- <el-button @click="edit(scope.row)" type="text" size="small" icon="el-icon-edit">&nbsp;</el-button> -->
-											<el-button @click="del(scope.row)" type="text" size="small" icon="el-icon-delete">&nbsp;</el-button>
+											<el-button @click="del(scope.row)" type="text" size="small" icon="el-icon-delete">删除</el-button>
 											</template> 
 									</el-table-column>
 								</el-table>
@@ -149,7 +153,8 @@ export default {
       addFormBox: false,
       searchFormBox: false,
       multipleSelection: [],
-			permissionList: [],
+      permissionList: [],
+      deviceList: [],
       editForm: {},
       addForm: {},
 			searchForm: {},
@@ -174,14 +179,14 @@ export default {
           return false;
         }
 				_this.list = res.rows;
-				_this.field_ch = ["IP", "告警类型", "内容", "第一次告警时间", "最后告警时间"];
+				_this.field_ch = ["设备IP", "告警类型", "内容", "第一次告警时间", "最后告警时间"];
 				_this.field_en = ["client_ip", "alarm_type", "alarm_msg", "first_alarm_time", "last_alarm_time"];
 				_this.data_type = ["text", "text", "text", "text", "text"];
 				_this.field_width = [120, 150, 200, 160, 160];
 				_this.field_width.forEach(element => {
 						_this.tabelwidth+=Number(element);
 				});
-				_this.tabelwidth = _this.tabelwidth + 40 + 130 + 5 + "px";
+				_this.tabelwidth = _this.tabelwidth + 130 + 5 + "px";
         _this.page = res.page;
         _this.limit = res.limit;
         _this.count = res.count;
@@ -358,7 +363,12 @@ export default {
         _this.$refs["searchForm"].validate (function (valid) {
             if(valid) {
               // console.log(_this.searchForm);
-              _this.whereJson = Object.assign({"status":1,"group":"true"}, _this.searchForm)
+              _this.whereJson = {"status":1,"group":"true"};
+              for(var item in _this.searchForm){
+                if(String(_this.searchForm[item]).trim()){_this.whereJson[item] = typeof(_this.searchForm[item]) == "string" ? _this.searchForm[item].trim() :  _this.searchForm[item]}
+              };
+              _this.page = 1;
+              _this.limit = 10;
               _this.getData();
 
             }else {
@@ -368,10 +378,12 @@ export default {
         });
     },
     searchCancelSubmit() {
-      this.searchForm = {};
+      this.searchForm = {"alarm_type_id": "", "client_ip": ""};
       this.$refs["searchForm"].resetFields();
       this.searchFormBox = false;
       this.whereJson = {"status":1,"group":"true"};
+      this.page = 1;
+      this.limit = 10;
       this.getData();
     }
   },
@@ -408,6 +420,22 @@ export default {
     }).catch(function (err) {
       console.log(err);
     });
+    _this.$set(_this.searchForm, "alarm_type_id", "");
+
+    //加载device_list
+    var reqUrl = _this.GLOBAL.host+'/api/python/device_list'
+    var reqData = {"action":"findData", "page":1, "limit":-1, "tocken": sessionStorage.getItem('tocken')}
+    _this.$axiosHttp.get(reqUrl, {"params":reqData}).then(function (res) {
+      if(res.code != 200){
+        _this.$message({duration: 1000, message: res.msg});
+        return false;
+      }
+      _this.deviceList = res.rows;
+    }).catch(function (err) {
+        console.log(err);
+    });
+    _this.$set(_this.searchForm, "client_ip", "");
+
   }
 }
 </script>

@@ -188,10 +188,10 @@
         var _this = this;
         var reqData = {'action': 'SignOut', "username": _this.username, "tocken": sessionStorage.getItem('tocken')};
         _this.$axiosHttp.post(_this.url, reqData).then(function (res) {
-          if(res.code != 200){
-            _this.$message({duration: 1000, message: res.msg});
-            return false;
-          }
+          // if(res.code != 200){
+          //   _this.$message({duration: 1000, message: res.msg});
+          //   return false;
+          // }
         _this.$router.push({ path: '/page/login' });
         }).catch(function (err) {
           console.log(err);

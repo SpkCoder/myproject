@@ -24,10 +24,19 @@
                           @selection-change="selectionChange" 
                           @sort-change="sortChange"
                           :style={width:tabelwidth}>
-                          <el-table-column fixed="left" type="selection" width="40"></el-table-column>
+                          <!-- <el-table-column fixed="left" type="selection" width="40"></el-table-column> -->
                           <template v-for='(item, index) in field_en'>
                               <el-table-column :key="item.id" show-overflow-tooltip sortable="custom" :prop="item" :label="field_ch[index]" :width="field_width[index] | field_width_filter"> </el-table-column>
                           </template>
+                          <el-table-column fixed="right" label="操作" width="130"> 
+                              <template slot-scope="scope"> 
+                              <router-link :to="'/page/alarm_list_detail/' + scope.row.client_ip + '/' + scope.row.alarm_type_id">
+                                <el-button type="text" size="small" icon="el-icon-view">查看</el-button>
+                              </router-link>
+                              <!-- <el-button @click="edit(scope.row)" type="text" size="small" icon="el-icon-edit">&nbsp;</el-button> -->
+                              <el-button @click="del(scope.row)" type="text" size="small" icon="el-icon-delete">删除</el-button>
+                              </template> 
+                          </el-table-column>
                         </el-table>
 
                         <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="page" :page-sizes="[10,50,100,500]" :page-size="limit" layout="prev, pager, next, jumper, total, sizes" :total="count"> 
@@ -47,10 +56,19 @@
                           @selection-change="selectionChange" 
                           @sort-change="sortChange2"
                           :style={width:tabelwidth2}>
-                          <el-table-column fixed="left" type="selection" width="40"></el-table-column>
+                          <!-- <el-table-column fixed="left" type="selection" width="40"></el-table-column> -->
                           <template v-for='(item, index) in field_en2'>
                               <el-table-column :key="item.id" show-overflow-tooltip sortable="custom" :prop="item" :label="field_ch2[index]" :width="field_width2[index] | field_width_filter"> </el-table-column>
                           </template>
+                          <el-table-column fixed="right" label="操作" width="130"> 
+                              <template slot-scope="scope"> 
+                              <router-link :to="'/page/alarm_list_history_detail/' + scope.row.client_ip + '/' + scope.row.alarm_type_id">
+                                <el-button type="text" size="small" icon="el-icon-view">查看</el-button>
+                              </router-link>
+                              <!-- <el-button @click="edit(scope.row)" type="text" size="small" icon="el-icon-edit">&nbsp;</el-button> -->
+                              <!-- <el-button @click="del(scope.row)" type="text" size="small" icon="el-icon-delete">&nbsp;</el-button> -->
+                              </template> 
+                          </el-table-column>
                         </el-table>
 
                         <el-pagination @size-change="handleSizeChange2" @current-change="handleCurrentChange2" :current-page="page2" :page-sizes="[10,50,100,500]" :page-size="limit2" layout="prev, pager, next, jumper, total, sizes" :total="count2"> 
@@ -135,7 +153,7 @@ export default {
 				_this.field_width.forEach(element => {
 						_this.tabelwidth+=Number(element);
 				});
-				_this.tabelwidth = _this.tabelwidth + 40 + 5 + "px";
+				_this.tabelwidth = _this.tabelwidth + 130 + 5 + "px";
         _this.page = res.page;
         _this.limit = res.limit;
         _this.count = res.count;
@@ -163,7 +181,7 @@ export default {
 				_this.field_width2.forEach(element => {
 						_this.tabelwidth2+=Number(element);
 				});
-				_this.tabelwidth2 = _this.tabelwidth2 + 40 + 5 + "px";
+				_this.tabelwidth2 = _this.tabelwidth2 + 130 + 5 + "px";
         _this.page2 = res.page;
         _this.limit2 = res.limit;
         _this.count2 = res.count;
@@ -220,60 +238,27 @@ export default {
     view(row) {
        //console.log(row);
     },
-    searchSubmitForm() {
+    del(row) {
+        //console.log(row);
         var _this = this;
-        _this.$refs["searchForm"].validate (function (valid) {
-            if(valid) {
-              // console.log(_this.searchForm);
-              if(_this.searchForm.client_host){
-                _this.searchForm.client_host = "/"+_this.searchForm.client_host+"/"
-              }
-              delete _this.searchForm.log_time
-              if(_this.searchForm.time_start && _this.searchForm.time_end){
-                  _this.searchForm.log_time = {"$gte":_this.searchForm.time_start,"$lt":_this.searchForm.time_end}
-              }
-              _this.whereJson = Object.assign({"type":"host"}, _this.searchForm)
-              delete _this.whereJson.time_start
-              delete _this.whereJson.time_end
-              _this.getData();
-
-            }else {
-              console.log('error submit');
-              return false;
-            }
+        _this.$confirm('确认删除?', '删除', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(function () {
+          var whereJson = {"status": 1, "client_ip": row.client_ip, "alarm_type_id": row.alarm_type_id};
+          var updateJson = {"status":0};
+          var reqData = {'action': 'updateData', 'whereJson': whereJson, 'updateJson': updateJson, "tocken": sessionStorage.getItem('tocken')};     
+          _this.$axiosHttp.post(_this.url, reqData).then(function (res) {
+            _this.$message({duration: 1000, message: res.msg});
+            if(res.code != 200){ return false; }
+            _this.getData();
+          }).catch(function (err) {
+            console.log(err);
+          });
+        }).catch(function () {
+          //
         });
-    },
-    searchSubmitForm2() {
-        var _this = this;
-        _this.$refs["searchForm2"].validate (function (valid) {
-            if(valid) {
-              // console.log(_this.searchForm2);
-              delete _this.searchForm2.log_time
-              if(_this.searchForm2.time_start && _this.searchForm2.time_end){
-                  _this.searchForm2.log_time = {"$gte":_this.searchForm2.time_start,"$lt":_this.searchForm2.time_end}
-              }
-              _this.whereJson2 = Object.assign({"type":"ip"}, _this.searchForm2)
-              delete _this.whereJson2.time_start
-              delete _this.whereJson2.time_end
-              _this.getData2();
-
-            }else {
-              console.log('error submit');
-              return false;
-            }
-        });
-    },
-    searchCancelSubmit() {
-      this.searchForm = {};
-      this.$refs["searchForm"].resetFields();
-      this.whereJson = {"type":"host"};
-      this.getData();
-    },
-    searchCancelSubmit2() {
-      this.searchForm2 = {};
-      this.$refs["searchForm2"].resetFields();
-      this.whereJson2 = {"type":"ip"};
-      this.getData2();
     },
     tabHandleClick(tab, event) {
       // console.log(tab.name);

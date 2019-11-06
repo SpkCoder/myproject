@@ -16,8 +16,8 @@
 									</el-button-group>
 								</div>
 
-								<div style="margin-bottom:10px;">
-									<el-form ref="searchForm" :inline="true" :model="searchForm" :rules="rules" size="small" label-width="100px">
+								<div style="margin-bottom:10px; margin-left: -33px;">
+									<el-form v-loading.fullscreen.lock="fullLoading" element-loading-text="Loading" ref="searchForm" :inline="true" :model="searchForm" :rules="rules" size="small" label-width="100px">
                       <template v-for='(item, index) in field_en'>
                           <template v-if='item == "code" || item == "name" || item == "ip"'>
 														<el-form-item :key="index" :label="field_ch[index]">
@@ -32,8 +32,8 @@
 												<el-button icon="el-icon-search" type="primary" @click="searchSubmitForm">查询</el-button>
 												<el-button icon="el-icon-refresh" @click="searchCancelSubmit">取消</el-button>
                         <el-button icon="el-icon-upload2" @click="btn_import()">导入</el-button>
-                        <input style="display: none" id="file_input" type="file" name="file" multiple="multiple"/>
                         <el-button icon="el-icon-download" @click="btn_export()">导出</el-button>
+                        <input style="display: none" id="file_input" type="file" name="file" multiple="multiple"/>
                         <a style="display: none" id="a_export" href="" target="_self" download></a>
 											</el-form-item>
 										</el-form>
@@ -58,10 +58,10 @@
 									<el-table-column fixed="right" label="操作" width="130"> 
 											<template slot-scope="scope"> 
                       <!-- <router-link :to="'/page/page_demo_detail/' + scope.row.id">
-                        <el-button type="text" size="small" icon="el-icon-view">&nbsp;</el-button>
+                        <el-button type="text" size="small" icon="el-icon-view">查看</el-button>
                       </router-link> -->
-											<el-button @click="edit(scope.row)" type="text" size="small" icon="el-icon-edit">&nbsp;</el-button>
-											<el-button @click="del(scope.row)" type="text" size="small" icon="el-icon-delete">&nbsp;</el-button>
+											<el-button @click="edit(scope.row)" type="text" size="small" icon="el-icon-edit">修改</el-button>
+											<el-button @click="del(scope.row)" type="text" size="small" icon="el-icon-delete">删除</el-button>
 											</template> 
 									</el-table-column>
 								</el-table>
@@ -78,7 +78,7 @@
                           <template v-if='item == "id"'>
                           </template>
                           <template v-else-if='item == "code" || item == "name" || item == "ip" || item == "level"'>
-                            <el-form-item :key="index" :label="field_ch[index]" :prop="item" required>
+                            <el-form-item :key="index" :label="field_ch[index]" :prop="item">
                               <el-input v-model="addForm[item]"/>
                             </el-form-item>
                           </template>
@@ -123,8 +123,8 @@
 											<template v-for='(item, index) in field_en'>
                           <template v-if='item == "id"'>
                           </template>
-                          <template v-else-if='item == "code" || item == "name" || item == "ip"'>
-                            <el-form-item :key="index" :label="field_ch[index]" :prop="item" required>
+                          <template v-else-if='item == "code" || item == "name" || item == "ip" || item == "level"'>
+                            <el-form-item :key="index" :label="field_ch[index]" :prop="item">
                               <el-input v-model="editForm[item]"/>
                             </el-form-item>
                           </template>
@@ -185,6 +185,7 @@ export default {
 			tabelwidth: null,
 			list: null,
 			listLoading: true,
+			fullLoading: false,
 			data_type: null,
 			field_ch: null,
 			field_en: null,
@@ -233,7 +234,7 @@ export default {
 
         _this.rules = formVerify.rules(_this.field_en,_this.data_type);
         _this.rules["code"] = [
-            { required: true, message: '请输入密码', trigger: 'blur' },
+            { required: true, message: '请输入设备编号', trigger: 'blur' },
             {
                 validator: function (rule, value, callback) {
                     if (! /^[A-Z][0-9]+$/.test(value)) {
@@ -243,6 +244,24 @@ export default {
                 },
                 trigger: 'blur'
             }
+        ];
+        _this.rules["name"] = [
+            { required: true, message: '请输入设备名称', trigger: 'blur' }
+        ];
+        _this.rules["ip"] = [
+            { required: true, message: '请输入IP地址', trigger: 'blur' },
+            {
+                validator: function (rule, value, callback) {
+                    if (! /^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$/.test(value)) {
+                        return callback(new Error('IP地址错误'));
+                    }
+                    callback();
+                },
+                trigger: 'blur'
+            }
+        ];
+        _this.rules["level"] = [
+            { required: true, message: '请输入所属节点', trigger: 'blur' }
         ];
         }).catch(function (err) {
           console.log(err);
@@ -294,9 +313,9 @@ export default {
               _this.field_en.forEach(function(item,index){
                   var field_type_this = _this.data_type[index];
                   if(field_type_this == "int" || field_type_this == "int(6)" || field_type_this == "decimal(2)" || field_type_this == "decimal(4)"){
-                    _this.addForm[item] = _this.addForm[item] ? Number(_this.addForm[item]) : 0;
+                    _this.editForm[item] = _this.editForm[item] ? Number(_this.editForm[item]) : 0;
                   }else{
-                    _this.addForm[item] = _this.addForm[item] ? String(_this.addForm[item]) : "";
+                    _this.editForm[item] = _this.editForm[item] ? String(_this.editForm[item]) : "";
                   }
               });
               var whereJson = {"id": _this.thisrow.id};
@@ -421,7 +440,9 @@ export default {
           var reqData = {"action":"importData", "tocken": sessionStorage.getItem('tocken')}
           formData.append("file",file);
           formData.append("params",JSON.stringify(reqData));
+          _this.fullLoading = true;
           _this.$axiosHttp.post(_this.url, formData,{headers: {'Content-Type': 'multipart/form-data'}}).then(function (res) {
+            _this.fullLoading = false;
             _this.$message({duration: 1000, message: res.msg});
             if(res.code != 200){ return false; }
             _this.getData();
@@ -434,7 +455,9 @@ export default {
     btn_export() {
         var _this = this;
         var reqData = {"action":"exportData", "page":_this.page, "limit":_this.limit, "whereJson":_this.whereJson, "sortJson":_this.sortJson, "tocken": sessionStorage.getItem('tocken')}
+        _this.fullLoading = true;
         _this.$axiosHttp.get(_this.url, {"params":reqData}).then(function (res) {
+          _this.fullLoading = false;
           if(res.code != 200){
             _this.$message({duration: 1000, message: res.msg});
             return false;
@@ -451,7 +474,12 @@ export default {
         _this.$refs["searchForm"].validate (function (valid) {
             if(valid) {
               // console.log(_this.searchForm);
-              _this.whereJson = _this.searchForm
+              _this.whereJson = {};
+              for(var item in _this.searchForm){
+                if(String(_this.searchForm[item]).trim()){_this.whereJson[item] = typeof(_this.searchForm[item]) == "string" ? _this.searchForm[item].trim() :  _this.searchForm[item]}
+              };
+              _this.page = 1;
+              _this.limit = 10;
               _this.getData();
 
             }else {
@@ -465,6 +493,8 @@ export default {
       this.$refs["searchForm"].resetFields();
       this.searchFormBox = false;
       this.whereJson = {};
+      this.page = 1;
+      this.limit = 10;
       this.getData();
     }
   },

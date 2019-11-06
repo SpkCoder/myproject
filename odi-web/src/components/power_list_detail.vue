@@ -10,6 +10,7 @@
 						<div class="list-page" style="padding-left:50px">
 
               <el-tree
+                v-loading.fullscreen.lock="fullLoading" element-loading-text="Loading" 
                 :data="list"
                 show-checkbox
                 default-expand-all
@@ -22,7 +23,7 @@
 
               <el-form ref="editForm" :model="editForm" :rules="rules" size="small" label-width="0px" style="margin-top:20px">
                   <el-form-item>
-                    <el-button type="primary" @click="editSubmitForm">保存</el-button>
+                    <el-button type="primary" @click="editSubmitForm">保存</el-button> <el-button onclick="javascript:history.go(-1)">返回</el-button>
                   </el-form-item>
               </el-form>
 
@@ -49,7 +50,7 @@ export default {
 			url: null,
 			tabelwidth: null,
 			list: null,
-			listLoading: true,
+			fullLoading: true,
       defaultProps: { children: 'children', label: 'name' },
       defaultChecked: [],
       editForm: {},
@@ -66,10 +67,10 @@ export default {
 	methods: {
     getData() {
       var _this = this;
-      _this.listLoading = true;
+      _this.fullLoading = true;
 			var reqData = {"action":"findData", "page":_this.page, "limit":_this.limit, "whereJson":_this.whereJson, "sortJson":_this.sortJson, "tocken": sessionStorage.getItem('tocken')}
       _this.$axiosHttp.get(_this.url, {"params":reqData}).then(function (res) {
-        _this.listLoading = false;
+        _this.fullLoading = false;
         if(res.code != 200){
 				  _this.$message({duration: 1000, message: res.msg});
           return false;

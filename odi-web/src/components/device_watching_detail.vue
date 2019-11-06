@@ -9,8 +9,8 @@
 		  	  <div class="container clearfix">
 						<div class="list-page">
 
-                <div style="margin-bottom:10px;">
-                  <el-form v-loading.fullscreen.lock="listLoading" ref="searchForm" :inline="true" :model="searchForm" :rules="rules" size="small" label-width="100px" >
+                <div style="margin-bottom:10px; margin-left: -60px;">
+                  <el-form v-loading.fullscreen.lock="fullLoading" element-loading-text="Loading" ref="searchForm" :inline="true" :model="searchForm" :rules="rules" size="small" label-width="100px" >
 
                       <el-form-item label="时间">
                         <el-date-picker v-model="searchForm['time']" type="date" value-format="yyyy-MM-dd"> </el-date-picker>
@@ -58,7 +58,7 @@ export default {
 			url: null,
 			xdata: [],
 			ydata: [],
-			listLoading: true,
+			fullLoading: true,
       searchFormBox: false,
 			searchForm: {},
 			roleClass: [],
@@ -74,10 +74,10 @@ export default {
 	methods: {
     getData() {
       var _this = this;
-      _this.listLoading = true;
+      _this.fullLoading = true;
 			var reqData = {"action":"findData", "page":_this.page, "limit":_this.limit, "whereJson":_this.whereJson, "sortJson":_this.sortJson, "tocken": sessionStorage.getItem('tocken')}
       _this.$axiosHttp.get(_this.url, {"params":reqData}).then(function (res) {
-        _this.listLoading = false;
+        _this.fullLoading = false;
         if(res.code != 200){
 				  _this.$message({duration: 1000, message: res.msg});
           return false;
@@ -101,7 +101,7 @@ export default {
                       length: 15
                     },
                     title: {
-                      offsetCenter: [0, -20]
+                      offsetCenter: [0, 60]
                     },
                     detail: {fontSize: 20,formatter:'{value}%'},
                     data: [{value: (res.info.cpu_rate * 100).toFixed(0), name: 'CPU使用率'}]
@@ -129,7 +129,7 @@ export default {
                       length: 15
                     },
                     title: {
-                      offsetCenter: [0, -20]
+                      offsetCenter: [0, 60]
                     },
                     detail: {fontSize: 20,formatter:'{value}%'},
                     data: [{value: (res.info.ram_rate * 100).toFixed(0), name: '内存使用率'}]
@@ -157,7 +157,7 @@ export default {
                       length: 15
                     },
                     title: {
-                      offsetCenter: [0, -20]
+                      offsetCenter: [0, 60]
                     },
                     detail: {fontSize: 20,formatter:'{value}%'},
                     data: [{value: (res.info.disk_rate * 100).toFixed(0), name: '磁盘使用率'}]
@@ -173,14 +173,26 @@ export default {
                 left: 'left'
             },
             color: ['#409EFF'],
-            tooltip: {trigger: 'axis'},
+            tooltip: {
+              trigger: 'axis'
+              // formatter: function (value, index) {
+              //   var html = value[0].name+'<br>'+value[0].marker+'</span>'+value[0].seriesName+': '+(value[0].value/1024/1024).toFixed(2)+"(G)";
+              //   return html;
+              // }
+            },
             xAxis: {
                 axisLabel : {
                     rotate: 0
                 },
                 data: res.info.time
             },
-            yAxis: {},
+            yAxis: {
+                // axisLabel : {
+                //     formatter: function (value, index) {
+                //       return (value/1024/1024).toFixed(2)+"(G)";
+                //     }
+                // }
+            },
             series: [{
                 name: '网络流量',
                 type: 'line',
@@ -204,7 +216,13 @@ export default {
                 },
                 data: res.info.time
             },
-            yAxis: {},
+            yAxis: {
+                // axisLabel : {
+                //     formatter: function (value, index) {
+                //       return value+"(次)";
+                //     }
+                // }
+            },
             series: [{
                 name: 'QPS',
                 type: 'line',
@@ -228,7 +246,13 @@ export default {
                 },
                 data: res.info.time
             },
-            yAxis: {},
+            yAxis: {
+                // axisLabel : {
+                //     formatter: function (value, index) {
+                //       return value+"(MS)";
+                //     }
+                // }
+            },
             series: [{
                 name: '解析时延',
                 type: 'line',
@@ -245,14 +269,26 @@ export default {
                 left: 'left'
             },
             color: ['#409EFF'],
-            tooltip: {trigger: 'axis'},
+            tooltip: {
+              trigger: 'axis'
+              // formatter: function (value, index) {
+              //   var html = value[0].name+'<br>'+value[0].marker+'</span>'+value[0].seriesName+': '+parseInt(value[0].value*100)+"%";
+              //   return html;
+              // }
+            },
             xAxis: {
                 axisLabel : {
                     rotate: 0
                 },
                 data: res.info.time
             },
-            yAxis: {},
+            yAxis: {
+                // axisLabel : {
+                //     formatter: function (value, index) {
+                //       return parseInt(value*100)+"(%)";
+                //     }
+                // }
+            },
             series: [{
                 name: '解析成功率',
                 type: 'line',

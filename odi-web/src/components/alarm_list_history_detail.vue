@@ -21,7 +21,7 @@
 									@selection-change="selectionChange" 
 									@sort-change="sortChange"
 									:style={width:tabelwidth}>
-									<el-table-column fixed="left" type="selection" width="40"></el-table-column>
+									<!-- <el-table-column fixed="left" type="selection" width="40"></el-table-column> -->
 									<template v-for='(item, index) in field_en'>
 											<el-table-column :key="item.id" show-overflow-tooltip sortable="custom" :prop="item" :label="field_ch[index]" :width="field_width[index] | field_width_filter"> </el-table-column>
 									</template>
@@ -97,14 +97,14 @@ export default {
           return false;
         }
 				_this.list = res.rows;
-				_this.field_ch = ["IP", "告警类型", "内容", "告警时间"];
+				_this.field_ch = ["设备IP", "告警类型", "内容", "告警时间"];
 				_this.field_en = ["client_ip", "alarm_type", "alarm_msg", "alarm_time"];
 				_this.data_type = ["text", "text", "text", "text"];
 				_this.field_width = [120, 150, 150, 160];
 				_this.field_width.forEach(element => {
 						_this.tabelwidth+=Number(element);
 				});
-				_this.tabelwidth = _this.tabelwidth + 40 + 5 + "px";
+				_this.tabelwidth = _this.tabelwidth + 5 + "px";
         _this.page = res.page;
         _this.limit = res.limit;
         _this.count = res.count;
@@ -149,6 +149,8 @@ export default {
             if(valid) {
               // console.log(_this.searchForm);
               _this.whereJson = Object.assign({"status":0,"group":"true"}, _this.searchForm)
+              _this.page = 1;
+              _this.limit = 10;
               _this.getData();
 
             }else {
@@ -162,6 +164,8 @@ export default {
       this.$refs["searchForm"].resetFields();
       this.searchFormBox = false;
       this.whereJson = {"status":0,"group":"true"};
+      this.page = 1;
+      this.limit = 10;
       this.getData();
     }
   },
@@ -182,7 +186,7 @@ export default {
            if(item2.id == localStorage.getItem("activeIndex")){
               _this.modelName1 = item.name;
               _this.modelName2 = item2.name;
-              _this.modelName3 = "明细";
+              _this.modelName3 = "告警明细";
               return false;
            }
         });

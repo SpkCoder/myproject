@@ -9,8 +9,8 @@
 		  	  <div class="container clearfix">
 						<div class="list-page">
 
-								<div style="margin-bottom:10px;">
-									<el-form ref="searchForm" :inline="true" :model="searchForm" :rules="rules" size="small" label-width="100px">
+								<div style="margin-bottom:10px; margin-left: -44px;">
+									<el-form v-loading.fullscreen.lock="fullLoading" element-loading-text="Loading" ref="searchForm" :inline="true" :model="searchForm" :rules="rules" size="small" label-width="100px">
                       <template v-for='(item, index) in field_en'>
                           <template v-if='item == "username"'>
 														<el-form-item :key="index" :label="field_ch[index]">
@@ -20,6 +20,7 @@
                           <template v-else-if='item == "client_ip"'>
 														<el-form-item :key="index" :label="field_ch[index]">
                               <el-select v-model="searchForm['client_ip']" placeholder="">
+                                <el-option label="全部" value=""> </el-option>
                                 <el-option v-for="item2 in deviceList" :key="item2.id" :label="item2.ip" :value="item2.ip"> </el-option>
                               </el-select>
                             </el-form-item>
@@ -27,6 +28,7 @@
                           <template v-else-if='item == "operation_type"'>
 														<el-form-item :key="index" :label="field_ch[index]">
                               <el-select v-model="searchForm['operation_type']" placeholder="">
+                                <el-option label="全部" value=""> </el-option>
                                 <el-option v-for="item2 in typeList" :key="item2.id" :label="item2.ip" :value="item2.name"> </el-option>
                               </el-select>
                             </el-form-item>
@@ -56,7 +58,7 @@
 									@selection-change="selectionChange" 
 									@sort-change="sortChange"
 									:style={width:tabelwidth}>
-									<el-table-column fixed="left" type="selection" width="40"></el-table-column>
+									<!-- <el-table-column fixed="left" type="selection" width="40"></el-table-column> -->
 									<template v-for='(item, index) in field_en'>
 											<el-table-column :key="item.id" show-overflow-tooltip sortable="custom" :prop="item" :label="field_ch[index]" :width="field_width[index] | field_width_filter"> </el-table-column>
 									</template>
@@ -88,7 +90,8 @@ export default {
 			url: null,
 			tabelwidth: null,
 			list: null,
-			listLoading: true,
+      listLoading: true,
+      fullLoading: false,
 			data_type: null,
 			field_ch: null,
 			field_en: null,
@@ -131,7 +134,7 @@ export default {
 				_this.field_width.forEach(element => {
 						_this.tabelwidth+=Number(element);
 				});
-				_this.tabelwidth = _this.tabelwidth + 40 + 5 + "px";
+				_this.tabelwidth = _this.tabelwidth + 5 + "px";
         _this.page = res.page;
         _this.limit = res.limit;
         _this.count = res.count;
@@ -172,8 +175,10 @@ export default {
     },
     btn_export() {
         var _this = this;
+        _this.fullLoading = true;
         var reqData = {"action":"exportData", "page":_this.page, "limit":_this.limit, "whereJson":_this.whereJson, "sortJson":_this.sortJson, "tocken": sessionStorage.getItem('tocken')}
         _this.$axiosHttp.get(_this.url, {"params":reqData}).then(function (res) {
+          _this.fullLoading = false;
           if(res.code != 200){
             _this.$message({duration: 1000, message: res.msg});
             return false;
@@ -190,7 +195,12 @@ export default {
         _this.$refs["searchForm"].validate (function (valid) {
             if(valid) {
               // console.log(_this.searchForm);
-              _this.whereJson = _this.searchForm
+              _this.whereJson = {};
+              for(var item in _this.searchForm){
+                if(String(_this.searchForm[item]).trim()){_this.whereJson[item] = typeof(_this.searchForm[item]) == "string" ? _this.searchForm[item].trim() :  _this.searchForm[item]}
+              };
+              _this.page = 1;
+              _this.limit = 10;
               _this.getData();
 
             }else {
@@ -200,10 +210,12 @@ export default {
         });
     },
     searchCancelSubmit() {
-      this.searchForm = {};
+      this.searchForm = {"client_ip": "", "operation_type": ""};
       this.$refs["searchForm"].resetFields();
       this.searchFormBox = false;
       this.whereJson = {};
+      this.page = 1;
+      this.limit = 10;
       this.getData();
     }
   },
@@ -240,8 +252,10 @@ export default {
     }).catch(function (err) {
         console.log(err);
     });
+    _this.$set(_this.searchForm, "client_ip", "");
 
     _this.typeList = [{"id": 1, "name": "退出"},{"id": 2, "name": "登录"},{"id": 3, "name": "创建项目"},{"id": 4, "name": "取消操作"}];
+    _this.$set(_this.searchForm, "operation_type", "");
   }
 }
 </script>

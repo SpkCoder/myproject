@@ -27,7 +27,7 @@ def main():
 
     tm = time.localtime(t)
 
-    logging.debug ("start %s" % time.strftime('%Y-%m-%dT%H:%M:%S',tm))
+    logging.info ("start %s" % time.strftime('%Y-%m-%dT%H:%M:%S',tm))
 
     lt = t- t%300
     gt = lt - 300
@@ -35,18 +35,16 @@ def main():
     lt_str = time.strftime('%Y-%m-%d %H:%M:00',time.localtime(lt))
     gt_str = time.strftime('%Y-%m-%d %H:%M:00',time.localtime(gt))
     
-    logging.debug(gt_str)
-    logging.debug(lt_str)
-
+    logging.info(gt_str + ' ~ ' + lt_str)
 
     obj = es_operation.model(gt_str,lt_str)
     obj.run()
 
-    obj = alarm_operation.model(gt_str,lt_str)
-    obj.run()
+    # obj = alarm_operation.model(gt_str,lt_str)
+    # obj.run()
 
 
-    logging.debug ("end %s" % time.strftime('%Y-%m-%dT%H:%M:%S',time.localtime(int(time.time()))))
+    logging.info ("end %s" % time.strftime('%Y-%m-%dT%H:%M:%S',time.localtime(int(time.time()))))
 
 
 def initLog():
@@ -61,13 +59,14 @@ if __name__ == '__main__':
 
     # initLog()
     print('run_es start')
-    
-    # 4分的时候开始执行
+
+    # 0分的时候开始执行
     t = int(time.time())
     tt = t%300
-    if tt <= 240:
-        time.sleep(240-tt)
+    ttt = 0
+    if tt <= ttt:
+        time.sleep(ttt-tt)
     else:
-        time.sleep(300-tt+240)
+        time.sleep(300-tt+ttt)
 
     main()

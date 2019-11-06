@@ -44,7 +44,7 @@ def favicon():
 @app.route('/api/python/<arg>', methods=['GET', 'POST'])
 def require(arg):
     #验证request json
-    logging.info('request arg: ' + str(arg))
+    logging.info('request: /api/python/' + str(arg))
     try:
         if request.args:
             dict_req = json.loads(request.args['params'])
@@ -52,7 +52,7 @@ def require(arg):
             dict_req = json.loads(request.form['params'])
         else:
             dict_req = json.loads(request.get_data())
-        print(dict_req)
+        logging.info(dict_req)
     except Exception as e:
         logging.debug('request json error: ' + str(e))
         dict_res = {'code': 500, 'msg': 'request json error'}

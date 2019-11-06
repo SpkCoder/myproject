@@ -7,6 +7,7 @@ import time
 import re
 import os
 from datetime import datetime
+from multiprocessing import Process, Pool
 
 
 #/python/device_list req_data { "action":"findData", "limit":10, "page":1, "whereJson":{}, "tocken": "eyJhbGciOiJIUzIbmFtZSmei4" }  //查询数据
@@ -149,17 +150,34 @@ class model(object):
                 date_lt = datetime.fromtimestamp(int_now)
                 int_num = int((int_now-int_gte)/300)
             str_lt = date_lt.strftime('%Y-%m-%d %H:%M:00')
-            whereStr = 'create_time < "'+str_lt+'" and create_time >= "'+str_gte+'"'+' and client_ip = "'+params['whereJson']['ip']+'"'
+            whereStr = 'log_time >= "'+str_gte+'" and log_time < "'+str_lt+'"'+' and client_ip = "'+params['whereJson']['ip']+'"'
             sql = 'select client_ip, cpu_rate, net_flow_receive, net_flow_send, net_speed, ram_rate, create_time from device_run_list where '+whereStr+' group by create_time order by create_time asc'
-            result = self.mysqldb.find_data(self.table_name, params, sql)
-            # print(result)
+            # result = self.mysqldb.find_data(self.table_name, params, sql)
+            list_pool = []
+            p = Pool(3)
+            p_res = p.apply_async(self.mysqldb.find_data, args=(self.table_name, params, sql))
+            list_pool.append(p_res)
 
             # 查询解析成功率
-            whereStr = 'create_time < "'+str_lt+'" and create_time >= "'+str_gte+'"'+' and server_ip = "'+params['whereJson']['ip']+'"'
-            whereStr2 = 'create_time < "'+str_lt+'" and create_time >= "'+str_gte+'"'+' and server_ip = "'+params['whereJson']['ip']+'"'+' and req_status = "SERVFAIL"'
-            sql = 'select t1.server_ip, t1.num, t1.create_time, t2.num_err from (select server_ip, count(*) as num, create_time from dns_req_list where '+whereStr+' group by create_time) t1 left join (select server_ip, count(*) as num_err, create_time as create_time2 from dns_err_list where '+whereStr2+' group by create_time) t2 on t1.create_time=t2.create_time2 order by create_time asc'
-            result_dns_success_rate = self.mysqldb.find_data(self.table_name, params, sql)
-            
+            whereStr = 'log_time >= "'+str_gte+'" and log_time < "'+str_lt+'"'+' and server_ip = "'+params['whereJson']['ip']+'"'
+            union_sql = self.mysqldb.get_union_sql('dns_req_list_latest', str_gte, str_lt, whereStr)
+            sql = 'select create_time, req_status, count(*) as num from '+union_sql+' group by create_time,req_status order by create_time asc'
+            # result_dns_success_rate = self.mysqldb.find_data(self.table_name, params, sql)
+            p_res = p.apply_async(self.mysqldb.find_data, args=(self.table_name, params, sql))
+            list_pool.append(p_res)
+
+            # 查询QPS(5分钟DNS查询次数)
+            whereStr = 'log_time >= "'+str_gte+'" and log_time < "'+str_lt+'"'+' and server_ip = "'+params['whereJson']['ip']+'"'
+            union_sql = self.mysqldb.get_union_sql('dns_req_list_latest', str_gte, str_lt, whereStr)
+            sql = 'select create_time, count(*) as num from '+union_sql+' group by create_time order by create_time asc'
+            # result_qps = self.mysqldb.find_data(self.table_name, params, sql)
+            p_res = p.apply_async(self.mysqldb.find_data, args=(self.table_name, params, sql))
+            list_pool.append(p_res)
+
+            result = list_pool[0].get()
+            result_dns_success_rate = list_pool[1].get()
+            result_qps = list_pool[2].get()
+
             if result:
                 if len(result['rows']) > 0:
                     result['cpu_rate'] = result['rows'][len(result['rows'])-1]['cpu_rate']
@@ -176,12 +194,21 @@ class model(object):
                 result['dns_success_rate'] = []
                 result['dict_time_net'] = {}
                 result['dict_time_dns'] = {}
+                result['dict_time_qps'] = {}
                 for item in result['rows']:
                     result['dict_time_net'][item['create_time']] = item['net_flow_send']
                 for item in result_dns_success_rate['rows']:
-                    item['num_err'] = item['num_err'] if item['num_err'] else 0
-                    item['success_rate'] = round((item['num']-item['num_err'])/item['num'],2)
-                    result['dict_time_dns'][item['create_time']] = item['success_rate']
+                    if item['create_time'] not in result['dict_time_dns']:
+                        num_success = 0
+                        num = item['num']
+                    else:
+                        num += item['num']
+                    if item['req_status'] == 0:
+                        num_success = item['num']
+                    success_rate = round((num_success)/num,2)
+                    result['dict_time_dns'][item['create_time']] = success_rate
+                for item in result_qps['rows']:
+                    result['dict_time_qps'][item['create_time']] = item['num']
                 for i in range(int_num):
                     if i == 0:
                         continue
@@ -194,13 +221,17 @@ class model(object):
                         result['dns_success_rate'].append(result['dict_time_dns'][str_time])
                     else:
                         result['dns_success_rate'].append(0)
-                    result['qps'].append(0)
+                    if str_time in result['dict_time_qps']:
+                        result['qps'].append(result['dict_time_qps'][str_time])
+                    else:
+                        result['qps'].append(0)
                     result['dns_delay'].append(0)
                     result['time'].append(str_time.split(' ')[1])
                 del result['count']
                 del result['rows']
                 del result['dict_time_net']
                 del result['dict_time_dns']
+                del result['dict_time_qps']
                 dict_res = {'code': 200, 'msg': '操作成功', 'info': result}
                 return make_response(json.dumps(dict_res, ensure_ascii=False))
             else:
@@ -243,7 +274,7 @@ class model(object):
         params = { 'whereJson':{ '$or': [{'ip':list_data[0]['ip']}, {'code':list_data[0]['code']}, {'name':list_data[0]['name']}] }, 'fieldJson':{'ip': 1, 'code': 1, 'name': 1 } }
         result = self.mysqldb.find_data(self.table_name, params)
         if result['count'] != 0:
-            dict_res = {'code': 200, 'msg': 'code或name或ip已存在'}
+            dict_res = {'code': 500, 'msg': 'code或name或ip已存在'}
             return make_response(json.dumps(dict_res, ensure_ascii=False))
 
         result = self.mysqldb.insert_data(self.table_name, list_data)
@@ -319,7 +350,7 @@ class model(object):
         # dict_req = self.req.dict_req
         file = self.req.files.get('file')
         if not file:
-            dict_res = {'code': 200, 'msg': 'file不能为空'}
+            dict_res = {'code': 500, 'msg': 'file不能为空'}
             return make_response(json.dumps(dict_res, ensure_ascii=False))
         file_path = os.path.dirname(os.path.dirname(__file__)) + '/static/uploadFile/'+ self.table_name +'_import.csv'
         file.save(file_path)
@@ -345,7 +376,7 @@ class model(object):
         params = { 'whereJson':{ 'ip': {'$in':list_ip} }, 'fieldJson':{ 'id': 1, 'ip': 1 } }
         result = self.mysqldb.find_data(self.table_name, params)
         if result['count'] != 0:
-            dict_res = {'code': 200, 'msg': 'ip已存在'}
+            dict_res = {'code': 500, 'msg': 'ip已存在'}
             return make_response(json.dumps(dict_res, ensure_ascii=False))
 
         result = self.mysqldb.insert_data(self.table_name, list_data)

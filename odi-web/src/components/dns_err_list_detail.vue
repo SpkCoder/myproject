@@ -21,9 +21,14 @@
 									@selection-change="selectionChange" 
 									@sort-change="sortChange"
 									:style={width:tabelwidth}>
-									<el-table-column fixed="left" type="selection" width="40"></el-table-column>
+									<!-- <el-table-column fixed="left" type="selection" width="40"></el-table-column> -->
 									<template v-for='(item, index) in field_en'>
-											<el-table-column :key="item.id" show-overflow-tooltip sortable="custom" :prop="item" :label="field_ch[index]" :width="field_width[index] | field_width_filter"> </el-table-column>
+                      <el-table-column v-if='item == "req_status"' :key="item.id" show-overflow-tooltip sortable="custom" :prop="item" :label="field_ch[index]" :width="field_width[index] | field_width_filter">
+                        <template slot-scope="scope">
+                          {{ scope.row.req_status | req_status_filter}}
+                        </template>
+                      </el-table-column>
+											<el-table-column v-else :key="item.id" show-overflow-tooltip sortable="custom" :prop="item" :label="field_ch[index]" :width="field_width[index] | field_width_filter"> </el-table-column>
 									</template>
 									<!-- <el-table-column fixed="right" label="操作" width="130"> 
 											<template slot-scope="scope"> 
@@ -53,6 +58,15 @@ export default {
 	filters: {
     field_width_filter(value) {
        if(value){return value+"px"}
+    },
+    req_status_filter(value) {
+        var obj_req_status = {
+            '0': 'NOERROR',
+            '1': 'NXDOMAIN',
+            '2': 'SERVFAIL',
+            '3': 'OTHER'
+        }
+        return obj_req_status[''+value]
     }
   },
   data () {
@@ -97,14 +111,14 @@ export default {
           return false;
         }
 				_this.list = res.rows;
-				_this.field_ch = ["设备IP", "域名", "客户端IP", "端口", "类型", "时间"];
-				_this.field_en = ["server_ip", "client_host", "client_ip", "client_port", "type_name", "log_time"];
+				_this.field_ch = ["设备IP", "域名", "客户端IP", "类型", "错误码", "时间"];
+				_this.field_en = ["server_ip", "client_host", "client_ip", "type_name", "req_status", "log_time"];
 				_this.data_type = ["text", "text", "text", "text", "text", "text"];
 				_this.field_width = [150, 250, 150, 100, 100, 160];
 				_this.field_width.forEach(element => {
 						_this.tabelwidth+=Number(element);
 				});
-				_this.tabelwidth = _this.tabelwidth + 40 + 5 + "px";
+				_this.tabelwidth = _this.tabelwidth + 5 + "px";
         _this.page = res.page;
         _this.limit = res.limit;
         _this.count = res.count;
@@ -149,6 +163,8 @@ export default {
             if(valid) {
               // console.log(_this.searchForm);
               _this.whereJson = Object.assign({"status":1,"group":"true"}, _this.searchForm)
+              _this.page = 1;
+              _this.limit = 10;
               _this.getData();
 
             }else {
@@ -162,6 +178,8 @@ export default {
       this.$refs["searchForm"].resetFields();
       this.searchFormBox = false;
       this.whereJson = {"status":1,"group":"true"};
+      this.page = 1;
+      this.limit = 10;
       this.getData();
     }
   },

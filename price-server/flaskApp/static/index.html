@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>郑州农产品均价走势图</title>
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+</head>
+<style type="text/css">
+    html,body {padding: 0; margin: 0}
+    .list-page {padding: 10px;}
+   .title_type {padding: 10px 0px; border-bottom: 1px solid #bbb;}
+   .el-table .red-row {color: Red; }
+   .el-table .green-row {color: Green;} 
+   .el-table--small td, .el-table--small th {padding: 0;}
+</style>
+<body>
+
+    <div id="tableApp" class="list-page">
+
+        <div style="margin-bottom:10px;">
+            <el-form v-loading.fullscreen.lock="fullLoading" element-loading-text="Loading" ref="searchForm" :model="searchForm" :rules="rules" size="small" >
+
+              <el-form-item>
+                <span>郑州农产品均价走势图</span>
+                <span style="color: #f00; font-size: 12px;">（每天18:00更新当天的价格）</span>
+                <!-- <span><a href="http://zzny.zhengzhou.gov.cn/ncpjg/index_1.jhtml" target="_blank">数据来源</a></span> -->
+              </el-form-item>
+              <el-form-item style="width: 100px">
+                <el-select v-model="searchForm['type']" @change="selectChange">
+                  <el-option v-for="item2 in typeList" :key="item2.id" :label="item2.name" :value="item2.id"> </el-option>
+                </el-select>
+              </el-form-item>
+
+              <!-- <el-form-item>
+                <el-button icon="el-icon-search" type="primary" @click="searchSubmitForm">查询</el-button>
+                <el-button icon="el-icon-refresh" @click="searchCancelSubmit">取消</el-button>
+              </el-form-item> -->
+            </el-form>
+        </div>
+
+        <div class="eChartBox">
+            <template v-for='(value, key, index) in type_name'>
+                <template v-if="key=='食用油'"><h3 class="title_type">{{key+'（元/5公升）'}}</h3></template>
+                <template v-else><h3 class="title_type">{{key+'（元/500克）'}}</h3></template>
+                <template v-for='(value2, key2, index2) in value'>
+                    <div :id="'eChart' + index + index2" style="width:98%;height:200px;"></div>
+                </template>
+            </template>
+        </div>
+
+    </div>
+
+</body>
+  <!-- <script src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script> -->
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  <script src="https://www.echartsjs.com/examples/vendors/echarts/echarts.min.js"></script>
+  <script type="text/javascript">
+
+        Vue.use(ELEMENT);
+        Vue.prototype.$axiosHttp = axios
+
+        new Vue({
+            el: '#tableApp',
+            data:{
+                msg: null,
+                url: null,
+                type_name: {},
+                xdata: [],
+                ydata: [],
+                fullLoading: false,
+                searchFormBox: false,
+                searchForm: {},
+                typeList: [{"id": "1D", "name": "日线"}, {"id": "1M", "name": "月线"}, {"id": "1Y", "name": "年线"}],
+                whereJson : {},
+                rules: {}
+            },
+            methods: {
+                getData() {
+                    var _this = this;
+                    _this.fullLoading = true;
+                    var reqData = {"action":"findData", "whereJson":_this.whereJson}
+                    _this.$axiosHttp.get(_this.url, {"params":{"params":reqData}}).then(function (res) {
+                        _this.fullLoading = false;
+                        res = res.data;
+                        if(res.code != 200){
+                            _this.$message({duration: 1000, message: res.msg});
+                            return false;
+                        }
+                        _this.type_name = res.info.type_name
+                        _this.$nextTick(function () {
+                            Object.keys(_this.type_name).forEach(function(value, index) {
+                                Object.keys(_this.type_name[value]).forEach(function(value2, index2) {
+                                    var eChartId = 'eChart' + index + '' + index2;
+                                    var type = value
+                                    var name = value2
+                                    var option = {
+                                        title: {
+                                            text: name,
+                                            left: 'center'
+                                        },
+                                        color: ['#409EFF'],
+                                        tooltip: {
+                                            trigger: 'axis'
+                                            // formatter: function (value, index) {
+                                            //   var html = value[0].name+'<br>'+value[0].marker+'</span>'+value[0].seriesName+': '+parseInt(value[0].value*100)+"%";
+                                            //   return html;
+                                            // }
+                                        },
+                                        xAxis: {
+                                            axisLabel : {
+                                                rotate: 0
+                                            },
+                                            data: res.info.time
+                                        },
+                                        yAxis: {
+                                            // axisLabel : {
+                                            //     formatter: function (value, index) {
+                                            //       return parseInt(value*100)+"(%)";
+                                            //     }
+                                            // }
+                                        },
+                                        series: [{
+                                            name: name,
+                                            type: 'line',
+                                            lineStyle: {width: 1},
+                                            data: res.info.type_name[type][name]
+                                        }]
+                                    };
+                                    var myChart = echarts.init(document.getElementById(eChartId));
+                                    myChart.setOption(option, true);
+                                });
+                            });
+
+                        })
+
+
+                    }).catch(function (err) {
+                        console.log(err);
+                    });
+
+              },
+              selectChange(value) {
+                var _this = this;
+                _this.whereJson = {"group_type": value};
+                _this.getData();
+              },
+              searchSubmitForm() {
+                    var _this = this;
+                    _this.$refs["searchForm"].validate (function (valid) {
+                        if(valid) {
+                        // console.log(_this.searchForm);
+                        if(!_this.searchForm.time){
+                            _this.$message({duration: 1000, message: "请输入时间！"});
+                            return false;
+                        }
+                        _this.whereJson.time = _this.searchForm.time
+                        _this.getData();
+
+                        }else {
+                        console.log('error submit');
+                        return false;
+                        }
+                    });
+              },
+              searchCancelSubmit() {
+                    var _this = this;
+                    _this.searchForm = {};
+                    _this.whereJson.time = moment().format("YYYY-MM-DD");
+                    _this.$set(_this.searchForm, "time", _this.whereJson.time);
+                    _this.$refs["searchForm"].resetFields();
+                    _this.getData();
+              }
+
+            },
+            watch: {
+                msg(value, oldValue) {
+                    console.log(value, oldValue);
+                }
+            },
+            created() {
+                var _this = this;
+                _this.url = "/api/python/price_list";
+                _this.$set(_this.searchForm, "type", _this.typeList[0].id);
+                _this.whereJson = {"group_type": "1D"};
+                _this.getData();
+            }
+
+        });
+
+
+    </script>
+</html>
+

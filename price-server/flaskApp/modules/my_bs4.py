@@ -68,7 +68,7 @@ class model():
         return self.list_data
 
     def run(self):
-        Timer(24*3600, self.run).start()
+        Timer(12*3600, self.run).start()
         try:
             self.get_download_url()
             for i in self.urls:
@@ -81,7 +81,7 @@ class model():
 
 def main():
     # 18:00:00的时候开始执行
-    logging.info('mybs4 run')
+    print('mybs4 run')
     int_now = int(time.time())
     str_time = time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(int_now))
     int_time = int(time.mktime(time.strptime(str_time.split(' ')[0]+' 18:00:00', "%Y-%m-%d %H:%M:%S")))

@@ -48,6 +48,10 @@ class model(object):
             str_gte = time.strftime('%Y-%m-%d 00:00:00', time.localtime(int_now-30*24*3600))
             whereStr = 'where time >= "'+str_gte+'"'
             sql = 'select strftime("%Y-%m-%d",time) as time2, type, name, price as price2 from price_list '+whereStr+' group by time2,type,name order by time2 asc'
+        if params['whereJson']['group_type'] == '1W':
+            str_gte = time.strftime('%Y-%m-%d 00:00:00', time.localtime(int_now-52*7*24*3600))
+            whereStr = 'where time >= "'+str_gte+'"'
+            sql = 'select strftime("%Y-%W",time) as time2, type, name, round(avg(price),2) as price2 from price_list '+whereStr+' group by time2,type,name order by time2 asc'
         if params['whereJson']['group_type'] == '1M':
             str_gte = time.strftime('%Y-%m-00 00:00:00', time.localtime(int_now-12*30*24*3600))
             whereStr = 'where time >= "'+str_gte+'"'

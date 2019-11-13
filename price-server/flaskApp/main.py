@@ -18,7 +18,7 @@ app.config['MAX_CONTENT_LENGTH'] = 100 * 1024 * 1024            #设置上传文
 app.config['UPLOAD_FOLDER'] = './flaskApp/static/uploadFile'     #设置上传文件路径
 
 #logging config
-logging.basicConfig(level=logging.DEBUG,
+logging.basicConfig(level=logging.ERROR,
                 format='%(asctime)s %(filename)s[line:%(lineno)d] %(levelname)s %(message)s',
                 datefmt='%a, %d %b %Y %H:%M:%S',
                 filename= './logs/out.log',

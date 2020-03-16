@@ -11,7 +11,7 @@ app.config['UPLOAD_FOLDER'] = '/static/uploadFile'     #设置上传文件路径
 
 if app.config['ENV'] == 'development':
     app.config['DEBUG'] = False
-    app.config['dbArgs'] = {'host': 'localhost', 'user': 'root', 'password': '', 'port': '3306', 'database': 'mydb'}
+    app.config['dbArgs'] = {'host': '127.0.0.1', 'user': 'root', 'password': 'ott@123456', 'port': '3306', 'database': 'mydb'}
 else:
     app.config['DEBUG'] = False
-    app.config['dbArgs'] = {'host': 'localhost', 'user': 'root', 'password': '123456xx', 'port': '3306', 'database': 'mydb'}
+    app.config['dbArgs'] = {'host': '127.0.0.1', 'user': 'root', 'password': '123456', 'port': '3306', 'database': 'mydb'}

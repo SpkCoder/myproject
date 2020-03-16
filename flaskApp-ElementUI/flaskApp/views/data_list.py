@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 from flask import make_response
 from flaskApp.my_modules import mysqldb
+from multiprocessing import Process
 import json
 import time
 import re
 import os
 import shutil
-import asyncio
-# import uwsgi
+import uwsgi
 
 #http://localhost:3000/python/http_test?action=findData&whereStr=id=1 and name="xx"&fieldStr=field1,field2&prePageNum=10&currPage=1&sortStr=id ASC|DESC  //查询数据
 #http://localhost:3000/python/http_test?action=insertData&dataArr=[{"name":"mick","age":18},{"name":"tina","age":35}]  //插入数据
@@ -142,6 +142,16 @@ class model(object):
         else:
             return make_response('操作失败')
 
+    # vue-cli-admin打包
+    def p_work(self):
+        print("vue-cli-admin打包")
+        build_path = os.path.dirname(os.path.dirname(__file__)) + "/static/vue-cli-admin/build/build.js"
+        print(build_path)
+        # os.system("node " + build_path)
+        os.system("curl http://localhost:4040/python/vue_build")
+        # 重启server
+        print("重启server")
+        uwsgi.reload()
 
     # 复制前后端代码文件
     def copy_file_fn(self,table_this_name):
@@ -187,25 +197,10 @@ class model(object):
             print("写入urls.py成功")
         f.closed
 
-
-        # vue-cli-admin打包
-        async def vue_build():
-            print("vue-cli-admin打包")
-            # build_path = os.path.dirname(os.path.dirname(__file__)) + "/static/vue-cli-admin/build/build.js"
-            # print(build_path)
-            # os.system("node " + build_path)
-            os.system("curl http://localhost:4040/python/vue_build") 
-
-        new_loop = asyncio.new_event_loop()
-        asyncio.set_event_loop(new_loop)
-        loop = asyncio.get_event_loop()
-        loop.run_until_complete(vue_build())
-
-        # 重启server
-        # uwsgi.reload()
-        print("重启server")
+        p = Process(target=self.p_work, args=())
+        p.start()
         return make_response('操作成功')
-        
+
 
     # 删除前后端代码文件
     def remove_file_fn(self,table_this_name):
@@ -249,22 +244,8 @@ class model(object):
             print("写入urls.py成功")
         f.closed
 
-        # vue-cli-admin打包
-        async def vue_build():
-            print("vue-cli-admin打包")
-            # build_path = os.path.dirname(os.path.dirname(__file__)) + "/static/vue-cli-admin/build/build.js"
-            # print(build_path)
-            # os.system("node " + build_path) 
-            os.system("curl http://localhost:4040/python/vue_build")
-
-        new_loop = asyncio.new_event_loop()
-        asyncio.set_event_loop(new_loop)
-        loop = asyncio.get_event_loop()
-        loop.run_until_complete(vue_build())
-
-        # 重启server
-        # uwsgi.reload()
-        print("重启server")
+        p = Process(target=self.p_work, args=())
+        p.start()
         return make_response('操作成功')
 
     # 插入list_data

@@ -1,14 +1,22 @@
--- phpMyAdmin SQL Dump
--- version 4.5.1
--- http://www.phpmyadmin.net
+-- MySQL dump 10.13  Distrib 8.0.16, for Linux (x86_64)
 --
--- Host: localhost:3306
--- Generation Time: 2018-09-30 10:48:09
--- 服务器版本： 10.1.19-MariaDB
--- PHP Version: 5.6.28
+-- Host: 127.0.0.1    Database: xty_db
+-- ------------------------------------------------------
+-- Server version	8.0.16
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+SET NAMES utf8mb4;
+SET FOREIGN_KEY_CHECKS = 0;
+CREATE DATABASE IF NOT EXISTS mydb;
+USE mydb;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -28,18 +36,18 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `data_list` (
   `id` int(6) UNSIGNED NOT NULL,
-  `modelId` int(10) NOT NULL,
-  `name` varchar(100) NOT NULL,
-  `name_ch` varchar(100) NOT NULL,
-  `field_en` varchar(100) NOT NULL,
-  `field_ch` varchar(100) NOT NULL,
-  `data_type` varchar(100) NOT NULL,
-  `field_width` int(10) NOT NULL,
-  `field_sort` int(10) NOT NULL,
-  `create_name` varchar(100) NOT NULL,
-  `create_time` varchar(100) NOT NULL,
-  `update_name` varchar(100) NOT NULL,
-  `update_time` varchar(100) NOT NULL
+  `modelId` int(10) NOT NULL DEFAULT 0,
+  `name` varchar(100) NOT NULL DEFAULT '',
+  `name_ch` varchar(100) NOT NULL DEFAULT '',
+  `field_en` varchar(100) NOT NULL DEFAULT '',
+  `field_ch` varchar(100) NOT NULL DEFAULT '',
+  `data_type` varchar(100) NOT NULL DEFAULT '',
+  `field_width` int(10) NOT NULL DEFAULT 0,
+  `field_sort` int(10) NOT NULL DEFAULT 0,
+  `create_name` varchar(100) NOT NULL DEFAULT '',
+  `create_time` varchar(100) NOT NULL DEFAULT '',
+  `update_name` varchar(100) NOT NULL DEFAULT '',
+  `update_time` varchar(100) NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -127,12 +135,12 @@ INSERT INTO `data_list` (`id`, `modelId`, `name`, `name_ch`, `field_en`, `field_
 
 CREATE TABLE `file_list` (
   `id` int(10) UNSIGNED NOT NULL,
-  `class_name` varchar(100) NOT NULL,
-  `name` varchar(100) NOT NULL,
-  `size` varchar(100) NOT NULL,
-  `url` varchar(100) NOT NULL,
-  `create_name` varchar(100) NOT NULL,
-  `create_time` varchar(100) NOT NULL
+  `class_name` varchar(100) NOT NULL DEFAULT '',
+  `name` varchar(100) NOT NULL DEFAULT '',
+  `size` varchar(100) NOT NULL DEFAULT '',
+  `url` varchar(100) NOT NULL DEFAULT '',
+  `create_name` varchar(100) NOT NULL DEFAULT '',
+  `create_time` varchar(100) NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -151,13 +159,13 @@ INSERT INTO `file_list` (`id`, `class_name`, `name`, `size`, `url`, `create_name
 
 CREATE TABLE `http_test` (
   `id` int(6) UNSIGNED NOT NULL,
-  `firstname` varchar(30) NOT NULL,
-  `lastname` varchar(30) NOT NULL,
-  `email` varchar(50) NOT NULL,
-  `create_time` varchar(30) NOT NULL,
-  `update_time` varchar(30) NOT NULL,
-  `create_name` varchar(30) NOT NULL,
-  `update_name` varchar(30) NOT NULL
+  `firstname` varchar(30) NOT NULL DEFAULT '',
+  `lastname` varchar(30) NOT NULL DEFAULT '',
+  `email` varchar(50) NOT NULL DEFAULT '',
+  `create_time` varchar(30) NOT NULL DEFAULT '',
+  `update_time` varchar(30) NOT NULL DEFAULT '',
+  `create_name` varchar(30) NOT NULL DEFAULT '',
+  `update_name` varchar(30) NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -180,18 +188,18 @@ INSERT INTO `http_test` (`id`, `firstname`, `lastname`, `email`, `create_time`, 
 
 CREATE TABLE `model_list` (
   `id` int(6) UNSIGNED NOT NULL,
-  `name` varchar(100) NOT NULL,
-  `level` int(10) NOT NULL,
-  `parentId` int(6) NOT NULL,
-  `position` varchar(100) NOT NULL,
-  `sort` int(10) NOT NULL,
-  `href` varchar(100) NOT NULL,
-  `iconfont` varchar(100) NOT NULL,
-  `show` varchar(100) NOT NULL,
-  `create_name` varchar(100) NOT NULL,
-  `create_time` varchar(100) NOT NULL,
-  `update_name` varchar(100) NOT NULL,
-  `update_time` varchar(100) NOT NULL
+  `name` varchar(100) NOT NULL DEFAULT '',
+  `level` int(10) NOT NULL DEFAULT 0,
+  `parentId` int(6) NOT NULL DEFAULT 0,
+  `position` varchar(100) NOT NULL DEFAULT '',
+  `sort` int(10) NOT NULL DEFAULT 0,
+  `href` varchar(100) NOT NULL DEFAULT '',
+  `iconfont` varchar(100) NOT NULL DEFAULT '',
+  `show` varchar(100) NOT NULL DEFAULT '',
+  `create_name` varchar(100) NOT NULL DEFAULT '',
+  `create_time` varchar(100) NOT NULL DEFAULT '',
+  `update_name` varchar(100) NOT NULL DEFAULT '',
+  `update_time` varchar(100) NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -219,13 +227,13 @@ INSERT INTO `model_list` (`id`, `name`, `level`, `parentId`, `position`, `sort`,
 
 CREATE TABLE `model_list_fn` (
   `id` int(10) UNSIGNED NOT NULL,
-  `model_id` int(6) NOT NULL,
-  `model_name` varchar(100) NOT NULL,
-  `db_name` varchar(100) NOT NULL,
-  `function_ch` varchar(100) NOT NULL,
-  `function_en` varchar(100) NOT NULL,
-  `create_name` varchar(100) NOT NULL,
-  `create_time` varchar(100) NOT NULL
+  `model_id` int(6) NOT NULL DEFAULT 0,
+  `model_name` varchar(100) NOT NULL DEFAULT '',
+  `db_name` varchar(100) NOT NULL DEFAULT '',
+  `function_ch` varchar(100) NOT NULL DEFAULT '',
+  `function_en` varchar(100) NOT NULL DEFAULT '',
+  `create_name` varchar(100) NOT NULL DEFAULT '',
+  `create_time` varchar(100) NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -272,15 +280,15 @@ INSERT INTO `model_list_fn` (`id`, `model_id`, `model_name`, `db_name`, `functio
 
 CREATE TABLE `power_list` (
   `id` int(10) UNSIGNED NOT NULL,
-  `power_id` int(10) NOT NULL,
-  `power_name` varchar(100) NOT NULL,
-  `model_id` int(6) NOT NULL,
-  `model_name` varchar(100) NOT NULL,
-  `db_name` varchar(100) NOT NULL,
-  `function_ch` varchar(100) NOT NULL,
-  `function_en` varchar(100) NOT NULL,
-  `create_name` varchar(100) NOT NULL,
-  `create_time` varchar(100) NOT NULL
+  `power_id` int(10) NOT NULL DEFAULT 0,
+  `power_name` varchar(100) NOT NULL DEFAULT '',
+  `model_id` int(6) NOT NULL DEFAULT 0,
+  `model_name` varchar(100) NOT NULL DEFAULT '',
+  `db_name` varchar(100) NOT NULL DEFAULT '',
+  `function_ch` varchar(100) NOT NULL DEFAULT '',
+  `function_en` varchar(100) NOT NULL DEFAULT '',
+  `create_name` varchar(100) NOT NULL DEFAULT '',
+  `create_time` varchar(100) NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -336,16 +344,16 @@ INSERT INTO `power_list` (`id`, `power_id`, `power_name`, `model_id`, `model_nam
 
 CREATE TABLE `record_list` (
   `id` int(6) UNSIGNED NOT NULL,
-  `username` varchar(100) NOT NULL,
-  `modelId` int(10) NOT NULL,
-  `dbName` varchar(100) NOT NULL,
-  `dbName_ch` varchar(100) NOT NULL,
-  `action` varchar(100) NOT NULL,
-  `content` varchar(1000) NOT NULL,
-  `os` varchar(100) NOT NULL,
-  `px` varchar(100) NOT NULL,
-  `ip` varchar(100) NOT NULL,
-  `time` varchar(100) NOT NULL
+  `username` varchar(100) NOT NULL DEFAULT '',
+  `modelId` int(10) NOT NULL DEFAULT 0,
+  `dbName` varchar(100) NOT NULL DEFAULT '',
+  `dbName_ch` varchar(100) NOT NULL DEFAULT '',
+  `action` varchar(100) NOT NULL DEFAULT '',
+  `content` varchar(1000) NOT NULL DEFAULT '',
+  `os` varchar(100) NOT NULL DEFAULT '',
+  `px` varchar(100) NOT NULL DEFAULT '',
+  `ip` varchar(100) NOT NULL DEFAULT '',
+  `time` varchar(100) NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -461,11 +469,11 @@ INSERT INTO `record_list` (`id`, `username`, `modelId`, `dbName`, `dbName_ch`, `
 
 CREATE TABLE `role_class` (
   `id` int(10) UNSIGNED NOT NULL,
-  `class_name` varchar(100) NOT NULL,
-  `create_name` varchar(100) NOT NULL,
-  `create_time` varchar(100) NOT NULL,
-  `update_name` varchar(100) NOT NULL,
-  `update_time` varchar(100) NOT NULL
+  `class_name` varchar(100) NOT NULL DEFAULT '',
+  `create_name` varchar(100) NOT NULL DEFAULT '',
+  `create_time` varchar(100) NOT NULL DEFAULT '',
+  `update_name` varchar(100) NOT NULL DEFAULT '',
+  `update_time` varchar(100) NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -486,23 +494,23 @@ INSERT INTO `role_class` (`id`, `class_name`, `create_name`, `create_time`, `upd
 
 CREATE TABLE `sale_list` (
   `id` int(10) UNSIGNED NOT NULL,
-  `create_name` varchar(100) NOT NULL,
-  `create_time` varchar(100) NOT NULL,
-  `update_name` varchar(100) NOT NULL,
-  `update_time` varchar(100) NOT NULL,
-  `name` varchar(100) NOT NULL,
-  `m1` int(11) NOT NULL,
-  `m2` int(11) NOT NULL,
-  `m3` int(11) NOT NULL,
-  `m4` int(11) NOT NULL,
-  `m5` int(11) NOT NULL,
-  `m6` int(11) NOT NULL,
-  `m7` int(11) NOT NULL,
-  `m8` int(11) NOT NULL,
-  `m9` int(11) NOT NULL,
-  `m10` int(11) NOT NULL,
-  `m11` int(11) NOT NULL,
-  `m12` int(11) NOT NULL
+  `create_name` varchar(100) NOT NULL DEFAULT '',
+  `create_time` varchar(100) NOT NULL DEFAULT '',
+  `update_name` varchar(100) NOT NULL DEFAULT '',
+  `update_time` varchar(100) NOT NULL DEFAULT '',
+  `name` varchar(100) NOT NULL DEFAULT '',
+  `m1` int(11) NOT NULL DEFAULT 0,
+  `m2` int(11) NOT NULL DEFAULT 0,
+  `m3` int(11) NOT NULL DEFAULT 0,
+  `m4` int(11) NOT NULL DEFAULT 0,
+  `m5` int(11) NOT NULL DEFAULT 0,
+  `m6` int(11) NOT NULL DEFAULT 0,
+  `m7` int(11) NOT NULL DEFAULT 0,
+  `m8` int(11) NOT NULL DEFAULT 0,
+  `m9` int(11) NOT NULL DEFAULT 0,
+  `m10` int(11) NOT NULL DEFAULT 0,
+  `m11` int(11) NOT NULL DEFAULT 0,
+  `m12` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -521,18 +529,18 @@ INSERT INTO `sale_list` (`id`, `create_name`, `create_time`, `update_name`, `upd
 
 CREATE TABLE `user_list` (
   `id` int(6) UNSIGNED NOT NULL,
-  `username` varchar(100) NOT NULL,
-  `password` varchar(100) NOT NULL,
-  `name` varchar(100) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `phone` varchar(100) NOT NULL,
-  `sex` varchar(100) NOT NULL,
-  `age` int(10) NOT NULL,
-  `create_name` varchar(100) NOT NULL,
-  `create_time` varchar(100) NOT NULL,
-  `roleId` int(6) NOT NULL,
-  `update_name` varchar(100) NOT NULL,
-  `update_time` varchar(100) NOT NULL
+  `username` varchar(100) NOT NULL DEFAULT '',
+  `password` varchar(100) NOT NULL DEFAULT '',
+  `name` varchar(100) NOT NULL DEFAULT '',
+  `email` varchar(100) NOT NULL DEFAULT '',
+  `phone` varchar(100) NOT NULL DEFAULT '',
+  `sex` varchar(100) NOT NULL DEFAULT '',
+  `age` int(10) NOT NULL DEFAULT 0,
+  `create_name` varchar(100) NOT NULL DEFAULT '',
+  `create_time` varchar(100) NOT NULL DEFAULT '',
+  `roleId` int(6) NOT NULL DEFAULT 0,
+  `update_name` varchar(100) NOT NULL DEFAULT '',
+  `update_time` varchar(100) NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --

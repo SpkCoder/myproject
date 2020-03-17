@@ -321,7 +321,7 @@ router.post('/', function(req, res, next) {
 		    console.log(result);
 		    
 		    //重启server
-		    //myServer.restart();
+		    myServer.restart();
 		}).catch(function(data){
 		    console.log(data);
 		});
@@ -433,7 +433,7 @@ router.post('/', function(req, res, next) {
 		    console.log(result);
 		    
 		    //重启server
-		    //myServer.restart();
+		    myServer.restart();
 		}).catch(function(data){
 		    console.log(data);
 		});

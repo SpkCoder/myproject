@@ -319,7 +319,7 @@ export default {
 
             //系统重启
             _this.showloading = true;
-            _this.showloadingTime = 5;
+            _this.showloadingTime = 60;
             var timer = setInterval(function () {
               _this.showloadingTime-=1;
               if(_this.showloadingTime==0){
@@ -370,7 +370,7 @@ export default {
 
                   //系统重启
                   _this.showloading = true;
-                  _this.showloadingTime = 5;
+                  _this.showloadingTime = 60;
                   var timer = setInterval(function () {
                     _this.showloadingTime-=1;
                     if(_this.showloadingTime==0){

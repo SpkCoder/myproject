@@ -142,13 +142,9 @@ class model(object):
         else:
             return make_response('操作失败')
 
-    # vue-cli-admin打包
+    # 重启server
     def p_work(self):
-        print("vue-cli-admin打包")
-        build_path = os.path.dirname(os.path.dirname(__file__)) + "/static/vue-cli-admin/build/build.js"
-        print(build_path)
-        # os.system("node " + build_path)
-        os.system("curl http://localhost:4040/python/vue_build")
+        time.sleep(2)
         # 重启server
         print("重启server")
         uwsgi.reload()
@@ -197,6 +193,8 @@ class model(object):
             print("写入urls.py成功")
         f.closed
 
+        print("vue-cli-admin打包")
+        os.system("./run_build.sh")
         p = Process(target=self.p_work, args=())
         p.start()
         return make_response('操作成功')
@@ -244,6 +242,8 @@ class model(object):
             print("写入urls.py成功")
         f.closed
 
+        print("vue-cli-admin打包")
+        os.system("./run_build.sh")
         p = Process(target=self.p_work, args=())
         p.start()
         return make_response('操作成功')
@@ -335,14 +335,14 @@ class model(object):
         else:
             # 给数据表插入列
             if list_data[0]['data_type'] == 'int' or list_data[0]['data_type'] == 'int(6)':
-                data_type = list_data[0]['data_type']
+                data_type = list_data[0]['data_type'] + ' not null default 0'
             elif list_data[0]['data_type'] == 'textarea':
-                data_type = 'VARCHAR(3000)'
+                data_type = 'VARCHAR(3000) not null default ""'
             elif list_data[0]['data_type'] == 'decimal(2)' or list_data[0]['data_type'] == 'decimal(4)':
-                data_type = 'FLOAT'
+                data_type = 'FLOAT not null default 0'
             else:
-                data_type = 'VARCHAR(100)'
-            str_data = 'add ' + list_data[0]['field_en'] + ' ' + data_type + ' not null'
+                data_type = 'VARCHAR(100) not null default ""'
+            str_data = 'add ' + list_data[0]['field_en'] + ' ' + data_type
             result = mysqldb.update_col(table_this_name, str_data)
             print("插入列完成")
             if not result:

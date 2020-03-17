@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from flask import make_response
 from flaskApp.my_modules import mysqldb
+from multiprocessing import Process
 import json
 import time
 import re
@@ -97,6 +98,12 @@ def operation(req):
         else:
             return make_response('操作失败')
 
+    # 重启server
+    def p_work():
+        time.sleep(2)
+        # 重启server
+        print("重启server")
+        uwsgi.reload()
 
     # 复制前后端代码文件
     def copy_file_fn(this_table_name):
@@ -141,9 +148,8 @@ def operation(req):
             print("写入urls.py成功")
         f.closed
 
-        # 重启server
-        uwsgi.reload()
-        print("重启server")
+        p = Process(target=p_work, args=())
+        p.start()
         return make_response('操作成功')
 
     # 删除前后端代码文件
@@ -187,9 +193,8 @@ def operation(req):
             print("写入urls.py成功")
         f.closed
 
-        # 重启server
-        uwsgi.reload()
-        print("重启server")
+        p = Process(target=p_work, args=())
+        p.start()
         return make_response('操作成功')
 
     # 插入list_data

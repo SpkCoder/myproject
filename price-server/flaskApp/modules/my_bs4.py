@@ -68,7 +68,7 @@ class model():
         return self.list_data
 
     def run(self):
-        Timer(12*3600, self.run).start()
+        Timer(24*3600, self.run).start()
         try:
             self.get_download_url()
             for i in self.urls:

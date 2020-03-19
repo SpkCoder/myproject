@@ -1,0 +1,180 @@
+Fri, 28 Feb 2020 14:14:32 _internal.py[line:97] INFO  * Running on http://0.0.0.0:8866/ (Press CTRL+C to quit)
+Fri, 28 Feb 2020 14:15:44 _internal.py[line:97] INFO 127.0.0.1 - - [28/Feb/2020 14:15:44] "GET / HTTP/1.1" 200 -
+Fri, 28 Feb 2020 14:15:46 main.py[line:39] INFO request: /api/python/light_power_list
+Fri, 28 Feb 2020 14:15:46 main.py[line:47] INFO {'action': 'findData', 'whereJson': {'group_type': 'M', 'pon_name': '杭州市余杭县美特钢构机房-华为OLT05-00-03-GPBD-PON1'}}
+Fri, 28 Feb 2020 14:15:47 _internal.py[line:97] INFO 127.0.0.1 - - [28/Feb/2020 14:15:47] "GET /favicon.ico HTTP/1.1" 304 -
+Fri, 28 Feb 2020 14:15:47 db_mysql.py[line:198] DEBUG sql_count: 
+Fri, 28 Feb 2020 14:15:47 db_mysql.py[line:199] DEBUG sql: select time, password, pon_name, power_receive, power_send from light_power_list where pon_name = "杭州市余杭县美特钢构机房-华为OLT05-00-03-GPBD-PON1" group by time,password order by time asc
+Fri, 28 Feb 2020 14:15:48 db_mysql.py[line:217] DEBUG sql_count_time: 0
+Fri, 28 Feb 2020 14:15:48 db_mysql.py[line:218] DEBUG sql_time: 0.7848806381225586
+Fri, 28 Feb 2020 14:15:48 _internal.py[line:97] INFO 127.0.0.1 - - [28/Feb/2020 14:15:48] "GET /api/python/light_power_list?params=%7B%22action%22:%22findData%22,%22whereJson%22:%7B%22group_type%22:%22M%22,%22pon_name%22:%22杭州市余杭县美特钢构机房-华为OLT05-00-03-GPBD-PON1%22%7D%7D HTTP/1.1" 200 -
+Fri, 28 Feb 2020 14:16:32 _internal.py[line:97] INFO 127.0.0.1 - - [28/Feb/2020 14:16:32] "GET / HTTP/1.1" 200 -
+Fri, 28 Feb 2020 14:16:32 main.py[line:39] INFO request: /api/python/light_power_list
+Fri, 28 Feb 2020 14:16:32 main.py[line:47] INFO {'action': 'findData', 'whereJson': {'group_type': 'M', 'pon_name': '杭州市余杭县美特钢构机房-华为OLT05-00-03-GPBD-PON1'}}
+Fri, 28 Feb 2020 14:16:33 _internal.py[line:97] INFO 127.0.0.1 - - [28/Feb/2020 14:16:33] "GET /favicon.ico HTTP/1.1" 200 -
+Fri, 28 Feb 2020 14:16:33 db_mysql.py[line:198] DEBUG sql_count: 
+Fri, 28 Feb 2020 14:16:33 db_mysql.py[line:199] DEBUG sql: select time, password, pon_name, power_receive, power_send from light_power_list where pon_name = "杭州市余杭县美特钢构机房-华为OLT05-00-03-GPBD-PON1" group by time,password order by time asc
+Fri, 28 Feb 2020 14:16:34 db_mysql.py[line:217] DEBUG sql_count_time: 0
+Fri, 28 Feb 2020 14:16:34 db_mysql.py[line:218] DEBUG sql_time: 0.8776237964630127
+Fri, 28 Feb 2020 14:16:34 _internal.py[line:97] INFO 127.0.0.1 - - [28/Feb/2020 14:16:34] "GET /api/python/light_power_list?params=%7B%22action%22:%22findData%22,%22whereJson%22:%7B%22group_type%22:%22M%22,%22pon_name%22:%22杭州市余杭县美特钢构机房-华为OLT05-00-03-GPBD-PON1%22%7D%7D HTTP/1.1" 200 -
+Fri, 28 Feb 2020 14:19:11 _internal.py[line:97] INFO 127.0.0.1 - - [28/Feb/2020 14:19:11] "GET /index2.html HTTP/1.1" 200 -
+Fri, 28 Feb 2020 14:19:12 main.py[line:39] INFO request: /api/python/light_power_list
+Fri, 28 Feb 2020 14:19:12 main.py[line:47] INFO {'action': 'findData', 'whereJson': {'group_type': 'M', 'pon_name': '杭州市余杭县美特钢构机房-华为OLT05-00-03-GPBD-PON1'}}
+Fri, 28 Feb 2020 14:19:12 db_mysql.py[line:198] DEBUG sql_count: 
+Fri, 28 Feb 2020 14:19:12 db_mysql.py[line:199] DEBUG sql: select time, password, pon_name, power_receive, power_send from light_power_list where pon_name = "杭州市余杭县美特钢构机房-华为OLT05-00-03-GPBD-PON1" group by time,password order by time asc
+Fri, 28 Feb 2020 14:19:13 db_mysql.py[line:217] DEBUG sql_count_time: 0
+Fri, 28 Feb 2020 14:19:13 db_mysql.py[line:218] DEBUG sql_time: 0.7846188545227051
+Fri, 28 Feb 2020 14:19:13 _internal.py[line:97] INFO 127.0.0.1 - - [28/Feb/2020 14:19:13] "GET /api/python/light_power_list?params=%7B%22action%22:%22findData%22,%22whereJson%22:%7B%22group_type%22:%22M%22,%22pon_name%22:%22杭州市余杭县美特钢构机房-华为OLT05-00-03-GPBD-PON1%22%7D%7D HTTP/1.1" 200 -
+Fri, 28 Feb 2020 14:19:28 _internal.py[line:97] INFO 127.0.0.1 - - [28/Feb/2020 14:19:28] "GET /index4.html HTTP/1.1" 200 -
+Fri, 28 Feb 2020 14:19:30 main.py[line:39] INFO request: /api/python/light_distance_list
+Fri, 28 Feb 2020 14:19:30 main.py[line:47] INFO {'action': 'findData', 'whereJson': {'pon_name': '杭州市余杭县美特钢构机房-华为OLT05-00-03-GPBD-PON1'}}
+Fri, 28 Feb 2020 14:19:30 db_mysql.py[line:198] DEBUG sql_count: 
+Fri, 28 Feb 2020 14:19:30 db_mysql.py[line:199] DEBUG sql: select password, pon_name from light_power_list where pon_name = "杭州市余杭县美特钢构机房-华为OLT05-00-03-GPBD-PON1" group by password order by time asc
+Fri, 28 Feb 2020 14:19:31 db_mysql.py[line:217] DEBUG sql_count_time: 0
+Fri, 28 Feb 2020 14:19:31 db_mysql.py[line:218] DEBUG sql_time: 0.38158440589904785
+Fri, 28 Feb 2020 14:19:31 db_mysql.py[line:198] DEBUG sql_count: 
+Fri, 28 Feb 2020 14:19:31 db_mysql.py[line:199] DEBUG sql: select password, distance from light_distance_list where password in ('m3239157rz', 'm17973840u', 'm57093131a', 'k9976620zh', 'm1825589vc', 'k97564415i', 'k9960901fx', 'k9817373x0', 'k977507579', 'm1880102xx', 'm1880001mt', 'm1363500as', 'k9621321v6', 'j67962876x', 'j0951001sc', 'k8402301re', 'm172068110', 'm1828120jr', 'm60754478e', 'j6800545q9', 'm1292608y0', 'm1479946v0', 'k9814807r0', 'k1733994nh', 'k7619290zw', 'm2055317x9', 'm1787334xw', 'm1732715vm', 'm3564611r0', 'k7903012e0', 'm1737178u7', 'm6698403b3', 'm1900424ka', 'k9865913w6', 'k9135855n0', 'k6670085b7', 'm1747317pg', 'k9561396a5', 'j7214871xq', 'k9288997vy', 'm1801229ex') group by password
+Fri, 28 Feb 2020 14:19:31 db_mysql.py[line:217] DEBUG sql_count_time: 0
+Fri, 28 Feb 2020 14:19:31 db_mysql.py[line:218] DEBUG sql_time: 0.02086043357849121
+Fri, 28 Feb 2020 14:19:31 _internal.py[line:97] INFO 127.0.0.1 - - [28/Feb/2020 14:19:31] "GET /api/python/light_distance_list?params=%7B%22action%22:%22findData%22,%22whereJson%22:%7B%22pon_name%22:%22杭州市余杭县美特钢构机房-华为OLT05-00-03-GPBD-PON1%22%7D%7D HTTP/1.1" 200 -
+Fri, 28 Feb 2020 14:21:34 _internal.py[line:97] INFO 127.0.0.1 - - [28/Feb/2020 14:21:34] "GET /index4.html HTTP/1.1" 200 -
+Fri, 28 Feb 2020 14:21:34 main.py[line:39] INFO request: /api/python/light_distance_list
+Fri, 28 Feb 2020 14:21:34 main.py[line:47] INFO {'action': 'findData', 'whereJson': {'pon_name': '杭州市余杭县美特钢构机房-华为OLT05-00-03-GPBD-PON1'}}
+Fri, 28 Feb 2020 14:21:34 _internal.py[line:97] INFO 127.0.0.1 - - [28/Feb/2020 14:21:34] "GET /favicon.ico HTTP/1.1" 200 -
+Fri, 28 Feb 2020 14:21:35 db_mysql.py[line:198] DEBUG sql_count: 
+Fri, 28 Feb 2020 14:21:35 db_mysql.py[line:199] DEBUG sql: select password, pon_name from light_power_list where pon_name = "杭州市余杭县美特钢构机房-华为OLT05-00-03-GPBD-PON1" group by password order by time asc
+Fri, 28 Feb 2020 14:21:35 db_mysql.py[line:217] DEBUG sql_count_time: 0
+Fri, 28 Feb 2020 14:21:35 db_mysql.py[line:218] DEBUG sql_time: 0.3480260372161865
+Fri, 28 Feb 2020 14:21:35 db_mysql.py[line:198] DEBUG sql_count: 
+Fri, 28 Feb 2020 14:21:35 db_mysql.py[line:199] DEBUG sql: select password, distance from light_distance_list where password in ('m3239157rz', 'm17973840u', 'm57093131a', 'k9976620zh', 'm1825589vc', 'k97564415i', 'k9960901fx', 'k9817373x0', 'k977507579', 'm1880102xx', 'm1880001mt', 'm1363500as', 'k9621321v6', 'j67962876x', 'j0951001sc', 'k8402301re', 'm172068110', 'm1828120jr', 'm60754478e', 'j6800545q9', 'm1292608y0', 'm1479946v0', 'k9814807r0', 'k1733994nh', 'k7619290zw', 'm2055317x9', 'm1787334xw', 'm1732715vm', 'm3564611r0', 'k7903012e0', 'm1737178u7', 'm6698403b3', 'm1900424ka', 'k9865913w6', 'k9135855n0', 'k6670085b7', 'm1747317pg', 'k9561396a5', 'j7214871xq', 'k9288997vy', 'm1801229ex') group by password
+Fri, 28 Feb 2020 14:21:35 db_mysql.py[line:217] DEBUG sql_count_time: 0
+Fri, 28 Feb 2020 14:21:35 db_mysql.py[line:218] DEBUG sql_time: 0.019358396530151367
+Fri, 28 Feb 2020 14:21:35 _internal.py[line:97] INFO 127.0.0.1 - - [28/Feb/2020 14:21:35] "GET /api/python/light_distance_list?params=%7B%22action%22:%22findData%22,%22whereJson%22:%7B%22pon_name%22:%22杭州市余杭县美特钢构机房-华为OLT05-00-03-GPBD-PON1%22%7D%7D HTTP/1.1" 200 -
+Fri, 28 Feb 2020 14:40:45 _internal.py[line:97] INFO 127.0.0.1 - - [28/Feb/2020 14:40:45] "GET / HTTP/1.1" 200 -
+Fri, 28 Feb 2020 14:40:46 main.py[line:39] INFO request: /api/python/light_power_list
+Fri, 28 Feb 2020 14:40:46 main.py[line:47] INFO {'action': 'findData', 'whereJson': {'group_type': 'M', 'pon_name': '杭州市余杭县美特钢构机房-华为OLT05-00-03-GPBD-PON1'}}
+Fri, 28 Feb 2020 14:40:46 _internal.py[line:97] INFO 127.0.0.1 - - [28/Feb/2020 14:40:46] "GET /favicon.ico HTTP/1.1" 200 -
+Fri, 28 Feb 2020 14:40:47 db_mysql.py[line:198] DEBUG sql_count: 
+Fri, 28 Feb 2020 14:40:47 db_mysql.py[line:199] DEBUG sql: select time, password, pon_name, power_receive, power_send from light_power_list where pon_name = "杭州市余杭县美特钢构机房-华为OLT05-00-03-GPBD-PON1" group by time,password order by time asc
+Fri, 28 Feb 2020 14:40:48 db_mysql.py[line:217] DEBUG sql_count_time: 0
+Fri, 28 Feb 2020 14:40:48 db_mysql.py[line:218] DEBUG sql_time: 1.2559711933135986
+Fri, 28 Feb 2020 14:40:48 _internal.py[line:97] INFO 127.0.0.1 - - [28/Feb/2020 14:40:48] "GET /api/python/light_power_list?params=%7B%22action%22:%22findData%22,%22whereJson%22:%7B%22group_type%22:%22M%22,%22pon_name%22:%22杭州市余杭县美特钢构机房-华为OLT05-00-03-GPBD-PON1%22%7D%7D HTTP/1.1" 200 -
+Fri, 28 Feb 2020 14:45:55 _internal.py[line:97] INFO 127.0.0.1 - - [28/Feb/2020 14:45:55] "GET / HTTP/1.1" 200 -
+Fri, 28 Feb 2020 14:46:15 _internal.py[line:97] INFO 127.0.0.1 - - [28/Feb/2020 14:46:15] "GET /favicon.ico HTTP/1.1" 200 -
+Fri, 28 Feb 2020 14:47:25 _internal.py[line:97] INFO 127.0.0.1 - - [28/Feb/2020 14:47:25] "GET / HTTP/1.1" 200 -
+Fri, 28 Feb 2020 14:47:30 main.py[line:39] INFO request: /api/python/light_power_list
+Fri, 28 Feb 2020 14:47:30 main.py[line:47] INFO {'action': 'findData', 'whereJson': {'group_type': 'M', 'pon_name': '杭州市余杭县美特钢构机房-华为OLT05-00-03-GPBD-PON1'}}
+Fri, 28 Feb 2020 14:47:30 _internal.py[line:97] INFO 127.0.0.1 - - [28/Feb/2020 14:47:30] "GET /favicon.ico HTTP/1.1" 200 -
+Fri, 28 Feb 2020 14:47:30 db_mysql.py[line:198] DEBUG sql_count: 
+Fri, 28 Feb 2020 14:47:30 db_mysql.py[line:199] DEBUG sql: select time, password, pon_name, power_receive, power_send from light_power_list where pon_name = "杭州市余杭县美特钢构机房-华为OLT05-00-03-GPBD-PON1" group by time,password order by time asc
+Fri, 28 Feb 2020 14:47:31 db_mysql.py[line:217] DEBUG sql_count_time: 0
+Fri, 28 Feb 2020 14:47:31 db_mysql.py[line:218] DEBUG sql_time: 1.2244939804077148
+Fri, 28 Feb 2020 14:47:32 _internal.py[line:97] INFO 127.0.0.1 - - [28/Feb/2020 14:47:32] "GET /api/python/light_power_list?params=%7B%22action%22:%22findData%22,%22whereJson%22:%7B%22group_type%22:%22M%22,%22pon_name%22:%22杭州市余杭县美特钢构机房-华为OLT05-00-03-GPBD-PON1%22%7D%7D HTTP/1.1" 200 -
+Fri, 28 Feb 2020 14:50:12 _internal.py[line:97] INFO 127.0.0.1 - - [28/Feb/2020 14:50:12] "GET / HTTP/1.1" 200 -
+Fri, 28 Feb 2020 14:50:14 main.py[line:39] INFO request: /api/python/light_power_list
+Fri, 28 Feb 2020 14:50:14 main.py[line:47] INFO {'action': 'findData', 'whereJson': {'group_type': 'M', 'pon_name': '杭州市余杭县美特钢构机房-华为OLT05-00-03-GPBD-PON1'}}
+Fri, 28 Feb 2020 14:50:14 _internal.py[line:97] INFO 127.0.0.1 - - [28/Feb/2020 14:50:14] "GET /favicon.ico HTTP/1.1" 200 -
+Fri, 28 Feb 2020 14:50:14 db_mysql.py[line:198] DEBUG sql_count: 
+Fri, 28 Feb 2020 14:50:14 db_mysql.py[line:199] DEBUG sql: select time, password, pon_name, power_receive, power_send from light_power_list where pon_name = "杭州市余杭县美特钢构机房-华为OLT05-00-03-GPBD-PON1" group by time,password order by time asc
+Fri, 28 Feb 2020 14:50:16 db_mysql.py[line:217] DEBUG sql_count_time: 0
+Fri, 28 Feb 2020 14:50:16 db_mysql.py[line:218] DEBUG sql_time: 1.083301305770874
+Fri, 28 Feb 2020 14:50:16 _internal.py[line:97] INFO 127.0.0.1 - - [28/Feb/2020 14:50:16] "GET /api/python/light_power_list?params=%7B%22action%22:%22findData%22,%22whereJson%22:%7B%22group_type%22:%22M%22,%22pon_name%22:%22杭州市余杭县美特钢构机房-华为OLT05-00-03-GPBD-PON1%22%7D%7D HTTP/1.1" 200 -
+Fri, 28 Feb 2020 14:52:38 _internal.py[line:97] INFO 127.0.0.1 - - [28/Feb/2020 14:52:38] "GET / HTTP/1.1" 200 -
+Fri, 28 Feb 2020 14:52:40 main.py[line:39] INFO request: /api/python/light_power_list
+Fri, 28 Feb 2020 14:52:40 main.py[line:47] INFO {'action': 'findData', 'whereJson': {'group_type': 'M', 'pon_name': '杭州市余杭县美特钢构机房-华为OLT05-00-03-GPBD-PON1'}}
+Fri, 28 Feb 2020 14:52:40 _internal.py[line:97] INFO 127.0.0.1 - - [28/Feb/2020 14:52:40] "GET /favicon.ico HTTP/1.1" 200 -
+Fri, 28 Feb 2020 14:52:40 db_mysql.py[line:198] DEBUG sql_count: 
+Fri, 28 Feb 2020 14:52:40 db_mysql.py[line:199] DEBUG sql: select time, password, pon_name, power_receive, power_send from light_power_list where pon_name = "杭州市余杭县美特钢构机房-华为OLT05-00-03-GPBD-PON1" group by time,password order by time asc
+Fri, 28 Feb 2020 14:52:42 db_mysql.py[line:217] DEBUG sql_count_time: 0
+Fri, 28 Feb 2020 14:52:42 db_mysql.py[line:218] DEBUG sql_time: 1.1619343757629395
+Fri, 28 Feb 2020 14:52:42 _internal.py[line:97] INFO 127.0.0.1 - - [28/Feb/2020 14:52:42] "GET /api/python/light_power_list?params=%7B%22action%22:%22findData%22,%22whereJson%22:%7B%22group_type%22:%22M%22,%22pon_name%22:%22杭州市余杭县美特钢构机房-华为OLT05-00-03-GPBD-PON1%22%7D%7D HTTP/1.1" 200 -
+Fri, 28 Feb 2020 14:53:11 _internal.py[line:97] INFO 127.0.0.1 - - [28/Feb/2020 14:53:11] "GET / HTTP/1.1" 200 -
+Fri, 28 Feb 2020 14:53:11 main.py[line:39] INFO request: /api/python/light_power_list
+Fri, 28 Feb 2020 14:53:11 main.py[line:47] INFO {'action': 'findData', 'whereJson': {'group_type': 'M', 'pon_name': '杭州市余杭县美特钢构机房-华为OLT05-00-03-GPBD-PON1'}}
+Fri, 28 Feb 2020 14:53:11 _internal.py[line:97] INFO 127.0.0.1 - - [28/Feb/2020 14:53:11] "GET /favicon.ico HTTP/1.1" 200 -
+Fri, 28 Feb 2020 14:53:12 db_mysql.py[line:198] DEBUG sql_count: 
+Fri, 28 Feb 2020 14:53:12 db_mysql.py[line:199] DEBUG sql: select time, password, pon_name, power_receive, power_send from light_power_list where pon_name = "杭州市余杭县美特钢构机房-华为OLT05-00-03-GPBD-PON1" group by time,password order by time asc
+Fri, 28 Feb 2020 14:53:13 db_mysql.py[line:217] DEBUG sql_count_time: 0
+Fri, 28 Feb 2020 14:53:13 db_mysql.py[line:218] DEBUG sql_time: 1.0260450839996338
+Fri, 28 Feb 2020 14:53:13 _internal.py[line:97] INFO 127.0.0.1 - - [28/Feb/2020 14:53:13] "GET /api/python/light_power_list?params=%7B%22action%22:%22findData%22,%22whereJson%22:%7B%22group_type%22:%22M%22,%22pon_name%22:%22杭州市余杭县美特钢构机房-华为OLT05-00-03-GPBD-PON1%22%7D%7D HTTP/1.1" 200 -
+Fri, 28 Feb 2020 14:54:39 _internal.py[line:97] INFO 127.0.0.1 - - [28/Feb/2020 14:54:39] "GET / HTTP/1.1" 200 -
+Fri, 28 Feb 2020 14:54:41 main.py[line:39] INFO request: /api/python/light_power_list
+Fri, 28 Feb 2020 14:54:41 main.py[line:47] INFO {'action': 'findData', 'whereJson': {'group_type': 'M', 'pon_name': '杭州市余杭县美特钢构机房-华为OLT05-00-03-GPBD-PON1'}}
+Fri, 28 Feb 2020 14:54:41 _internal.py[line:97] INFO 127.0.0.1 - - [28/Feb/2020 14:54:41] "GET /favicon.ico HTTP/1.1" 200 -
+Fri, 28 Feb 2020 14:54:41 db_mysql.py[line:198] DEBUG sql_count: 
+Fri, 28 Feb 2020 14:54:41 db_mysql.py[line:199] DEBUG sql: select time, password, pon_name, power_receive, power_send from light_power_list where pon_name = "杭州市余杭县美特钢构机房-华为OLT05-00-03-GPBD-PON1" group by time,password order by time asc
+Fri, 28 Feb 2020 14:54:42 db_mysql.py[line:217] DEBUG sql_count_time: 0
+Fri, 28 Feb 2020 14:54:42 db_mysql.py[line:218] DEBUG sql_time: 0.9176168441772461
+Fri, 28 Feb 2020 14:54:42 _internal.py[line:97] INFO 127.0.0.1 - - [28/Feb/2020 14:54:42] "GET /api/python/light_power_list?params=%7B%22action%22:%22findData%22,%22whereJson%22:%7B%22group_type%22:%22M%22,%22pon_name%22:%22杭州市余杭县美特钢构机房-华为OLT05-00-03-GPBD-PON1%22%7D%7D HTTP/1.1" 200 -
+Fri, 28 Feb 2020 14:56:00 _internal.py[line:97] INFO 127.0.0.1 - - [28/Feb/2020 14:56:00] "GET / HTTP/1.1" 200 -
+Fri, 28 Feb 2020 14:56:02 main.py[line:39] INFO request: /api/python/light_power_list
+Fri, 28 Feb 2020 14:56:02 main.py[line:47] INFO {'action': 'findData', 'whereJson': {'group_type': 'M', 'pon_name': '杭州市余杭县美特钢构机房-华为OLT05-00-03-GPBD-PON1'}}
+Fri, 28 Feb 2020 14:56:02 _internal.py[line:97] INFO 127.0.0.1 - - [28/Feb/2020 14:56:02] "GET /favicon.ico HTTP/1.1" 200 -
+Fri, 28 Feb 2020 14:56:02 db_mysql.py[line:198] DEBUG sql_count: 
+Fri, 28 Feb 2020 14:56:02 db_mysql.py[line:199] DEBUG sql: select time, password, pon_name, power_receive, power_send from light_power_list where pon_name = "杭州市余杭县美特钢构机房-华为OLT05-00-03-GPBD-PON1" group by time,password order by time asc
+Fri, 28 Feb 2020 14:56:03 db_mysql.py[line:217] DEBUG sql_count_time: 0
+Fri, 28 Feb 2020 14:56:03 db_mysql.py[line:218] DEBUG sql_time: 1.0611932277679443
+Fri, 28 Feb 2020 14:56:03 _internal.py[line:97] INFO 127.0.0.1 - - [28/Feb/2020 14:56:03] "GET /api/python/light_power_list?params=%7B%22action%22:%22findData%22,%22whereJson%22:%7B%22group_type%22:%22M%22,%22pon_name%22:%22杭州市余杭县美特钢构机房-华为OLT05-00-03-GPBD-PON1%22%7D%7D HTTP/1.1" 200 -
+Fri, 28 Feb 2020 14:57:49 _internal.py[line:97] INFO 127.0.0.1 - - [28/Feb/2020 14:57:49] "GET / HTTP/1.1" 200 -
+Fri, 28 Feb 2020 14:57:52 main.py[line:39] INFO request: /api/python/light_power_list
+Fri, 28 Feb 2020 14:57:52 main.py[line:47] INFO {'action': 'findData', 'whereJson': {'group_type': 'M', 'pon_name': '杭州市余杭县美特钢构机房-华为OLT05-00-03-GPBD-PON1'}}
+Fri, 28 Feb 2020 14:57:52 _internal.py[line:97] INFO 127.0.0.1 - - [28/Feb/2020 14:57:52] "GET /favicon.ico HTTP/1.1" 200 -
+Fri, 28 Feb 2020 14:57:52 db_mysql.py[line:198] DEBUG sql_count: 
+Fri, 28 Feb 2020 14:57:52 db_mysql.py[line:199] DEBUG sql: select time, password, pon_name, power_receive, power_send from light_power_list where pon_name = "杭州市余杭县美特钢构机房-华为OLT05-00-03-GPBD-PON1" group by time,password order by time asc
+Fri, 28 Feb 2020 14:57:53 db_mysql.py[line:217] DEBUG sql_count_time: 0
+Fri, 28 Feb 2020 14:57:53 db_mysql.py[line:218] DEBUG sql_time: 0.9736051559448242
+Fri, 28 Feb 2020 14:57:53 _internal.py[line:97] INFO 127.0.0.1 - - [28/Feb/2020 14:57:53] "GET /api/python/light_power_list?params=%7B%22action%22:%22findData%22,%22whereJson%22:%7B%22group_type%22:%22M%22,%22pon_name%22:%22杭州市余杭县美特钢构机房-华为OLT05-00-03-GPBD-PON1%22%7D%7D HTTP/1.1" 200 -
+Fri, 28 Feb 2020 14:58:48 _internal.py[line:97] INFO 127.0.0.1 - - [28/Feb/2020 14:58:48] "GET / HTTP/1.1" 200 -
+Fri, 28 Feb 2020 14:58:49 main.py[line:39] INFO request: /api/python/light_power_list
+Fri, 28 Feb 2020 14:58:49 main.py[line:47] INFO {'action': 'findData', 'whereJson': {'group_type': 'M', 'pon_name': '杭州市余杭县美特钢构机房-华为OLT05-00-03-GPBD-PON1'}}
+Fri, 28 Feb 2020 14:58:49 _internal.py[line:97] INFO 127.0.0.1 - - [28/Feb/2020 14:58:49] "GET /favicon.ico HTTP/1.1" 200 -
+Fri, 28 Feb 2020 14:58:49 db_mysql.py[line:198] DEBUG sql_count: 
+Fri, 28 Feb 2020 14:58:49 db_mysql.py[line:199] DEBUG sql: select time, password, pon_name, power_receive, power_send from light_power_list where pon_name = "杭州市余杭县美特钢构机房-华为OLT05-00-03-GPBD-PON1" group by time,password order by time asc
+Fri, 28 Feb 2020 14:58:50 db_mysql.py[line:217] DEBUG sql_count_time: 0
+Fri, 28 Feb 2020 14:58:50 db_mysql.py[line:218] DEBUG sql_time: 0.9704101085662842
+Fri, 28 Feb 2020 14:58:50 _internal.py[line:97] INFO 127.0.0.1 - - [28/Feb/2020 14:58:50] "GET /api/python/light_power_list?params=%7B%22action%22:%22findData%22,%22whereJson%22:%7B%22group_type%22:%22M%22,%22pon_name%22:%22杭州市余杭县美特钢构机房-华为OLT05-00-03-GPBD-PON1%22%7D%7D HTTP/1.1" 200 -
+Fri, 28 Feb 2020 14:59:48 _internal.py[line:97] INFO 127.0.0.1 - - [28/Feb/2020 14:59:48] "GET / HTTP/1.1" 200 -
+Fri, 28 Feb 2020 14:59:48 main.py[line:39] INFO request: /api/python/light_power_list
+Fri, 28 Feb 2020 14:59:48 main.py[line:47] INFO {'action': 'findData', 'whereJson': {'group_type': 'M', 'pon_name': '杭州市余杭县美特钢构机房-华为OLT05-00-03-GPBD-PON1'}}
+Fri, 28 Feb 2020 14:59:48 _internal.py[line:97] INFO 127.0.0.1 - - [28/Feb/2020 14:59:48] "GET /favicon.ico HTTP/1.1" 200 -
+Fri, 28 Feb 2020 14:59:50 db_mysql.py[line:198] DEBUG sql_count: 
+Fri, 28 Feb 2020 14:59:50 db_mysql.py[line:199] DEBUG sql: select time, password, pon_name, power_receive, power_send from light_power_list where pon_name = "杭州市余杭县美特钢构机房-华为OLT05-00-03-GPBD-PON1" group by time,password order by time asc
+Fri, 28 Feb 2020 14:59:51 db_mysql.py[line:217] DEBUG sql_count_time: 0
+Fri, 28 Feb 2020 14:59:51 db_mysql.py[line:218] DEBUG sql_time: 1.4935123920440674
+Fri, 28 Feb 2020 14:59:51 _internal.py[line:97] INFO 127.0.0.1 - - [28/Feb/2020 14:59:51] "GET /api/python/light_power_list?params=%7B%22action%22:%22findData%22,%22whereJson%22:%7B%22group_type%22:%22M%22,%22pon_name%22:%22杭州市余杭县美特钢构机房-华为OLT05-00-03-GPBD-PON1%22%7D%7D HTTP/1.1" 200 -
+Fri, 28 Feb 2020 15:00:27 _internal.py[line:97] INFO 127.0.0.1 - - [28/Feb/2020 15:00:27] "GET / HTTP/1.1" 200 -
+Fri, 28 Feb 2020 15:00:27 main.py[line:39] INFO request: /api/python/light_power_list
+Fri, 28 Feb 2020 15:00:27 main.py[line:47] INFO {'action': 'findData', 'whereJson': {'group_type': 'M', 'pon_name': '杭州市余杭县美特钢构机房-华为OLT05-00-03-GPBD-PON1'}}
+Fri, 28 Feb 2020 15:00:27 _internal.py[line:97] INFO 127.0.0.1 - - [28/Feb/2020 15:00:27] "GET /favicon.ico HTTP/1.1" 200 -
+Fri, 28 Feb 2020 15:00:28 db_mysql.py[line:198] DEBUG sql_count: 
+Fri, 28 Feb 2020 15:00:28 db_mysql.py[line:199] DEBUG sql: select time, password, pon_name, power_receive, power_send from light_power_list where pon_name = "杭州市余杭县美特钢构机房-华为OLT05-00-03-GPBD-PON1" group by time,password order by time asc
+Fri, 28 Feb 2020 15:00:29 db_mysql.py[line:217] DEBUG sql_count_time: 0
+Fri, 28 Feb 2020 15:00:29 db_mysql.py[line:218] DEBUG sql_time: 0.9667036533355713
+Fri, 28 Feb 2020 15:00:29 _internal.py[line:97] INFO 127.0.0.1 - - [28/Feb/2020 15:00:29] "GET /api/python/light_power_list?params=%7B%22action%22:%22findData%22,%22whereJson%22:%7B%22group_type%22:%22M%22,%22pon_name%22:%22杭州市余杭县美特钢构机房-华为OLT05-00-03-GPBD-PON1%22%7D%7D HTTP/1.1" 200 -
+Fri, 28 Feb 2020 15:02:04 _internal.py[line:97] INFO 127.0.0.1 - - [28/Feb/2020 15:02:04] "GET / HTTP/1.1" 200 -
+Fri, 28 Feb 2020 15:02:05 main.py[line:39] INFO request: /api/python/light_power_list
+Fri, 28 Feb 2020 15:02:05 main.py[line:47] INFO {'action': 'findData', 'whereJson': {'group_type': 'M', 'pon_name': '杭州市余杭县美特钢构机房-华为OLT05-00-03-GPBD-PON1'}}
+Fri, 28 Feb 2020 15:02:05 _internal.py[line:97] INFO 127.0.0.1 - - [28/Feb/2020 15:02:05] "GET /favicon.ico HTTP/1.1" 200 -
+Fri, 28 Feb 2020 15:02:06 db_mysql.py[line:198] DEBUG sql_count: 
+Fri, 28 Feb 2020 15:02:06 db_mysql.py[line:199] DEBUG sql: select time, password, pon_name, power_receive, power_send from light_power_list where pon_name = "杭州市余杭县美特钢构机房-华为OLT05-00-03-GPBD-PON1" group by time,password order by time asc
+Fri, 28 Feb 2020 15:02:07 db_mysql.py[line:217] DEBUG sql_count_time: 0
+Fri, 28 Feb 2020 15:02:07 db_mysql.py[line:218] DEBUG sql_time: 1.1771249771118164
+Fri, 28 Feb 2020 15:02:07 _internal.py[line:97] INFO 127.0.0.1 - - [28/Feb/2020 15:02:07] "GET /api/python/light_power_list?params=%7B%22action%22:%22findData%22,%22whereJson%22:%7B%22group_type%22:%22M%22,%22pon_name%22:%22杭州市余杭县美特钢构机房-华为OLT05-00-03-GPBD-PON1%22%7D%7D HTTP/1.1" 200 -
+Fri, 28 Feb 2020 15:02:36 _internal.py[line:97] INFO 127.0.0.1 - - [28/Feb/2020 15:02:36] "GET / HTTP/1.1" 200 -
+Fri, 28 Feb 2020 15:02:37 main.py[line:39] INFO request: /api/python/light_power_list
+Fri, 28 Feb 2020 15:02:37 main.py[line:47] INFO {'action': 'findData', 'whereJson': {'group_type': 'M', 'pon_name': '杭州市余杭县美特钢构机房-华为OLT05-00-03-GPBD-PON1'}}
+Fri, 28 Feb 2020 15:02:37 _internal.py[line:97] INFO 127.0.0.1 - - [28/Feb/2020 15:02:37] "GET /favicon.ico HTTP/1.1" 200 -
+Fri, 28 Feb 2020 15:02:37 db_mysql.py[line:198] DEBUG sql_count: 
+Fri, 28 Feb 2020 15:02:37 db_mysql.py[line:199] DEBUG sql: select time, password, pon_name, power_receive, power_send from light_power_list where pon_name = "杭州市余杭县美特钢构机房-华为OLT05-00-03-GPBD-PON1" group by time,password order by time asc
+Fri, 28 Feb 2020 15:02:39 db_mysql.py[line:217] DEBUG sql_count_time: 0
+Fri, 28 Feb 2020 15:02:39 db_mysql.py[line:218] DEBUG sql_time: 1.0848095417022705
+Fri, 28 Feb 2020 15:02:39 _internal.py[line:97] INFO 127.0.0.1 - - [28/Feb/2020 15:02:39] "GET /api/python/light_power_list?params=%7B%22action%22:%22findData%22,%22whereJson%22:%7B%22group_type%22:%22M%22,%22pon_name%22:%22杭州市余杭县美特钢构机房-华为OLT05-00-03-GPBD-PON1%22%7D%7D HTTP/1.1" 200 -
+Fri, 28 Feb 2020 15:04:36 _internal.py[line:97] INFO 127.0.0.1 - - [28/Feb/2020 15:04:36] "GET / HTTP/1.1" 200 -
+Fri, 28 Feb 2020 15:04:36 main.py[line:39] INFO request: /api/python/light_power_list
+Fri, 28 Feb 2020 15:04:36 main.py[line:47] INFO {'action': 'findData', 'whereJson': {'group_type': 'M', 'pon_name': '杭州市余杭县美特钢构机房-华为OLT05-00-03-GPBD-PON1'}}
+Fri, 28 Feb 2020 15:04:36 _internal.py[line:97] INFO 127.0.0.1 - - [28/Feb/2020 15:04:36] "GET /favicon.ico HTTP/1.1" 200 -
+Fri, 28 Feb 2020 15:04:36 db_mysql.py[line:198] DEBUG sql_count: 
+Fri, 28 Feb 2020 15:04:36 db_mysql.py[line:199] DEBUG sql: select time, password, pon_name, power_receive, power_send from light_power_list where pon_name = "杭州市余杭县美特钢构机房-华为OLT05-00-03-GPBD-PON1" group by time,password order by time asc
+Fri, 28 Feb 2020 15:04:38 db_mysql.py[line:217] DEBUG sql_count_time: 0
+Fri, 28 Feb 2020 15:04:38 db_mysql.py[line:218] DEBUG sql_time: 1.1988935470581055
+Fri, 28 Feb 2020 15:04:38 _internal.py[line:97] INFO 127.0.0.1 - - [28/Feb/2020 15:04:38] "GET /api/python/light_power_list?params=%7B%22action%22:%22findData%22,%22whereJson%22:%7B%22group_type%22:%22M%22,%22pon_name%22:%22杭州市余杭县美特钢构机房-华为OLT05-00-03-GPBD-PON1%22%7D%7D HTTP/1.1" 200 -

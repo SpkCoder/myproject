@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PON口光距图</title>
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+</head>
+<style type="text/css">
+    html,body {padding: 0; margin: 0}
+    .list-page {padding: 10px;}
+   .title_type {padding: 10px 0px; border-bottom: 1px solid #bbb;}
+   .el-table .red-row {color: Red; }
+   .el-table .green-row {color: Green;} 
+   .el-table--small td, .el-table--small th {padding: 0;}
+</style>
+<body>
+
+    <div id="tableApp" class="list-page">
+
+        <div style="margin-bottom:10px;">
+            <p>
+                <a style="color: #606266; cursor: default; margin-right: 20px"  href="/index4.html" target="_blank">PON口光距图</a>
+            </p>
+            <el-form v-loading.fullscreen.lock="fullLoading" element-loading-text="Loading" ref="searchForm" :model="searchForm" :inline="true" :rules="rules" size="small" >
+
+              <!-- <el-form-item >
+                <el-select v-model="searchForm['pon_name']" @change="selectChange">
+                  <el-option v-for="item in pon_name_list" :key="item.pon_name" :label="item.pon_name" :value="item.pon_name"> </el-option>
+                </el-select>
+              </el-form-item> -->
+              <el-form-item label="PON口拼装名称">
+                    <el-input style="width: 400px" v-model="searchForm['pon_name']"/>
+              </el-form-item>
+
+              <el-form-item>
+                <el-button icon="el-icon-search" type="primary" @click="searchSubmitForm">查询</el-button>
+                <!-- <el-button icon="el-icon-refresh" @click="searchCancelSubmit">取消</el-button> -->
+              </el-form-item>
+            </el-form>
+        </div>
+
+        <div class="eChartBox">
+            <div style="margin-top:20px"></div>
+            <div id="eChart_all" :style="styleObject"></div>
+        </div>
+
+    </div>
+
+</body>
+  <!-- <script src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script> -->
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  <script src="https://www.echartsjs.com/examples/vendors/echarts/echarts.min.js"></script>
+  <script type="text/javascript">
+
+        Vue.use(ELEMENT);
+        Vue.prototype.$axiosHttp = axios
+
+        new Vue({
+            el: '#tableApp',
+            data:{
+                msg: null,
+                url: null,
+                all: {},
+                xdata: [],
+                ydata: [],
+                fullLoading: false,
+                searchFormBox: false,
+                searchForm: {},
+                typeList: [{"id": "M", "name": "分钟"}],
+                whereJson : {},
+                rules: {},
+                styleObject: {
+                    width: "1500px",
+                    height: "400px"
+                }
+            },
+            methods: {
+                getData() {
+                    var _this = this;
+                    _this.fullLoading = true;
+                    var reqData = {"action":"findData", "whereJson":_this.whereJson}
+                    _this.$axiosHttp.get(_this.url, {"params":{"params":reqData}}).then(function (res) {
+                        _this.fullLoading = false;
+                        res = res.data;
+                        // console.log(res)
+                        if(res.code != 200){
+                            _this.$message({duration: 1000, message: res.msg});
+                            return false;
+                        }
+                        tabelheight = 0;
+                        arr_password = []
+                        arr_distance = []
+                        res.result.rows.forEach(function (item, index) {
+                            tabelheight+=20;
+                            // arr_distance.push(item.distance)
+                            // arr_password.push(item.password)
+                            if(index==0){
+                                arr_distance.push(item.distance)
+                                arr_password.push(item.password)
+                            }else{
+                                num = arr_distance.length;
+                                for(var i=0; i< num; i++){
+                                    if(item.distance>arr_distance[i]){
+                                        arr_distance.splice(i,0,item.distance);
+                                        arr_password.splice(i,0,item.password);
+                                        break;
+                                    }else{
+                                        if(i == num-1){
+                                            arr_distance.push(item.distance)
+                                            arr_password.push(item.password)
+                                        }
+                                    }
+                                }
+                            }
+                        });
+                        _this.styleObject.height = tabelheight+'px';
+                        _this.$nextTick(function () {
+                            var option_all = {
+                                title: {
+                                    text: 'PON口光距图',
+                                    left: 'left',
+                                    textStyle: {
+                                        fontSize: 14
+                                    }
+                                },
+                                color: ['#409EFF'],
+                                grid: {
+                                    x: 100,
+                                    x2: 100,
+                                },
+                                tooltip: {
+                                    trigger: 'axis'
+                                    // formatter: function (value, index) {
+                                    //   var html = value[0].name+'<br>'+value[0].marker+'</span>'+value[0].seriesName+': '+parseInt(value[0].value*100)+"%";
+                                    //   return html;
+                                    // }
+                                },
+                                legend: {
+                                    left: 'left',
+                                    top: '30px',
+                                    data:[]
+                                },
+                                xAxis: {
+                                    type: 'value',
+                                    axisLabel : {
+                                        rotate: 45
+                                    },
+                                    max : 15000,
+                                    min : 0,
+                                    splitNumber : 75
+                                },
+                                yAxis: {
+                                    type: 'category',
+                                    data: arr_password
+                                },
+                                series: [{ name: '', type: 'bar', barWidth : 2, symbol: "none", data: arr_distance }]
+                            };
+
+                            var myChart = echarts.init(document.getElementById('eChart_all'));
+                            myChart.setOption(option_all, true);
+                            myChart.on('click', function (params) {
+                                console.log(params.name);
+
+                            });
+
+                        })
+                        console.log(_this.sort_data)
+
+
+                    }).catch(function (err) {
+                        console.log(err);
+                    });
+
+              },
+              selectChange(value) {
+                var _this = this;
+                _this.whereJson = {"group_type": value};
+                _this.getData();
+              },
+              searchSubmitForm() {
+                    var _this = this;
+                    _this.$refs["searchForm"].validate (function (valid) {
+                        if(valid) {
+                        // console.log(_this.searchForm);
+                        if(!_this.searchForm.pon_name){
+                            _this.$message({duration: 1000, message: "请输入PON口拼装名称"});
+                            return false;
+                        }
+                        _this.whereJson.pon_name = _this.searchForm.pon_name
+                        _this.getData();
+
+                        }else {
+                        console.log('error submit');
+                        return false;
+                        }
+                    });
+              },
+              searchCancelSubmit() {
+                    var _this = this;
+                    _this.searchForm = {};
+                    _this.whereJson.time = moment().format("YYYY-MM-DD");
+                    _this.$set(_this.searchForm, "time", _this.whereJson.time);
+                    _this.$refs["searchForm"].resetFields();
+                    _this.getData();
+              }
+
+            },
+            watch: {
+                msg(value, oldValue) {
+                    console.log(value, oldValue);
+                }
+            },
+            created() {
+                var _this = this;
+                _this.url = "/api/python/light_distance_list";
+
+                _this.$set(_this.searchForm, "pon_name", "杭州市余杭县美特钢构机房-华为OLT05-00-03-GPBD-PON1");
+                _this.whereJson = {"pon_name": _this.searchForm.pon_name};
+                _this.getData();
+
+            }
+
+        });
+
+
+    </script>
+</html>
+

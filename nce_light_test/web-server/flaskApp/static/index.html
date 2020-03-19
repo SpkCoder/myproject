@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>PON口接收光功率(dBm)图</title>
+  <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+</head>
+<style type="text/css">
+    html,body {padding: 0; margin: 0}
+    .list-page {padding: 10px;}
+   .title_type {padding: 10px 0px; border-bottom: 1px solid #bbb;}
+   .el-table .red-row {color: Red; }
+   .el-table .green-row {color: Green;} 
+   .el-table--small td, .el-table--small th {padding: 0;}
+</style>
+<body>
+
+    <div id="tableApp" class="list-page">
+
+        <div style="margin-bottom:10px;">
+            <p>
+                <a style="color: #606266; cursor: default; margin-right: 20px" href="javascript:;" target="_blank">PON口接收光功率(dBm)图</a>
+                <a style="margin-right: 20px" href="/index2.html" target="_blank">PON口发射光功率(dBm)图</a>
+                <a style="margin-right: 20px" href="/index4.html" target="_blank">PON口光距图</a>
+                <a href="/index3.html" target="_blank">用户数量最多的PON口</a>
+            </p>
+            <el-form v-loading.fullscreen.lock="fullLoading" element-loading-text="Loading" ref="searchForm" :model="searchForm" :inline="true" :rules="rules" size="small" >
+
+              <!-- <el-form-item >
+                <el-select v-model="searchForm['pon_name']" @change="selectChange">
+                  <el-option v-for="item in pon_name_list" :key="item.pon_name" :label="item.pon_name" :value="item.pon_name"> </el-option>
+                </el-select>
+              </el-form-item> -->
+              <el-form-item label="PON口拼装名称">
+                    <el-input style="width: 400px" v-model="searchForm['pon_name']"/>
+              </el-form-item>
+
+              <el-form-item>
+                <el-button icon="el-icon-search" type="primary" @click="searchSubmitForm">查询</el-button>
+                <!-- <el-button icon="el-icon-refresh" @click="searchCancelSubmit">取消</el-button> -->
+              </el-form-item>
+            </el-form>
+        </div>
+
+        <div class="eChartBox">
+            <div style="margin-top:20px"></div>
+            <div id="eChart_all" :style="styleObject"></div>
+            <div style="margin-bottom:20px"></div>
+            <!-- <template v-for='(value, key, index) in all'>
+                <div :id="'eChart' + index" :style="styleObject"></div>
+                <div style="margin-bottom:20px"></div>
+            </template> -->
+        </div>
+
+    </div>
+
+</body>
+  <!-- <script src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.min.js"></script> -->
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+  <script src="https://www.echartsjs.com/examples/vendors/echarts/echarts.min.js"></script>
+  <script type="text/javascript">
+
+        Vue.use(ELEMENT);
+        Vue.prototype.$axiosHttp = axios
+
+        new Vue({
+            el: '#tableApp',
+            data:{
+                msg: null,
+                url: null,
+                all: {},
+                xdata: [],
+                ydata: [],
+                fullLoading: false,
+                searchFormBox: false,
+                searchForm: {},
+                typeList: [{"id": "M", "name": "分钟"}],
+                whereJson : {},
+                rules: {},
+                styleObject: {
+                    width: "1000px",
+                    height: "800px"
+                }
+            },
+            methods: {
+                getData() {
+                    var _this = this;
+                    _this.fullLoading = true;
+                    var reqData = {"action":"findData", "whereJson":_this.whereJson}
+                    _this.$axiosHttp.get(_this.url, {"params":{"params":reqData}}).then(function (res) {
+                        _this.fullLoading = false;
+                        res = res.data;
+                        // console.log(res)
+                        if(res.code != 200){
+                            _this.$message({duration: 1000, message: res.msg});
+                            return false;
+                        }
+                        tabelwidth = 0;
+                        res.info.time.forEach(element => {
+                            tabelwidth+=5;
+                        });
+                        _this.styleObject.width = tabelwidth+'px';
+                        _this.all = res.info.all;
+                        _this.sort = res.info.sort
+                        _this.sort_data = [];
+                        var series_arr = []
+                        _this.$nextTick(function () {
+                            var option_all = {
+                                title: {
+                                    text: 'PON口接收光功率(dBm)图',
+                                    left: 'left',
+                                    textStyle: {
+                                        fontSize: 14
+                                    }
+                                },
+                                grid: {
+                                    x: 100,
+                                    x2: 0,
+                                },
+                                tooltip: {
+                                    trigger: 'axis'
+                                    // formatter: function (value, index) {
+                                    //   var html = value[0].name+'<br>'+value[0].marker+'</span>'+value[0].seriesName+': '+parseInt(value[0].value*100)+"%";
+                                    //   return html;
+                                    // }
+                                },
+                                legend: {
+                                    left: 'left',
+                                    top: '30px',
+                                    data:[]
+                                },
+                                xAxis: {
+                                    axisLabel : {
+                                        rotate: 45,
+                                        formatter:(value) => {
+                                            return value.slice(5,16);
+                                        }
+                                    },
+                                    data: res.info.time
+                                },
+                                yAxis: {
+                                    max : -20,
+                                    min : -40,
+                                    splitNumber : 40,
+                                    // axisLabel : {
+                                    //     formatter: function (value, index) {
+                                    //       return parseInt(value*100)+"(%)";
+                                    //     }
+                                    // }
+                                },
+                                series: []
+                            };
+
+                            _this.sort.forEach(function(value, index) {
+                                var eChartId = 'eChart' + index;
+                                var type = value
+                                var name = _this.all[type]['pon_name']
+                                var newArr = []
+                                _this.all[type]['power_receive'].forEach(function(value, index) {
+                                    if(value==0){
+                                        newArr.push(-40)
+                                    }else{
+                                        newArr.push(value)
+                                    }
+                                });
+                                _this.all[type]['power_receive'] = newArr
+                                var option = {
+                                    title: {
+                                        text: type,
+                                        left: 'left',
+                                        textStyle: {
+                                            fontSize: 14
+                                        }
+                                    },
+                                    grid: {
+                                        x: 100,
+                                        x2: 0,
+                                    },
+                                    color: ['#409EFF'],
+                                    tooltip: {
+                                        trigger: 'axis'
+                                        // formatter: function (value, index) {
+                                        //   var html = value[0].name+'<br>'+value[0].marker+'</span>'+value[0].seriesName+': '+parseInt(value[0].value*100)+"%";
+                                        //   return html;
+                                        // }
+                                    },
+                                    xAxis: {
+                                        axisLabel : {
+                                            rotate: 45,
+                                            formatter:(value) => {
+                                                return value.slice(5,16);
+                                            }
+                                        },
+                                        data: res.info.time
+                                    },
+                                    yAxis: {
+                                        max : -20,
+                                        min : -40,
+                                        splitNumber : 40,
+                                        // axisLabel : {
+                                        //     formatter: function (value, index) {
+                                        //       return parseInt(value*100)+"(%)";
+                                        //     }
+                                        // }
+                                    },
+                                    series: [{
+                                        name: type,
+                                        type: 'line',
+                                        symbol: "none",
+                                        // lineStyle: {width: 1},
+                                        data: _this.all[type]['power_receive']
+                                    }]
+                                };
+                                // var myChart = echarts.init(document.getElementById(eChartId));
+                                // myChart.setOption(option, true);
+
+                                option_all.legend.data.push(type)
+                                option_all.series.push({ 
+                                    name: type, 
+                                    type: 'line', 
+                                    symbol: "circle",
+                                    symbolSize: 3,
+                                    lineStyle:{
+                                        width:'0'
+                                    },
+                                    data: _this.all[type]['power_receive'] 
+                                })
+                                _this.sort_data.push(_this.all[value])
+                            });
+                            var myChart = echarts.init(document.getElementById('eChart_all'));
+                            myChart.setOption(option_all, true);
+
+                        })
+                        console.log(_this.sort_data)
+
+
+                    }).catch(function (err) {
+                        console.log(err);
+                    });
+
+              },
+              selectChange(value) {
+                var _this = this;
+                _this.whereJson = {"group_type": value};
+                _this.getData();
+              },
+              searchSubmitForm() {
+                    var _this = this;
+                    _this.$refs["searchForm"].validate (function (valid) {
+                        if(valid) {
+                        // console.log(_this.searchForm);
+                        if(!_this.searchForm.pon_name){
+                            _this.$message({duration: 1000, message: "请输入PON口拼装名称"});
+                            return false;
+                        }
+                        _this.whereJson.pon_name = _this.searchForm.pon_name
+                        _this.getData();
+
+                        }else {
+                        console.log('error submit');
+                        return false;
+                        }
+                    });
+              },
+              searchCancelSubmit() {
+                    var _this = this;
+                    _this.searchForm = {};
+                    _this.whereJson.time = moment().format("YYYY-MM-DD");
+                    _this.$set(_this.searchForm, "time", _this.whereJson.time);
+                    _this.$refs["searchForm"].resetFields();
+                    _this.getData();
+              }
+
+            },
+            watch: {
+                msg(value, oldValue) {
+                    console.log(value, oldValue);
+                }
+            },
+            created() {
+                var _this = this;
+                _this.url = "/api/python/light_power_list";
+                //加载pon_name_list
+                // var reqData = {"action":"findData2"}
+                // _this.$axiosHttp.get(_this.url, {"params":{"params":reqData}}).then(function (res) {
+                //     res = res.data;
+                //     if(res.code != 200){
+                //         _this.$message({duration: 1000, message: res.msg});
+                //         return false;
+                //     }
+                //     console.log(res.rows)
+                //     _this.pon_name_list = res.rows;
+                    
+                // }).catch(function (err) {
+                //     console.log(err);
+                // });
+
+                _this.$set(_this.searchForm, "pon_name", "杭州市余杭县美特钢构机房-华为OLT05-00-03-GPBD-PON1");
+                _this.whereJson = {"group_type": "M", "pon_name": _this.searchForm.pon_name};
+                _this.getData();
+
+            }
+
+        });
+
+
+    </script>
+</html>
+

@@ -1,0 +1,23 @@
+# 日志数据采集，将光功率日志上传到指定目录，会自动格式化到MySQL
+scp ./xx.csv root@183.247.173.159:/home/nce_light_test/logs/光功率日志/
+
+# 初步判断条件
+## 同一个PON口拼装名称下面有多个账号，当前的账号和其他的账号对比
+- 如果当前时间点的光功率不正常，其他的账号光功率正常，则可能是PON口到二级分光器线路出现问题
+- 如果当前时间点的光功率所有账号都不正常，则可能是二级分光器到一级分光器线路出现问题，或者一级分光器到最顶级线路出现问题
+
+# 数据表里面的关键字段
+pon_name(PON口拼装名称)  唯一性
+
+password(ONU密码)  唯一性
+
+power_send(PON口发射光功率(dBm))  正常范围 -27～-25
+
+power_receive(PON口接收光功率(dBm))  正常范围 0～2
+
+
+# group sql
+select time, password, pon_name, power_receive, power_send from light_power_list where pon_name='台州市路桥区李家洋汇聚机房-OLT01-00-12-GPBD-PON0' group by time,password order by time asc;
+
+查询哪个PON口下面用户最多
+select pon_name, count(*) as num from (select pon_name, password from nce_light_db.light_power_list2 group by pon_name, password) t group by pon_name order by num desc limit 0,10;

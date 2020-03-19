@@ -15,7 +15,7 @@ export default {
   },
   mounted: function () {
     var _this = this;
-    document.getElementById("iframeBox").src = 'http://192.168.218.161:6001/users/data/' + _this.$route.params.id;
+    document.getElementById("iframeBox").src = 'http://127.0.0.1:6001/users/data/' + _this.$route.params.id;
   },
   methods: {
     view(row) {

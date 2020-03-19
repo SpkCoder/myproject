@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const config = require('../config');
 const AdminModel = require('../models/admin');
-const powerModel = require('../my_modules/power');
+// const powerModel = require('../my_modules/power');
 const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
 const dtime = require('time-formater');
@@ -50,7 +50,8 @@ router.get('/', async function(req, res, next) {
         //判断权限
         var action = req.query.action;
         var tableName = "admins";
-        var result = await powerModel.getPower(userObj.Permission, tableName, action);
+        // var result = await powerModel.getPower(userObj.Permission, tableName, action2);
+        var result = 1;
         //分配方法
         if(result){
             switch (action){

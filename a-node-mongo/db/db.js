@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
-// mongoose.connect('mongodb://192.168.218.161:27017/app-node');
-mongoose.connect('mongodb://avid:avid789@18.223.242.20:27017/app-node');
+// mongoose.connect('mongodb://admin:123456@192.168.218.161:27017/avid_db');
+mongoose.connect('mongodb://127.0.0.1:27017/avid_db');
 const db = mongoose.connection;
 
 db.on('error', console.error.bind(console, 'connection error:'));

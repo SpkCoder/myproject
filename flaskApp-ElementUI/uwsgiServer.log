@@ -1,0 +1,707 @@
+*** Starting uWSGI 2.0.17.1 (64bit) on [Tue Mar 24 16:18:30 2020] ***
+compiled with version: 7.3.0 on 16 December 2018 11:36:53
+os: Linux-4.15.0-72-generic #81-Ubuntu SMP Tue Nov 26 12:20:02 UTC 2019
+nodename: dell-3576
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 8
+current working directory: /media/xian/Work/myproject/flaskApp-ElementUI
+writing pidfile to ./uwsgi.pid
+detected binary path: /home/xian/.local/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+chdir() to /media/xian/Work/myproject/flaskApp-ElementUI/
+your processes number limit is 30952
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uWSGI http bound on :5000 fd 7
+uwsgi socket 0 bound to TCP address 127.0.0.1:41203 (port auto-assigned) fd 6
+Python version: 3.6.9 (default, Nov  7 2019, 10:44:02)  [GCC 8.3.0]
+Python main interpreter initialized at 0x558b133cd180
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 416720 bytes (406 KB) for 8 cores
+*** Operational MODE: preforking+threaded ***
+WSGI app 0 (mountpoint='') ready in 1 seconds on interpreter 0x558b133cd180 pid: 28379 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 28379)
+spawned uWSGI worker 1 (pid: 28397, cores: 2)
+spawned uWSGI worker 2 (pid: 28398, cores: 2)
+spawned uWSGI worker 3 (pid: 28400, cores: 2)
+spawned uWSGI worker 4 (pid: 28402, cores: 2)
+spawned uWSGI http 1 (pid: 28404)
+ImmutableMultiDict([('action', 'SignIn'), ('whereJson', '{"username":"admin","password":"123456"}'), ('osJson', '{"os":"Linux","px":"1476x830"}')])
+{'username': 'admin', 'password': '370b95d483d1f5b61854c462decafca4'}
+select username,password from user_list where username="admin" and password="370b95d483d1f5b61854c462decafca4"
+admin登录成功
+insert into record_list(`username`, `dbName`, `action`, `content`, `os`, `px`, `ip`, `time`, `modelId`, `dbName_ch`) values ('admin', 'user_list', '登录', 'action=SignIn', 'Linux', '1476x830', '127.0.0.1', '2020-03-24 16:18:47', 100004, '用户列表')
+ImmutableMultiDict([('action', 'findData'), ('timeStamp', '1585037927806')])
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from model_list order by level ASC, sort ASC
+select * from model_list limit 10
+ImmutableMultiDict([('action', 'findData'), ('timeStamp', '1585037927962')])
+select * from model_list order by level ASC, sort ASC
+ImmutableMultiDict([('action', 'findDataAll'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '5000'), ('currPage', '1')])
+ImmutableMultiDict([('action', 'findData'), ('whereStr', 'level=2'), ('sortStr', 'id ASC'), ('prePageNum', '100000'), ('currPage', '1')])
+select * from model_list where level=2 order by id ASC limit 100000
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from model_list limit 10
+ImmutableMultiDict([('action', 'findDataAll'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '5000'), ('currPage', '1')])
+ImmutableMultiDict([('action', 'findData'), ('whereStr', 'level=2'), ('sortStr', 'id ASC'), ('prePageNum', '100000'), ('currPage', '1')])
+select * from model_list where level=2 order by id ASC limit 100000
+ImmutableMultiDict([('action', 'findData'), ('whereStr', 'level=2'), ('sortStr', 'id ASC'), ('prePageNum', '100000'), ('currPage', '1')])
+select * from model_list where level=2 order by id ASC limit 100000
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from model_list_fn limit 10
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('prePageNum', '100000'), ('currPage', '1')])
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select user_list.id, user_list.username, user_list.password, user_list.name, user_list.email, user_list.phone, user_list.sex, user_list.age, user_list.create_name, user_list.create_time, user_list.update_name, user_list.update_time, user_list.roleId, role_class.class_name as roleName from user_list LEFT JOIN role_class ON user_list.roleId = role_class.id limit 10
+select * from role_class limit 100000
+ImmutableMultiDict([('action', 'findData'), ('timeStamp', '1585037948713')])
+select * from model_list order by level ASC, sort ASC
+ImmutableMultiDict([('action', 'findData'), ('timeStamp', '1585037948729')])
+select * from model_list order by level ASC, sort ASC
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('prePageNum', '100000'), ('currPage', '1')])
+select * from role_class limit 100000
+select user_list.id, user_list.username, user_list.password, user_list.name, user_list.email, user_list.phone, user_list.sex, user_list.age, user_list.create_name, user_list.create_time, user_list.update_name, user_list.update_time, user_list.roleId, role_class.class_name as roleName from user_list LEFT JOIN role_class ON user_list.roleId = role_class.id limit 10
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from power_list limit 10
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('prePageNum', '100000'), ('currPage', '1')])
+select * from role_class limit 100000
+ImmutableMultiDict([('action', 'findData'), ('whereStr', 'level=2'), ('sortStr', 'id ASC'), ('prePageNum', '100000'), ('currPage', '1')])
+select * from model_list where level=2 order by id ASC limit 100000
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from sale_list limit 10
+SIGINT/SIGQUIT received...killing workers...
+gateway "uWSGI http 1" has been buried (pid: 28404)
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+goodbye to uWSGI.
+VACUUM: pidfile removed.
+*** Starting uWSGI 2.0.17.1 (64bit) on [Mon Apr 20 11:23:14 2020] ***
+compiled with version: 7.3.0 on 16 December 2018 11:36:53
+os: Linux-4.15.0-72-generic #81-Ubuntu SMP Tue Nov 26 12:20:02 UTC 2019
+nodename: dell-3576
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 8
+current working directory: /media/xian/Work/myproject/flaskApp-ElementUI
+writing pidfile to ./uwsgi.pid
+detected binary path: /home/xian/.local/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+chdir() to /media/xian/Work/myproject/flaskApp-ElementUI/
+your processes number limit is 30952
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uWSGI http bound on :5000 fd 7
+uwsgi socket 0 bound to TCP address 127.0.0.1:44707 (port auto-assigned) fd 6
+Python version: 3.6.9 (default, Nov  7 2019, 10:44:02)  [GCC 8.3.0]
+Python main interpreter initialized at 0x55672f534f30
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 416720 bytes (406 KB) for 8 cores
+*** Operational MODE: preforking+threaded ***
+WSGI app 0 (mountpoint='') ready in 1 seconds on interpreter 0x55672f534f30 pid: 25737 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 25737)
+spawned uWSGI worker 1 (pid: 25751, cores: 2)
+spawned uWSGI worker 2 (pid: 25752, cores: 2)
+spawned uWSGI worker 3 (pid: 25754, cores: 2)
+spawned uWSGI worker 4 (pid: 25756, cores: 2)
+spawned uWSGI http 1 (pid: 25757)
+ImmutableMultiDict([('action', 'SignIn'), ('whereJson', '{"username":"admin","password":"123456"}'), ('osJson', '{"os":"Linux","px":"1476x830"}')])
+{'username': 'admin', 'password': '370b95d483d1f5b61854c462decafca4'}
+select username,password from user_list where username="admin" and password="370b95d483d1f5b61854c462decafca4"
+admin登录成功
+insert into record_list(`username`, `dbName`, `action`, `content`, `os`, `px`, `ip`, `time`, `modelId`, `dbName_ch`) values ('admin', 'user_list', '登录', 'action=SignIn', 'Linux', '1476x830', '127.0.0.1', '2020-04-20 11:23:35', 100004, '用户列表')
+ImmutableMultiDict([('action', 'findData'), ('timeStamp', '1587353015226')])
+select * from model_list order by level ASC, sort ASC
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from model_list limit 10
+ImmutableMultiDict([('action', 'findData'), ('timeStamp', '1587353015368')])
+select * from model_list order by level ASC, sort ASC
+ImmutableMultiDict([('action', 'findDataAll'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '5000'), ('currPage', '1')])
+ImmutableMultiDict([('action', 'findData'), ('whereStr', 'level=2'), ('sortStr', 'id ASC'), ('prePageNum', '100000'), ('currPage', '1')])
+select * from model_list where level=2 order by id ASC limit 100000
+ImmutableMultiDict([('action', 'findData'), ('whereStr', 'level=2'), ('sortStr', 'id ASC'), ('prePageNum', '100000'), ('currPage', '1')])
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from model_list where level=2 order by id ASC limit 100000
+select * from model_list_fn limit 10
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from model_list limit 10
+ImmutableMultiDict([('action', 'findDataAll'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '5000'), ('currPage', '1')])
+ImmutableMultiDict([('action', 'findData'), ('whereStr', 'level=2'), ('sortStr', 'id ASC'), ('prePageNum', '100000'), ('currPage', '1')])
+select * from model_list where level=2 order by id ASC limit 100000
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from model_list limit 10
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from sale_list limit 10
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from model_list limit 10
+ImmutableMultiDict([('action', 'findDataAll'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '5000'), ('currPage', '1')])
+ImmutableMultiDict([('action', 'findData'), ('whereStr', 'level=2'), ('sortStr', 'id ASC'), ('prePageNum', '100000'), ('currPage', '1')])
+select * from model_list where level=2 order by id ASC limit 100000
+ImmutableMultiDict([('action', 'findData'), ('whereStr', 'modelId=110001'), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from data_list where modelId=110001 limit 10
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from sale_list limit 10
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from role_class limit 10
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from power_list limit 10
+ImmutableMultiDict([('action', 'findData'), ('whereStr', 'level=2'), ('sortStr', 'id ASC'), ('prePageNum', '100000'), ('currPage', '1')])
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('prePageNum', '100000'), ('currPage', '1')])
+select * from model_list where level=2 order by id ASC limit 100000
+select * from role_class limit 100000
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '4')])
+select * from power_list limit 10 offset 30
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('prePageNum', '100000'), ('currPage', '1')])
+ImmutableMultiDict([('action', 'findData'), ('whereStr', 'level=2'), ('sortStr', 'id ASC'), ('prePageNum', '100000'), ('currPage', '1')])
+select * from role_class limit 100000
+select * from model_list where level=2 order by id ASC limit 100000
+ImmutableMultiDict([('action', 'findData'), ('whereStr', 'modelId=110002'), ('prePageNum', '1'), ('currPage', '1')])
+select * from data_list where modelId=110002 limit 1
+ImmutableMultiDict([('action', 'findData'), ('whereStr', 'modelId=110002'), ('prePageNum', '1'), ('currPage', '1')])
+select * from data_list where modelId=110002 limit 1
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from role_class limit 10
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from power_list limit 10
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('prePageNum', '100000'), ('currPage', '1')])
+ImmutableMultiDict([('action', 'findData'), ('whereStr', 'level=2'), ('sortStr', 'id ASC'), ('prePageNum', '100000'), ('currPage', '1')])
+select * from model_list where level=2 order by id ASC limit 100000
+select * from role_class limit 100000
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '4')])
+select * from power_list limit 10 offset 30
+ImmutableMultiDict([('action', 'findData'), ('whereStr', 'level=2'), ('sortStr', 'id ASC'), ('prePageNum', '100000'), ('currPage', '1')])
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('prePageNum', '100000'), ('currPage', '1')])
+select * from model_list where level=2 order by id ASC limit 100000
+select * from role_class limit 100000
+ImmutableMultiDict([('action', 'findData'), ('whereStr', 'modelId=110002'), ('prePageNum', '1'), ('currPage', '1')])
+select * from data_list where modelId=110002 limit 1
+ImmutableMultiDict([('action', 'findData'), ('whereStr', 'modelId=110002'), ('prePageNum', '1'), ('currPage', '1')])
+select * from data_list where modelId=110002 limit 1
+ImmutableMultiDict([('action', 'findData'), ('timeStamp', '1587363655869')])
+select * from model_list order by level ASC, sort ASC
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from power_list limit 10
+ImmutableMultiDict([('action', 'findData'), ('timeStamp', '1587363655991')])
+select * from model_list order by level ASC, sort ASC
+ImmutableMultiDict([('action', 'findData'), ('whereStr', 'level=2'), ('sortStr', 'id ASC'), ('prePageNum', '100000'), ('currPage', '1')])
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('prePageNum', '100000'), ('currPage', '1')])
+select * from model_list where level=2 order by id ASC limit 100000
+select * from role_class limit 100000
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from sale_list limit 10
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from power_list limit 10
+ImmutableMultiDict([('action', 'findData'), ('whereStr', 'level=2'), ('sortStr', 'id ASC'), ('prePageNum', '100000'), ('currPage', '1')])
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('prePageNum', '100000'), ('currPage', '1')])
+select * from model_list where level=2 order by id ASC limit 100000
+select * from role_class limit 100000
+ImmutableMultiDict([('action', 'findDataAll'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '5000'), ('currPage', '1')])
+ImmutableMultiDict([('action', 'findData'), ('whereStr', 'level=2'), ('sortStr', 'id ASC'), ('prePageNum', '100000'), ('currPage', '1')])
+select * from model_list where level=2 order by id ASC limit 100000
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from sale_list limit 10
+ImmutableMultiDict([('action', 'findDataAll'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '5000'), ('currPage', '1')])
+ImmutableMultiDict([('action', 'findData'), ('whereStr', 'level=2'), ('sortStr', 'id ASC'), ('prePageNum', '100000'), ('currPage', '1')])
+select * from model_list where level=2 order by id ASC limit 100000
+ImmutableMultiDict([('action', 'findData'), ('whereStr', 'name="test_list"'), ('prePageNum', '1'), ('currPage', '1')])
+select * from data_list where name="test_list" limit 1
+ImmutableMultiDict([('action', 'insertData'), ('dataArr', '[{"id":110002,"name":"test_list","name_ch":"测试","field_ch":"ID","field_en":"id"}]')])
+select modelId,field_en from data_list where modelId=110002 and field_en in("id") limit 1
+创建数据表完成
+insert into data_list(`name`, `name_ch`, `field_ch`, `field_en`, `data_type`, `field_width`, `field_sort`, `create_name`, `create_time`, `update_name`, `update_time`, `modelId`) values ('test_list', '测试', 'ID', 'id', 'int', 100, 1, 'admin', '2020-04-20 14:21:55', '', '', 110002)
+插入list_data成功
+insert into record_list(`username`, `dbName`, `action`, `content`, `os`, `px`, `ip`, `time`, `modelId`, `dbName_ch`) values ('admin', 'data_list', '增加', "dataArr=[{'name': 'test_list', 'name_ch': '测试', 'field_ch': 'ID', 'field_en': 'id', 'data_type': 'int', 'field_width': 100, 'field_sort': 1, 'create_name': 'admin', 'create_time': '2020-04-20 14:21:55', 'update_name': '', 'update_time': '', 'modelId': 110002}]", 'Linux', '1476x830', '127.0.0.1', '2020-04-20 14:21:55', 100002, '数据列表')
+复制test_list.vue成功
+复制test_list.py成功
+写入routerUrl.js成功
+写入urls.py成功
+vue-cli-admin打包
+npm run build
+重启server
+gateway "uWSGI http 1" has been buried (pid: 25757)
+...gracefully killing workers...
+Gracefully killing worker 1 (pid: 25751)...
+Gracefully killing worker 3 (pid: 25754)...
+Gracefully killing worker 2 (pid: 25752)...
+Gracefully killing worker 4 (pid: 25756)...
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+binary reloading uWSGI...
+chdir() to /media/xian/Work/myproject/flaskApp-ElementUI
+closing all non-uwsgi socket fds > 2 (max_fd = 1024)...
+found fd 6 mapped to socket 0 (127.0.0.1:44707)
+running /home/xian/.local/bin/uwsgi
+[uWSGI] getting INI configuration from ./uwsgi.ini
+*** Starting uWSGI 2.0.17.1 (64bit) on [Mon Apr 20 14:21:59 2020] ***
+compiled with version: 7.3.0 on 16 December 2018 11:36:53
+os: Linux-4.15.0-72-generic #81-Ubuntu SMP Tue Nov 26 12:20:02 UTC 2019
+nodename: dell-3576
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 8
+current working directory: /media/xian/Work/myproject/flaskApp-ElementUI
+detected binary path: /home/xian/.local/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+chdir() to /media/xian/Work/myproject/flaskApp-ElementUI/
+your processes number limit is 30952
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uWSGI http bound on :5000 fd 9
+uwsgi socket 0 bound to TCP address 127.0.0.1:41557 (port auto-assigned) fd 8
+Python version: 3.6.9 (default, Nov  7 2019, 10:44:02)  [GCC 8.3.0]
+Python main interpreter initialized at 0x55aae2b30d20
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 416720 bytes (406 KB) for 8 cores
+*** Operational MODE: preforking+threaded ***
+WSGI app 0 (mountpoint='') ready in 1 seconds on interpreter 0x55aae2b30d20 pid: 25737 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+gracefully (RE)spawned uWSGI master process (pid: 25737)
+spawned uWSGI worker 1 (pid: 16678, cores: 2)
+spawned uWSGI worker 2 (pid: 16679, cores: 2)
+spawned uWSGI worker 3 (pid: 16681, cores: 2)
+spawned uWSGI worker 4 (pid: 16683, cores: 2)
+spawned uWSGI http 1 (pid: 16685)
+ImmutableMultiDict([('action', 'findDataAll'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '5000'), ('currPage', '1')])
+ImmutableMultiDict([('action', 'findData'), ('timeStamp', '1587363784756')])
+select * from model_list order by level ASC, sort ASC
+ImmutableMultiDict([('action', 'findData'), ('timeStamp', '1587363785283')])
+select * from model_list order by level ASC, sort ASC
+ImmutableMultiDict([('action', 'findData'), ('whereStr', 'level=2'), ('sortStr', 'id ASC'), ('prePageNum', '100000'), ('currPage', '1')])
+select * from model_list where level=2 order by id ASC limit 100000
+ImmutableMultiDict([('action', 'findData'), ('whereStr', 'modelId=110002'), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from data_list where modelId=110002 limit 10
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from model_list limit 10
+ImmutableMultiDict([('action', 'findDataAll'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '5000'), ('currPage', '1')])
+ImmutableMultiDict([('action', 'findData'), ('whereStr', 'level=2'), ('sortStr', 'id ASC'), ('prePageNum', '100000'), ('currPage', '1')])
+select * from model_list where level=2 order by id ASC limit 100000
+ImmutableMultiDict([('action', 'findData'), ('whereStr', 'modelId=110002'), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from data_list where modelId=110002 limit 10
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from power_list limit 10
+ImmutableMultiDict([('action', 'findData'), ('whereStr', 'level=2'), ('sortStr', 'id ASC'), ('prePageNum', '100000'), ('currPage', '1')])
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('prePageNum', '100000'), ('currPage', '1')])
+select * from role_class limit 100000
+select * from model_list where level=2 order by id ASC limit 100000
+ImmutableMultiDict([('action', 'findData'), ('whereStr', 'modelId=110002'), ('prePageNum', '1'), ('currPage', '1')])
+select * from data_list where modelId=110002 limit 1
+ImmutableMultiDict([('action', 'insertData'), ('dataArr', '[{"power_id":1,"model_id":110002,"function_en":"findData","power_name":"超级用户","model_name":"测试","function_ch":"查询","db_name":"test_list"}]')])
+select power_id,model_id,function_en from power_list where power_id=1 and model_id=110002 and function_en="findData" limit 1
+insert into power_list(`power_id`, `model_id`, `function_en`, `power_name`, `model_name`, `function_ch`, `db_name`, `create_name`, `create_time`) values (1, 110002, 'findData', '超级用户', '测试', '查询', 'test_list', 'admin', '2020-04-20 14:23:49')
+insert into record_list(`username`, `dbName`, `action`, `content`, `os`, `px`, `ip`, `time`, `modelId`, `dbName_ch`) values ('admin', 'power_list', '增加', "dataArr=[{'power_id': 1, 'model_id': 110002, 'function_en': 'findData', 'power_name': '超级用户', 'model_name': '测试', 'function_ch': '查询', 'db_name': 'test_list', 'create_name': 'admin', 'create_time': '2020-04-20 14:23:49'}]", 'Linux', '1476x830', '127.0.0.1', '2020-04-20 14:23:49', 100005, '角色权限')
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from power_list limit 10
+ImmutableMultiDict([('action', 'findData'), ('whereStr', 'level=2'), ('sortStr', 'id ASC'), ('prePageNum', '100000'), ('currPage', '1')])
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('prePageNum', '100000'), ('currPage', '1')])
+select * from model_list where level=2 order by id ASC limit 100000
+select * from role_class limit 100000
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from test_list limit 10
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from model_list limit 10
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from sale_list limit 10
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from test_list limit 10
+ImmutableMultiDict([('action', 'findDataAll'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '5000'), ('currPage', '1')])
+ImmutableMultiDict([('action', 'findData'), ('whereStr', 'level=2'), ('sortStr', 'id ASC'), ('prePageNum', '100000'), ('currPage', '1')])
+select * from model_list where level=2 order by id ASC limit 100000
+ImmutableMultiDict([('action', 'findData'), ('whereStr', 'modelId=110002'), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from data_list where modelId=110002 limit 10
+ImmutableMultiDict([('action', 'insertData'), ('dataArr', '[{"data_type":"text","field_ch":"名称","field_en":"name","field_width":100,"field_sort":2,"id":110002,"name":"test_list","name_ch":"测试"}]')])
+select modelId,field_en from data_list where modelId=110002 and field_en in("name") limit 1
+alter table `test_list` add name VARCHAR(100) not null default ""
+插入列完成
+insert into data_list(`data_type`, `field_ch`, `field_en`, `field_width`, `field_sort`, `name`, `name_ch`, `create_name`, `create_time`, `update_name`, `update_time`, `modelId`) values ('text', '名称', 'name', 100, 2, 'test_list', '测试', 'admin', '2020-04-20 14:25:21', '', '', 110002)
+插入list_data成功
+insert into record_list(`username`, `dbName`, `action`, `content`, `os`, `px`, `ip`, `time`, `modelId`, `dbName_ch`) values ('admin', 'data_list', '增加', "dataArr=[{'data_type': 'text', 'field_ch': '名称', 'field_en': 'name', 'field_width': 100, 'field_sort': 2, 'name': 'test_list', 'name_ch': '测试', 'create_name': 'admin', 'create_time': '2020-04-20 14:25:21', 'update_name': '', 'update_time': '', 'modelId': 110002}]", 'Linux', '1476x830', '127.0.0.1', '2020-04-20 14:25:21', 100002, '数据列表')
+ImmutableMultiDict([('action', 'findData'), ('whereStr', 'modelId=110002'), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from data_list where modelId=110002 limit 10
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from test_list limit 10
+ImmutableMultiDict([('action', 'insertData'), ('dataArr', '[{"name":"xx"}]')])
+ImmutableMultiDict([('action', 'insertData'), ('dataArr', '[{"name":"xx"}]')])
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from power_list limit 10
+ImmutableMultiDict([('action', 'findData'), ('whereStr', 'level=2'), ('sortStr', 'id ASC'), ('prePageNum', '100000'), ('currPage', '1')])
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('prePageNum', '100000'), ('currPage', '1')])
+select * from model_list where level=2 order by id ASC limit 100000
+select * from role_class limit 100000
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '4')])
+select * from power_list limit 10 offset 30
+ImmutableMultiDict([('action', 'findData'), ('whereStr', 'level=2'), ('sortStr', 'id ASC'), ('prePageNum', '100000'), ('currPage', '1')])
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('prePageNum', '100000'), ('currPage', '1')])
+select * from model_list where level=2 order by id ASC limit 100000
+select * from role_class limit 100000
+ImmutableMultiDict([('action', 'findData'), ('whereStr', 'modelId=110002'), ('prePageNum', '1'), ('currPage', '1')])
+select * from data_list where modelId=110002 limit 1
+ImmutableMultiDict([('action', 'insertData'), ('dataArr', '[{"power_id":1,"model_id":110002,"function_en":"insertData","power_name":"超级用户","model_name":"测试","function_ch":"增加","db_name":"test_list"}]')])
+select power_id,model_id,function_en from power_list where power_id=1 and model_id=110002 and function_en="insertData" limit 1
+insert into power_list(`power_id`, `model_id`, `function_en`, `power_name`, `model_name`, `function_ch`, `db_name`, `create_name`, `create_time`) values (1, 110002, 'insertData', '超级用户', '测试', '增加', 'test_list', 'admin', '2020-04-20 14:26:27')
+insert into record_list(`username`, `dbName`, `action`, `content`, `os`, `px`, `ip`, `time`, `modelId`, `dbName_ch`) values ('admin', 'power_list', '增加', "dataArr=[{'power_id': 1, 'model_id': 110002, 'function_en': 'insertData', 'power_name': '超级用户', 'model_name': '测试', 'function_ch': '增加', 'db_name': 'test_list', 'create_name': 'admin', 'create_time': '2020-04-20 14:26:27'}]", 'Linux', '1476x830', '127.0.0.1', '2020-04-20 14:26:27', 100005, '角色权限')
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '4')])
+select * from power_list limit 10 offset 30
+ImmutableMultiDict([('action', 'findData'), ('whereStr', 'level=2'), ('sortStr', 'id ASC'), ('prePageNum', '100000'), ('currPage', '1')])
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('prePageNum', '100000'), ('currPage', '1')])
+select * from model_list where level=2 order by id ASC limit 100000
+select * from role_class limit 100000
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from test_list limit 10
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from sale_list limit 10
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from test_list limit 10
+ImmutableMultiDict([('action', 'insertData'), ('dataArr', '[{"name":"xx"}]')])
+insert into test_list(`name`, `create_name`, `create_time`, `update_name`, `update_time`) values ('xx', 'admin', '2020-04-20 14:27:08', '', '')
+insert into record_list(`username`, `dbName`, `action`, `content`, `os`, `px`, `ip`, `time`, `modelId`, `dbName_ch`) values ('admin', 'test_list', '增加', "dataArr=[{'name': 'xx', 'create_name': 'admin', 'create_time': '2020-04-20 14:27:08', 'update_name': '', 'update_time': ''}]", 'Linux', '1476x830', '127.0.0.1', '2020-04-20 14:27:08', 110002, '测试')
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from test_list limit 10
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', 'time desc'), ('prePageNum', '10'), ('currPage', '1')])
+select * from record_list order by time desc limit 10
+ImmutableMultiDict([('action', 'SignIn'), ('whereJson', '{"username":"admin","password":"123456"}'), ('osJson', '{"os":"Linux","px":"1476x830"}')])
+{'username': 'admin', 'password': '370b95d483d1f5b61854c462decafca4'}
+select username,password from user_list where username="admin" and password="370b95d483d1f5b61854c462decafca4"
+admin登录成功
+insert into record_list(`username`, `dbName`, `action`, `content`, `os`, `px`, `ip`, `time`, `modelId`, `dbName_ch`) values ('admin', 'user_list', '登录', 'action=SignIn', 'Linux', '1476x830', '127.0.0.1', '2020-04-21 12:06:12', 100004, '用户列表')
+ImmutableMultiDict([('action', 'findData'), ('timeStamp', '1587441972951')])
+select * from model_list order by level ASC, sort ASC
+ImmutableMultiDict([('action', 'findData'), ('timeStamp', '1587441972965')])
+select * from model_list order by level ASC, sort ASC
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from model_list limit 10
+*** Starting uWSGI 2.0.17.1 (64bit) on [Mon Apr 27 11:09:06 2020] ***
+compiled with version: 7.3.0 on 16 December 2018 11:36:53
+os: Linux-4.15.0-72-generic #81-Ubuntu SMP Tue Nov 26 12:20:02 UTC 2019
+nodename: dell-3576
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 8
+current working directory: /media/xian/Work/myproject/flaskApp-ElementUI
+writing pidfile to ./uwsgi.pid
+detected binary path: /home/xian/.local/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+chdir() to /media/xian/Work/myproject/flaskApp-ElementUI/
+your processes number limit is 30952
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uWSGI http bound on :5000 fd 7
+uwsgi socket 0 bound to TCP address 127.0.0.1:37359 (port auto-assigned) fd 6
+Python version: 3.6.9 (default, Nov  7 2019, 10:44:02)  [GCC 8.3.0]
+Python main interpreter initialized at 0x5570d5815f30
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 416720 bytes (406 KB) for 8 cores
+*** Operational MODE: preforking+threaded ***
+WSGI app 0 (mountpoint='') ready in 1 seconds on interpreter 0x5570d5815f30 pid: 31120 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 31120)
+spawned uWSGI worker 1 (pid: 31134, cores: 2)
+spawned uWSGI worker 2 (pid: 31135, cores: 2)
+spawned uWSGI worker 3 (pid: 31137, cores: 2)
+spawned uWSGI worker 4 (pid: 31138, cores: 2)
+spawned uWSGI http 1 (pid: 31141)
+ImmutableMultiDict([('action', 'SignIn'), ('whereJson', '{"username":"admin","password":"123456"}'), ('osJson', '{"os":"Linux","px":"1476x830"}')])
+{'username': 'admin', 'password': '370b95d483d1f5b61854c462decafca4'}
+select username,password from user_list where username="admin" and password="370b95d483d1f5b61854c462decafca4"
+admin登录成功
+insert into record_list(`username`, `dbName`, `action`, `content`, `os`, `px`, `ip`, `time`, `modelId`, `dbName_ch`) values ('admin', 'user_list', '登录', 'action=SignIn', 'Linux', '1476x830', '127.0.0.1', '2020-04-27 11:10:36', 100004, '用户列表')
+ImmutableMultiDict([('action', 'findData'), ('timeStamp', '1587957036796')])
+select * from model_list order by level ASC, sort ASC
+ImmutableMultiDict([('action', 'findData'), ('timeStamp', '1587957036821')])
+select * from model_list order by level ASC, sort ASC
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from model_list limit 10
+ImmutableMultiDict([('action', 'findDataAll'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '5000'), ('currPage', '1')])
+ImmutableMultiDict([('action', 'findData'), ('whereStr', 'level=2'), ('sortStr', 'id ASC'), ('prePageNum', '100000'), ('currPage', '1')])
+select * from model_list where level=2 order by id ASC limit 100000
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from model_list limit 10
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from sale_list limit 10
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from model_list limit 10
+ImmutableMultiDict([('action', 'findDataAll'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '5000'), ('currPage', '1')])
+ImmutableMultiDict([('action', 'findData'), ('whereStr', 'level=2'), ('sortStr', 'id ASC'), ('prePageNum', '100000'), ('currPage', '1')])
+select * from model_list where level=2 order by id ASC limit 100000
+ImmutableMultiDict([('action', 'findData'), ('whereStr', 'modelId=110002'), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from data_list where modelId=110002 limit 10
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from sale_list limit 10
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from test_list limit 10
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from role_class limit 10
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from power_list limit 10
+ImmutableMultiDict([('action', 'findData'), ('whereStr', 'level=2'), ('sortStr', 'id ASC'), ('prePageNum', '100000'), ('currPage', '1')])
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('prePageNum', '100000'), ('currPage', '1')])
+select * from model_list where level=2 order by id ASC limit 100000
+select * from role_class limit 100000
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from model_list limit 10
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from test_list limit 10
+SIGINT/SIGQUIT received...killing workers...
+gateway "uWSGI http 1" has been buried (pid: 31141)
+worker 1 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 4 buried after 1 seconds
+goodbye to uWSGI.
+VACUUM: pidfile removed.
+*** Starting uWSGI 2.0.17.1 (64bit) on [Tue May 12 10:57:56 2020] ***
+compiled with version: 7.3.0 on 16 December 2018 11:36:53
+os: Linux-4.15.0-72-generic #81-Ubuntu SMP Tue Nov 26 12:20:02 UTC 2019
+nodename: dell-3576
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 8
+current working directory: /media/xian/Work/myproject/flaskApp-ElementUI
+writing pidfile to ./uwsgi.pid
+detected binary path: /home/xian/.local/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+chdir() to /media/xian/Work/myproject/flaskApp-ElementUI/
+your processes number limit is 30952
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uWSGI http bound on :5000 fd 7
+uwsgi socket 0 bound to TCP address 127.0.0.1:37123 (port auto-assigned) fd 6
+Python version: 3.6.9 (default, Nov  7 2019, 10:44:02)  [GCC 8.3.0]
+Python main interpreter initialized at 0x56057addf180
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 416720 bytes (406 KB) for 8 cores
+*** Operational MODE: preforking+threaded ***
+WSGI app 0 (mountpoint='') ready in 0 seconds on interpreter 0x56057addf180 pid: 28777 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 28777)
+spawned uWSGI worker 1 (pid: 28802, cores: 2)
+spawned uWSGI worker 2 (pid: 28803, cores: 2)
+spawned uWSGI worker 3 (pid: 28805, cores: 2)
+spawned uWSGI worker 4 (pid: 28807, cores: 2)
+spawned uWSGI http 1 (pid: 28809)
+ImmutableMultiDict([('action', 'SignIn'), ('whereJson', '{"username":"admin","password":"123456"}'), ('osJson', '{"os":"Linux","px":"1476x830"}')])
+{'username': 'admin', 'password': '370b95d483d1f5b61854c462decafca4'}
+select username,password from user_list where username="admin" and password="370b95d483d1f5b61854c462decafca4"
+admin登录成功
+insert into record_list(`username`, `dbName`, `action`, `content`, `os`, `px`, `ip`, `time`, `modelId`, `dbName_ch`) values ('admin', 'user_list', '登录', 'action=SignIn', 'Linux', '1476x830', '127.0.0.1', '2020-05-12 10:58:19', 100004, '用户列表')
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+ImmutableMultiDict([('action', 'findData'), ('timeStamp', '1589252299504')])
+select * from model_list order by level ASC, sort ASC
+select * from model_list limit 10
+ImmutableMultiDict([('action', 'findData'), ('timeStamp', '1589252299667')])
+select * from model_list order by level ASC, sort ASC
+ImmutableMultiDict([('action', 'findDataAll'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '5000'), ('currPage', '1')])
+ImmutableMultiDict([('action', 'findData'), ('whereStr', 'level=2'), ('sortStr', 'id ASC'), ('prePageNum', '100000'), ('currPage', '1')])
+select * from model_list where level=2 order by id ASC limit 100000
+ImmutableMultiDict([('action', 'findData'), ('whereStr', 'level=2'), ('sortStr', 'id ASC'), ('prePageNum', '100000'), ('currPage', '1')])
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from model_list where level=2 order by id ASC limit 100000
+select * from model_list_fn limit 10
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from model_list limit 10
+ImmutableMultiDict([('action', 'findDataAll'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '5000'), ('currPage', '1')])
+ImmutableMultiDict([('action', 'findData'), ('whereStr', 'level=2'), ('sortStr', 'id ASC'), ('prePageNum', '100000'), ('currPage', '1')])
+select * from model_list where level=2 order by id ASC limit 100000
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from model_list limit 10
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from sale_list limit 10
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from test_list limit 10
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from model_list limit 10
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '2')])
+select * from model_list limit 10 offset 10
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from model_list limit 10
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '2')])
+select * from model_list limit 10 offset 10
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from model_list limit 10
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '2')])
+select * from model_list limit 10 offset 10
+ImmutableMultiDict([('action', 'findDataAll'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '5000'), ('currPage', '1')])
+ImmutableMultiDict([('action', 'findData'), ('whereStr', 'level=2'), ('sortStr', 'id ASC'), ('prePageNum', '100000'), ('currPage', '1')])
+select * from model_list where level=2 order by id ASC limit 100000
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from model_list limit 10
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '2')])
+select * from model_list limit 10 offset 10
+ImmutableMultiDict([('action', 'findDataAll'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '5000'), ('currPage', '1')])
+ImmutableMultiDict([('action', 'findData'), ('whereStr', 'level=2'), ('sortStr', 'id ASC'), ('prePageNum', '100000'), ('currPage', '1')])
+select * from model_list where level=2 order by id ASC limit 100000
+ImmutableMultiDict([('action', 'findData'), ('whereStr', 'level=2'), ('sortStr', 'id ASC'), ('prePageNum', '100000'), ('currPage', '1')])
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from model_list where level=2 order by id ASC limit 100000
+select * from model_list_fn limit 10
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from model_list limit 10
+ImmutableMultiDict([('action', 'findDataAll'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '5000'), ('currPage', '1')])
+ImmutableMultiDict([('action', 'findData'), ('whereStr', 'level=2'), ('sortStr', 'id ASC'), ('prePageNum', '100000'), ('currPage', '1')])
+select * from model_list where level=2 order by id ASC limit 100000
+ImmutableMultiDict([('action', 'findData'), ('whereStr', 'modelId=110001'), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from data_list where modelId=110001 limit 10
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from sale_list limit 10
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from power_list limit 10
+ImmutableMultiDict([('action', 'findData'), ('whereStr', 'level=2'), ('sortStr', 'id ASC'), ('prePageNum', '100000'), ('currPage', '1')])
+select * from model_list where level=2 order by id ASC limit 100000
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('prePageNum', '100000'), ('currPage', '1')])
+select * from role_class limit 100000
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from sale_list limit 10
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from model_list limit 10
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from sale_list limit 10
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from role_class limit 10
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from sale_list limit 10
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from test_list limit 10
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from sale_list limit 10
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from test_list limit 10
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from role_class limit 10
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from sale_list limit 10
+ImmutableMultiDict([('action', 'findDataAll'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '5000'), ('currPage', '1')])
+ImmutableMultiDict([('action', 'findData'), ('whereStr', 'level=2'), ('sortStr', 'id ASC'), ('prePageNum', '100000'), ('currPage', '1')])
+select * from model_list where level=2 order by id ASC limit 100000
+ImmutableMultiDict([('action', 'findData'), ('whereStr', 'modelId=110001'), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from data_list where modelId=110001 limit 10
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from sale_list limit 10
+ImmutableMultiDict([('action', 'SignIn'), ('whereJson', '{"username":"admin","password":"123456"}'), ('osJson', '{"os":"Linux","px":"1476x830"}')])
+{'username': 'admin', 'password': '370b95d483d1f5b61854c462decafca4'}
+select username,password from user_list where username="admin" and password="370b95d483d1f5b61854c462decafca4"
+admin登录成功
+insert into record_list(`username`, `dbName`, `action`, `content`, `os`, `px`, `ip`, `time`, `modelId`, `dbName_ch`) values ('admin', 'user_list', '登录', 'action=SignIn', 'Linux', '1476x830', '127.0.0.1', '2020-05-13 15:05:55', 100004, '用户列表')
+ImmutableMultiDict([('action', 'findData'), ('timeStamp', '1589353555565')])
+select * from model_list order by level ASC, sort ASC
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from model_list limit 10
+ImmutableMultiDict([('action', 'findData'), ('timeStamp', '1589353555732')])
+select * from model_list order by level ASC, sort ASC
+ImmutableMultiDict([('action', 'findDataAll'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '5000'), ('currPage', '1')])
+ImmutableMultiDict([('action', 'findData'), ('whereStr', 'level=2'), ('sortStr', 'id ASC'), ('prePageNum', '100000'), ('currPage', '1')])
+select * from model_list where level=2 order by id ASC limit 100000
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from model_list limit 10
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from sale_list limit 10
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from test_list limit 10
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from power_list limit 10
+ImmutableMultiDict([('action', 'findData'), ('whereStr', 'level=2'), ('sortStr', 'id ASC'), ('prePageNum', '100000'), ('currPage', '1')])
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('prePageNum', '100000'), ('currPage', '1')])
+select * from model_list where level=2 order by id ASC limit 100000
+select * from role_class limit 100000
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('prePageNum', '100000'), ('currPage', '1')])
+select * from role_class limit 100000
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select user_list.id, user_list.username, user_list.password, user_list.name, user_list.email, user_list.phone, user_list.sex, user_list.age, user_list.create_name, user_list.create_time, user_list.update_name, user_list.update_time, user_list.roleId, role_class.class_name as roleName from user_list LEFT JOIN role_class ON user_list.roleId = role_class.id limit 10
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from model_list limit 10
+ImmutableMultiDict([('action', 'findDataAll'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '5000'), ('currPage', '1')])
+ImmutableMultiDict([('action', 'findData'), ('whereStr', 'level=2'), ('sortStr', 'id ASC'), ('prePageNum', '100000'), ('currPage', '1')])
+select * from model_list where level=2 order by id ASC limit 100000
+ImmutableMultiDict([('action', 'findData'), ('whereStr', 'modelId=110002'), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from data_list where modelId=110002 limit 10
+ImmutableMultiDict([('action', 'findDataAll'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '5000'), ('currPage', '1')])
+ImmutableMultiDict([('action', 'findData'), ('whereStr', 'level=2'), ('sortStr', 'id ASC'), ('prePageNum', '100000'), ('currPage', '1')])
+select * from model_list where level=2 order by id ASC limit 100000
+ImmutableMultiDict([('action', 'findData'), ('whereStr', 'modelId=110001'), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from data_list where modelId=110001 limit 10
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from sale_list limit 10
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from model_list limit 10
+ImmutableMultiDict([('action', 'findDataAll'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '5000'), ('currPage', '1')])
+ImmutableMultiDict([('action', 'findData'), ('whereStr', 'level=2'), ('sortStr', 'id ASC'), ('prePageNum', '100000'), ('currPage', '1')])
+select * from model_list where level=2 order by id ASC limit 100000
+*** Starting uWSGI 2.0.17.1 (64bit) on [Wed Jun  3 08:25:17 2020] ***
+compiled with version: 7.3.0 on 16 December 2018 11:36:53
+os: Linux-4.15.0-72-generic #81-Ubuntu SMP Tue Nov 26 12:20:02 UTC 2019
+nodename: dell-3576
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 8
+current working directory: /media/xian/Work/myproject/flaskApp-ElementUI
+writing pidfile to ./uwsgi.pid
+detected binary path: /home/xian/.local/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+chdir() to /media/xian/Work/myproject/flaskApp-ElementUI/
+your processes number limit is 30952
+your memory page size is 4096 bytes
+detected max file descriptor number: 1024
+lock engine: pthread robust mutexes
+thunder lock: disabled (you can enable it with --thunder-lock)
+uWSGI http bound on :5000 fd 7
+uwsgi socket 0 bound to TCP address 127.0.0.1:35345 (port auto-assigned) fd 6
+Python version: 3.6.9 (default, Nov  7 2019, 10:44:02)  [GCC 8.3.0]
+Python main interpreter initialized at 0x55977a05af30
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 416720 bytes (406 KB) for 8 cores
+*** Operational MODE: preforking+threaded ***
+WSGI app 0 (mountpoint='') ready in 0 seconds on interpreter 0x55977a05af30 pid: 14312 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 14312)
+spawned uWSGI worker 1 (pid: 14327, cores: 2)
+spawned uWSGI worker 2 (pid: 14328, cores: 2)
+spawned uWSGI worker 3 (pid: 14330, cores: 2)
+spawned uWSGI worker 4 (pid: 14332, cores: 2)
+spawned uWSGI http 1 (pid: 14334)
+ImmutableMultiDict([('action', 'SignIn'), ('whereJson', '{"username":"admin","password":"123456"}'), ('osJson', '{"os":"Linux","px":"1476x830"}')])
+{'username': 'admin', 'password': '370b95d483d1f5b61854c462decafca4'}
+select username,password from user_list where username="admin" and password="370b95d483d1f5b61854c462decafca4"
+admin登录成功
+insert into record_list(`username`, `dbName`, `action`, `content`, `os`, `px`, `ip`, `time`, `modelId`, `dbName_ch`) values ('admin', 'user_list', '登录', 'action=SignIn', 'Linux', '1476x830', '127.0.0.1', '2020-06-03 08:25:48', 100004, '用户列表')
+ImmutableMultiDict([('action', 'findData'), ('timeStamp', '1591143948515')])
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from model_list order by level ASC, sort ASC
+select * from model_list limit 10
+ImmutableMultiDict([('action', 'findData'), ('timeStamp', '1591143948682')])
+select * from model_list order by level ASC, sort ASC
+ImmutableMultiDict([('action', 'findDataAll'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '5000'), ('currPage', '1')])
+ImmutableMultiDict([('action', 'findData'), ('whereStr', 'level=2'), ('sortStr', 'id ASC'), ('prePageNum', '100000'), ('currPage', '1')])
+select * from model_list where level=2 order by id ASC limit 100000
+ImmutableMultiDict([('action', 'findData'), ('whereStr', 'level=2'), ('sortStr', 'id ASC'), ('prePageNum', '100000'), ('currPage', '1')])
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from model_list where level=2 order by id ASC limit 100000
+select * from model_list_fn limit 10
+ImmutableMultiDict([('action', 'findData'), ('whereStr', ''), ('sortStr', ''), ('prePageNum', '10'), ('currPage', '1')])
+select * from model_list limit 10

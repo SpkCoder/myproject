@@ -1,3 +1,5 @@
+docker run --name flaskApp-ElementUI -p 5000:5000 -v $PWD/flaskApp-ElementUI:/home/app -w /home/app -d python-env-docker /home/app/run.sh
+
 pip install uwsgi
 
 ## start uwsgi
@@ -23,3 +25,4 @@ server {
 }
 
 nginx -s reload
+

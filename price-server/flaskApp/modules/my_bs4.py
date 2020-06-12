@@ -61,7 +61,7 @@ class model():
                     if price > 0:
                         price_all+=price
                         num+=1
-                price = round(price_all/num, 2)
+                price = 0 if num ==0 else round(price_all/num, 2)
                 obj = {'type': str_type, 'name': name, 'price': price, 'time': str_time}
                 self.list_data.append(obj)
         # print(self.list_data)
@@ -77,7 +77,6 @@ class model():
                     self.mysqldb.insert_data(self.table_name, list_data)
         except Exception as e:
             logging.error('my_bs4 run error: '+ str(e))
-            
 
 def main():
     # 18:00:00的时候开始执行

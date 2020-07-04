@@ -8,14 +8,15 @@ Page({
       loading: true
     })
     wx.request({
-      url: config.requestUrl,
-      method: "POST",
+      url: config.loginUrl2 +'/python/user_list',
+      method: "GET",
       data: {
+        action:"findData",
         noncestr: Date.now()
       },
       success: function(result) {
         wx.showToast({
-          title: '请求成功',
+          title: result.data,
           icon: 'success',
           mask: true,
           duration: 2000
@@ -23,7 +24,7 @@ Page({
         self.setData({
           loading: false
         })
-        console.log('request success', result)
+        console.log('request success', result.data)
       },
 
       fail: function({errMsg}) {
